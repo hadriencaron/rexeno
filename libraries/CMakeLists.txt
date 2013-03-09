@@ -1,0 +1,6 @@
+cmake_minimum_required (VERSION 2.6)
+project (Rexeno)
+include_directories ("${PROJECT_SOURCE_DIR}/configuration")
+add_subdirectory (configuration)
+add_executable(Rexeno main.cc)
+target_link_libraries (Rexeno configuration)
