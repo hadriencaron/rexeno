@@ -36,6 +36,7 @@ void demo(void *arg)
 		       (long)(now - previous) % 1000000);
 		       previous = now;
 	}
+	//
 }
 
 void catch_signal(int sig)

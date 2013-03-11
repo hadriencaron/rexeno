@@ -6,5 +6,6 @@ OPTIONS= -D_GNU_SOURCE -D_REENTRANT -D__XENO__
 SRC=latency.c
 LIBS= -Xlinker -rpath -Xlinker /usr/xenomai/lib -lnative -L/usr/xenomai/lib -lxenomai -lpthread -lrt
 
+
 all:
-	$(CC) $(INCLUDE) $(OPTIONS) latency.c $(LIBS) 
+	$(CC) $(INCLUDE) $(OPTIONS) $(SRC) $(LIBS) 
