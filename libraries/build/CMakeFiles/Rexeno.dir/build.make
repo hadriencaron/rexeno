@@ -78,6 +78,7 @@ Rexeno_EXTERNAL_OBJECTS =
 
 Rexeno: CMakeFiles/Rexeno.dir/main.cc.o
 Rexeno: configuration/libconfiguration.a
+Rexeno: nidaq/libnidaq.a
 Rexeno: CMakeFiles/Rexeno.dir/build.make
 Rexeno: CMakeFiles/Rexeno.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable Rexeno"

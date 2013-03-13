@@ -3,6 +3,8 @@
 #include <sys/types.h>
 #include <signal.h>
 
+int launch();
+
 using namespace std;
 
 int	main(int argc,
@@ -25,6 +27,8 @@ int	main(int argc,
       printf("i am the parent !\n");
       sleep(5);
       kill(pid, 9);
+      launch();
     }
+  
 }
 

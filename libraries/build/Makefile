@@ -121,6 +121,19 @@ configuration/fast:
 	$(MAKE) -f configuration/CMakeFiles/configuration.dir/build.make configuration/CMakeFiles/configuration.dir/build
 .PHONY : configuration/fast
 
+#=============================================================================
+# Target rules for targets named nidaq
+
+# Build rule for target.
+nidaq: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nidaq
+.PHONY : nidaq
+
+# fast build rule for target.
+nidaq/fast:
+	$(MAKE) -f nidaq/CMakeFiles/nidaq.dir/build.make nidaq/CMakeFiles/nidaq.dir/build
+.PHONY : nidaq/fast
+
 main.o: main.cc.o
 .PHONY : main.o
 
@@ -155,6 +168,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... configuration"
+	@echo "... nidaq"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

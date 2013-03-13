@@ -12,6 +12,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
   "../configuration/CMakeLists.txt"
+  "../nidaq/CMakeLists.txt"
   "/usr/share/cmake-2.8/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake"
@@ -37,10 +38,12 @@ SET(CMAKE_MAKEFILE_OUTPUTS
 SET(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "configuration/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "nidaq/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Rexeno.dir/DependInfo.cmake"
   "configuration/CMakeFiles/configuration.dir/DependInfo.cmake"
+  "nidaq/CMakeFiles/nidaq.dir/DependInfo.cmake"
   )

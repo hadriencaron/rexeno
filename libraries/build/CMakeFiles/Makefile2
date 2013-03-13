@@ -54,6 +54,7 @@ CMAKE_BINARY_DIR = /home/hadrien/repos/newRexeno/libraries/build
 
 # All Build rule for target.
 CMakeFiles/Rexeno.dir/all: configuration/CMakeFiles/configuration.dir/all
+CMakeFiles/Rexeno.dir/all: nidaq/CMakeFiles/nidaq.dir/all
 	$(MAKE) -f CMakeFiles/Rexeno.dir/build.make CMakeFiles/Rexeno.dir/depend
 	$(MAKE) -f CMakeFiles/Rexeno.dir/build.make CMakeFiles/Rexeno.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles  1
@@ -66,7 +67,7 @@ all: CMakeFiles/Rexeno.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Rexeno.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Rexeno.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles 0
 .PHONY : CMakeFiles/Rexeno.dir/rule
@@ -132,6 +133,56 @@ configuration/CMakeFiles/configuration.dir/clean:
 
 # clean rule for target.
 clean: configuration/CMakeFiles/configuration.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory nidaq
+
+# Convenience name for "all" pass in the directory.
+nidaq/all: nidaq/CMakeFiles/nidaq.dir/all
+.PHONY : nidaq/all
+
+# Convenience name for "clean" pass in the directory.
+nidaq/clean: nidaq/CMakeFiles/nidaq.dir/clean
+.PHONY : nidaq/clean
+
+# Convenience name for "preinstall" pass in the directory.
+nidaq/preinstall:
+.PHONY : nidaq/preinstall
+
+#=============================================================================
+# Target rules for target nidaq/CMakeFiles/nidaq.dir
+
+# All Build rule for target.
+nidaq/CMakeFiles/nidaq.dir/all:
+	$(MAKE) -f nidaq/CMakeFiles/nidaq.dir/build.make nidaq/CMakeFiles/nidaq.dir/depend
+	$(MAKE) -f nidaq/CMakeFiles/nidaq.dir/build.make nidaq/CMakeFiles/nidaq.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles  3
+	@echo "Built target nidaq"
+.PHONY : nidaq/CMakeFiles/nidaq.dir/all
+
+# Include target in all.
+all: nidaq/CMakeFiles/nidaq.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+nidaq/CMakeFiles/nidaq.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 nidaq/CMakeFiles/nidaq.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles 0
+.PHONY : nidaq/CMakeFiles/nidaq.dir/rule
+
+# Convenience name for target.
+nidaq: nidaq/CMakeFiles/nidaq.dir/rule
+.PHONY : nidaq
+
+# clean rule for target.
+nidaq/CMakeFiles/nidaq.dir/clean:
+	$(MAKE) -f nidaq/CMakeFiles/nidaq.dir/build.make nidaq/CMakeFiles/nidaq.dir/clean
+.PHONY : nidaq/CMakeFiles/nidaq.dir/clean
+
+# clean rule for target.
+clean: nidaq/CMakeFiles/nidaq.dir/clean
 .PHONY : clean
 
 #=============================================================================

@@ -120,7 +120,7 @@ void	input(void*)
 
 
 
-int	main()
+int	launch()
 {
   /* Avoids memory swapping for this program */
   mlockall(MCL_CURRENT|MCL_FUTURE);

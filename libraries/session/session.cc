@@ -2,7 +2,7 @@
 
 #include <boost/spirit.hh>
 
-Session::Session(string	s)
+Session::Session(sessionInfo	&s)
 {
 
 }
@@ -12,9 +12,8 @@ Session::~Session()
 
 }
 
-int	main()
+Session::run()
 {
-  Session s("");
-  cout << "un petit test" << endl;
 
 }
+
