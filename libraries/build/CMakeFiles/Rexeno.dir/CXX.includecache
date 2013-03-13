@@ -38,11 +38,23 @@ string
 vector
 -
 
+../includes/session.hh
+iostream
+-
+list
+-
+parser.hh
+../includes/parser.hh
+GL/glut.h
+-
+
 /home/hadrien/repos/newRexeno/libraries/main.cc
 iostream
 -
 parser.hh
 /home/hadrien/repos/newRexeno/libraries/parser.hh
+session.hh
+/home/hadrien/repos/newRexeno/libraries/session.hh
 sys/types.h
 -
 signal.h

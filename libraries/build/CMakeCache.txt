@@ -166,6 +166,12 @@ configuration_LIB_DEPENDS:STATIC=
 //Dependencies for the target
 nidaq_LIB_DEPENDS:STATIC=general;pthread;general;native;general;rt;general;analogy;general;rtdm;general;xenomai;
 
+//Dependencies for target
+session.cc_LIB_DEPENDS:STATIC=
+
+//Dependencies for target
+session_LIB_DEPENDS:STATIC=
+
 
 ########################
 # INTERNAL cache entries
@@ -261,7 +267,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=3
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

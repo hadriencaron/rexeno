@@ -1,5 +1,6 @@
 #include <iostream>
 #include "parser.hh"
+#include "session.hh"
 #include <sys/types.h>
 #include <signal.h>
 
@@ -29,6 +30,6 @@ int	main(int argc,
       kill(pid, 9);
       launch();
     }
-  
+  Session s(conf);
 }
 

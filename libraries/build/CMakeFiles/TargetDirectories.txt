@@ -1,3 +1,4 @@
 /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles/Rexeno.dir
 /home/hadrien/repos/newRexeno/libraries/build/configuration/CMakeFiles/configuration.dir
 /home/hadrien/repos/newRexeno/libraries/build/nidaq/CMakeFiles/nidaq.dir
+/home/hadrien/repos/newRexeno/libraries/build/session/CMakeFiles/session.dir

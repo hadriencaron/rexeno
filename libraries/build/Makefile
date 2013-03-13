@@ -122,6 +122,19 @@ configuration/fast:
 .PHONY : configuration/fast
 
 #=============================================================================
+# Target rules for targets named session
+
+# Build rule for target.
+session: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 session
+.PHONY : session
+
+# fast build rule for target.
+session/fast:
+	$(MAKE) -f session/CMakeFiles/session.dir/build.make session/CMakeFiles/session.dir/build
+.PHONY : session/fast
+
+#=============================================================================
 # Target rules for targets named nidaq
 
 # Build rule for target.
@@ -168,6 +181,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... configuration"
+	@echo "... session"
 	@echo "... nidaq"
 	@echo "... main.o"
 	@echo "... main.i"

@@ -1,1 +1,1 @@
-/usr/bin/c++       CMakeFiles/Rexeno.dir/main.cc.o  -o Rexeno -rdynamic configuration/libconfiguration.a nidaq/libnidaq.a -lpthread -lnative -lrt -lanalogy -lrtdm -lxenomai 
+/usr/bin/c++       CMakeFiles/Rexeno.dir/main.cc.o  -o Rexeno -rdynamic configuration/libconfiguration.a nidaq/libnidaq.a session/libsession.a -lpthread -lnative -lrt -lanalogy -lrtdm -lxenomai 
