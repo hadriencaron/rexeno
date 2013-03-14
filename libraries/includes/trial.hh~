@@ -1,0 +1,20 @@
+#ifndef	TRIAL_HH_
+# define TRIAL_HH_
+
+# include <set>
+using namespace std;
+class Shape;
+
+class Trial
+{
+public:
+  Trial();
+  ~Trial();
+
+  void run();
+private:
+  std<Shape*> _shapes;
+};
+
+
+#endif
