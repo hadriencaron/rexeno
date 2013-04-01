@@ -48,13 +48,13 @@ parser.hh
 GL/glut.h
 -
 
-/home/hadrien/repos/newRexeno/libraries/main.cc
+/home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/main.cc
 iostream
 -
 parser.hh
-/home/hadrien/repos/newRexeno/libraries/parser.hh
+/home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/parser.hh
 session.hh
-/home/hadrien/repos/newRexeno/libraries/session.hh
+/home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/session.hh
 sys/types.h
 -
 signal.h

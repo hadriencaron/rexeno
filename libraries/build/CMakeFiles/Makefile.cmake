@@ -12,7 +12,6 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
   "../configuration/CMakeLists.txt"
-  "../nidaq/CMakeLists.txt"
   "../session/CMakeLists.txt"
   "/usr/share/cmake-2.8/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCXXInformation.cmake"
@@ -48,5 +47,5 @@ SET(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Rexeno.dir/DependInfo.cmake"
   "configuration/CMakeFiles/configuration.dir/DependInfo.cmake"
   "session/CMakeFiles/session.dir/DependInfo.cmake"
-  "nidaq/CMakeFiles/nidaq.dir/DependInfo.cmake"
+  "session/CMakeFiles/sessionBin.dir/DependInfo.cmake"
   )

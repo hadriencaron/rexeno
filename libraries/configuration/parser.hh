@@ -29,37 +29,37 @@ namespace configuration
   ///////////////////////////////////////////////////////////////////////////
   //  Our moses struct
   ///////////////////////////////////////////////////////////////////////////
-  struct shapeInfo
+  struct ShapeInfo
   {
     std::string name;
     std::vector<std::string> attributes;
   };
 
-  struct trialInfo
+  struct TrialInfo
   {
     int time;
     std::string name;
-    std::vector<shapeInfo> shapes;
+    std::vector<ShapeInfo> shapes;
   };
 
-  struct screenInfo
+  struct ScreenInfo
   {
     int	height;
     int	width;
   };
 
-  struct sessionInfo
+  struct SessionInfo
   {
     std::string name;
     std::string comment;
 
     int polarCoordonates; // Default No
-    std::vector<screenInfo> screens; // Default Yes
-    std::vector<trialInfo> trials;
+    std::vector<ScreenInfo> screens; // Default Yes
+    std::vector<TrialInfo> trials;
   };
 
   bool	createConfiguration(char const* filename,
-			    sessionInfo &res);
+			    SessionInfo &res);
 
 }
 

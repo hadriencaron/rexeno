@@ -14,13 +14,14 @@ class Trial;
 class Session
 {
 public:
-  Session(sessionInfo	&s);
+  Session(SessionInfo	&s);
   ~Session();
   void	run();
 private:
   vector<Trial*> _trials;
-  sessionInfo& _info;
+  SessionInfo& _info;
 };
+
 
 #endif
 

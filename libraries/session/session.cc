@@ -1,10 +1,10 @@
 #include "session.hh"
 #include "trial.hh"
 
-Session::Session(sessionInfo &s)
+Session::Session(SessionInfo &s)
   : _info(s)
 {
-  vector<trialInfo>::iterator it;
+  vector<TrialInfo>::iterator it;
 
   for (it = _info.trials.begin(); it != _info.trials.end(); ++it)
     {
@@ -23,6 +23,9 @@ Session::run()
   vector<Trial*>::iterator it;
   string b;
 
+  glutCreateWindow("monkey-business");
+  glutFullScreen();
+  glutSetCursor(GLUT_CURSOR_NONE);
   for (it = _trials.begin(); it != _trials.end(); ++it)
     {
       do

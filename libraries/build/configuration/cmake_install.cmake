@@ -1,4 +1,4 @@
-# Install script for directory: /home/hadrien/repos/newRexeno/libraries/configuration
+# Install script for directory: /home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/configuration
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

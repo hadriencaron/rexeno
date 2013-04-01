@@ -21,6 +21,7 @@ void demo(void *arg)
 	 */
 	rt_task_set_periodic(NULL, TM_NOW, 1000000000);
 	previous = rt_timer_read();
+	char *test;
 
 	while (1) {
 		rt_task_wait_period(NULL);

@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/hadrien/repos/newRexeno/libraries/configuration/parser.cc
+/home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/configuration/parser.cc
 parser.hh
-/home/hadrien/repos/newRexeno/libraries/configuration/parser.hh
+/home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/configuration/parser.hh
 
-/home/hadrien/repos/newRexeno/libraries/configuration/parser.hh
+/home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/configuration/parser.hh
 boost/config/warning_disable.hpp
 -
 boost/spirit/include/qi.hpp

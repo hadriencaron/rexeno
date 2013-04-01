@@ -36,10 +36,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hadrien/repos/newRexeno/libraries
+CMAKE_SOURCE_DIR = /home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hadrien/repos/newRexeno/libraries/build
+CMAKE_BINARY_DIR = /home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -66,9 +66,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/build/CMakeFiles /home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/repos/newRexeno/libraries/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/libraries/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -135,17 +135,17 @@ session/fast:
 .PHONY : session/fast
 
 #=============================================================================
-# Target rules for targets named nidaq
+# Target rules for targets named sessionBin
 
 # Build rule for target.
-nidaq: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nidaq
-.PHONY : nidaq
+sessionBin: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sessionBin
+.PHONY : sessionBin
 
 # fast build rule for target.
-nidaq/fast:
-	$(MAKE) -f nidaq/CMakeFiles/nidaq.dir/build.make nidaq/CMakeFiles/nidaq.dir/build
-.PHONY : nidaq/fast
+sessionBin/fast:
+	$(MAKE) -f session/CMakeFiles/sessionBin.dir/build.make session/CMakeFiles/sessionBin.dir/build
+.PHONY : sessionBin/fast
 
 main.o: main.cc.o
 .PHONY : main.o
@@ -182,7 +182,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... configuration"
 	@echo "... session"
-	@echo "... nidaq"
+	@echo "... sessionBin"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
