@@ -42,25 +42,17 @@ namespace configuration
     std::vector<ShapeInfo> shapes;
   };
 
-  struct ScreenInfo
-  {
-    int	height;
-    int	width;
-  };
 
   struct SessionInfo
   {
     std::string name;
     std::string comment;
 
-    int polarCoordonates; // Default No
-    std::vector<ScreenInfo> screens; // Default Yes
     std::vector<TrialInfo> trials;
   };
 
   bool	createConfiguration(char const* filename,
 			    SessionInfo &res);
-
 }
 
 

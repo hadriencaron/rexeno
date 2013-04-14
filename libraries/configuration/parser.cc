@@ -13,31 +13,23 @@
 // be in global scope according to official Boost Spirit tutorial.
 
 BOOST_FUSION_ADAPT_STRUCT(
-			  configuration::shapeInfo,
+			  configuration::ShapeInfo,
 			  (std::string, name)
 			  (std::vector<std::string>, attributes)
 			  )
 
 BOOST_FUSION_ADAPT_STRUCT(
-			  configuration::screenInfo,
-			  (int, height)
-			  (int, width)
-			  )
-
-BOOST_FUSION_ADAPT_STRUCT(
-			  configuration::trialInfo,
+			  configuration::TrialInfo,
 			  (int, time)
 			  (std::string, name)
-			  (std::vector<configuration::shapeInfo>, shapes)
+			  (std::vector<configuration::ShapeInfo>, shapes)
 			  )
 
 BOOST_FUSION_ADAPT_STRUCT(
-			  configuration::sessionInfo,
+			  configuration::SessionInfo,
 			  (std::string, name)
 			  (std::string, comment)
-			  (int, polarCoordonates)
-			  (std::vector<configuration::screenInfo>, screens)
-			  (std::vector<configuration::trialInfo>, trials)
+			  (std::vector<configuration::TrialInfo>, trials)
 			  )
 
 namespace configuration
@@ -46,7 +38,7 @@ namespace configuration
   //  Our moses parser
   ///////////////////////////////////////////////////////////////////////////////
   template <typename Iterator>
-  struct moses_parser : qi::grammar<Iterator, sessionInfo(), standard::space_type>
+  struct moses_parser : qi::grammar<Iterator, SessionInfo(), standard::space_type>
   {
     moses_parser() : moses_parser::base_type(session)
     {
@@ -72,34 +64,27 @@ namespace configuration
 	>> ";"
 	;
 
-      screen %= int_ >> "x" >> int_ >> "|";
-
       session %=
 	"session name="
 	>> word
 	>> "comment="
 	>> word
-	>> "polar="
-	>> int_
-	>> "screens="
-	>> +screen
 	>> +trial
 	;
 
     }
 
     qi::rule<Iterator, std::string(), standard::space_type> word;
-    qi::rule<Iterator, configuration::shapeInfo(), standard::space_type> shape;
-    qi::rule<Iterator, configuration::trialInfo(), standard::space_type> trial;
-    qi::rule<Iterator, configuration::screenInfo(), standard::space_type> screen;
-    qi::rule<Iterator, configuration::sessionInfo(), standard::space_type> session;
+    qi::rule<Iterator, configuration::ShapeInfo(), standard::space_type> shape;
+    qi::rule<Iterator, configuration::TrialInfo(), standard::space_type> trial;
+    qi::rule<Iterator, configuration::SessionInfo(), standard::space_type> session;
   };
 
   ////////////////////////////////////////////////////////////////////////////
   //  Main program
   ////////////////////////////////////////////////////////////////////////////
   bool	createConfiguration(char const* filename,
-			    sessionInfo &res)
+			    SessionInfo &res)
   {
     std::ifstream in(filename, std::ios_base::in);
     if (!in)

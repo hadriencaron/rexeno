@@ -1,1 +1,1 @@
-/usr/bin/c++       CMakeFiles/Rexeno.dir/main.cc.o  -o Rexeno -rdynamic configuration/libconfiguration.a -lnidaq session/libsession.a -lglut 
+/usr/bin/c++   -g    CMakeFiles/Rexeno.dir/main.cc.o  -o Rexeno -rdynamic configuration/libconfiguration.a -lnidaq session/libsession.a -lglut 
