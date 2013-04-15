@@ -2,6 +2,9 @@
 # define SETUP_HH_
 
 # include "setup.hh"
+# include <string>
+
+using namespace std;
 
 class Setup
 {

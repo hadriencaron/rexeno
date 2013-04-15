@@ -161,7 +161,7 @@ Rexeno_SOURCE_DIR:STATIC=/home/hadrien/Bureau/Work/GITs/xenomai/newRexeno/librar
 configuration_LIB_DEPENDS:STATIC=
 
 //Dependencies for the target
-session_LIB_DEPENDS:STATIC=general;glut;
+session_LIB_DEPENDS:STATIC=general;glut;general;boost_program_options;
 
 
 ########################

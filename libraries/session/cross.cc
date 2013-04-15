@@ -15,3 +15,24 @@ Cross::Cross(const ShapeInfo& si,
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[8]));
 }
+
+void
+Cross::display()
+{
+
+
+}
+
+void
+Cross::displayMonitor()
+{
+
+}
+
+void
+Cross::react2input(Status&)
+{
+
+}
+
+

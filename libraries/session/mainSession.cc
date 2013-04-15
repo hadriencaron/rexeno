@@ -57,9 +57,10 @@ int	main(int argc,
 {
   configuration::SessionInfo conf;
   bool r = configuration::createConfiguration("./conf", conf);
-  Session* s = Session::getInstance(conf);
+  Setup* setup = new Setup();
+  Session* session = Session::getInstance(conf);
 
-  s->beforeTrial = &InterTrial_CTM;
+  session->beforeTrial = &InterTrial_CTM;
 
-  s->run(argc, argv);
+  session->run(argc, argv);
 }

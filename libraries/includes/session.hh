@@ -29,6 +29,7 @@ public:
   void (*beforeTrial)(string&, VariableManager&);
   void setSetup(Setup* s);
   
+  Setup* setup;
   //void (*interFrame)(VariableManager&);
   //void (*ConfigurableWindow)(TrialManager *);
   
@@ -42,7 +43,6 @@ private:
   vector<Trial*>::iterator _currentTrial;
   // Background Color :
   int _R, _G, _B;
-  Setup* _setup;
 };
 
 

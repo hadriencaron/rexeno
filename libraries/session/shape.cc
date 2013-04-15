@@ -1,9 +1,15 @@
 #include "shape.hh"
-#include "GL/glut.h"
+#include <GL/glut.h>
+
+#include "session.hh"
 
 void
 Shape::display()
 {
+  Session* s = Session::getInstance();
+  double xRatio = s->setup->xRatio();
+  double yRatio = s->setup->yRatio();
+
   double demi_vertical = *_width / 2;
   double demi_horizontal = *_height / 2;
 
