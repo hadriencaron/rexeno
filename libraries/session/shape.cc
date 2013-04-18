@@ -10,8 +10,11 @@ Shape::display()
   double xRatio = s->setup->xRatio();
   double yRatio = s->setup->yRatio();
 
-  double demi_vertical = *_width / 2;
-  double demi_horizontal = *_height / 2;
+  double demi_vertical = xRatio * *_width / 2;
+  double demi_horizontal = yRatio * *_height / 2;
+
+  double xGL = *_x * xRatio;
+  double yGL = *_y * xRatio;
 
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);    
