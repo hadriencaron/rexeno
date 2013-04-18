@@ -9,10 +9,11 @@
 # include "setup.hh"
 # include <GL/glut.h>
 
-typedef double ms;
+typedef unsigned long long ms;
 using namespace std;
 using namespace configuration;
 class Trial;
+class Driver;
 
 // Singleton class
 class Session
@@ -37,6 +38,7 @@ private:
   Session(SessionInfo& s);
   void _fillData();
 
+  Driver* _driver;
   vector<Trial*> _trials;
   static Session* _instance;
   vector<pair<double, ms> > _inputData;
