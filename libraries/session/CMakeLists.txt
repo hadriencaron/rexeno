@@ -1,4 +1,4 @@
-#find_package (glut)
+cmake_minimum_required (VERSION 2.6)
 set(CMAKE_CXX_FLAGS_INIT "-Wall --warn-uninitialized --warn-unused-vars")
 link_libraries (glut)
 link_libraries (boost_program_options)
