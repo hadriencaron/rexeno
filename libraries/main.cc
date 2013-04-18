@@ -11,7 +11,7 @@ using namespace std;
 int	main(int argc,
 	     char **argv)
 {
-  configuration::sessionInfo conf;
+  configuration::SessionInfo conf;
   bool r = configuration::createConfiguration(argv[1], conf);
 
   int pid = fork();
@@ -28,8 +28,8 @@ int	main(int argc,
       printf("i am the parent !\n");
       sleep(5);
       kill(pid, 9);
-      launch();
+      //launch();
     }
-  Session s(conf);
+  //Session s(conf);
 }
 
