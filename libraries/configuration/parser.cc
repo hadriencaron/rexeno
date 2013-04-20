@@ -65,7 +65,7 @@ namespace configuration
 	;
 
       session %=
-	"session name="
+	"name="
 	>> word
 	>> "comment="
 	>> word

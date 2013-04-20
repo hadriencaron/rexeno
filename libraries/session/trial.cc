@@ -105,6 +105,7 @@ Trial::_react2status()
     _curFrameId++;
     return (RUNNING);
   }
+  return (WRONG_NEXT); // should not get here
 }
 
 void

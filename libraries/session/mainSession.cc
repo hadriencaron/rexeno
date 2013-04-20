@@ -57,9 +57,11 @@ int	main(int argc,
 {
   configuration::SessionInfo conf;
   bool r = configuration::createConfiguration("./conf", conf);
-  Setup* setup = new Setup();
+  assert(r);
+  Setup* s = new Setup("~/.rexeno");
   Session* session = Session::getInstance(conf);
 
+  session->setup = s;
   session->beforeTrial = &InterTrial_CTM;
 
   session->run(argc, argv);

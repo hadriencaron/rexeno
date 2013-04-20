@@ -18,10 +18,10 @@ Shape::display()
 
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);    
-  glVertex2d(*_x-demi_horizontal, *_y-demi_vertical);
-  glVertex2d(*_x+demi_horizontal, *_y-demi_vertical);
-  glVertex2d(*_x+demi_horizontal, *_y+demi_vertical);
-  glVertex2d(*_x-demi_horizontal, *_y+demi_vertical);
+  glVertex2d(xGL-demi_horizontal, yGL-demi_vertical);
+  glVertex2d(xGL+demi_horizontal, yGL-demi_vertical);
+  glVertex2d(xGL+demi_horizontal, yGL+demi_vertical);
+  glVertex2d(xGL-demi_horizontal, yGL+demi_vertical);
   glEnd();
 }
 

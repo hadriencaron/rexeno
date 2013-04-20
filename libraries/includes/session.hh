@@ -28,7 +28,7 @@ public:
 
   void (*afterTrial)(string&, VariableManager&, int);
   void (*beforeTrial)(string&, VariableManager&);
-  void setSetup(Setup* s);
+  void setDriver(Driver* d) {_driver = d;}
   
   Setup* setup;
   //void (*interFrame)(VariableManager&);
