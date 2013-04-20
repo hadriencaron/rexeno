@@ -7,12 +7,14 @@
 # include "parser.hh"
 # include "shape.hh"
 # include "square.hh"
+# include "session.hh"
 # include <GL/glut.h>
 
 using namespace std;
 using namespace configuration;
 class Shape;
 class Square;
+class Driver;
 
 # define RUNNING 0
 # define PAUSE 1
@@ -27,7 +29,7 @@ class Trial
 public:
   Trial(TrialInfo& ti);
   ~Trial();
-  int displayFrame();
+  int displayFrame(Driver& d);
   bool finished();
   bool atStart();
   string& name() {return _name;}
@@ -46,6 +48,7 @@ private:
   string& _name;
   int _argc;
   char **_argv;
+  map<int, int> _ttlFrames;
 };
 
 

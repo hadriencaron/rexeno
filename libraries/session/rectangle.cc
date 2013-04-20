@@ -1,5 +1,7 @@
 #include "rectangle.hh"
+#include <boost/lexical_cast.hpp>
 
+using namespace boost;
 
 Rectangle::Rectangle(const ShapeInfo& si,
                      VariableManager& vm)
@@ -15,6 +17,8 @@ Rectangle::Rectangle(const ShapeInfo& si,
   vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[9]));
+
+  _ttl = lexical_cast<int>(si.attributes[10]);
 }
 
 void

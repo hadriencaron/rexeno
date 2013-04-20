@@ -17,6 +17,8 @@ private:
   // centimenters
   double _screenHeight;
   double _screenWidth;
+  // Hz :
+  double _refreshRate;
 };
 
 

@@ -71,7 +71,7 @@ Session::displayFrame()
       t->adjustNbFrames();
     }
 
-    int b = (*_currentTrial)->displayFrame();
+    int b = (*_currentTrial)->displayFrame(*_driver);
 
     if (t->finished())
     {

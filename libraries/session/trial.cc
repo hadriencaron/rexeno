@@ -16,6 +16,7 @@ Trial::Trial(TrialInfo& ti)
       _shapes.push_back(newShape);
       if (newShape->frameEnd() > _nbFrames)
         _nbFrames = newShape->frameEnd();
+      _ttlFrames[newShape->frameStart()] = newShape->ttl();
     }
   }
 
@@ -39,7 +40,7 @@ Trial::~Trial()
 }
 
 int
-Trial::displayFrame()
+Trial::displayFrame(Driver& d)
 {
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)

@@ -27,8 +27,10 @@ public:
   virtual void displayMonitor();
   virtual void react2input(Status&) = 0;
   const string& name() {return _name;}
+  double frameStart() {return _frameStart->value;}
   double frameEnd() {return _frameEnd->value;}
   bool monitorDisplayable();
+  uint ttl() {return _ttl;}
 
 protected:
   string _name;
