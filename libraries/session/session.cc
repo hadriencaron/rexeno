@@ -22,6 +22,7 @@ Session::Session(SessionInfo &s)
   beforeTrial = NULL;
   afterTrial = NULL;
   _inputData.resize(8);
+  _driver = NULL;
 }
 
 Session::~Session()
@@ -71,7 +72,7 @@ Session::displayFrame()
       t->adjustNbFrames();
     }
 
-    int b = (*_currentTrial)->displayFrame(*_driver);
+    int b = (*_currentTrial)->displayFrame(_driver);
 
     if (t->finished())
     {

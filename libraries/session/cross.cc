@@ -1,4 +1,5 @@
 #include "cross.hh"
+#include <GL/glut.h>
 
 Cross::Cross(const ShapeInfo& si,
              VariableManager& vm)
@@ -26,7 +27,31 @@ Cross::display()
 void
 Cross::displayMonitor()
 {
+  double xGL = _xGL();
+  double yGL = _yGL();
 
+  double demi_horizontal = _demiHorizontal();
+  double demi_vertical = _demiVertical();
+
+  double bar_width_horizontal = demi_horizontal / 20;
+  double bar_width_vertical = demi_vertical / 20;
+
+  glBegin(GL_QUADS);
+  glColor3ub(*_R,*_G,*_B);    
+  glVertex2d(xGL-demi_horizontal, yGL-bar_width_vertical);
+  glVertex2d(xGL+demi_horizontal, yGL-bar_width_vertical);
+  glVertex2d(xGL+demi_horizontal, yGL+bar_width_vertical);
+  glVertex2d(xGL-demi_horizontal, yGL+bar_width_vertical);
+  glEnd();
+
+  // Barre horizontale
+
+  glBegin(GL_QUADS);
+  glVertex2d(xGL-(bar_width_horizontal),yGL-demi_vertical);
+  glVertex2d(xGL+(bar_width_horizontal),yGL-demi_vertical);
+  glVertex2d(xGL+(bar_width_horizontal),yGL+demi_vertical);
+  glVertex2d(xGL-(bar_width_horizontal),yGL+demi_vertical);
+  glEnd();
 }
 
 void

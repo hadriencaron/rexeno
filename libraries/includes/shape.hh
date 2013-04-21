@@ -31,8 +31,14 @@ public:
   double frameEnd() {return _frameEnd->value;}
   bool monitorDisplayable();
   uint ttl() {return _ttl;}
+  bool displayable(int frameId);
 
 protected:
+  double _demiVertical(); // inside sub square-screen
+  double _demiHorizontal(); // inside sub square-screen
+  double _xGL(); // inside sub square-screen
+  double _yGL(); // inside sub square-screen
+
   string _name;
   Variable* _frameStart;
   Variable* _frameEnd;

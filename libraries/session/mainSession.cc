@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 
 #include "session.hh"
+#include "dummyDriver.hh"
 
 using namespace std;
 
@@ -58,11 +59,13 @@ int	main(int argc,
   configuration::SessionInfo conf;
   bool r = configuration::createConfiguration("./conf", conf);
   assert(r);
-  Setup* s = new Setup("~/.rexeno");
+  Setup* setup = new Setup("~/.rexeno");
   Session* session = Session::getInstance(conf);
+  Driver* d = new DummyDriver();
 
-  session->setup = s;
+  session->setup = setup;
   session->beforeTrial = &InterTrial_CTM;
+  session->setDriver(d);
 
   session->run(argc, argv);
 }

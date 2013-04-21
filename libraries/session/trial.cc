@@ -1,4 +1,6 @@
 #include "trial.hh"
+#include "driver.hh"
+#include <boost/foreach.hpp>
 
 Trial::Trial(TrialInfo& ti)
   : _curFrameId(0),
@@ -16,7 +18,6 @@ Trial::Trial(TrialInfo& ti)
       _shapes.push_back(newShape);
       if (newShape->frameEnd() > _nbFrames)
         _nbFrames = newShape->frameEnd();
-      _ttlFrames[newShape->frameStart()] = newShape->ttl();
     }
   }
 
@@ -26,6 +27,12 @@ Trial::Trial(TrialInfo& ti)
   _status[WRONG_NEXT] = false;
   _status[CORRECT] = false;
   _status[WAITING_FIXATION] = false;
+
+  _ttl = new vector<TtlEvent*>;
+  _ttl->push_back( new TtlEvent() );
+  _ttl->push_back( new TtlEvent() );
+  _ttl->push_back( new TtlEvent() );
+  _ttl->push_back( new TtlEvent() );
 }
 
 Trial::~Trial()
@@ -40,16 +47,16 @@ Trial::~Trial()
 }
 
 int
-Trial::displayFrame(Driver& d)
+Trial::displayFrame(Driver* d)
 {
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
-
     glPushMatrix();
     glTranslatef(0.5, 0, 0);
-    curShape->display();
+    if (curShape->displayable(_curFrameId))
+      curShape->display();
     glPopMatrix();
 
     if (curShape->monitorDisplayable())
@@ -64,6 +71,7 @@ Trial::displayFrame(Driver& d)
   glutPostRedisplay();
   glClear(GL_COLOR_BUFFER_BIT);
 
+  _sendTtls(d);
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
@@ -71,6 +79,17 @@ Trial::displayFrame(Driver& d)
     curShape->react2input(_status);
   }
   return (_react2status());
+}
+
+void
+Trial::_sendTtls(Driver* d)
+{
+  vector<TtlEvent*>::iterator it;
+  for (it = _ttl->begin(); it != _ttl->end(); ++it)
+  {
+    if ((*it)->value != 0)
+      d->ttlPulse((*it)->value, (*it)->delay);
+  }
 }
 
 int

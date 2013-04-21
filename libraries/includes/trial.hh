@@ -24,23 +24,32 @@ class Driver;
 # define WAITING_FIXATION 5
 
 
+struct TtlEvent
+{
+  TtlEvent() {delay=0;value=0;}
+  double delay;
+  uint value;
+};
+
 class Trial
 {
 public:
   Trial(TrialInfo& ti);
   ~Trial();
-  int displayFrame(Driver& d);
+  int displayFrame(Driver* d);
   bool finished();
   bool atStart();
   string& name() {return _name;}
   void reset();
   void adjustNbFrames();
+  void addTtl();
 
   int frameEnd() {return _nbFrames;}
   VariableManager variables;
 private:
   int _react2status();
-  
+  void _sendTtls(Driver* d);
+
   int _curFrameId;
   int _nbFrames;
   Status _status;
@@ -48,7 +57,7 @@ private:
   string& _name;
   int _argc;
   char **_argv;
-  map<int, int> _ttlFrames;
+  vector<TtlEvent*> *_ttl;
 };
 
 
