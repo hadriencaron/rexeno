@@ -53,8 +53,8 @@ CMAKE_BINARY_DIR = /home/hadrien/repos/newRexeno/libraries/build
 # Target rules for target CMakeFiles/Rexeno.dir
 
 # All Build rule for target.
-CMakeFiles/Rexeno.dir/all: configuration/CMakeFiles/configuration.dir/all
 CMakeFiles/Rexeno.dir/all: session/CMakeFiles/session.dir/all
+CMakeFiles/Rexeno.dir/all: configuration/CMakeFiles/configuration.dir/all
 CMakeFiles/Rexeno.dir/all: nidaq/CMakeFiles/nidaq.dir/all
 	$(MAKE) -f CMakeFiles/Rexeno.dir/build.make CMakeFiles/Rexeno.dir/depend
 	$(MAKE) -f CMakeFiles/Rexeno.dir/build.make CMakeFiles/Rexeno.dir/build
