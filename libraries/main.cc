@@ -13,6 +13,7 @@ int	main(int argc,
 {
   configuration::SessionInfo conf;
   bool r = configuration::createConfiguration(argv[1], conf);
+  assert(r);
 
   int pid = fork();
   if (pid == 0)
