@@ -7,6 +7,7 @@
 # include "parser.hh"
 # include "shape.hh"
 # include "square.hh"
+# include "cross.hh"
 # include "session.hh"
 # include <GL/glut.h>
 

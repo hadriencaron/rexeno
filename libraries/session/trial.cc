@@ -13,6 +13,8 @@ Trial::Trial(TrialInfo& ti)
     Shape *newShape = NULL;
     if (it->name == "Square")
       newShape = new Square(*it, variables);
+    if (it->name == "Cross")
+      newShape = new Cross(*it, variables);
     if (newShape)
     {
       _shapes.push_back(newShape);
@@ -63,7 +65,8 @@ Trial::displayFrame(Driver* d)
     {
       glPushMatrix();
       glTranslatef(-0.5, 0, 0);
-      curShape->displayMonitor();
+      if (curShape->displayable(_curFrameId))
+        curShape->displayMonitor();
       glPopMatrix();
     }
   }
