@@ -12,9 +12,9 @@ Trial::Trial(TrialInfo& ti)
   {
     Shape *newShape = NULL;
     if (it->name == "Square")
-      newShape = new Square(*it, variables);
+      newShape = new Square(*it, variables, this);
     if (it->name == "Cross")
-      newShape = new Cross(*it, variables);
+      newShape = new Cross(*it, variables, this);
     if (newShape)
     {
       _shapes.push_back(newShape);
@@ -75,11 +75,12 @@ Trial::displayFrame(Driver* d)
   glClear(GL_COLOR_BUFFER_BIT);
 
   _sendTtls(d);
+  _status[RUNNING] = false;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
 
-    curShape->react2input(_status);
+    curShape->react2input(_status, _curFrameId);
   }
   return (_react2status());
 }
@@ -162,3 +163,10 @@ Trial::reset()
 {
   _curFrameId = 0;
 }
+
+bool
+Trial::status(int key)
+{
+  return _status[key];
+}
+

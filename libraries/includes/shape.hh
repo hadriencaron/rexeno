@@ -16,6 +16,7 @@ using namespace configuration;
 using namespace std;
 
 typedef map<int, bool> Status;
+typedef unsigned long long ms;
 
 
 class Shape
@@ -28,7 +29,8 @@ public:
   virtual ~Shape() {}
   virtual void display();
   virtual void displayMonitor();
-  virtual void react2input(Status&) = 0;
+  virtual void react2input(Status&,
+                           ms);
   const string& name() {return _name;}
   double frameStart() {return _frameStart->value;}
   double frameEnd() {return _frameEnd->value;}

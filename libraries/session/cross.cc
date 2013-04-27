@@ -3,7 +3,8 @@
 
 
 Cross::Cross(const ShapeInfo& si,
-             VariableManager& vm)
+             VariableManager& vm,
+             Trial* father)
 {
   assert(si.attributes.size() == 9);
   _name = "Cross";
@@ -16,6 +17,8 @@ Cross::Cross(const ShapeInfo& si,
   vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[8]));
+
+  _father = father;
 }
 
 void
@@ -56,7 +59,8 @@ Cross::displayMonitor()
 }
 
 void
-Cross::react2input(Status&)
+Cross::react2input(Status&,
+                   ms frameId)
 {
 
 }

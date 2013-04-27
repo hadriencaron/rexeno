@@ -26,9 +26,10 @@ Rectangle::Rectangle(const ShapeInfo& si,
 }
 
 void
-Rectangle::react2input(Status& s)
+Rectangle::react2input(Status& s,
+                       ms frameId)
 {
-
+  Shape::react2input(s, frameId);
 
 }
 

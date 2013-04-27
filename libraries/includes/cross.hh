@@ -7,13 +7,15 @@ class Cross : public Shape
 {
 public:
   Cross(const ShapeInfo&,
-        VariableManager&);
+        VariableManager&,
+        Trial* father);
   Cross() {}
   ~Cross() {}
 
   void display();
   void displayMonitor();
-  void react2input(Status&);
+  void react2input(Status&,
+                   ms frameId);
 };
 
 #endif

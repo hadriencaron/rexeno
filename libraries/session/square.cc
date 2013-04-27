@@ -4,7 +4,8 @@ using boost::lexical_cast;
 using boost::bad_lexical_cast;
 
 Square::Square(const ShapeInfo& si,
-               VariableManager& vm)
+               VariableManager& vm,
+               Trial* father)
 {
   assert(si.attributes.size() == 10);
   _name = "Square";
@@ -17,6 +18,8 @@ Square::Square(const ShapeInfo& si,
   vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[8]));
+
+  _father = father;
 }
 
 Square::~Square()

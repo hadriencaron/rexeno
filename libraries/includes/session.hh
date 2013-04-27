@@ -9,7 +9,6 @@
 # include "setup.hh"
 # include <GL/glut.h>
 
-typedef unsigned long long ms;
 using namespace std;
 using namespace configuration;
 class Trial;

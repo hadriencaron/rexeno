@@ -77,3 +77,14 @@ Shape::_yGL()
   double yGL = *_y * yRatio;
   return yGL;
 }
+
+void
+Shape::react2input(Status& s,
+                   ms frameId)
+{
+  if (frameId > frameEnd())
+    s[RUNNING] |= false;
+  else
+    s[RUNNING] = true;
+}
+

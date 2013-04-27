@@ -74,7 +74,8 @@ Session::displayFrame()
 
     int b = (*_currentTrial)->displayFrame(_driver);
 
-    if (t->finished())
+    //if (t->finished())
+    if (!t->status(RUNNING))
     {
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);

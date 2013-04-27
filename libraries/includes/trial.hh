@@ -44,7 +44,7 @@ public:
   void reset();
   void adjustNbFrames();
   void addTtl();
-
+  bool status(int);
   int frameEnd() {return _nbFrames;}
   VariableManager variables;
 private:

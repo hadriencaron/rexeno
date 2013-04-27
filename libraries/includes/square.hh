@@ -7,7 +7,8 @@ class Square : public Rectangle
 {
 public:
   Square(const ShapeInfo& si,
-         VariableManager& vm);
+         VariableManager& vm,
+         Trial* t);
   ~Square();
 private:
 };

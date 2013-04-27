@@ -12,7 +12,8 @@ public:
   Rectangle() {}
   virtual ~Rectangle();
 
-  void react2input(Status&);
+  void react2input(Status&,
+                   ms);
 private:
 };
 
