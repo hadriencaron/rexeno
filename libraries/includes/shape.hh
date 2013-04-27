@@ -10,6 +10,8 @@
 # include "parser.hh"
 # include "variable.hh"
 
+class Trial;
+
 using namespace configuration;
 using namespace std;
 
@@ -20,7 +22,8 @@ class Shape
 {
 public:
   Shape(const ShapeInfo& si,
-        VariableManager& vm);
+        VariableManager& vm,
+        Trial* father);
   Shape() {}
   virtual ~Shape() {}
   virtual void display();
@@ -50,6 +53,7 @@ protected:
   Variable* _G;
   Variable* _B;
   uint _ttl;
+  Trial* _father;
 };
 
 #endif

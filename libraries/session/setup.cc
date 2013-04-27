@@ -22,9 +22,10 @@ Setup::Setup(string confFile)
     ("refresh", po::value<double>( &height )->default_value(60), "refresh rate of screens")
     ;
 
-  
   po::store( po::parse_config_file( settings_file , desc ), vm );
-  po::notify(vm); 
+  po::notify(vm);
+
+  boost::program_options::options_description dd;
 
   _screenHeight = height;
   _screenWidth = width;

@@ -7,7 +7,8 @@ class Rectangle : public Shape
 {
 public:
   Rectangle(const ShapeInfo&,
-            VariableManager&);
+            VariableManager&,
+            Trial* father);
   Rectangle() {}
   virtual ~Rectangle();
 

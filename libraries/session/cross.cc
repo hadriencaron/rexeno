@@ -16,7 +16,6 @@ Cross::Cross(const ShapeInfo& si,
   vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[8]));
-
 }
 
 void

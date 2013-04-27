@@ -4,9 +4,11 @@
 using namespace boost;
 
 Rectangle::Rectangle(const ShapeInfo& si,
-                     VariableManager& vm)
+                     VariableManager& vm,
+                     Trial* father)
 {
   assert(si.attributes.size() == 11);
+  assert(!father);
   _name = "Rectangle";
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
@@ -19,6 +21,8 @@ Rectangle::Rectangle(const ShapeInfo& si,
   vm.addVariable(_height = new Variable(si.attributes[9]));
 
   _ttl = lexical_cast<int>(si.attributes[10]);
+
+  _father = father;
 }
 
 void
