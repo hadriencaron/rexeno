@@ -39,6 +39,7 @@ public:
   bool displayable(int frameId);
 
 protected:
+  // Use these functions for opengl's drawing scale. 
   double _demiVertical(); // inside sub square-screen
   double _demiHorizontal(); // inside sub square-screen
   double _xGL(); // inside sub square-screen
