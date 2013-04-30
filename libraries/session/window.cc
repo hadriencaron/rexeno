@@ -1,11 +1,16 @@
 #include "window.hh"
+#include <boost/lexical_cast.hpp>
+#include <GL/glut.h>
 
-Window::Window(const ShapeInfo&,
-               variableManager&,
-               Trial*)
+using namespace boost;
+class Trial;
+
+Window::Window(const ShapeInfo& si,
+               VariableManager& vm,
+               Trial* father)
 {
   assert(si.attributes.size() == 11);
-  assert(!father);
+  assert(father);
   _name = "Rectangle";
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
@@ -39,10 +44,35 @@ Window::displayMonitor()
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);    
   glVertex2d(leftX, topY);
-  glVertex2d(leftX - _thickness, topY);
-  glVertex2d(leftX - _thickness, bottomY);
+  glVertex2d(leftX + _thickness, topY);
+  glVertex2d(leftX + _thickness, bottomY);
   glVertex2d(leftX, bottomY);
   glEnd();
+
+  glBegin(GL_QUADS);
+  glColor3ub(*_R,*_G,*_B);    
+  glVertex2d(rightX, topY);
+  glVertex2d(rightX - _thickness, topY);
+  glVertex2d(rightX - _thickness, bottomY);
+  glVertex2d(rightX, bottomY);
+  glEnd();
+
+  glBegin(GL_QUADS);
+  glColor3ub(*_R,*_G,*_B);    
+  glVertex2d(leftX, topY);
+  glVertex2d(rightX, _thickness - topY);
+  glVertex2d(rightX, _thickness - topY);
+  glVertex2d(leftX, topY);
+  glEnd();
+
+  glBegin(GL_QUADS);
+  glColor3ub(*_R,*_G,*_B);    
+  glVertex2d(leftX, bottomY);
+  glVertex2d(rightX, _thickness + bottomY);
+  glVertex2d(rightX, _thickness + bottomY);
+  glVertex2d(leftX, bottomY);
+  glEnd();
+
 }
 
 bool
@@ -60,3 +90,10 @@ Window::isIn(double x,
   return (res);
 }
 
+void
+CorrectWindow::react2input(Status& s,
+                           ms n)
+{
+
+
+}

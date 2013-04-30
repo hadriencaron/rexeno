@@ -3,14 +3,14 @@
 
 # include "shape.hh"
 
-class Window
+class Window : public Shape
 {
 public:
   Window(const ShapeInfo&,
-         variableManager&,
+         VariableManager&,
          Trial* father);
   Window() {}
-  virtual ~Window();
+  virtual ~Window() {}
 
   void display();
   void displayMonitor();
@@ -20,5 +20,18 @@ private:
   double _thickness;
 };
 
+class CorrectWindow : public Window
+{
+public:
+  CorrectWindow(const ShapeInfo&,
+                VariableManager&,
+                Trial* father);
+  CorrectWindow() {}
+  ~CorrectWindow() {}
+
+  void react2input(Status&,
+                   ms);
+
+};
 
 #endif
