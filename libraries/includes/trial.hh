@@ -58,7 +58,8 @@ private:
   string& _name;
   int _argc;
   char **_argv;
-  vector<TtlEvent*> *_ttl;
+  vector<TtlEvent*>* _ttl;
+  datas _data;
 };
 
 

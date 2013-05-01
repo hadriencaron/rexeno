@@ -4,6 +4,7 @@
 # include <vector>
 # include "session.hh"
 
+
 class Driver
 {
 public:
@@ -11,7 +12,7 @@ public:
   virtual ~Driver() {}
 
   virtual ms getTime() = 0;
-  virtual void analogIn() {}
+  virtual void analogIn(datas& data) {}
   virtual void ttlPulse(uint value,
                         ms delay = 0,
                         ms duration = 5) {}

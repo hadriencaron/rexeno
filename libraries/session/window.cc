@@ -1,3 +1,4 @@
+#include "trial.hh"
 #include "window.hh"
 #include <boost/lexical_cast.hpp>
 #include <GL/glut.h>
@@ -90,10 +91,18 @@ Window::isIn(double x,
   return (res);
 }
 
+
 void
 CorrectWindow::react2input(Status& s,
+                           datas& ds,
                            ms n)
 {
+  double x = ds[0].volt;
+  double y = ds[1].volt;
 
-
+  if (isIn(x, y))
+  {
+    s[CORRECT] = true;
+    s[RUNNING] = false;
+  }
 }

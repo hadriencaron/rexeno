@@ -10,13 +10,23 @@
 # include "parser.hh"
 # include "variable.hh"
 
-class Trial;
-
 using namespace configuration;
 using namespace std;
 
 typedef map<int, bool> Status;
 typedef unsigned long long ms;
+
+struct Element
+{
+  double volt;
+  ms timing;
+};
+
+typedef vector<Element> datas;
+
+class Trial;
+
+
 
 
 class Shape
@@ -30,6 +40,7 @@ public:
   virtual void display();
   virtual void displayMonitor();
   virtual void react2input(Status&,
+                           datas&,
                            ms);
   const string& name() {return _name;}
   double frameStart() {return _frameStart->value;}

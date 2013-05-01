@@ -80,6 +80,7 @@ Shape::_yGL()
 
 void
 Shape::react2input(Status& s,
+                   datas& ds,
                    ms frameId)
 {
   if (frameId > frameEnd())

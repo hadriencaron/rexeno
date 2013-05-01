@@ -18,6 +18,7 @@ public:
             double y);
 private:
   double _thickness;
+  int _validationNbFrame;
 };
 
 class CorrectWindow : public Window
@@ -30,6 +31,7 @@ public:
   ~CorrectWindow() {}
 
   void react2input(Status&,
+                   datas& ds,
                    ms);
 
 };

@@ -13,6 +13,7 @@ public:
   virtual ~Rectangle();
 
   void react2input(Status&,
+                   datas&,
                    ms);
 private:
 };
