@@ -13,6 +13,7 @@ public:
 
   double xRatio();
   double yRatio() {return 1;}
+  static bool* keys; // Create an array of boolean values of length 256 (0-255)
 private:
   // centimenters
   double _screenHeight;

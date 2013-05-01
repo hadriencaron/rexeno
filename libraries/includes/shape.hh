@@ -18,6 +18,12 @@ typedef unsigned long long ms;
 
 struct Element
 {
+  Element()
+  {
+    volt = 0;
+    timing = 0;
+  }
+
   double volt;
   ms timing;
 };

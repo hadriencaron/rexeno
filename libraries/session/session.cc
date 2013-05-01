@@ -38,6 +38,15 @@ displayRexeno()
   s->displayFrame();
 }
 
+void processNormalKeys(unsigned char key, int x, int y) 
+{
+  Setup::keys[key] = true;
+  if (key == 27) 
+    {
+      exit(0);
+    }
+}
+
 void
 Session::run(int argc,
              char** argv)
@@ -49,6 +58,7 @@ Session::run(int argc,
   glutCreateWindow ((char*)"rexeno");
   glutGameModeString("2048x768:32@60");
   //glutEnterGameMode();
+  glutKeyboardFunc(processNormalKeys);
   glutFullScreen();
   glutSetCursor(GLUT_CURSOR_NONE);
   glutDisplayFunc (displayRexeno);

@@ -6,6 +6,8 @@
 namespace po = boost::program_options;
 using namespace std;
 
+bool* Setup::keys = new bool[256];
+
 Setup::Setup(string confFile)
 {
   double height;
