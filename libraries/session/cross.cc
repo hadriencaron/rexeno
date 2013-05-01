@@ -1,6 +1,6 @@
 #include "cross.hh"
 #include <GL/glut.h>
-
+#include "trial.hh"
 
 Cross::Cross(const ShapeInfo& si,
              VariableManager& vm,
@@ -59,10 +59,12 @@ Cross::displayMonitor()
 }
 
 void
-Cross::react2input(Status&,
+Cross::react2input(Status& s,
+                   datas& ds,
                    ms frameId)
 {
-
+  _x->value = ds[0].volt;
+  _y->value = ds[1].volt;
 }
 
 

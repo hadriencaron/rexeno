@@ -7,7 +7,7 @@ Trial::Trial(TrialInfo& ti)
     _nbFrames(1),
     _name(ti.name)
 {
-  //_data = new datas(8);
+  _data.resize(8);
   vector<ShapeInfo>::iterator it;
   for (it = ti.shapes.begin(); it != ti.shapes.end(); ++it)
   {

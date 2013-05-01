@@ -15,6 +15,7 @@ public:
   void display();
   void displayMonitor();
   void react2input(Status&,
+                   datas&,
                    ms frameId);
 };
 
