@@ -83,9 +83,13 @@ Shape::react2input(Status& s,
                    datas& ds,
                    int frameId)
 {
+  if (frameId == frameStart())
+    s[RUNNING] |= false;
+
   if (frameId > frameEnd())
     s[RUNNING] |= false;
   else
     s[RUNNING] = true;
+
 }
 
