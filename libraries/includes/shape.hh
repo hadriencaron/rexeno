@@ -47,7 +47,7 @@ public:
   virtual void displayMonitor();
   virtual void react2input(Status&,
                            datas&,
-                           ms);
+                           int);
   const string& name() {return _name;}
   double frameStart() {return _frameStart->value;}
   double frameEnd() {return _frameEnd->value;}

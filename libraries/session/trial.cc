@@ -16,6 +16,8 @@ Trial::Trial(TrialInfo& ti)
       newShape = new Square(*it, variables, this);
     if (it->name == "Cross")
       newShape = new Cross(*it, variables, this);
+    if (it->name == "WrongWindow")
+      newShape = new WrongWindow(*it, variables, this);
     if (newShape)
     {
       _shapes.push_back(newShape);
@@ -30,6 +32,7 @@ Trial::Trial(TrialInfo& ti)
   _status[WRONG_NEXT] = false;
   _status[CORRECT] = false;
   _status[WAITING_FIXATION] = false;
+  _status[NEUTRAL] = false;
 
   _ttl = new vector<TtlEvent*>;
   _ttl->push_back( new TtlEvent() );
@@ -81,7 +84,8 @@ Trial::displayFrame(Driver* d)
   {
     Shape *curShape = *it;
 
-    curShape->react2input(_status, _data, _curFrameId);
+    if (curShape->displayable(_curFrameId))
+      curShape->react2input(_status, _data, _curFrameId);
   }
   return (_react2status());
 }
@@ -100,26 +104,28 @@ Trial::_sendTtls(Driver* d)
 int
 Trial::_react2status()
 {
-  if (_status[WAITING_FIXATION] == true)
-  {
-    return (WAITING_FIXATION);
-  }
+  // if (_status[WAITING_FIXATION] == true)
+  // {
+  //   return (WAITING_FIXATION);
+  // }
 
   if (_status[CORRECT] == true)
   {
     return (CORRECT);
   }
 
-  if (_status[WRONG_NEXT] == true)
+  if (_status[NEUTRAL])
   {
-    return (WRONG_NEXT);
-  }
+    if (_status[WRONG_NEXT] == true)
+    {
+      return (WRONG_NEXT);
+    }
 
-  if (_status[WRONG_REDO] == true)
-  {
-    return (WRONG_REDO);
+    if (_status[WRONG_REDO] == true)
+    {
+      return (WRONG_REDO);
+    }
   }
-
   if (_status[PAUSE] == true)
   {
     return (PAUSE);
@@ -130,7 +136,7 @@ Trial::_react2status()
     _curFrameId++;
     return (RUNNING);
   }
-  return (WRONG_NEXT); // should not get here
+  return (WRONG_NEXT); // should not get here (this line is to avoid a compiler warning)
 }
 
 void

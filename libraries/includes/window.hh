@@ -16,9 +16,14 @@ public:
   void displayMonitor();
   bool isIn(double x,
             double y);
-private:
+  void react2input(Status&,
+                   datas&,
+                   int);
+protected:
   double _thickness;
-  int _validationNbFrame;
+  Variable* _validationNbFrame;
+  int _startValidationFrame;
+  int _type;
 };
 
 class CorrectWindow : public Window
@@ -29,11 +34,36 @@ public:
                 Trial* father);
   CorrectWindow() {}
   ~CorrectWindow() {}
+};
 
-  void react2input(Status&,
-                   datas& ds,
-                   ms);
+class WrongWindow : public Window
+{
+public:
+  WrongWindow(const ShapeInfo&,
+                VariableManager&,
+                Trial* father);
+  WrongWindow() {}
+  ~WrongWindow() {}
+};
 
+class FixationWindow : public Window
+{
+public:
+  FixationWindow(const ShapeInfo&,
+                VariableManager&,
+                Trial* father);
+  FixationWindow() {}
+  ~FixationWindow() {}
+};
+
+class NeutralWindow : public Window
+{
+public:
+  NeutralWindow(const ShapeInfo&,
+                VariableManager&,
+                Trial* father);
+  NeutralWindow() {}
+  ~NeutralWindow() {}
 };
 
 #endif

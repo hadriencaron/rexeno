@@ -81,7 +81,7 @@ Shape::_yGL()
 void
 Shape::react2input(Status& s,
                    datas& ds,
-                   ms frameId)
+                   int frameId)
 {
   if (frameId > frameEnd())
     s[RUNNING] |= false;

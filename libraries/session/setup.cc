@@ -39,3 +39,10 @@ Setup::xRatio()
   return (_screenHeight / _screenWidth);
 }
 
+void
+Setup::reset()
+{
+  int i = 0;
+  for (; i < 256; ++i)
+    Setup::keys[i] = false;
+}

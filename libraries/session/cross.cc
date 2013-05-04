@@ -61,10 +61,20 @@ Cross::displayMonitor()
 void
 Cross::react2input(Status& s,
                    datas& ds,
-                   ms frameId)
+                   int frameId)
 {
-  _x->value = ds[0].volt;
-  _y->value = ds[1].volt;
+  if (Setup::keys['q'])
+    _offsetX -= 0.05;
+  if (Setup::keys['d'])
+    _offsetX += 0.05;
+  if (Setup::keys['z'])
+    _offsetY -= 0.05;
+  if (Setup::keys['s'])
+    _offsetY += 0.05;
+  Setup::reset();
+
+  _x->value = ds[0].volt + _offsetX;
+  _y->value = - ds[1].volt - _offsetY;
 }
 
 

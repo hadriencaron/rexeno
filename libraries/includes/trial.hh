@@ -9,6 +9,7 @@
 # include "square.hh"
 # include "cross.hh"
 # include "session.hh"
+# include "window.hh"
 # include <GL/glut.h>
 
 using namespace std;
@@ -23,7 +24,7 @@ class Driver;
 # define WRONG_NEXT 3
 # define CORRECT 4
 # define WAITING_FIXATION 5
-
+# define NEUTRAL 6
 
 struct TtlEvent
 {
