@@ -3,15 +3,17 @@
 
 # include <iostream>
 # include <list>
+# include <GL/glut.h>
 
 # include "parser.hh"
 # include "trial.hh"
 # include "setup.hh"
-# include <GL/glut.h>
+# include "recorder.hh"
+# include "driver.hh"
 
 using namespace std;
 using namespace configuration;
-class Trial;
+//class Trial;
 class Driver;
 
 // Singleton class
@@ -28,15 +30,16 @@ public:
   void (*afterTrial)(string&, VariableManager&, int);
   void (*beforeTrial)(string&, VariableManager&);
   void setDriver(Driver* d) {_driver = d;}
-  
+
   Setup* setup;
   //void (*interFrame)(VariableManager&);
   //void (*ConfigurableWindow)(TrialManager *);
-  
+
 private:
   Session(SessionInfo& s);
   void _fillData();
 
+  Recorder* _recorder;
   Driver* _driver;
   vector<Trial*> _trials;
   static Session* _instance;

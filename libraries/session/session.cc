@@ -23,11 +23,30 @@ Session::Session(SessionInfo &s)
   afterTrial = NULL;
   _inputData.resize(8);
   _driver = NULL;
+  _recorder = new Recorder("/tmp/");
+  _recorder->AddFile("results.txt");
+  _recorder->AddFile("events.txt");
+  _recorder->AddFile("X.txt");
+  _recorder->AddFile("id_trials.txt");
+  _recorder->AddFile("square_targets.txt");
 }
 
 Session::~Session()
 {
+  vector<Trial*>::iterator it;
+  for (it = _trials.begin(); it != _trials.end(); ++it)
+  {
+    delete (*it);
+  }
 
+  delete _recorder;
+  _recorder = NULL;
+  delete _driver;
+  _driver = NULL;
+  delete _instance;
+  _instance = NULL;
+  delete setup;
+  setup = NULL;
 }
 
 void

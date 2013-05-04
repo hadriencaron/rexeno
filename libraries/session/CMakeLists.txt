@@ -6,6 +6,7 @@ add_library (session session.cc trial.cc shape.cc square.cc rectangle.cc variabl
 target_link_libraries (configuration)
 link_libraries(configuration)
 link_libraries(driver)
+link_libraries(recorder)
 add_executable (sessionBin session.cc trial.cc  shape.cc cross.cc square.cc  rectangle.cc variable.cc setup.cc window.cc mainSession.cc)
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
