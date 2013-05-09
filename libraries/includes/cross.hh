@@ -16,11 +16,9 @@ public:
   void displayMonitor();
   void react2input(Status&,
                    datas&,
-                   int frameId);
+                   int frameId,
+                   ms);
 private:
-  double _offsetX;
-  double _offsetY;
-  
 };
 
 #endif

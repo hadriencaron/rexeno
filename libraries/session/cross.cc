@@ -7,7 +7,7 @@ Cross::Cross(const ShapeInfo& si,
              Trial* father)
 {
   assert(si.attributes.size() == 9);
-  _name = "Cross";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -61,20 +61,11 @@ Cross::displayMonitor()
 void
 Cross::react2input(Status& s,
                    datas& ds,
-                   int frameId)
+                   int frameId,
+                   ms)
 {
-  if (Setup::keys['q'])
-    _offsetX -= 0.05;
-  if (Setup::keys['d'])
-    _offsetX += 0.05;
-  if (Setup::keys['z'])
-    _offsetY -= 0.05;
-  if (Setup::keys['s'])
-    _offsetY += 0.05;
-  Setup::reset();
-
-  _x->value = ds[0].volt + _offsetX;
-  _y->value = - ds[1].volt - _offsetY;
+  _x->value = ds[0].volt;
+  _y->value = - ds[1].volt;
 }
 
 

@@ -9,7 +9,7 @@ public:
   Window(const ShapeInfo&,
          VariableManager&,
          Trial* father);
-  Window() {}
+  Window() { _thickness = 0.01;}
   virtual ~Window() {}
 
   void display();
@@ -18,7 +18,8 @@ public:
             double y);
   void react2input(Status&,
                    datas&,
-                   int);
+                   int,
+                   ms);
 protected:
   double _thickness;
   Variable* _validationNbFrame;

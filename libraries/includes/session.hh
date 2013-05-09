@@ -13,8 +13,6 @@
 
 using namespace std;
 using namespace configuration;
-//class Trial;
-class Driver;
 
 // Singleton class
 class Session
@@ -26,20 +24,24 @@ public:
   void run(int argc,
            char** argv);
   void displayFrame();
+  void displayHeader();
 
   void (*afterTrial)(string&, VariableManager&, int);
   void (*beforeTrial)(string&, VariableManager&);
   void setDriver(Driver* d) {_driver = d;}
 
   Setup* setup;
+  Recorder* recorder;
   //void (*interFrame)(VariableManager&);
   //void (*ConfigurableWindow)(TrialManager *);
-
+  int nbFrame4init() {return _nbFrame4init;}
+  int nbInitFrames() {return _nbInitFrames;}
+  ms getTime();
+  bool initialized();
 private:
   Session(SessionInfo& s);
   void _fillData();
 
-  Recorder* _recorder;
   Driver* _driver;
   vector<Trial*> _trials;
   static Session* _instance;
@@ -47,6 +49,12 @@ private:
   vector<Trial*>::iterator _currentTrial;
   // Background Color :
   int _R, _G, _B;
+  // Guardian Trial : in charge of
+  // evaluating the offset value of display
+  bool _initialized;
+  int _nbFrame4init;
+  int _nbInitFrames;
+  double _offsetVsync; // offset between 0 and 16.666 (if 60Hz)
 };
 
 

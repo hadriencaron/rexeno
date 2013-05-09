@@ -23,12 +23,17 @@ Session::Session(SessionInfo &s)
   afterTrial = NULL;
   _inputData.resize(8);
   _driver = NULL;
-  _recorder = new Recorder("/tmp/");
-  _recorder->AddFile("results.txt");
-  _recorder->AddFile("events.txt");
-  _recorder->AddFile("X.txt");
-  _recorder->AddFile("id_trials.txt");
-  _recorder->AddFile("square_targets.txt");
+  recorder = new Recorder("/tmp/");
+  recorder->AddFile("results.txt");
+  recorder->AddFile("events.txt");
+  recorder->AddFile("X.txt");
+  recorder->AddFile("id_trials.txt");
+  recorder->AddFile("square_targets.txt");
+
+  _offsetVsync = -1;
+  _initialized = false;
+  _nbFrame4init = 120;
+  _nbInitFrames = 0;
 }
 
 Session::~Session()
@@ -38,11 +43,8 @@ Session::~Session()
   {
     delete (*it);
   }
-
-  delete _recorder;
-  _recorder = NULL;
-  delete _driver;
-  _driver = NULL;
+  delete recorder;
+  recorder = NULL;
   delete _instance;
   _instance = NULL;
   delete setup;
@@ -53,9 +55,42 @@ void
 displayRexeno()
 {
   Session* s = Session::getInstance();
-
-  s->displayFrame();
+  s->displayHeader();
 }
+
+void
+Session::displayHeader()
+{
+  if (!initialized())
+  {
+    glBegin(GL_QUADS);
+    glColor3ub(255, 155, 255);    
+    glVertex2d(-0.1, -0.1);
+    glVertex2d(-0.1, 0.1);
+    glVertex2d(0.1, -0.1);
+    glVertex2d(0.1, 0.1);
+    glEnd();
+
+
+    glutSwapBuffers();
+    glutPostRedisplay();
+    glClear(GL_COLOR_BUFFER_BIT);
+    if (nbInitFrames() < nbFrame4init())
+    {
+      //getTime() % (int) setup->refreshRate();
+      ++_nbInitFrames;
+    }
+    else
+    {
+      _initialized = true;
+    }
+  }
+  else
+  {
+    displayFrame();
+  }
+}
+
 
 void processNormalKeys(unsigned char key, int x, int y) 
 {
@@ -103,9 +138,10 @@ Session::displayFrame()
 
     int b = (*_currentTrial)->displayFrame(_driver);
 
-    //if (t->finished())
-    if (!t->status(RUNNING))
+    if (b != RUNNING)
     {
+      ms displayTime = _driver->getTime();
+      recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);
 
@@ -138,3 +174,15 @@ Session::_fillData()
 }
 
 
+ms
+Session::getTime()
+{
+  assert (_driver);
+  return _driver->getTime();
+}
+
+bool
+Session::initialized()
+{
+  return (_initialized);
+}

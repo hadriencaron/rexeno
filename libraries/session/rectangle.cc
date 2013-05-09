@@ -9,7 +9,7 @@ Rectangle::Rectangle(const ShapeInfo& si,
 {
   assert(si.attributes.size() == 11);
   assert(!father);
-  _name = "Rectangle";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -28,9 +28,10 @@ Rectangle::Rectangle(const ShapeInfo& si,
 void
 Rectangle::react2input(Status& s,
                        datas& ds,
-                       ms frameId)
+                       int frameId,
+                       ms displayTime)
 {
-  Shape::react2input(s, ds, frameId);
+  Shape::react2input(s, ds, frameId, displayTime);
 
 }
 

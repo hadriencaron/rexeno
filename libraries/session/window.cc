@@ -12,7 +12,7 @@ Window::Window(const ShapeInfo& si,
 {
   assert(si.attributes.size() == 11);
   assert(father);
-  _name = "Window";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -24,6 +24,7 @@ Window::Window(const ShapeInfo& si,
   vm.addVariable(_height = new Variable(si.attributes[9]));
 
   _ttl = lexical_cast<int>(si.attributes[10]);
+  _thickness = 0.01;
 
   _father = father;
 }
@@ -40,9 +41,7 @@ Window::displayMonitor()
   double leftX = _xGL() - _demiHorizontal();
   double rightX = _xGL() + _demiHorizontal();
   double topY = _yGL() + _demiVertical();
-  double bottomY = _yGL() + _demiVertical();
-
-  cout << "display window" << endl;
+  double bottomY = _yGL() - _demiVertical();
 
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);
@@ -63,17 +62,17 @@ Window::displayMonitor()
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);
   glVertex2d(leftX, topY);
-  glVertex2d(rightX, _thickness - topY);
-  glVertex2d(rightX, _thickness - topY);
-  glVertex2d(leftX, topY);
+  glVertex2d(leftX,  topY - _thickness);
+  glVertex2d(rightX,  topY - _thickness);
+  glVertex2d(rightX, topY);
   glEnd();
 
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);
   glVertex2d(leftX, bottomY);
+  glVertex2d(leftX, _thickness + bottomY);
   glVertex2d(rightX, _thickness + bottomY);
-  glVertex2d(rightX, _thickness + bottomY);
-  glVertex2d(leftX, bottomY);
+  glVertex2d(rightX, bottomY);
   glEnd();
 
 }
@@ -90,6 +89,7 @@ Window::isIn(double x,
 
   res &= (x > leftX) && (x < rightX);
   res &= (y > bottomY) && (y < topY);
+
   return (res);
 }
 
@@ -99,7 +99,7 @@ CorrectWindow::CorrectWindow(const ShapeInfo& si,
 {
   assert(si.attributes.size() == 12);
   assert(father);
-  _name = "CorrectWindow";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -124,7 +124,7 @@ WrongWindow::WrongWindow(const ShapeInfo& si,
 {
   assert(si.attributes.size() == 12);
   assert(father);
-  _name = "WrongWindow";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -149,7 +149,7 @@ FixationWindow::FixationWindow(const ShapeInfo& si,
 {
   assert(si.attributes.size() == 12);
   assert(father);
-  _name = "WrongWindow";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -177,7 +177,7 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
 {
   assert(si.attributes.size() == 11);
   assert(father);
-  _name = "WrongWindow";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -199,7 +199,8 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
 void
 Window::react2input(Status& s,
                     datas& ds,
-                    int n)
+                    int n,
+                    ms displayTime)
 {
   double x = ds[0].volt;
   double y = ds[1].volt;
@@ -216,4 +217,6 @@ Window::react2input(Status& s,
   }
   else
     _startValidationFrame = -1;
+
+  Shape::react2input(s, ds, n, displayTime);
 }

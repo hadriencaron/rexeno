@@ -1,7 +1,9 @@
 #include "shape.hh"
 #include <GL/glut.h>
-
+#include <boost/lexical_cast.hpp>
 #include "session.hh"
+
+using boost::lexical_cast;
 
 void
 Shape::display()
@@ -65,7 +67,7 @@ Shape::_xGL()
 {
   Session* s = Session::getInstance();
   double xRatio = s->setup->xRatio();
-  double xGL = *_x * xRatio;
+  double xGL = *_x * xRatio / 2;
   return xGL;
 }
 
@@ -81,10 +83,21 @@ Shape::_yGL()
 void
 Shape::react2input(Status& s,
                    datas& ds,
-                   int frameId)
+                   int frameId,
+                   ms displayTime)
 {
-  if (frameId == frameStart())
-    s[RUNNING] |= false;
+  Session* session = Session::getInstance();
+  cout << frameId << " " << frameStart() << " " << frameEnd() << endl;
+  if ((frameId == frameStart()) && (!_logged))
+  {
+    _logged = true;
+    session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " start", "events.txt");
+  }
+  if ((frameId == frameEnd()) && (!_loggedEnd))
+  {
+    session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " end", "events.txt");
+    _loggedEnd = true;
+  }
 
   if (frameId > frameEnd())
     s[RUNNING] |= false;
@@ -93,3 +106,8 @@ Shape::react2input(Status& s,
 
 }
 
+Shape::Shape()
+{
+  _logged = false;
+  _loggedEnd = false;
+}

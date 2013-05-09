@@ -46,8 +46,10 @@ void		InterTrial_CTM(std::string &name,
 
  // GO_Target1(TM);
  // GO_Target2(TM);
+  //Variable* start = TM.getVariable("Start_Correct");
   Variable* end = TM.getVariable("End_Target");
-  end->value = 160;
+  //start->value = 1160;
+  end->value = 1160;
 }
 
 

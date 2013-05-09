@@ -61,6 +61,7 @@ private:
   char **_argv;
   vector<TtlEvent*>* _ttl;
   datas _data;
+  bool _logged;
 };
 
 

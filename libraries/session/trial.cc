@@ -7,6 +7,7 @@ Trial::Trial(TrialInfo& ti)
     _nbFrames(1),
     _name(ti.name)
 {
+  _logged = false;
   _data.resize(8);
   vector<ShapeInfo>::iterator it;
   for (it = ti.shapes.begin(); it != ti.shapes.end(); ++it)
@@ -18,6 +19,12 @@ Trial::Trial(TrialInfo& ti)
       newShape = new Cross(*it, variables, this);
     if (it->name == "WrongWindow")
       newShape = new WrongWindow(*it, variables, this);
+    if (it->name == "CorrectWindow")
+      newShape = new CorrectWindow(*it, variables, this);
+    if (it->name == "NeutralWindow")
+      newShape = new NeutralWindow(*it, variables, this);
+    if (it->name == "FixationWindow")
+      newShape = new FixationWindow(*it, variables, this);
     if (newShape)
     {
       _shapes.push_back(newShape);
@@ -55,6 +62,8 @@ Trial::~Trial()
 int
 Trial::displayFrame(Driver* d)
 {
+  Session* s = Session::getInstance();
+
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
@@ -80,13 +89,26 @@ Trial::displayFrame(Driver* d)
 
   _sendTtls(d);
   _status[RUNNING] = false;
+  d->react2input();
+  d->analogIn(_data);
+  ms displayTime = d->getTime();
+
+  if ((_curFrameId == 0) && (!_logged))
+  {
+    s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");
+    _logged = true;
+  }
+  cout << "DATA = " << _data[0].volt << " " << _data[1].volt << endl;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
 
-    if (curShape->displayable(_curFrameId))
-      curShape->react2input(_status, _data, _curFrameId);
+    cout << curShape->name() << " x = " << curShape->x() << endl;
+    
+    //if (curShape->displayable(_curFrameId))
+    curShape->react2input(_status, _data, _curFrameId, d->getTime());
   }
+  Setup::reset();
   return (_react2status());
 }
 
@@ -104,17 +126,13 @@ Trial::_sendTtls(Driver* d)
 int
 Trial::_react2status()
 {
-  // if (_status[WAITING_FIXATION] == true)
-  // {
-  //   return (WAITING_FIXATION);
-  // }
 
   if (_status[CORRECT] == true)
   {
     return (CORRECT);
   }
 
-  if (_status[NEUTRAL])
+  if (!_status[NEUTRAL])
   {
     if (_status[WRONG_NEXT] == true)
     {
@@ -129,6 +147,11 @@ Trial::_react2status()
   if (_status[PAUSE] == true)
   {
     return (PAUSE);
+  }
+
+  if (_status[WAITING_FIXATION] == true)
+  {
+    return (RUNNING);
   }
 
   if (_status[RUNNING] == true)

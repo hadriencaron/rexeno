@@ -9,26 +9,14 @@
 
 # include "parser.hh"
 # include "variable.hh"
+# include "types.hh"
 
 using namespace configuration;
 using namespace std;
 
 typedef map<int, bool> Status;
-typedef unsigned long long ms;
 
-struct Element
-{
-  Element()
-  {
-    volt = 0;
-    timing = 0;
-  }
 
-  double volt;
-  ms timing;
-};
-
-typedef vector<Element> datas;
 
 class Trial;
 
@@ -41,13 +29,16 @@ public:
   Shape(const ShapeInfo& si,
         VariableManager& vm,
         Trial* father);
-  Shape() {}
+  Shape();
   virtual ~Shape() {}
   virtual void display();
   virtual void displayMonitor();
   virtual void react2input(Status&,
                            datas&,
-                           int);
+                           int,
+                           ms);
+  double x() {return _x->value;}
+  double y() {return _y->value;}
   const string& name() {return _name;}
   double frameStart() {return _frameStart->value;}
   double frameEnd() {return _frameEnd->value;}
@@ -74,6 +65,8 @@ protected:
   Variable* _B;
   uint _ttl;
   Trial* _father;
+  bool _logged;
+  bool _loggedEnd;
 };
 
 #endif

@@ -8,7 +8,7 @@ Square::Square(const ShapeInfo& si,
                Trial* father)
 {
   assert(si.attributes.size() == 10);
-  _name = "Square";
+  _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
