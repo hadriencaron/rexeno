@@ -1,5 +1,5 @@
-#ifndef DRIVER2_HH_
-# define DRIVER2_HH_
+#ifndef DRIVER_HH_
+# define DRIVER_HH_
 
 # include <vector>
 # include "calibration.hh"
