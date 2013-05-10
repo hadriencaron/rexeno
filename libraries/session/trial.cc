@@ -96,17 +96,15 @@ Trial::displayFrame(Driver* d)
   if ((_curFrameId == 0) && (!_logged))
   {
     s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");
+    s->recorder->Save(_name + lexical_cast<string>(displayTime), "events.txt");
     _logged = true;
   }
-  cout << "DATA = " << _data[0].volt << " " << _data[1].volt << endl;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
 
-    cout << curShape->name() << " x = " << curShape->x() << endl;
-    
-    //if (curShape->displayable(_curFrameId))
-    curShape->react2input(_status, _data, _curFrameId, d->getTime());
+    if (curShape->displayable(_curFrameId))
+      curShape->react2input(_status, _data, _curFrameId, d->getTime());
   }
   Setup::reset();
   return (_react2status());
