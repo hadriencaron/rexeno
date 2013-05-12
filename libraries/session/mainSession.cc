@@ -63,11 +63,10 @@ int	main(int argc,
   assert(r);
   Setup* setup = new Setup("~/.rexeno");
   Session* session = Session::getInstance(conf);
-  Driver* d = new DummyDriver();
+  // Driver* d = new DummyDriver();
 
   session->setup = setup;
   session->beforeTrial = &InterTrial_CTM;
-  session->setDriver(d);
 
   session->run(argc, argv);
 }

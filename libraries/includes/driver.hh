@@ -44,4 +44,24 @@ private:
   ms _start;
 };
 
-#endif
+
+#ifdef XENO
+
+class XenoDriver : public Driver
+{
+public:
+  XenoDriver();
+  ~XenoDriver() {}
+
+  ms getTime();
+  void react2input();
+  void analogIn(datas&);
+private:
+  ms _start;
+
+  double* _buffer;
+};
+
+#endif /* XENO */
+
+#endif /* DRIVER_HH_ */

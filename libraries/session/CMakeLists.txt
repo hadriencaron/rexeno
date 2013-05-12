@@ -1,4 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
+if(XENO)
+add_definitions(-DXENO)
+endif()
 set(CMAKE_CXX_FLAGS_INIT "-Wall --warn-uninitialized --warn-unused-vars '-std=c++0x'")
 link_libraries (glut)
 link_libraries (boost_program_options)

@@ -22,7 +22,6 @@ Session::Session(SessionInfo &s)
   beforeTrial = NULL;
   afterTrial = NULL;
   _inputData.resize(8);
-  _driver = NULL;
   recorder = new Recorder("/tmp/");
   recorder->AddFile("results.txt");
   recorder->AddFile("events.txt");
@@ -34,6 +33,12 @@ Session::Session(SessionInfo &s)
   _initialized = false;
   _nbFrame4init = 120;
   _nbInitFrames = 0;
+
+#ifdef XENO
+  _driver = new XenoDriver();
+#else
+  _driver = new DummyDriver();
+#endif
 }
 
 Session::~Session()

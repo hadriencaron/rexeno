@@ -73,7 +73,7 @@ int initNidaqCard()
   instructions = (a4l_insnlst_t*)malloc(sizeof( a4l_insnlst_t));
   instructions->count = NB_CHANNELS;
   instructions->insns = inst;
-  for (i = 0 ; i < instructions->count ; i++)
+  for (unsigned int i = 0 ; i < instructions->count ; i++)
     {
       inst[i].type = A4L_INSN_MASK_READ;
       inst[i].idx_subd = descriptor->idx_read_subd;
@@ -85,6 +85,8 @@ int initNidaqCard()
   // Initialization of buffers to 0
   for (i=0;i<NB_CHANNELS*NB_DATA;i++) doubleBuffer[i] = 0;
   for (i=0;i<NB_CHANNELS*NB_DATA;i++) finalBuffer[i] = 0;
+
+  return (0);
 }
 
 void	input(void*)
@@ -125,7 +127,7 @@ int	launch()
   /* Avoids memory swapping for this program */
   mlockall(MCL_CURRENT|MCL_FUTURE);
 
-  rt_alarm_t  	handler_acquire;
+  // rt_alarm_t  	handler_acquire;
   rt_alarm_create(&alarm_acquire, "acquisition_time");
   rt_alarm_start(&alarm_acquire,
 		 0,
