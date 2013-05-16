@@ -1,9 +1,11 @@
 #ifndef DRIVER_HH_
 # define DRIVER_HH_
 
+# include <native/buffer.h>
 # include <vector>
 # include "calibration.hh"
 # include "types.hh"
+# include "recorder.hh"
 
 class Driver
 {
@@ -20,10 +22,12 @@ public:
                          ms delay = 0,
                          ms duration = 5) {}
   virtual void react2input() = 0 ;
+  void setRecorder(Recorder* r) {_recorder = r;}
   
 protected:
   string _name;
   Calibration* _calibration;
+  Recorder* _recorder;
 };
 
 #include <iostream>
@@ -47,6 +51,8 @@ private:
 
 #ifdef XENO
 
+#include <native/mutex.h>
+
 class XenoDriver : public Driver
 {
 public:
@@ -57,9 +63,14 @@ public:
   void react2input();
   void analogIn(datas&);
 private:
-  ms _start;
+  int _initNidaqCard();
+  int _launch();
 
-  double* _buffer;
+  ms _start;
+  double* _analogData;
+
+  RT_MUTEX* _mutex;
+  RT_BUFFER* _buffer;
 };
 
 #endif /* XENO */
