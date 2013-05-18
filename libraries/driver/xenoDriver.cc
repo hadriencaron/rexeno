@@ -143,7 +143,9 @@ void recorder(void* p)
     if (rec)
       {
 	for (int i = 0; i < NB_CHANNELS*NB_DATA*2; ++i)
-	  ofs << recorderBuffer[i] << "\n";
+	  {
+	    ofs << recorderBuffer[i] << " " << recorderBuffer[i + 1] << "\n";
+	  }
       }
   }
 }
