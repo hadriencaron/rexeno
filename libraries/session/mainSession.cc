@@ -59,10 +59,13 @@ int	main(int argc,
 	     char **argv)
 {
   configuration::SessionInfo conf;
+  vector<int> t;
+  cout << t.size() << endl;
   bool r = configuration::createConfiguration("../../protocoles/DevTests/conf", conf);
-  assert(r);
+  bool r2 = configuration::createTrialOrder("../../protocoles/DevTests/ctm", t);
+  assert(r && r2);
   Setup* setup = new Setup("~/.rexeno");
-  Session* session = Session::getInstance(conf);
+  Session* session = Session::GetInstance(conf,t);
   // Driver* d = new DummyDriver();
 
   session->setup = setup;

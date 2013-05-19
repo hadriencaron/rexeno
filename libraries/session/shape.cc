@@ -6,12 +6,12 @@
 using boost::lexical_cast;
 
 void
-Shape::display()
+Shape::Display()
 {
-  double xGL = _xGL();
-  double yGL = _yGL();
-  double demi_horizontal = _demiHorizontal();
-  double demi_vertical = _demiVertical();
+  double xGL = _Xgl();
+  double yGL = _Ygl();
+  double demi_horizontal = _DemiHorizontal();
+  double demi_vertical = _DemiVertical();
 
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);    
@@ -23,83 +23,82 @@ Shape::display()
 }
 
 void
-Shape::displayMonitor()
+Shape::DisplayMonitor()
 {
-  display();
+  Display();
 }
 
 bool
-Shape::displayable(int frameId)
+Shape::Displayable(int frameId)
 {
   bool res = true;
 
-  res &= (frameId >= frameStart()) || (frameStart() == -1);
-  res &= (frameId <= frameEnd()) || (frameEnd() == -1);
+  res &= (frameId >= FrameStart()) || (FrameStart() == -1);
+  res &= (frameId <= FrameEnd()) || (FrameEnd() == -1);
   return res;
 }
 
 bool
-Shape::monitorDisplayable()
+Shape::MonitorDisplayable()
 {
   return ((*_x + *_width / 2) < 1);
 }
 
 double
-Shape::_demiVertical()
+Shape::_DemiVertical()
 {
-  Session* s = Session::getInstance();
+  Session* s = Session::GetInstance();
   double xRatio = s->setup->xRatio();
   double demi_vertical = xRatio * *_width / 2;
   return (demi_vertical);
 }
 
 double
-Shape::_demiHorizontal()
+Shape::_DemiHorizontal()
 {
-  Session* s = Session::getInstance();
+  Session* s = Session::GetInstance();
   double yRatio = s->setup->yRatio();
-  double demi_horizontal = yRatio * *_height / 2;
+  double demi_horizontal = yRatio * *_height / 2 / 2;
   return (demi_horizontal);
 }
 
 double
-Shape::_xGL()
+Shape::_Xgl()
 {
-  Session* s = Session::getInstance();
+  Session* s = Session::GetInstance();
   double xRatio = s->setup->xRatio();
   double xGL = *_x * xRatio / 2;
   return xGL;
 }
 
 double
-Shape::_yGL()
+Shape::_Ygl()
 {
-  Session* s = Session::getInstance();
+  Session* s = Session::GetInstance();
   double yRatio = s->setup->yRatio();
   double yGL = *_y * yRatio;
   return yGL;
 }
 
 void
-Shape::react2input(Status& s,
+Shape::React2Input(Status& s,
                    datas& ds,
                    int frameId,
                    ms displayTime)
 {
-  Session* session = Session::getInstance();
-  cout << frameId << " " << frameStart() << " " << frameEnd() << endl;
-  if ((frameId == frameStart()) && (!_logged))
+  Session* session = Session::GetInstance();
+  if ((frameId == FrameStart()) && (!_logged))
   {
     _logged = true;
     session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " start", "events.txt");
   }
-  if ((frameId == frameEnd()) && (!_loggedEnd))
+  if ((frameId == FrameEnd()) && (!_loggedEnd))
   {
     session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " end", "events.txt");
     _loggedEnd = true;
   }
 
-  if (frameId > frameEnd())
+  if (frameId > FrameEnd())
     s[RUNNING] |= false;
   else
     s[RUNNING] = true;

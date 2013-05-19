@@ -4,20 +4,27 @@
 
 Session* Session::_instance = NULL;
 
-Session::Session(SessionInfo &s)
+Session::Session(SessionInfo& s,
+    			   vector<int>& order)
   : _R(0),
     _G(0),
     _B(0)
 {
   Trial* t = NULL;
+  vector<Trial*> trialTypes;
   vector<TrialInfo>::iterator it;
 
   for (it = s.trials.begin(); it != s.trials.end(); ++it)
     {
       t = new Trial(*it);
-      _trials.push_back(t);
+      trialTypes.push_back(t);
     }
-  _currentTrial = _trials.begin();
+
+
+  for (vector<int>::iterator it = order.begin(); it != order.end(); ++it)
+  {
+	  _trials.push_back(trialTypes[*it]);
+  }
 
   beforeTrial = NULL;
   afterTrial = NULL;
@@ -33,7 +40,7 @@ Session::Session(SessionInfo &s)
   _initialized = false;
   _nbFrame4init = 120;
   _nbInitFrames = 0;
-
+  _currentTrial = _trials.begin();
 #ifdef XENO
   _driver = new XenoDriver();
 #else
@@ -59,14 +66,14 @@ Session::~Session()
 void
 displayRexeno()
 {
-  Session* s = Session::getInstance();
-  s->displayHeader();
+  Session* s = Session::GetInstance();
+  s->DisplayHeader();
 }
 
 void
-Session::displayHeader()
+Session::DisplayHeader()
 {
-  if (!initialized())
+  if (!Initialized())
   {
     glBegin(GL_QUADS);
     glColor3ub(255, 155, 255);    
@@ -80,7 +87,7 @@ Session::displayHeader()
     glutSwapBuffers();
     glutPostRedisplay();
     glClear(GL_COLOR_BUFFER_BIT);
-    if (nbInitFrames() < nbFrame4init())
+    if (NbInitFrames() < NbFrame4init())
     {
       //getTime() % (int) setup->refreshRate();
       ++_nbInitFrames;
@@ -92,7 +99,7 @@ Session::displayHeader()
   }
   else
   {
-    displayFrame();
+    DisplayFrame();
   }
 }
 
@@ -129,7 +136,7 @@ Session::run(int argc,
 }
 
 void
-Session::displayFrame()
+Session::DisplayFrame()
 {
   if (_currentTrial != _trials.end())
   {
@@ -145,7 +152,7 @@ Session::displayFrame()
 
     if (b != RUNNING)
     {
-      ms displayTime = _driver->getTime();
+      ms displayTime = _driver->GetTime();
       recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);
@@ -159,35 +166,36 @@ Session::displayFrame()
 }
 
 Session*
-Session::getInstance()
+Session::GetInstance()
 {
   return _instance; 
 }
 
 Session*
-Session::getInstance(SessionInfo& s)
+Session::GetInstance(SessionInfo& s,
+		                vector<int>& t)
 {
-  _instance = new Session(s);
+	_instance = new Session(s, t);
 
-  return (_instance);
+	return (_instance);
 }
 
 void
-Session::_fillData()
+Session::_FillData()
 {
 
 }
 
 
 ms
-Session::getTime()
+Session::GetTime()
 {
   assert (_driver);
-  return _driver->getTime();
+  return _driver->GetTime();
 }
 
 bool
-Session::initialized()
+Session::Initialized()
 {
   return (_initialized);
 }
