@@ -12,7 +12,7 @@ public:
   Window() { _thickness = 0.01;}
   virtual ~Window() {}
 
-  void Display();
+  void display();
   void displayMonitor();
   bool isIn(double x,
             double y);

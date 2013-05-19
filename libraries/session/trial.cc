@@ -28,8 +28,8 @@ Trial::Trial(TrialInfo& ti)
     if (newShape)
     {
       _shapes.push_back(newShape);
-      if (newShape->FrameEnd() > _nbFrames)
-        _nbFrames = newShape->FrameEnd();
+      if (newShape->frameEnd() > _nbFrames)
+        _nbFrames = newShape->frameEnd();
     }
   }
 
@@ -62,7 +62,7 @@ Trial::~Trial()
 int
 Trial::displayFrame(Driver* d)
 {
-  Session* s = Session::GetInstance();
+  Session* s = Session::getInstance();
 
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
@@ -70,16 +70,16 @@ Trial::displayFrame(Driver* d)
     Shape *curShape = *it;
     glPushMatrix();
     glTranslatef(0.5, 0, 0);
-    if (curShape->Displayable(_curFrameId))
-      curShape->Display();
+    if (curShape->displayable(_curFrameId))
+      curShape->display();
     glPopMatrix();
 
-    if (curShape->MonitorDisplayable())
+    if (curShape->monitorDisplayable())
     {
       glPushMatrix();
       glTranslatef(-0.5, 0, 0);
-      if (curShape->Displayable(_curFrameId))
-        curShape->DisplayMonitor();
+      if (curShape->displayable(_curFrameId))
+        curShape->displayMonitor();
       glPopMatrix();
     }
   }
@@ -89,9 +89,9 @@ Trial::displayFrame(Driver* d)
 
   _sendTtls(d);
   _status[RUNNING] = false;
-  d->React2input();
-  d->AnalogIn(_data);
-  ms displayTime = d->GetTime();
+  d->react2input();
+  d->analogIn(_data);
+  ms displayTime = d->getTime();
 
   if ((_curFrameId == 0) && (!_logged))
   {
@@ -103,8 +103,8 @@ Trial::displayFrame(Driver* d)
   {
     Shape *curShape = *it;
 
-    if (curShape->Displayable(_curFrameId))
-      curShape->React2Input(_status, _data, _curFrameId, d->GetTime());
+    if (curShape->displayable(_curFrameId))
+      curShape->react2input(_status, _data, _curFrameId, d->getTime());
   }
   Setup::reset();
   return (_react2status());
@@ -117,7 +117,7 @@ Trial::_sendTtls(Driver* d)
   for (it = _ttl->begin(); it != _ttl->end(); ++it)
   {
     if ((*it)->value != 0)
-      d->TtlPulse((*it)->value, (*it)->delay);
+      d->ttlPulse((*it)->value, (*it)->delay);
   }
 }
 
@@ -167,7 +167,7 @@ Trial::adjustNbFrames()
 
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
-    double curEndFrame = (*it)->FrameEnd();
+    double curEndFrame = (*it)->frameEnd();
 
     if (curEndFrame > _nbFrames)
       _nbFrames = curEndFrame;

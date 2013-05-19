@@ -19,30 +19,28 @@ class Session
 {
 public:
   ~Session();
-  static Session* GetInstance();
-  static Session* GetInstance(SessionInfo& s,
-		  	  	  	  	  	    vector<int>& t);
-  void Run(int argc,
+  static Session* getInstance();
+  static Session* getInstance(SessionInfo& s);
+  void run(int argc,
            char** argv);
-  void DisplayFrame();
-  void DisplayHeader();
+  void displayFrame();
+  void displayHeader();
 
   void (*afterTrial)(string&, VariableManager&, int);
   void (*beforeTrial)(string&, VariableManager&);
-  void SetDriver(Driver* d) {_driver = d;}
+  void setDriver(Driver* d) {_driver = d;}
 
   Setup* setup;
   Recorder* recorder;
   //void (*interFrame)(VariableManager&);
   //void (*ConfigurableWindow)(TrialManager *);
-  int NbFrame4init() {return _nbFrame4init;}
-  int NbInitFrames() { return _nbInitFrames;	}
-  ms GetTime();
-  bool Initialized();
+  int nbFrame4init() {return _nbFrame4init;}
+  int nbInitFrames() {return _nbInitFrames;}
+  ms getTime();
+  bool initialized();
 private:
-  Session(SessionInfo& s,
-		  vector<int>&);
-  void _FillData();
+  Session(SessionInfo& s);
+  void _fillData();
 
   Driver* _driver;
   vector<Trial*> _trials;

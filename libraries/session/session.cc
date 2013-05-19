@@ -4,27 +4,20 @@
 
 Session* Session::_instance = NULL;
 
-Session::Session(SessionInfo& s,
-    			   vector<int>& order)
+Session::Session(SessionInfo &s)
   : _R(0),
     _G(0),
     _B(0)
 {
   Trial* t = NULL;
-  vector<Trial*> trialTypes;
   vector<TrialInfo>::iterator it;
 
   for (it = s.trials.begin(); it != s.trials.end(); ++it)
     {
       t = new Trial(*it);
-      trialTypes.push_back(t);
+      _trials.push_back(t);
     }
-
-
-  for (vector<int>::iterator it = order.begin(); it != order.end(); ++it)
-  {
-	  _trials.push_back(trialTypes[*it]);
-  }
+  _currentTrial = _trials.begin();
 
   beforeTrial = NULL;
   afterTrial = NULL;
@@ -40,7 +33,7 @@ Session::Session(SessionInfo& s,
   _initialized = false;
   _nbFrame4init = 120;
   _nbInitFrames = 0;
-  _currentTrial = _trials.begin();
+
 #ifdef XENO
   _driver = new XenoDriver();
 #else
@@ -66,14 +59,14 @@ Session::~Session()
 void
 displayRexeno()
 {
-  Session* s = Session::GetInstance();
-  s->DisplayHeader();
+  Session* s = Session::getInstance();
+  s->displayHeader();
 }
 
 void
-Session::DisplayHeader()
+Session::displayHeader()
 {
-  if (!Initialized())
+  if (!initialized())
   {
     glBegin(GL_QUADS);
     glColor3ub(255, 155, 255);    
@@ -87,7 +80,7 @@ Session::DisplayHeader()
     glutSwapBuffers();
     glutPostRedisplay();
     glClear(GL_COLOR_BUFFER_BIT);
-    if (NbInitFrames() < NbFrame4init())
+    if (nbInitFrames() < nbFrame4init())
     {
       //getTime() % (int) setup->refreshRate();
       ++_nbInitFrames;
@@ -99,7 +92,7 @@ Session::DisplayHeader()
   }
   else
   {
-    DisplayFrame();
+    displayFrame();
   }
 }
 
@@ -114,7 +107,7 @@ void processNormalKeys(unsigned char key, int x, int y)
 }
 
 void
-Session::Run(int argc,
+Session::run(int argc,
              char** argv)
 {
   glutInit(&argc, argv);
@@ -136,7 +129,7 @@ Session::Run(int argc,
 }
 
 void
-Session::DisplayFrame()
+Session::displayFrame()
 {
   if (_currentTrial != _trials.end())
   {
@@ -152,7 +145,7 @@ Session::DisplayFrame()
 
     if (b != RUNNING)
     {
-      ms displayTime = _driver->GetTime();
+      ms displayTime = _driver->getTime();
       recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);
@@ -166,36 +159,35 @@ Session::DisplayFrame()
 }
 
 Session*
-Session::GetInstance()
+Session::getInstance()
 {
   return _instance; 
 }
 
 Session*
-Session::GetInstance(SessionInfo& s,
-		                vector<int>& t)
+Session::getInstance(SessionInfo& s)
 {
-	_instance = new Session(s, t);
+  _instance = new Session(s);
 
-	return (_instance);
+  return (_instance);
 }
 
 void
-Session::_FillData()
+Session::_fillData()
 {
 
 }
 
 
 ms
-Session::GetTime()
+Session::getTime()
 {
   assert (_driver);
-  return _driver->GetTime();
+  return _driver->getTime();
 }
 
 bool
-Session::Initialized()
+Session::initialized()
 {
   return (_initialized);
 }

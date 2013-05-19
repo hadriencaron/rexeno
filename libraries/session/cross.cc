@@ -22,20 +22,20 @@ Cross::Cross(const ShapeInfo& si,
 }
 
 void
-Cross::Display()
+Cross::display()
 {
 
 
 }
 
 void
-Cross::DisplayMonitor()
+Cross::displayMonitor()
 {
-  double xGL = _Xgl();
-  double yGL = _Ygl();
+  double xGL = _xGL();
+  double yGL = _yGL();
 
-  double demi_horizontal = _DemiHorizontal();
-  double demi_vertical = _DemiVertical();
+  double demi_horizontal = _demiHorizontal();
+  double demi_vertical = _demiVertical();
 
   double bar_width_horizontal = demi_horizontal / 20;
   double bar_width_vertical = demi_vertical / 20;
@@ -59,7 +59,7 @@ Cross::DisplayMonitor()
 }
 
 void
-Cross::React2Input(Status& s,
+Cross::react2input(Status& s,
                    datas& ds,
                    int frameId,
                    ms)

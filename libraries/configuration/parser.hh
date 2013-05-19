@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-#include <boost/lexical_cast.hpp>
+
 
 namespace configuration
 {
@@ -53,10 +53,6 @@ namespace configuration
 
   bool	createConfiguration(char const* filename,
 			    SessionInfo &res);
-
-  bool createTrialOrder(char const* filename,
-  	  	  	  	  	  	  std::vector<int>& t);
-
 }
 
 

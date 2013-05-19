@@ -31,27 +31,27 @@ public:
         Trial* father);
   Shape();
   virtual ~Shape() {}
-  virtual void Display();
-  virtual void DisplayMonitor();
-  virtual void React2Input(Status&,
+  virtual void display();
+  virtual void displayMonitor();
+  virtual void react2input(Status&,
                            datas&,
                            int,
                            ms);
   double x() {return _x->value;}
   double y() {return _y->value;}
-  const string& Name() {return _name;}
-  double FrameStart() {return _frameStart->value;}
-  double FrameEnd() {return _frameEnd->value;}
-  bool MonitorDisplayable();
-  uint Ttl() {return _ttl;}
-  bool Displayable(int frameId);
+  const string& name() {return _name;}
+  double frameStart() {return _frameStart->value;}
+  double frameEnd() {return _frameEnd->value;}
+  bool monitorDisplayable();
+  uint ttl() {return _ttl;}
+  bool displayable(int frameId);
 
 protected:
   // Use these functions for opengl's drawing scale. 
-  double _DemiVertical(); // inside sub square-screen
-  double _DemiHorizontal(); // inside sub square-screen
-  double _Xgl(); // inside sub square-screen
-  double _Ygl(); // inside sub square-screen
+  double _demiVertical(); // inside sub square-screen
+  double _demiHorizontal(); // inside sub square-screen
+  double _xGL(); // inside sub square-screen
+  double _yGL(); // inside sub square-screen
 
   string _name;
   Variable* _frameStart;

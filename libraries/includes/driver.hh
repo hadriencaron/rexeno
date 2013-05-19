@@ -1,9 +1,7 @@
 #ifndef DRIVER_HH_
 # define DRIVER_HH_
 
-# ifdef XENO
-#  include <native/buffer.h>
-# endif /* XENO */
+# include <native/buffer.h>
 # include <vector>
 # include "calibration.hh"
 # include "types.hh"
@@ -15,16 +13,16 @@ public:
   Driver() {}
   virtual ~Driver() {}
 
-  virtual ms GetTime() = 0;
-  virtual void AnalogIn(datas& data) = 0;
-  virtual void TtlPulse(uint value,
+  virtual ms getTime() = 0;
+  virtual void analogIn(datas& data) = 0;
+  virtual void ttlPulse(uint value,
                         ms delay = 0,
                         ms duration = 5) {}
-  virtual void AnalogOut(double volt,
+  virtual void analogOut(double volt,
                          ms delay = 0,
                          ms duration = 5) {}
-  virtual void React2input() = 0 ;
-  void SetRecorder(Recorder* r) {_recorder = r;}
+  virtual void react2input() = 0 ;
+  void setRecorder(Recorder* r) {_recorder = r;}
   
 protected:
   string _name;
@@ -43,9 +41,9 @@ public:
   DummyDriver();
   ~DummyDriver() {}
 
-  ms GetTime();
-  void React2input();
-  void AnalogIn(datas&);
+  ms getTime();
+  void react2input();
+  void analogIn(datas&);
 private:
   ms _start;
 };
@@ -61,9 +59,9 @@ public:
   XenoDriver();
   ~XenoDriver() {}
 
-  ms GetTime();
-  void React2input();
-  void AnalogIn(datas&);
+  ms getTime();
+  void react2input();
+  void analogIn(datas&);
 private:
   int _initNidaqCard();
   int _launch();

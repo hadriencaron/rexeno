@@ -80,6 +80,9 @@ namespace configuration
     qi::rule<Iterator, configuration::SessionInfo(), standard::space_type> session;
   };
 
+  ////////////////////////////////////////////////////////////////////////////
+  //  Main program
+  ////////////////////////////////////////////////////////////////////////////
   bool	createConfiguration(char const* filename,
 			    SessionInfo &res)
   {
@@ -112,31 +115,5 @@ namespace configuration
     return (r);
   }
 
-  bool createTrialOrder(char const* filename,
-  	  	  	  	  	  	  std::vector<int>& t)
-  {
-	  std::ifstream in(filename, std::ios_base::in);
-	  if (!in)
-	  {
-		  std::cerr << "Error: Could not open input file: "
-				  << filename << std::endl;
-		  return false;
-	  }
-	  std::string previousLine = "";
-	  std::string STRING;
-	  int a = 0;
-	  while(a < 1) // To get you all the lines.
-	  {
-		  std::getline(in,STRING); // Saves the line in STRING.
-		  if (STRING == "")
-			  break;
-		  else
-			  t.push_back(boost::lexical_cast<int>(STRING));
-	  }
-	  in.close();
-	return true;
-  }
 }
-
-
 

@@ -11,7 +11,7 @@ DummyDriver::DummyDriver()
 }
 
 ms
-DummyDriver::GetTime()
+DummyDriver::getTime()
 {
   timeb tb;
   ftime(&tb);
@@ -21,14 +21,14 @@ DummyDriver::GetTime()
 }
 
 void
-DummyDriver::React2input()
+DummyDriver::react2input()
 {
   if (_calibration)
     _calibration->react2input();
 }
 
 void
-DummyDriver::AnalogIn(datas& data)
+DummyDriver::analogIn(datas& data)
 {
   _calibration->adjustPoint(data);
 }

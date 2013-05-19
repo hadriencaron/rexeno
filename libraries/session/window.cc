@@ -30,7 +30,7 @@ Window::Window(const ShapeInfo& si,
 }
 
 void
-Window::Display()
+Window::display()
 {
 
 }
@@ -38,10 +38,10 @@ Window::Display()
 void
 Window::displayMonitor()
 {
-  double leftX = _Xgl() - _DemiHorizontal();
-  double rightX = _Xgl() + _DemiHorizontal();
-  double topY = _Ygl() + _DemiVertical();
-  double bottomY = _Ygl() - _DemiVertical();
+  double leftX = _xGL() - _demiHorizontal();
+  double rightX = _xGL() + _demiHorizontal();
+  double topY = _yGL() + _demiVertical();
+  double bottomY = _yGL() - _demiVertical();
 
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);
@@ -104,9 +104,9 @@ CorrectWindow::CorrectWindow(const ShapeInfo& si,
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
   vm.addVariable(_frameEnd = new Variable(si.attributes[4]));
-  vm.addVariable(_R = new Variable(0));
-  vm.addVariable(_G = new Variable(255));
-  vm.addVariable(_B = new Variable(0));
+  vm.addVariable(_R = new Variable(si.attributes[5]));
+  vm.addVariable(_G = new Variable(si.attributes[6]));
+  vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[9]));
   vm.addVariable(_validationNbFrame = new Variable(si.attributes[10]));
@@ -129,9 +129,9 @@ WrongWindow::WrongWindow(const ShapeInfo& si,
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
   vm.addVariable(_frameEnd = new Variable(si.attributes[4]));
-  vm.addVariable(_R = new Variable(255));
-  vm.addVariable(_G = new Variable(0));
-  vm.addVariable(_B = new Variable(0));
+  vm.addVariable(_R = new Variable(si.attributes[5]));
+  vm.addVariable(_G = new Variable(si.attributes[6]));
+  vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[9]));
   vm.addVariable(_validationNbFrame = new Variable(si.attributes[10]));
@@ -154,9 +154,9 @@ FixationWindow::FixationWindow(const ShapeInfo& si,
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
   vm.addVariable(_frameEnd = new Variable(si.attributes[4]));
-  vm.addVariable(_R = new Variable(0));
-  vm.addVariable(_G = new Variable(128));
-  vm.addVariable(_B = new Variable(128));
+  vm.addVariable(_R = new Variable(si.attributes[5]));
+  vm.addVariable(_G = new Variable(si.attributes[6]));
+  vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[9]));
   vm.addVariable(_validationNbFrame = new Variable(si.attributes[10]));
@@ -182,9 +182,9 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
   vm.addVariable(_frameEnd = new Variable(si.attributes[4]));
-  vm.addVariable(_R = new Variable(128));
-  vm.addVariable(_G = new Variable(0));
-  vm.addVariable(_B = new Variable(128));
+  vm.addVariable(_R = new Variable(si.attributes[5]));
+  vm.addVariable(_G = new Variable(si.attributes[6]));
+  vm.addVariable(_B = new Variable(si.attributes[7]));
   vm.addVariable(_width = new Variable(si.attributes[8]));
   vm.addVariable(_height = new Variable(si.attributes[9]));
   vm.addVariable(_validationNbFrame = new Variable(0));
@@ -218,5 +218,5 @@ Window::react2input(Status& s,
   else
     _startValidationFrame = -1;
 
-  Shape::React2Input(s, ds, n, displayTime);
+  Shape::react2input(s, ds, n, displayTime);
 }
