@@ -114,7 +114,7 @@ void processNormalKeys(unsigned char key, int x, int y)
 }
 
 void
-Session::run(int argc,
+Session::Run(int argc,
              char** argv)
 {
   glutInit(&argc, argv);

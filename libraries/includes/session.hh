@@ -22,7 +22,7 @@ public:
   static Session* GetInstance();
   static Session* GetInstance(SessionInfo& s,
 		  	  	  	  	  	    vector<int>& t);
-  void run(int argc,
+  void Run(int argc,
            char** argv);
   void DisplayFrame();
   void DisplayHeader();
@@ -36,7 +36,7 @@ public:
   //void (*interFrame)(VariableManager&);
   //void (*ConfigurableWindow)(TrialManager *);
   int NbFrame4init() {return _nbFrame4init;}
-  int NbInitFrames() {return _nbInitFrames;}
+  int NbInitFrames() { return _nbInitFrames;	}
   ms GetTime();
   bool Initialized();
 private:

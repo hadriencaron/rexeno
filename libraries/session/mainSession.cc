@@ -71,5 +71,5 @@ int	main(int argc,
   session->setup = setup;
   session->beforeTrial = &InterTrial_CTM;
 
-  session->run(argc, argv);
+  session->Run(argc, argv);
 }
