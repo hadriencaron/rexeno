@@ -48,6 +48,7 @@ public:
   bool status(int);
   int frameEnd() {return _nbFrames;}
   VariableManager variables;
+  void Reset();
 private:
   int _react2status();
   void _sendTtls(Driver* d);

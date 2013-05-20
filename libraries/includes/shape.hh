@@ -45,6 +45,7 @@ public:
   bool monitorDisplayable();
   uint ttl() {return _ttl;}
   bool displayable(int frameId);
+  bool SubjectVisible(){return _subjectVisible;}
 
 protected:
   // Use these functions for opengl's drawing scale. 
@@ -67,6 +68,7 @@ protected:
   Trial* _father;
   bool _logged;
   bool _loggedEnd;
+  bool _subjectVisible;
 };
 
 #endif

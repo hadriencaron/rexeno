@@ -22,17 +22,22 @@ Session::Session(SessionInfo &s)
   beforeTrial = NULL;
   afterTrial = NULL;
   _inputData.resize(8);
-  recorder = new Recorder("/tmp/");
+  recorder = new Recorder("/tmp/", s.traceLevel);
   recorder->AddFile("results.txt");
   recorder->AddFile("events.txt");
   recorder->AddFile("X.txt");
   recorder->AddFile("id_trials.txt");
   recorder->AddFile("square_targets.txt");
+  recorder->AddFile("logger.txt");
+  recorder->AddFile("general.txt");
 
   _offsetVsync = -1;
   _initialized = false;
   _nbFrame4init = 120;
   _nbInitFrames = 0;
+
+  recorder->Save(s.name, "general.txt");
+  recorder->Save(s.traceLevel, "general.txt");
 
 #ifdef XENO
   _driver = new XenoDriver();

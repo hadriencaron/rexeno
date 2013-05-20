@@ -29,6 +29,11 @@ Window::Window(const ShapeInfo& si,
   _father = father;
 }
 
+Window::Window()
+{
+  _thickness = 0.01;
+  _subjectVisible = false;
+}
 void
 Window::display()
 {
@@ -97,7 +102,7 @@ CorrectWindow::CorrectWindow(const ShapeInfo& si,
                              VariableManager& vm,
                              Trial* father)
 {
-  assert(si.attributes.size() == 12);
+  assert(si.attributes.size() == 9);
   assert(father);
   _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
@@ -107,11 +112,11 @@ CorrectWindow::CorrectWindow(const ShapeInfo& si,
   vm.addVariable(_R = new Variable(0));
   vm.addVariable(_G = new Variable(255));
   vm.addVariable(_B = new Variable(0));
-  vm.addVariable(_width = new Variable(si.attributes[8]));
-  vm.addVariable(_height = new Variable(si.attributes[9]));
-  vm.addVariable(_validationNbFrame = new Variable(si.attributes[10]));
+  vm.addVariable(_width = new Variable(si.attributes[5]));
+  vm.addVariable(_height = new Variable(si.attributes[6]));
+  vm.addVariable(_validationNbFrame = new Variable(si.attributes[7]));
 
-  _ttl = lexical_cast<int>(si.attributes[11]);
+  _ttl = lexical_cast<int>(si.attributes[8]);
 
   _father = father;
   _startValidationFrame = -1;
@@ -122,7 +127,7 @@ WrongWindow::WrongWindow(const ShapeInfo& si,
                          VariableManager& vm,
                          Trial* father)
 {
-  assert(si.attributes.size() == 12);
+  assert(si.attributes.size() == 9);
   assert(father);
   _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
@@ -132,11 +137,11 @@ WrongWindow::WrongWindow(const ShapeInfo& si,
   vm.addVariable(_R = new Variable(255));
   vm.addVariable(_G = new Variable(0));
   vm.addVariable(_B = new Variable(0));
-  vm.addVariable(_width = new Variable(si.attributes[8]));
-  vm.addVariable(_height = new Variable(si.attributes[9]));
-  vm.addVariable(_validationNbFrame = new Variable(si.attributes[10]));
+  vm.addVariable(_width = new Variable(si.attributes[5]));
+  vm.addVariable(_height = new Variable(si.attributes[6]));
+  vm.addVariable(_validationNbFrame = new Variable(si.attributes[7]));
 
-  _ttl = lexical_cast<int>(si.attributes[11]);
+  _ttl = lexical_cast<int>(si.attributes[8]);
 
   _father = father;
   _startValidationFrame = -1;
@@ -147,7 +152,7 @@ FixationWindow::FixationWindow(const ShapeInfo& si,
                                VariableManager& vm,
                                Trial* father)
 {
-  assert(si.attributes.size() == 12);
+  assert(si.attributes.size() == 9);
   assert(father);
   _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
@@ -157,11 +162,11 @@ FixationWindow::FixationWindow(const ShapeInfo& si,
   vm.addVariable(_R = new Variable(0));
   vm.addVariable(_G = new Variable(128));
   vm.addVariable(_B = new Variable(128));
-  vm.addVariable(_width = new Variable(si.attributes[8]));
-  vm.addVariable(_height = new Variable(si.attributes[9]));
-  vm.addVariable(_validationNbFrame = new Variable(si.attributes[10]));
+  vm.addVariable(_width = new Variable(si.attributes[5]));
+  vm.addVariable(_height = new Variable(si.attributes[6]));
+  vm.addVariable(_validationNbFrame = new Variable(si.attributes[7]));
 
-  _ttl = lexical_cast<int>(si.attributes[11]);
+  _ttl = lexical_cast<int>(si.attributes[8]);
 
   _father = father;
   _startValidationFrame = -1;
@@ -175,7 +180,7 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
                              VariableManager& vm,
                              Trial* father)
 {
-  assert(si.attributes.size() == 11);
+  assert(si.attributes.size() == 8);
   assert(father);
   _name = si.attributes[0];
   vm.addVariable(_x = new Variable(si.attributes[1]));
@@ -185,11 +190,11 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
   vm.addVariable(_R = new Variable(0));
   vm.addVariable(_G = new Variable(0));
   vm.addVariable(_B = new Variable(255));
-  vm.addVariable(_width = new Variable(si.attributes[8]));
-  vm.addVariable(_height = new Variable(si.attributes[9]));
+  vm.addVariable(_width = new Variable(si.attributes[5]));
+  vm.addVariable(_height = new Variable(si.attributes[6]));
   vm.addVariable(_validationNbFrame = new Variable(0));
 
-  _ttl = lexical_cast<int>(si.attributes[10]);
+  _ttl = lexical_cast<int>(si.attributes[7]);
 
   _father = father;
   _startValidationFrame = -1;

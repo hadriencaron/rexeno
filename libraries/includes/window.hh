@@ -9,7 +9,7 @@ public:
   Window(const ShapeInfo&,
          VariableManager&,
          Trial* father);
-  Window() { _thickness = 0.01;}
+  Window();
   virtual ~Window() {}
 
   void display();

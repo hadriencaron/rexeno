@@ -46,8 +46,7 @@ namespace configuration
   struct SessionInfo
   {
     std::string name;
-    std::string comment;
-
+    int traceLevel;
     std::vector<TrialInfo> trials;
   };
 

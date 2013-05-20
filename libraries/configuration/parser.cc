@@ -28,7 +28,7 @@ BOOST_FUSION_ADAPT_STRUCT(
 BOOST_FUSION_ADAPT_STRUCT(
 			  configuration::SessionInfo,
 			  (std::string, name)
-			  (std::string, comment)
+                          (int, traceLevel)
 			  (std::vector<configuration::TrialInfo>, trials)
 			  )
 
@@ -67,8 +67,7 @@ namespace configuration
       session %=
 	"name="
 	>> word
-	>> "comment="
-	>> word
+        >> -("logLevel=" >> int_)
 	>> +trial
 	;
 

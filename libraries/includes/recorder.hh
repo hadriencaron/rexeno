@@ -12,12 +12,16 @@ class Recorder
 {
 public:
   Recorder();
-  Recorder(std::string folder);
+  Recorder(std::string folder,
+           int traceLevel);
   ~Recorder();
 
   void AddFile(std::string filename);
   void Save(string data,
             string filename);
+  void Save(string data,
+            string filename,
+            int traceLevel);
 
   void Save(std::vector<float>* data,
             string filename);
@@ -36,6 +40,7 @@ public:
   bool in_trial;
 private:
   std::string _folder;
+  int _traceLevel;
 };
 
 

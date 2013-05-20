@@ -5,9 +5,11 @@ Recorder::Recorder()
   fichiers = new vector<pair<string, ofstream*> >();
 }
 
-Recorder::Recorder(std::string	f)
+Recorder::Recorder(std::string	folder,
+                   int traceLevel)
 {
-  _folder = f;
+  _folder = folder;
+  _traceLevel = traceLevel;
   fichiers = new vector<pair<string, ofstream*> >();
 }
 
@@ -55,6 +57,17 @@ void	Recorder::Save(string data,
 	}
     }
 }
+
+void	Recorder::Save(string data,
+		       string filename,
+                       int traceLevel)
+{
+  if (traceLevel <= _traceLevel)
+    Save(data, filename);
+  if (_traceLevel == 10)
+    cout << data << endl;
+}
+
 
 void	Recorder::Save(vector<float>* data,
 		       string filename)

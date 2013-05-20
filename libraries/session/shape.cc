@@ -104,10 +104,14 @@ Shape::react2input(Status& s,
   else
     s[RUNNING] = true;
 
+  
+  session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " display", "logger.txt");
 }
 
 Shape::Shape()
 {
   _logged = false;
   _loggedEnd = false;
+  _subjectVisible = true;
 }
+
