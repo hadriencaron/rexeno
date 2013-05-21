@@ -35,13 +35,13 @@ Window::Window()
   _subjectVisible = false;
 }
 void
-Window::display()
+Window::Display()
 {
 
 }
 
 void
-Window::displayMonitor()
+Window::DisplayMonitor()
 {
   double leftX = _xGL() - _demiHorizontal();
   double rightX = _xGL() + _demiHorizontal();

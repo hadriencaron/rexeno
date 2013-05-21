@@ -70,16 +70,16 @@ Trial::displayFrame(Driver* d)
     Shape *curShape = *it;
     glPushMatrix();
     glTranslatef(0.5, 0, 0);
-    if (curShape->displayable(_curFrameId))
-      curShape->display();
+    if (curShape->Displayable(_curFrameId))
+      curShape->Display();
     glPopMatrix();
 
-    if (curShape->monitorDisplayable())
+    if (curShape->MonitorDisplayable())
     {
       glPushMatrix();
       glTranslatef(-0.5, 0, 0);
-      if (curShape->displayable(_curFrameId))
-        curShape->displayMonitor();
+      if (curShape->Displayable(_curFrameId))
+        curShape->DisplayMonitor();
       glPopMatrix();
     }
   }
@@ -89,9 +89,9 @@ Trial::displayFrame(Driver* d)
 
   _sendTtls(d);
   _status[RUNNING] = false;
-  d->react2input();
-  d->analogIn(_data);
-  ms displayTime = d->getTime();
+  d->React2input();
+  d->AnalogIn(_data);
+  ms displayTime = d->GetTime();
 
   if ((_curFrameId == 0) && (!_logged))
   {
@@ -103,8 +103,8 @@ Trial::displayFrame(Driver* d)
   {
     Shape *curShape = *it;
 
-    if (curShape->displayable(_curFrameId))
-      curShape->react2input(_status, _data, _curFrameId, d->getTime());
+    if (curShape->Displayable(_curFrameId))
+      curShape->react2input(_status, _data, _curFrameId, d->GetTime());
   }
   Setup::reset();
   return (_react2status());
@@ -117,7 +117,7 @@ Trial::_sendTtls(Driver* d)
   for (it = _ttl->begin(); it != _ttl->end(); ++it)
   {
     if ((*it)->value != 0)
-      d->ttlPulse((*it)->value, (*it)->delay);
+      d->TtlPulse((*it)->value, (*it)->delay);
   }
 }
 

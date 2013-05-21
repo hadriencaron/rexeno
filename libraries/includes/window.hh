@@ -12,8 +12,8 @@ public:
   Window();
   virtual ~Window() {}
 
-  void display();
-  void displayMonitor();
+  void Display();
+  void DisplayMonitor();
   bool isIn(double x,
             double y);
   void react2input(Status&,

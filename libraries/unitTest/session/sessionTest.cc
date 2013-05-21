@@ -6,7 +6,7 @@
 BOOST_AUTO_TEST_CASE( my_test )
 {
   configuration::SessionInfo conf;
-  bool r = configuration::createConfiguration("./conf", conf);
+  bool r = configuration::CreateConfiguration("./conf", conf);
 
   BOOST_CHECK( r );
 }

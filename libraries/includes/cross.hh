@@ -12,8 +12,8 @@ public:
   Cross() {}
   ~Cross() {}
 
-  void display();
-  void displayMonitor();
+  void Display();
+  void DisplayMonitor();
   void react2input(Status&,
                    datas&,
                    int frameId,

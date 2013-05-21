@@ -10,7 +10,7 @@ using boost::lexical_cast;
  * 
  */
 void
-Shape::display()
+Shape::Display()
 {
   double xGL = _xGL();
   double yGL = _yGL();
@@ -31,9 +31,9 @@ Shape::display()
  * 
  */
 void
-Shape::displayMonitor()
+Shape::DisplayMonitor()
 {
-  display();
+  Display();
 }
 
 /** 
@@ -45,7 +45,7 @@ Shape::displayMonitor()
  * else 0
  */
 bool
-Shape::displayable(int frameId)
+Shape::Displayable(int frameId)
 {
   bool res = true;
 
@@ -64,7 +64,7 @@ Shape::displayable(int frameId)
  * else 0
  */
 bool
-Shape::monitorDisplayable()
+Shape::MonitorDisplayable()
 {
   return ((*_x + *_width / 2) < 1);
 }

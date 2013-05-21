@@ -22,14 +22,14 @@ Cross::Cross(const ShapeInfo& si,
 }
 
 void
-Cross::display()
+Cross::Display()
 {
 
 
 }
 
 void
-Cross::displayMonitor()
+Cross::DisplayMonitor()
 {
   double xGL = _xGL();
   double yGL = _yGL();

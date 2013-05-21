@@ -82,7 +82,7 @@ namespace configuration
   ////////////////////////////////////////////////////////////////////////////
   //  Main program
   ////////////////////////////////////////////////////////////////////////////
-  bool	createConfiguration(char const* filename,
+  bool	CreateConfiguration(char const* filename,
 			    SessionInfo &res)
   {
     std::ifstream in(filename, std::ios_base::in);

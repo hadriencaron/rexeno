@@ -189,7 +189,7 @@ Session::displayFrame()
 
     if (b != RUNNING)
     {
-      ms displayTime = _driver->getTime();
+      ms displayTime = _driver->GetTime();
       recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);
@@ -244,7 +244,7 @@ ms
 Session::getTime()
 {
   assert (_driver);
-  return _driver->getTime();
+  return _driver->GetTime();
 }
 
 bool

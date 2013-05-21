@@ -50,7 +50,7 @@ namespace configuration
     std::vector<TrialInfo> trials;
   };
 
-  bool	createConfiguration(char const* filename,
+  bool	CreateConfiguration(char const* filename,
 			    SessionInfo &res);
 }
 

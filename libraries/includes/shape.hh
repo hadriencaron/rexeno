@@ -45,8 +45,8 @@ public:
         Trial* father);
   Shape();
   virtual ~Shape() {}
-  virtual void display();
-  virtual void displayMonitor();
+  virtual void Display();
+  virtual void DisplayMonitor();
   virtual void react2input(Status&,
                            datas&,
                            int,
@@ -56,9 +56,9 @@ public:
   const string& name() {return _name;}
   double frameStart() {return _frameStart->value;}
   double frameEnd() {return _frameEnd->value;}
-  bool monitorDisplayable();
+  bool MonitorDisplayable();
   uint ttl() {return _ttl;}
-  bool displayable(int frameId);
+  bool Displayable(int frameId);
   bool SubjectVisible(){return _subjectVisible;}
 
 protected:

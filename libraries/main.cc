@@ -12,7 +12,7 @@ int	main(int argc,
 	     char **argv)
 {
   configuration::SessionInfo conf;
-  bool r = configuration::createConfiguration(argv[1], conf);
+  bool r = configuration::CreateConfiguration(argv[1], conf);
   assert(r);
 
   int pid = fork();
