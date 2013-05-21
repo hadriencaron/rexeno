@@ -1,3 +1,15 @@
+/**
+ * @file   session.hh
+ * @author hadrien <hadrien@barbow>
+ * @date   Tue May 21 23:07:59 2013
+ * 
+ * @brief  Defines the Session class
+ * This is a global unique object (Design Pattern Singleton)
+ * it represents a complete session.
+ * The main task of about any program is to run each trial of the session class.
+ * 
+ */
+
 #ifndef SESSION_HH_
 # define SESSION_HH_
 

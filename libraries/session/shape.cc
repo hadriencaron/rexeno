@@ -5,6 +5,10 @@
 
 using boost::lexical_cast;
 
+/** 
+ * Displays the shape on the subject screen
+ * 
+ */
 void
 Shape::display()
 {
@@ -22,12 +26,24 @@ Shape::display()
   glEnd();
 }
 
+/** 
+ * Displays the shape on the monitor screen (experimentator side)
+ * 
+ */
 void
 Shape::displayMonitor()
 {
   display();
 }
 
+/** 
+ * Indicate if the shape should appear at the given frame
+ * 
+ * @param frameId : frame number. 0 for first frame
+ * 
+ * @return true if the shape should be displayed,
+ * else 0
+ */
 bool
 Shape::displayable(int frameId)
 {
@@ -38,12 +54,28 @@ Shape::displayable(int frameId)
   return res;
 }
 
+/** 
+ * Checks if the given shape won't appear on the
+ * subjects (because of too large coodonates)
+ * side if one attempts to display it on the monitor screen
+ * 
+ * 
+ * @return true if is safe to draw,
+ * else 0
+ */
 bool
 Shape::monitorDisplayable()
 {
   return ((*_x + *_width / 2) < 1);
 }
 
+/** 
+ * 
+ * FOR OPENGL COORD USAGE :
+ * returns the length of the vertical dimension
+ * 
+ * @return the opengl length adapted to the screen
+ */
 double
 Shape::_demiVertical()
 {
@@ -53,6 +85,12 @@ Shape::_demiVertical()
   return (demi_vertical);
 }
 
+/** 
+ * FOR OPENGL COORD USAGE :
+ * returns the length of the vertical dimension
+ * 
+ * @return the opengl length adapted to the screen
+ */
 double
 Shape::_demiHorizontal()
 {
@@ -62,6 +100,12 @@ Shape::_demiHorizontal()
   return (demi_horizontal);
 }
 
+/** 
+ * 
+ * FOR OPENGL COORD USAGE
+ * 
+ * @return the x value adapted to the screen
+ */
 double
 Shape::_xGL()
 {
@@ -71,6 +115,12 @@ Shape::_xGL()
   return xGL;
 }
 
+/** 
+ * 
+ * FOR OPENGL COORD USAGE
+ * 
+ * @return the y value adapted to the screen
+ */
 double
 Shape::_yGL()
 {
@@ -80,6 +130,15 @@ Shape::_yGL()
   return yGL;
 }
 
+/** 
+ * This function represents the possibility to affect the outcome of
+ * a trial according to what is in ds by changing mainly it's paramenters
+ * 
+ * @param s : the current status of the trial (WRONG, CORRECT, ...)
+ * @param ds : (Eye) data extracted from the analog input
+ * @param frameId : current frame we are on
+ * @param displayTime : what date (in milliseconds) was the frame presented
+ */
 void
 Shape::react2input(Status& s,
                    datas& ds,
@@ -105,9 +164,14 @@ Shape::react2input(Status& s,
     s[RUNNING] = true;
 
   
+
   session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " display", "logger.txt");
 }
 
+/** 
+ * Abstract Constructor : inits some bool values
+ * 
+ */
 Shape::Shape()
 {
   _logged = false;

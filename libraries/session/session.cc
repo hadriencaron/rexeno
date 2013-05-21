@@ -4,6 +4,14 @@
 
 Session* Session::_instance = NULL;
 
+/** 
+ * Constructor :
+ * Inits all the fields automatically
+ * only the _trials field will depend on
+ * what information is in the SessionInfo parameter
+ * 
+ * @param s 
+ */
 Session::Session(SessionInfo &s)
   : _R(0),
     _G(0),
@@ -46,6 +54,11 @@ Session::Session(SessionInfo &s)
 #endif
 }
 
+/** 
+ * Destructor : cleans everything up
+ * TODO : this destructor is stupid and
+ * probably not even called (program exited before)
+ */
 Session::~Session()
 {
   vector<Trial*>::iterator it;
@@ -61,6 +74,10 @@ Session::~Session()
   setup = NULL;
 }
 
+/** 
+ * function set as the main GLUT callback
+ * 
+ */
 void
 displayRexeno()
 {
@@ -68,6 +85,11 @@ displayRexeno()
   s->displayHeader();
 }
 
+/** 
+ * If session is initialized : show trial
+ * else : show dummy GL_QUAD to calculate displaying delay
+ * 
+ */
 void
 Session::displayHeader()
 {
@@ -101,7 +123,13 @@ Session::displayHeader()
   }
 }
 
-
+/** 
+ * Opengl's keyboard/mouse processing callback
+ * 
+ * @param key 
+ * @param x 
+ * @param y 
+ */
 void processNormalKeys(unsigned char key, int x, int y) 
 {
   Setup::keys[key] = true;
@@ -111,6 +139,12 @@ void processNormalKeys(unsigned char key, int x, int y)
     }
 }
 
+/** 
+ * Inits and launch the GLUT loop
+ * 
+ * @param argc 
+ * @param argv 
+ */
 void
 Session::run(int argc,
              char** argv)
@@ -133,6 +167,11 @@ Session::run(int argc,
   glutMainLoop();
 }
 
+/** 
+ * displays a single frame of the Session (must return quickly in order for the GLUT loop to
+ * continue smoothly)
+ * 
+ */
 void
 Session::displayFrame()
 {
@@ -163,12 +202,25 @@ Session::displayFrame()
 
 }
 
+/** 
+ * Standard SINGLETON member
+ * 
+ * 
+ * @return 
+ */
 Session*
 Session::getInstance()
 {
   return _instance; 
 }
 
+/** 
+ * Standard SINGLETON member
+ * 
+ * @param s 
+ * 
+ * @return 
+ */
 Session*
 Session::getInstance(SessionInfo& s)
 {
@@ -177,6 +229,10 @@ Session::getInstance(SessionInfo& s)
   return (_instance);
 }
 
+/** 
+ * 
+ * 
+ */
 void
 Session::_fillData()
 {

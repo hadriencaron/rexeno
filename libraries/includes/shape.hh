@@ -1,3 +1,17 @@
+/**
+ * @file   shape.hh
+ * @author hadrien <hadrien@barbow>
+ * @date   Tue May 21 22:45:52 2013
+ * 
+ * @brief  
+ * 
+ * Defines the Shape class
+ * Shape is a purely abstract that designates the elements that can appear during a trial.
+ * Most of the time, a shape has a color and dimensions (for example a Circle or a Square)
+ * but it is possible to create objects that only affect the outcome of the trial without
+ * anything being displayed directly (kind of the case of Window)
+ */
+
 #ifndef SHAPE_HH_
 # define SHAPE_HH_
 
