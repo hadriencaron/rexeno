@@ -1,10 +1,7 @@
 #ifndef DRIVER_HH_
 # define DRIVER_HH_
 
-#ifdef XENO
 # include <native/buffer.h>
-#endif /* XENO */
-
 # include <vector>
 # include "calibration.hh"
 # include "types.hh"

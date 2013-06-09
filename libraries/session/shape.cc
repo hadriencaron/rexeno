@@ -96,7 +96,7 @@ Shape::_demiHorizontal()
 {
   Session* s = Session::getInstance();
   double yRatio = s->setup->yRatio();
-  double demi_horizontal = yRatio * *_height / 2 / 2;
+  double demi_horizontal = yRatio * *_height / 2;
   return (demi_horizontal);
 }
 
