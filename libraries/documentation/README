@@ -20,3 +20,13 @@ file will be by attributing an integer value to the traceLevel value.
                                        then it is recorded 3 times)
 7 - Only subject-visible shapes are recorder.
 0 - Empty Log
+
+--- Code ---
+
+-- Conventions --
+
+Class and Methods begin with uppercase
+Fields begin with minuscule
+
+privates : start with underscore
+

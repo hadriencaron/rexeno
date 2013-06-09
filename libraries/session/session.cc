@@ -229,17 +229,6 @@ Session::getInstance(SessionInfo& s)
   return (_instance);
 }
 
-/** 
- * 
- * 
- */
-void
-Session::_fillData()
-{
-
-}
-
-
 ms
 Session::getTime()
 {
