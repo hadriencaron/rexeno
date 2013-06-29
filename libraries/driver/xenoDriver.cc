@@ -131,7 +131,7 @@ void input(void* p)
 
 void recorder(void* p)
 {
-  ofstream ofs ("test.txt", std::ofstream::out);
+  ofstream ofs ("/tmp/Eye", std::ofstream::out);
 
   RT_BUFFER bf;
   Recorder* rec = (Recorder*) p;
@@ -196,7 +196,7 @@ XenoDriver::XenoDriver()
 }
 
 ms
-XenoDriver::getTime()
+XenoDriver::GetTime()
 {
   RTIME current = rt_timer_read();
 
@@ -204,14 +204,14 @@ XenoDriver::getTime()
 }
 
 void
-XenoDriver::react2input()
+XenoDriver::React2input()
 {
   if (_calibration)
     _calibration->react2input();
 }
 
 void
-XenoDriver::analogIn(datas& data)
+XenoDriver::AnalogIn(datas& data)
 {
   unsigned int i;
 
