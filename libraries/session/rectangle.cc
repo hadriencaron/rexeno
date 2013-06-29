@@ -32,7 +32,6 @@ Rectangle::react2input(Status& s,
                        ms displayTime)
 {
   Shape::react2input(s, ds, frameId, displayTime);
-
 }
 
 Rectangle::~Rectangle()
