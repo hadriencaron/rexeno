@@ -1,4 +1,18 @@
+/**
+ * @file   dummyDriver.cc
+ * @author hadrien <hadrien@barbow>
+ * @date   Sun Jun 30 01:55:38 2013
+ * 
+ * @brief  Implementation of the Driver for a computer
+ * that doesn't have xenomai or a nidaq card.
+ * 
+ * TODO : adapt this class to be able to use a mouse to emulate Eye movements !
+ */
+
+
 #include "driver.hh"
+
+
 
 DummyDriver::DummyDriver()
 {

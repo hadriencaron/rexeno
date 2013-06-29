@@ -1,3 +1,13 @@
+/**
+ * @file   cross.cc
+ * @author hadrien <hadrien@barbow>
+ * @date   Sun Jun 30 01:09:11 2013
+ * 
+ * @brief  Implementation of the Cross class
+ * 
+ * 
+ */
+
 #include "cross.hh"
 #include <GL/glut.h>
 #include "trial.hh"
@@ -75,11 +85,11 @@ Cross::DisplayMonitor()
 }
 
 /** 
+ * Changes the trial's state according to what was recorded in ds
  * 
- * 
- * @param s 
- * @param ds 
- * @param frameId 
+ * @param s current state of the Trial
+ * @param ds what was obtained from the nidaq card
+ * @param frameId what frame is currently being displayed (0 if it is the first one)
  * @param ms 
  */
 void

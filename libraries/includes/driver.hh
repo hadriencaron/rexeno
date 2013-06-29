@@ -1,3 +1,17 @@
+/**
+ * @file   driver.hh
+ * @author hadrien <hadrien@barbow>
+ * @date   Sun Jun 30 01:49:32 2013
+ * 
+ * @brief  Driver(s) declaration(s) file
+ * The Driver is an abstract class that describes the link
+ * between a protocole (the computer) and the subject (the outside world)
+ * This class contains functions to get information from the outside world about
+ * - time elapsing in milliseconds
+ * - getting and setting analog channels (in Volts)
+ * - getting and setting digital channels (up/down on each bit)
+ *
+ */
 #ifndef DRIVER_HH_
 # define DRIVER_HH_
 
