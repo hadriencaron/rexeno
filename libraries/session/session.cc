@@ -126,9 +126,9 @@ Session::displayHeader()
 /** 
  * Opengl's keyboard/mouse processing callback
  * 
- * @param key 
- * @param x 
- * @param y 
+ * @param key : id of a keyboard key that was pressed
+ * @param x : horizontal position of the mouse
+ * @param y : vertical position of the mouse
  */
 void processNormalKeys(unsigned char key, int x, int y) 
 {

@@ -2,6 +2,14 @@
 #include <GL/glut.h>
 #include "trial.hh"
 
+/** 
+ * Constructor : Attributes values to the Shape's variables
+ * 
+ * @param si : contains information that was extracted from the protocole's conf file.
+ * @param vm : a structure that will manage all the variables in the current trial and make them available
+ *             to the user through the various callbacks.
+ * @param father : pointer to the current trial (a little ugly by useful).
+ */
 Cross::Cross(const ShapeInfo& si,
              VariableManager& vm,
              Trial* father)
@@ -21,6 +29,10 @@ Cross::Cross(const ShapeInfo& si,
   _father = father;
 }
 
+/** 
+ * Destructor : TODO free variables ?
+ * 
+ */
 void
 Cross::Display()
 {
@@ -28,6 +40,10 @@ Cross::Display()
 
 }
 
+/** 
+ * Display appearing on the monitor screen (not visible by subject)
+ * 
+ */
 void
 Cross::DisplayMonitor()
 {
@@ -58,6 +74,14 @@ Cross::DisplayMonitor()
   glEnd();
 }
 
+/** 
+ * 
+ * 
+ * @param s 
+ * @param ds 
+ * @param frameId 
+ * @param ms 
+ */
 void
 Cross::react2input(Status& s,
                    datas& ds,
