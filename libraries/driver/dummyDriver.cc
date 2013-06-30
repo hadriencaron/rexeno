@@ -14,6 +14,10 @@
 
 
 
+/** 
+ * Constructor : just  initialization of driver
+ * 
+ */
 DummyDriver::DummyDriver()
 {
   _calibration = new KeyboardCalibration();
@@ -24,6 +28,9 @@ DummyDriver::DummyDriver()
   _start = tb.millitm + (tb.time & 0xfffff) * 1000;
 }
 
+/** 
+ * @return time since initialization
+ */
 ms
 DummyDriver::GetTime()
 {

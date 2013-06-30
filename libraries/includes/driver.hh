@@ -21,6 +21,7 @@
 # include "types.hh"
 # include "recorder.hh"
 
+/// Abstract Driver
 class Driver
 {
 public:
