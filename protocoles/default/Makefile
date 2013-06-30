@@ -32,7 +32,7 @@ CC=$(shell $(XENOCONFIG) --cc) -ldl
 
 CFLAGS=$(shell $(XENOCONFIG) --xeno-cflags) $(MY_CFLAGS) -lnative -lanalogy -lrtdm
 
-LDFLAGS=$(shell $(XENOCONFIG) --xeno-ldflags) $(MY_LDFLAGS) #-lnative -lanalogy -lxenomai
+LDFLAGS=$(shell $(XENOCONFIG) --xeno-ldflags) $(MY_LDFLAGS)
 
 # This includes the library path of given Xenomai into the binary to make live
 # easier for beginners if Xenomai's libs are not in any default search path.
@@ -47,4 +47,7 @@ clean:
 	rm -f $(OBJS) $(TARGET) core *~
 
 $(TARGET) : $(OBJS)
-	g++    $(SRCS) $(LIBFLAGS)  -o $(TARGET) /usr/lib/libsession.a /usr/lib/librecorder.a /usr/lib/libdriver.a /usr/lib/libconfiguration.a -lGL -lboost_program_options -lglut $(CFLAGS) $(LDFLAGS)
+	g++ $(SRCS) -o $(TARGET) /usr/lib/libsession.a /usr/lib/librecorder.a /usr/lib/libdriver.a /usr/lib/libconfiguration.a -lGL -lboost_program_options -lglut $(CFLAGS) $(LDFLAGS)
+
+noxeno:
+	g++ $(SRCS) -o $(TARGET) /usr/lib/libsession.a /usr/lib/librecorder.a /usr/lib/libdriver.a /usr/lib/libconfiguration.a -lGL -lboost_program_options -lglut 
