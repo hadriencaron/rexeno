@@ -1,8 +1,8 @@
 #include <iostream>
 #include <GL/glut.h>
 
-#include "session.hh"
-#include "dummyDriver.hh"
+#include <rexeno/session.hh>
+//#include <rexeno/dummyDriver.hh>
 
 using namespace std;
 

@@ -30,15 +30,15 @@ endif
 
 CC=$(shell $(XENOCONFIG) --cc) -ldl
 
-CFLAGS=$(shell $(XENOCONFIG) --xeno-cflags) $(MY_CFLAGS)
+CFLAGS=$(shell $(XENOCONFIG) --xeno-cflags) $(MY_CFLAGS) -lnative -lanalogy -lrtdm
 
-LDFLAGS=$(shell $(XENOCONFIG) --xeno-ldflags) $(MY_LDFLAGS) -lnative
+LDFLAGS=$(shell $(XENOCONFIG) --xeno-ldflags) $(MY_LDFLAGS) #-lnative -lanalogy -lxenomai
 
 # This includes the library path of given Xenomai into the binary to make live
 # easier for beginners if Xenomai's libs are not in any default search path.
-# LDFLAGS+=-Xlinker -rpath -Xlinker $(shell $(XENOCONFIG) --libdir)  \
-# 	-lglui -lrwconf -lm -lX11 -lXenoTimer -g -ggdb -lRecorder -lInterface -lPipeWriter
-LDFLAGS+=-lsession
+LDFLAGS+=-Xlinker -rpath -Xlinker $(shell $(XENOCONFIG) --libdir)  \
+	-lm -lX11 -g -ggdb
+#LDFLAGS+=-lsession
 
 
 all: $(TARGET)
@@ -47,4 +47,4 @@ clean:
 	rm -f $(OBJS) $(TARGET) core *~
 
 $(TARGET) : $(OBJS)
-	$(CC)  $(CFLAGS) $(LDFLAGS) $(SRCS) $(LIBFLAGS)  -ldisplayer -o $(TARGET)
+	g++    $(SRCS) $(LIBFLAGS)  -o $(TARGET) /usr/lib/libsession.a /usr/lib/librecorder.a /usr/lib/libdriver.a /usr/lib/libconfiguration.a -lGL -lboost_program_options -lglut $(CFLAGS) $(LDFLAGS)
