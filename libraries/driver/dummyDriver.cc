@@ -16,6 +16,9 @@
 
 /** 
  * Constructor : just  initialization of driver
+ * the dummy driver uses a keyboard calibration
+ * which is a pretentious way of saying that the user
+ * can control the input through the keyboard keys zqsd
  * 
  */
 DummyDriver::DummyDriver()
@@ -41,6 +44,10 @@ DummyDriver::GetTime()
   return (current - _start);
 }
 
+/** 
+ * 
+ * 
+ */
 void
 DummyDriver::React2input()
 {
@@ -48,6 +55,11 @@ DummyDriver::React2input()
     _calibration->react2input();
 }
 
+/** 
+ * 
+ * 
+ * @param data 
+ */
 void
 DummyDriver::AnalogIn(datas& data)
 {

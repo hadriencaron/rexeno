@@ -1,5 +1,0 @@
-#! /bin/sh
-
-# usage : rexeno-create-protocole <name>
-
-mkdir $1
