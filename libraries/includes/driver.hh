@@ -15,6 +15,7 @@
 #ifndef DRIVER_HH_
 # define DRIVER_HH_
 
+# include <native/buffer.h>
 # include <vector>
 # include "calibration.hh"
 # include "types.hh"
@@ -65,8 +66,7 @@ private:
 
 #ifdef XENO
 
-# include <native/buffer.h>
-# include <native/mutex.h>
+#include <native/mutex.h>
 
 class XenoDriver : public Driver
 {
