@@ -4,29 +4,10 @@ TARGET = display
 
 SRCS = main.cc
 
-CC=g++
-
-CDEBUG = -g
-LDFLAGS += -g
-
-CFLAGS += $(CDEBUG)
-
-
-
 ### Default Xenomai installation path
 XENO ?= /usr/xenomai
 
 XENOCONFIG=$(shell PATH=$(XENO):$(XENO)/bin:$(PATH) which xeno-config 2>/dev/null)
-
-
-
-### Sanity check
-ifeq ($(XENOCONFIG),)
-all::
-	@echo ">>> Invoke make like this: \"make XENO=/path/to/xeno-config\" <<<"
-	@echo
-endif
-
 
 CC=$(shell $(XENOCONFIG) --cc) -ldl
 
@@ -38,7 +19,6 @@ LDFLAGS=$(shell $(XENOCONFIG) --xeno-ldflags) $(MY_LDFLAGS)
 # easier for beginners if Xenomai's libs are not in any default search path.
 LDFLAGS+=-Xlinker -rpath -Xlinker $(shell $(XENOCONFIG) --libdir)  \
 	-lm -lX11 -g -ggdb
-#LDFLAGS+=-lsession
 
 
 all: $(TARGET)

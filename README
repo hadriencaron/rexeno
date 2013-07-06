@@ -6,7 +6,12 @@ Enjoy !
 
 == Installation Rexeno Libraries ==
 
-./install.sh
+Automatic method :
+./install.sh 
+
+Hand control :
+cmake .. (rexeno version)
+cmake .. -DXENO=OFF (for a regular computer install)
 
 == Create a new protocole ==
 
