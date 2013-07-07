@@ -59,7 +59,8 @@ int	main(int argc,
 	     char **argv)
 {
   configuration::SessionInfo conf;
-  bool r = configuration::CreateConfiguration("../../protocoles/DevTests/conf", conf);
+  //bool r = configuration::CreateConfiguration("../../protocoles/DevTests/conf", conf);
+  bool r = configuration::CreateConfiguration("definition", conf);
   assert(r);
   Setup* setup = new Setup("~/.rexeno");
   Session* session = Session::getInstance(conf);
