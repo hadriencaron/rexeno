@@ -1,3 +1,12 @@
+/**
+ * @file   xenoDriver.cc
+ * @author hadrien <hadrien@barbow>
+ * @date   Wed Jul  3 23:59:48 2013
+ * 
+ * @brief  Implementation of the rexeno driver through Xenomai API
+ * This implementation requires the xenomai native library and analogy drivers
+ * 
+ */
 #ifdef XENO
 
 #include "driver.hh"

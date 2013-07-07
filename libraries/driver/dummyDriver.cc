@@ -45,7 +45,7 @@ DummyDriver::GetTime()
 }
 
 /** 
- * 
+ * Use the data to change calibration
  * 
  */
 void
@@ -56,7 +56,7 @@ DummyDriver::React2input()
 }
 
 /** 
- * 
+ * Gets the keyboard input through calibration
  * 
  * @param data 
  */

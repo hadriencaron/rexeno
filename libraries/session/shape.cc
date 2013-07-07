@@ -146,17 +146,21 @@ Shape::react2input(Status& s,
                    ms displayTime)
 {
   Session* session = Session::getInstance();
-  cout << frameId << " " << frameStart() << " " << frameEnd() << endl;
+  // cout << frameId << " " << frameStart() << " " << frameEnd() << endl;
+  // Saving of shape apparition
   if ((frameId == frameStart()) && (!_logged))
   {
     _logged = true;
     session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " start", "events.txt");
   }
+  // Saving of shape disparation
   if ((frameId == frameEnd()) && (!_loggedEnd))
   {
     session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " end", "events.txt");
     _loggedEnd = true;
   }
+
+  session->recorder->Save(_name + "\n" + ((string)*(this->_x)) + "\n" + ((string)*(this->_y)) + "\n" + lexical_cast<string>(displayTime), "square_target.txt");
 
   if (frameId > frameEnd())
     s[RUNNING] |= false;

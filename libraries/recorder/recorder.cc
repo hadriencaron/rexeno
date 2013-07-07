@@ -58,9 +58,9 @@ void	Recorder::Save(string data,
     }
 }
 
-void	Recorder::Save(string data,
-		       string filename,
-                       int traceLevel)
+void Recorder::Save(string data,
+                    string filename,
+                    int traceLevel)
 {
   if (traceLevel <= _traceLevel)
     Save(data, filename);
