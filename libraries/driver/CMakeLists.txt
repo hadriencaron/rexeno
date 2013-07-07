@@ -13,4 +13,4 @@ if(XENO)
 endif()
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 add_library (driver dummyDriver.cc calibration.cc xenoDriver.cc)
-
+install_targets(/lib driver)

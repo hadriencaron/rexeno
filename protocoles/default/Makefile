@@ -19,7 +19,7 @@ LDFLAGS=$(shell $(XENOCONFIG) --xeno-ldflags) $(MY_LDFLAGS)
 # easier for beginners if Xenomai's libs are not in any default search path.
 LDFLAGS+=-Xlinker -rpath -Xlinker $(shell $(XENOCONFIG) --libdir)  \
 	-lm -lX11 -g -ggdb
-
+REXENO_PATH=/usr/local/lib
 
 all: $(TARGET)
 
@@ -30,4 +30,4 @@ $(TARGET) : $(OBJS)
 	g++ $(SRCS) -o $(TARGET) /usr/lib/libsession.a /usr/lib/librecorder.a /usr/lib/libdriver.a /usr/lib/libconfiguration.a -lGL -lboost_program_options -lglut $(CFLAGS) $(LDFLAGS)
 
 noxeno:
-	g++ $(SRCS) -o $(TARGET) /usr/lib/libsession.a /usr/lib/librecorder.a /usr/lib/libdriver.a /usr/lib/libconfiguration.a -lGL -lboost_program_options -lglut 
+	g++ $(SRCS) -o $(TARGET) ${REXENO_PATH}/libsession.a ${REXENO_PATH}/librecorder.a ${REXENO_PATH}/libdriver.a ${REXENO_PATH}/libconfiguration.a -lGL -lboost_program_options -lglut

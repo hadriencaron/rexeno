@@ -23,3 +23,5 @@ add_executable (sessionBin session.cc trial.cc  shape.cc cross.cc square.cc  rec
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/configuration")
+
+install_targets(/lib session)

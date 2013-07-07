@@ -160,7 +160,7 @@ Shape::react2input(Status& s,
     _loggedEnd = true;
   }
 
-  session->recorder->Save(_name + "\n" + ((string)*(this->_x)) + "\n" + ((string)*(this->_y)) + "\n" + lexical_cast<string>(displayTime), "square_targets.txt");
+  session->recorder->Save(_name + "\n" + lexical_cast<string>(this->_x->value) + "\n" + lexical_cast<string>(this->_y->value) + "\n" + lexical_cast<string>(displayTime), "square_targets.txt");
 
   if (frameId > frameEnd())
     s[RUNNING] |= false;
