@@ -7,7 +7,8 @@ Enjoy !
 == Installation Rexeno Libraries ==
 
 Automatic method :
-./install.sh 
+./install.sh (for xeno box)
+./installDummy.sh (for regular linux box)
 
 Hand control :
 cmake .. (rexeno version)
