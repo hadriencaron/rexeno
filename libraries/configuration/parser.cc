@@ -90,7 +90,7 @@ namespace configuration
       {
         std::cerr << "Error: Could not open input file: "
 		  << filename << std::endl;
-        return 1;
+        return false;
       }
     in.unsetf(std::ios::skipws); // No white space skipping!
     std::string storage; // We will read the contents here.

@@ -6,9 +6,15 @@
 BOOST_AUTO_TEST_CASE( my_test )
 {
   configuration::SessionInfo conf;
-  bool r = configuration::CreateConfiguration("./conf", conf);
-
-  BOOST_CHECK( r );
+  try
+  {
+    bool r = configuration::CreateConfiguration("../../../unitTest/testFiles/session/conf", conf);
+    BOOST_CHECK( r );
+  }
+  catch(int e)
+  {
+    BOOST_CHECK( false );
+  }
 }
 
 BOOST_AUTO_TEST_CASE( my_test_2 )

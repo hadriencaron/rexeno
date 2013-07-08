@@ -6,22 +6,35 @@ Enjoy !
 
 == Installation Rexeno Libraries ==
 
-Automatic method :
+Automatic method (to get it done quickly) :
 ./install.sh (for xeno box)
 ./installDummy.sh (for regular linux box)
 
-Hand control :
-cmake .. (rexeno version)
-cmake .. -DXENO=OFF (for a regular computer install)
+Use lower level command line (recommanded to understand what is going on) :
 
-== Create a new protocole ==
+On a Xenomai Box :
+cd /to/the/rexeno/source/folder
+mkdir build
+cmake ..
+make
+sudo make install
 
-Author : Hadrien CARON
+On a regulare linux box :
+cd /to/the/rexeno/source/folder
+mkdir build
+cmake .. -DXENO=OFF
+make
+sudo make install
+
+== Create a new protocole from scratch ==
+
+Once the rexeno project installed, you can have access to several tools to create you new protocole :
+
 
 == Trace Information == 
 
 Inside the conf trial you can adjust how verbose the logging
-file will be by attributing an integer value to the traceLevel value.
+file will be by attributing an integer value to the traceLevel variable.
 
 10 - Debug mode : log is also sent to cout
 9 - Everything : 
@@ -42,3 +55,4 @@ Fields begin with minuscule
 
 privates : start with underscore
 
+Author : Hadrien CARON
