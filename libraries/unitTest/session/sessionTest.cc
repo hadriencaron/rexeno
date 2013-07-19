@@ -8,7 +8,7 @@ BOOST_AUTO_TEST_CASE( my_test )
   configuration::SessionInfo conf;
   try
   {
-    bool r = configuration::CreateConfiguration("../../../unitTest/testFiles/session/conf", conf);
+    bool r = configuration::CreateConfiguration("../../testFiles/session/conf", conf);
     BOOST_CHECK( r );
   }
   catch(int e)

@@ -6,6 +6,15 @@
 using namespace boost;
 class Trial;
 
+
+/** 
+ * Constructor : Attributes values to the Shape's variables
+ * 
+ * @param si : contains information that was extracted from the protocole's conf file.
+ * @param vm : a structure that will manage all the variables in the current trial and make them available
+ *             to the user through the various callbacks.
+ * @param father : pointer to the current trial (a little ugly by useful).
+ */
 Window::Window(const ShapeInfo& si,
                VariableManager& vm,
                Trial* father)
@@ -29,17 +38,45 @@ Window::Window(const ShapeInfo& si,
   _father = father;
 }
 
+/**
+ * @file   window.cc
+ * @author hadrien <hadrien@barbow>
+ * @date   Mon Jul 15 22:53:17 2013
+ * 
+ * @brief  Initializes variables
+ * 
+ * 
+ */
 Window::Window()
 {
   _thickness = 0.01;
   _subjectVisible = false;
 }
+
+/**
+ * @file   window.cc
+ * @author hadrien <hadrien@barbow>
+ * @date   Mon Jul 15 22:54:29 2013
+ * 
+ * @brief  Displays nothing on the Subject Screen
+ * 
+ * 
+ */
 void
 Window::Display()
 {
 
 }
 
+/**
+ * @file   window.cc
+ * @author hadrien <hadrien@barbow>
+ * @date   Mon Jul 15 22:54:52 2013
+ * 
+ * @brief  Displays the window for the Experimenter Screen
+ * 
+ * 
+ */
 void
 Window::DisplayMonitor()
 {
@@ -82,6 +119,15 @@ Window::DisplayMonitor()
 
 }
 
+/**
+ * @file   window.cc
+ * @author hadrien <hadrien@barbow>
+ * @date   Mon Jul 15 22:55:20 2013
+ * 
+ * @brief  returns true if the point P(x, y) is inside the window
+ * x and y are doubles and represent coordinates on the screen
+ * 
+ */
 bool
 Window::isIn(double x,
              double y)

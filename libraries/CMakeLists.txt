@@ -35,3 +35,9 @@ if(XENO)
   link_libraries ("xenomai")
 endif()
 #add_subdirectory (nidaq)
+
+# here we add configuration files
+add_custom_command(TARGET Rexeno POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${PROJECT_SOURCE_DIR}/unitTest/"
+        $<TARGET_FILE_DIR:Rexeno>)
