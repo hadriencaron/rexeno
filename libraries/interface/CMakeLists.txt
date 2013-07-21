@@ -1,0 +1,5 @@
+include_directories("/usr/include/qt4")
+include_directories(view)
+link_libraries(QtCore)
+link_libraries(QtGui)
+add_executable(TrialCreator model/model.cc)
