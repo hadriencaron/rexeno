@@ -6,10 +6,6 @@ Enjoy !
 
 == Installation Rexeno Libraries ==
 
-Automatic method (to get it done quickly) :
-./install.sh (for xeno box)
-./installDummy.sh (for regular linux box)
-
 Use lower level command line (recommanded to understand what is going on) :
 
 On a Xenomai Box :
@@ -19,7 +15,7 @@ cmake ..
 make
 sudo make install
 
-On a regulare linux box :
+On a regular linux box :
 cd /to/the/rexeno/source/folder
 mkdir build
 cmake .. -DXENO=OFF
