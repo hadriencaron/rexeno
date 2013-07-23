@@ -46,5 +46,5 @@ add_custom_command(TARGET Rexeno POST_BUILD
 execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory "~/.rexeno")
 add_custom_command(TARGET Rexeno POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${PROJECT_SOURCE_DIR}/unitTest/"
-        $<TARGET_FILE_DIR:Rexeno>)
+        "${PROJECT_SOURCE_DIR}/configFiles/"
+        "~/.rexeno")

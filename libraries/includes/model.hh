@@ -14,6 +14,7 @@ public:
   void addShape2Trial(const string&);
 
   string trialName() {return _trialName;}
+  void fillAvailableShapes(const string& confFile);
 private:
   string _trialName;
   vector<string> _availableShapes;
