@@ -23,16 +23,15 @@ Model::addShape2Trial(const string& shape)
 void
 Model::fillAvailableShapes(const string& confFile)
 {
-  ifstream myReadFile;
-  myReadFile.open(confFile.c_str());
-  string output;
-  if (myReadFile.is_open())
+  string sLine;
+  ifstream infile;
+  infile.open (confFile.c_str());
+  string previousLine="";
+
+  while (!infile.eof())
   {
-    while (!myReadFile.eof())
-    {
-      myReadFile >> output;
-      cout<<output;
-    }
-  }
-  myReadFile.close();
+    getline(infile, sLine);
+    cout << sLine << endl;
+  }  
+  infile.close();
 }
