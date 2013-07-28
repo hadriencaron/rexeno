@@ -1,14 +1,16 @@
 #include "mainWindow.hh"
 #include <wordexp.h>
 #include "model.hh"
+#include "view.hh"
 
 int main(int argc,
          char** argv)
 {
   QApplication app(argc, argv);
   QMainWindow qmw;
-  Ui_MainWindow* w = new Ui_MainWindow();
+  //Ui_MainWindow* w = new Ui_MainWindow();
   Model* m = new Model();
+  View* w = new View(m);
   wordexp_t exp_result;
   wordexp("~/.rexeno/shape_prototypes", &exp_result, 0);
   

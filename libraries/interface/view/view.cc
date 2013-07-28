@@ -10,4 +10,5 @@ void
 View::Refresh()
 {
   this->TrialNameLabel->setText(_m->trialName().c_str());
+
 }

@@ -18,5 +18,3 @@ private:
 
 #endif /* VIEW_HH_ */
 
-
-  
