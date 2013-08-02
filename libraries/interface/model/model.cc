@@ -30,13 +30,19 @@ Model::fillAvailableShapes(const string& confFile)
   infile.open (confFile.c_str());
   string previousLine="";
   std::vector<std::string> strs;
-
+  std::vector<std::string>::iterator it;
+ 
   while (!infile.eof())
   {
     getline(infile, sLine);
-    boost::split(strs, "string to split", boost::is_any_of("\t "));
+    boost::split(strs, sLine, boost::is_any_of("\t "));
     _availableShapes.push_back(strs[0]);
     cout << strs[0] << endl;
   }  
   infile.close();
+  for (it = strs.begin(); it != strs.end(); ++it)
+  {
+    
+
+  }
 }

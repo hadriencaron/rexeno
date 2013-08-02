@@ -15,6 +15,7 @@ public:
 
   string trialName() {return _trialName;}
   void fillAvailableShapes(const string& confFile);
+  vector<string>& availableShapes() {return _availableShapes;}
 private:
   string _trialName;
   vector<string> _availableShapes;

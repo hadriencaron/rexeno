@@ -1,5 +1,11 @@
 include_directories("/usr/include/qt4")
 include_directories(view)
+find_package(Qt4 REQUIRED)
 link_libraries(QtCore)
 link_libraries(QtGui)
-add_executable(TrialCreator TrialCreateMain.cc model/model.cc view/view.cc controler/controler.cc)
+INCLUDE(${QT_USE_FILE})
+ADD_DEFINITIONS(${QT_DEFINITIONS})
+
+qt4_wrap_cpp(TrialCreator_MOC view/mainWindow.hh ../includes/view.hh)
+add_executable(TrialCreator TrialCreateMain.cc model/model.cc view/view.cc controler/controler.cc ${TrialCreator_MOC})
+target_link_libraries(TrialCreator ${QT_LIBRARIES})

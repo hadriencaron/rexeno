@@ -7,15 +7,16 @@ int main(int argc,
          char** argv)
 {
   QApplication app(argc, argv);
-  QMainWindow qmw;
   //Ui_MainWindow* w = new Ui_MainWindow();
+  //QMainWindow qmw;
   Model* m = new Model();
-  View* w = new View(m);
+  View* v = new View();
+  v->SetModel(m);
   wordexp_t exp_result;
   wordexp("~/.rexeno/shape_prototypes", &exp_result, 0);
-  
   m->fillAvailableShapes(exp_result.we_wordv[0]);
-  w->setupUi(&qmw);
-  qmw.show();
+  v->setupUi(v);
+  v->show();
+  v->Refresh();
   app.exec();
 }

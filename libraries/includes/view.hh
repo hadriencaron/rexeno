@@ -4,17 +4,27 @@
 # include "mainWindow.hh"
 # include "model.hh"
 
-class View : public Ui_MainWindow
+QT_BEGIN_NAMESPACE
+
+class View : public QMainWindow, public Ui::MainWindow
 {
+  Q_OBJECT
+
 public:
-  View(Model* m);
+  View();
+  ~View() {}
+  void SetModel(Model* m);
+
   void Refresh();
+public slots:
+  void Hello();
 
 private:
   Model* _m;
+  //Ui_MainWindow* _window;
 };
 
-
+QT_END_NAMESPACE
 
 #endif /* VIEW_HH_ */
 
