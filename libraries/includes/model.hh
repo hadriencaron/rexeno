@@ -4,6 +4,7 @@
 using namespace std;
 # include <vector>
 # include "parser.hh"
+# include <map>
 
 class Model
 {
@@ -16,9 +17,11 @@ public:
   string trialName() {return _trialName;}
   void fillAvailableShapes(const string& confFile);
   vector<string>& availableShapes() {return _availableShapes;}
+  map<string, vector<string> > shapePrototypes() {return _shapePrototypes;}
 private:
   string _trialName;
   vector<string> _availableShapes;
+  map<string, vector<string> > _shapePrototypes;
   configuration::ShapeInfo _newShape;
   configuration::TrialInfo _curTrial;
 };

@@ -38,6 +38,9 @@ Model::fillAvailableShapes(const string& confFile)
     boost::split(strs, sLine, boost::is_any_of("\t "));
     _availableShapes.push_back(strs[0]);
     cout << strs[0] << endl;
+    vector<string>::const_iterator first = strs.begin() + 1;
+    vector<string>::const_iterator last = strs.end();
+    _shapePrototypes[strs[0]] = vector<string>(first, last);
   }  
   infile.close();
   for (it = strs.begin(); it != strs.end(); ++it)

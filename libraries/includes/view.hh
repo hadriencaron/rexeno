@@ -18,6 +18,8 @@ public:
   void Refresh();
 public slots:
   void Hello();
+  void SetShapeType(int t);
+  void AddShape();
 
 private:
   Model* _m;
