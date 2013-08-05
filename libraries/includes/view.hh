@@ -20,6 +20,9 @@ public slots:
   void Hello();
   void SetShapeType(int t);
   void AddShape();
+  void DrawProtocole();
+  void Clear();
+  void DeleteShape();
 
 private:
   Model* _m;

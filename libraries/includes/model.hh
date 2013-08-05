@@ -16,12 +16,12 @@ public:
 
   string trialName() {return _trialName;}
   void fillAvailableShapes(const string& confFile);
-  vector<string>& availableShapes() {return _availableShapes;}
-  map<string, vector<string> > shapePrototypes() {return _shapePrototypes;}
+  const vector<string>& availableShapes() {return _availableShapes;}
+  vector<vector<string> > protocole;
+  map<string, vector<string> > shapePrototypes;
 private:
   string _trialName;
   vector<string> _availableShapes;
-  map<string, vector<string> > _shapePrototypes;
   configuration::ShapeInfo _newShape;
   configuration::TrialInfo _curTrial;
 };

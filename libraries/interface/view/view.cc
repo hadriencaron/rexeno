@@ -16,7 +16,7 @@ View::SetShapeType(int t)
 {
   QString shapeName = ShapesComboBox->currentText();
   AttributesTableWidget->clear();
-  map<string, vector<string> > prototype = _m->shapePrototypes();
+  map<string, vector<string> > prototype = _m->shapePrototypes;
   int size = prototype[shapeName.toStdString()].size() - 1;
   AttributesTableWidget->setRowCount(size);
   for (int i = 0; i < size; ++i)
@@ -47,10 +47,12 @@ View::Refresh()
   connect(OKButton, SIGNAL(clicked()), (View*) this, SLOT(Hello()));
   connect(ShapesComboBox, SIGNAL(currentIndexChanged(int)), (View*) this, SLOT(SetShapeType(int)));
   connect(AddShapeButton, SIGNAL(clicked()), (View*) this, SLOT(AddShape()));
+  connect(ClearButton, SIGNAL(clicked()), (View*) this, SLOT(Clear()));
+  connect(DeleteShapeButton, SIGNAL(clicked()), (View*) this, SLOT(DeleteShape()));
 
   this->TrialNameLabel->setText(_m->trialName().c_str());
-  vector<string>::iterator it;
-  vector<string>& shapes = _m->availableShapes();
+  vector<string>::const_iterator it;
+  const vector<string>& shapes = _m->availableShapes();
 
   for (it = shapes.begin(); it != shapes.end(); ++it)
     this->ShapesComboBox->addItem(it->c_str());
@@ -66,18 +68,52 @@ View::Hello()
 void
 View::AddShape()
 {
+  vector<string> newShape;
   QString shapeName = ShapesComboBox->currentText();
   QString newLine = shapeName;
-  map<string, vector<string> > prototype = _m->shapePrototypes();
+  map<string, vector<string> > prototype = _m->shapePrototypes;
   int size = prototype[shapeName.toStdString()].size() - 1;
-  int lineSize = _mprototype[shapeName.toStdString()].size() - 1;
   AttributesTableWidget->setRowCount(size);
   for (int i = 0; i < size; ++i)
   {
-    QTableWidgetItem *item = AttributesTableWidget->itemAt(i, 1);
+    QTableWidgetItem *item = AttributesTableWidget->item(i, 1);
     QString curArg = item->text();
-
-    newLine += curArg;
+    newShape.push_back(curArg.toStdString());
   }
-  ShapesListWidget->insertItem(0, newLine);
+  _m->protocole.push_back(newShape);
+  DrawProtocole();
 }
+
+void
+View::DrawProtocole()
+{
+  ShapesListWidget->clear();
+  vector<vector<string> >::iterator it;
+  int lineNumber = 0;
+  for (it = _m->protocole.begin(); it != _m->protocole.end(); ++it, ++lineNumber)
+  {
+    vector<string>& curVect = *it;
+    vector<string>::iterator it2;
+    QString newLine;
+    for (it2 = curVect.begin(); it2 != curVect.end(); ++it2)
+      newLine += it2->c_str();
+    ShapesListWidget->insertItem(lineNumber, newLine);
+  }
+}
+
+void
+View::Clear()
+{
+  _m->protocole.clear();
+  DrawProtocole();
+}
+
+void
+View::DeleteShape()
+{
+  int curRow = ShapesListWidget->currentRow();
+  _m->protocole.erase(_m->protocole.begin() + curRow);
+  DrawProtocole();
+}
+
+

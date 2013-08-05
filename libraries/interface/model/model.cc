@@ -40,7 +40,7 @@ Model::fillAvailableShapes(const string& confFile)
     cout << strs[0] << endl;
     vector<string>::const_iterator first = strs.begin() + 1;
     vector<string>::const_iterator last = strs.end();
-    _shapePrototypes[strs[0]] = vector<string>(first, last);
+    shapePrototypes[strs[0]] = vector<string>(first, last);
   }  
   infile.close();
   for (it = strs.begin(); it != strs.end(); ++it)
