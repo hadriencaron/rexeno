@@ -23,6 +23,9 @@ public slots:
   void DrawProtocole();
   void Clear();
   void DeleteShape();
+  void Up();
+  void Down();
+  void Edit();
 
 private:
   Model* _m;
