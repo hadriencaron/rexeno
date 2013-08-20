@@ -3,6 +3,11 @@ include_directories(view)
 find_package(Qt4 REQUIRED)
 link_libraries(QtCore)
 link_libraries(QtGui)
+
+find_package(Boost COMPONENTS system filesystem REQUIRED)
+link_libraries(${Boost_FILESYSTEM_LIBRARY})
+link_libraries(${Boost_SYSTEM_LIBRARY})
+
 INCLUDE(${QT_USE_FILE})
 ADD_DEFINITIONS(${QT_DEFINITIONS})
 

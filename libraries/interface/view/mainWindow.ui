@@ -420,7 +420,7 @@ font: 75 12pt &quot;Purisa&quot;;</string>
       <x>380</x>
       <y>60</y>
       <width>121</width>
-      <height>82</height>
+      <height>84</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -1227,16 +1227,6 @@ image: url(:/newPrefix/zsources/FlecheBasRouge.png);</string>
      <string>Trial Name</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="TrialNameLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>301</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="ShapeListLabel">
     <property name="geometry">
      <rect>
@@ -1325,6 +1315,19 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
    </widget>
+   <widget class="QComboBox" name="TrialNameComboBox">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>50</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1332,7 +1335,7 @@ color: rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>896</width>
-     <height>20</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -1466,7 +1469,6 @@ color: rgb(255, 255, 255);</string>
   </action>
  </widget>
  <tabstops>
-  <tabstop>TrialNameLineEdit</tabstop>
   <tabstop>ClearButton</tabstop>
   <tabstop>OKButton</tabstop>
   <tabstop>ShapesComboBox</tabstop>
@@ -1514,22 +1516,6 @@ color: rgb(255, 255, 255);</string>
     <hint type="destinationlabel">
      <x>475</x>
      <y>355</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ClearButton</sender>
-   <signal>clicked()</signal>
-   <receiver>TrialNameLineEdit</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>440</x>
-     <y>104</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>160</x>
-     <y>95</y>
     </hint>
    </hints>
   </connection>

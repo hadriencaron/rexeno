@@ -1,4 +1,5 @@
 #include "view.hh"
+#include <QFileDialog>
 
 void
 View::SetModel(Model* m)
@@ -11,10 +12,16 @@ View::View()
   _m = NULL;
 }
 
+/** 
+ * When the user selects a new shape in the combobox, this function displays all the parameters adjustable 
+ * for the shape in question
+ *
+ * @param shapeName : QString, the shape selected by the user
+ */
 void
-View::SetShapeType(int t)
+View::SetShapeType(QString shapeName)
 {
-  QString shapeName = ShapesComboBox->currentText();
+  //QString shapeName = ShapesComboBox->currentText();
   AttributesTableWidget->clear();
   map<string, vector<string> > prototype = _m->shapePrototypes;
   int size = prototype[shapeName.toStdString()].size() - 1;
@@ -41,25 +48,31 @@ View::SetShapeType(int t)
   }
 }
 
+/** 
+ * Initializes the interface default values and connects slots to signals
+ * 
+ */
 void
-View::Refresh()
+View::Init()
 {
   connect(OKButton, SIGNAL(clicked()), (View*) this, SLOT(Hello()));
-  connect(ShapesComboBox, SIGNAL(currentIndexChanged(int)), (View*) this, SLOT(SetShapeType(int)));
+  connect(ShapesComboBox, SIGNAL(currentIndexChanged(QString)), (View*) this, SLOT(SetShapeType(QString)));
   connect(AddShapeButton, SIGNAL(clicked()), (View*) this, SLOT(AddShape()));
   connect(ClearButton, SIGNAL(clicked()), (View*) this, SLOT(Clear()));
   connect(DeleteShapeButton, SIGNAL(clicked()), (View*) this, SLOT(DeleteShape()));
   connect(UpButton, SIGNAL(clicked()), (View*) this, SLOT(Up()));
   connect(BottomButton, SIGNAL(clicked()), (View*) this, SLOT(Down()));
   connect(EditShapeButton, SIGNAL(clicked()), (View*) this, SLOT(Edit()));
+  connect(SaveButton, SIGNAL(clicked()), (View*) this, SLOT(Save()));
 
-  this->TrialNameLabel->setText(_m->trialName().c_str());
+  //this->TrialNameComboBox->setText(_m->trialName().c_str());
   vector<string>::const_iterator it;
   const vector<string>& shapes = _m->availableShapes();
-
   for (it = shapes.begin(); it != shapes.end(); ++it)
     this->ShapesComboBox->addItem(it->c_str());
-
+  const vector<string>& trials = _m->availableTrials();
+  for (it = trials.begin(); it != trials.end(); ++it)
+    this->TrialNameComboBox->addItem(it->c_str());
 }
 
 void
@@ -68,6 +81,10 @@ View::Hello()
   cout << "hello" << endl;
 }
 
+/** 
+ * Adds a shape and its parameters to the current protocole (represented by a list of shapes)
+ * 
+ */
 void
 View::AddShape()
 {
@@ -118,10 +135,12 @@ void
 View::DeleteShape()
 {
   int curRow = ShapesListWidget->currentRow();
-  _m->protocole.erase(_m->protocole.begin() + curRow);
-  DrawProtocole();
+  if (curRow != -1)
+  {
+    _m->protocole.erase(_m->protocole.begin() + curRow);
+    DrawProtocole();
+  }
 }
-
 
 void
 View::Up()
@@ -191,5 +210,38 @@ View::Edit()
     QTableWidgetItem *item2 = new QTableWidgetItem(tr(shapeValue.c_str()).arg(pow(1, 0)));
     AttributesTableWidget->setItem(i, 1, item2);
   }
+}
+
+void
+View::Save()
+{
+  QFileDialog dialog(this);
+  dialog.setFileMode(QFileDialog::AnyFile);
+
+  //string filename(_m->trialName().c_str());
+  string filename(this->TrialNameComboBox->currentText().toStdString());
+  
+  // QFile f( filename );
+  // f.open( QIODevice::WriteOnly );
+
+  string res;
+  QString shapeName;
+  ShapesListWidget->clear();
+  vector<vector<string> >::iterator it;
+  int lineNumber = 0;
+  for (it = _m->protocole.begin(); it != _m->protocole.end(); ++it, ++lineNumber)
+  {
+    vector<string>& curVect = *it;
+    vector<string>::iterator it2;
+    for (it2 = curVect.begin(); it2 != curVect.end(); ++it2)
+      res += (*it2 + " ").c_str();
+    res += "\n";
+  }
+
+
+  ofstream out(filename.c_str());
+  cout << filename << endl;
+  out << res << endl;
+  out.close();
 }
 

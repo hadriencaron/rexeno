@@ -13,11 +13,13 @@ int main(int argc,
   View* v = new View();
   v->SetModel(m);
   wordexp_t exp_result;
-  wordexp("~/.rexeno/shape_prototypes", &exp_result, 0);
+  wordexp("~/.rexeno", &exp_result, 0);
+
   m->fillAvailableShapes(exp_result.we_wordv[0]);
+  m->fillAlreadyExistingTrials(exp_result.we_wordv[0]);
   v->setupUi(v);
   v->show();
-  v->Refresh();
+  v->Init();
   app.exec();
 }
 

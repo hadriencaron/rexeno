@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainWindow.ui'
 **
-** Created: Sun Jul 21 15:39:53 2013
+** Created: Sun Aug 11 16:50:11 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -18,7 +18,6 @@
 #include <QtGui/QGridLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
 #include <QtGui/QListWidget>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
@@ -65,13 +64,13 @@ public:
     QPushButton *BottomButton;
     QTableWidget *AttributesTableWidget;
     QLabel *TrialNameLabel;
-    QLineEdit *TrialNameLineEdit;
     QLabel *ShapeListLabel;
     QListWidget *ShapesListWidget;
     QPushButton *helpButton;
     QPushButton *colorButton;
     QLabel *ShapeNameLabel_2;
     QTextEdit *textEdit;
+    QComboBox *TrialNameComboBox;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menu_Edit;
@@ -217,7 +216,7 @@ public:
         ShapeNameLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
         layoutWidget1 = new QWidget(centralwidget);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(380, 60, 121, 82));
+        layoutWidget1->setGeometry(QRect(380, 60, 121, 84));
         verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -399,9 +398,6 @@ public:
         TrialNameLabel->setPalette(palette4);
         TrialNameLabel->setLayoutDirection(Qt::LeftToRight);
         TrialNameLabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
-        TrialNameLineEdit = new QLineEdit(centralwidget);
-        TrialNameLineEdit->setObjectName(QString::fromUtf8("TrialNameLineEdit"));
-        TrialNameLineEdit->setGeometry(QRect(10, 50, 301, 41));
         ShapeListLabel = new QLabel(centralwidget);
         ShapeListLabel->setObjectName(QString::fromUtf8("ShapeListLabel"));
         ShapeListLabel->setGeometry(QRect(551, 31, 77, 17));
@@ -425,10 +421,14 @@ public:
         textEdit = new QTextEdit(centralwidget);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
         textEdit->setGeometry(QRect(210, 140, 71, 31));
+        TrialNameComboBox = new QComboBox(centralwidget);
+        TrialNameComboBox->setObjectName(QString::fromUtf8("TrialNameComboBox"));
+        TrialNameComboBox->setGeometry(QRect(90, 50, 221, 31));
+        TrialNameComboBox->setEditable(true);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 896, 20));
+        menubar->setGeometry(QRect(0, 0, 896, 23));
         menubar->setStyleSheet(QString::fromUtf8(""));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
@@ -443,7 +443,6 @@ public:
         ShapeNameLabel->setBuddy(ShapesComboBox);
         ShapeNameLabel_2->setBuddy(ShapesComboBox);
 #endif // QT_NO_SHORTCUT
-        QWidget::setTabOrder(TrialNameLineEdit, ClearButton);
         QWidget::setTabOrder(ClearButton, OKButton);
         QWidget::setTabOrder(OKButton, ShapesComboBox);
         QWidget::setTabOrder(ShapesComboBox, AttributesTableWidget);
@@ -473,7 +472,6 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(QuitButton, SIGNAL(clicked()), MainWindow, SLOT(close()));
         QObject::connect(action_Quit, SIGNAL(triggered()), MainWindow, SLOT(close()));
-        QObject::connect(ClearButton, SIGNAL(clicked()), TrialNameLineEdit, SLOT(clear()));
         QObject::connect(ClearButton, SIGNAL(clicked()), ShapesListWidget, SLOT(clearSelection()));
         QObject::connect(DeleteShapeButton, SIGNAL(clicked()), ShapesListWidget, SLOT(clearSelection()));
 

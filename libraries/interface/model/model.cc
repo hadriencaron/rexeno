@@ -1,9 +1,10 @@
 #include "parser.hh"
 #include "model.hh"
 #include <iostream>
-#include<fstream>
+#include <fstream>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 
 Model::Model()
 {
@@ -23,11 +24,11 @@ Model::addShape2Trial(const string& shape)
 }
 
 void
-Model::fillAvailableShapes(const string& confFile)
+Model::fillAvailableShapes(const string& confDir)
 {
   string sLine;
   ifstream infile;
-  infile.open (confFile.c_str());
+  infile.open ((confDir + "/shape_prototypes").c_str());
   string previousLine="";
   std::vector<std::string> strs;
   std::vector<std::string>::iterator it;
@@ -49,3 +50,28 @@ Model::fillAvailableShapes(const string& confFile)
 
   }
 }
+
+void
+Model::fillAlreadyExistingTrials(const string& confDir)
+{
+  namespace fs = boost::filesystem;
+  fs::path someDir(confDir + "trial_types/");
+  fs::directory_iterator end_iter;
+
+  //typedef std::multimap<std::time_t, fs::path> result_set_t;
+  //result_set_t result_set;
+
+  if ( fs::exists(someDir) && fs::is_directory(someDir))
+  {
+    for( fs::directory_iterator dir_iter(someDir) ; dir_iter != end_iter ; ++dir_iter)
+    {
+      if (fs::is_regular_file(dir_iter->status()) )
+      {
+        //result_set.insert(result_set_t::value_type(fs::last_write_time(dir_iter->status()), *dir_iter));
+        _availableTrials.push_back((*dir_iter).path().filename().string());
+        //cout << (*dir_iter).path().filename().string() << endl;
+      }
+    }
+  }
+}
+
