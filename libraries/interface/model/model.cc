@@ -55,9 +55,10 @@ void
 Model::fillAlreadyExistingTrials(const string& confDir)
 {
   namespace fs = boost::filesystem;
-  fs::path someDir(confDir + "trial_types/");
+  fs::path someDir(confDir + "/trial_types/");
   fs::directory_iterator end_iter;
 
+  cout << confDir << endl;
   //typedef std::multimap<std::time_t, fs::path> result_set_t;
   //result_set_t result_set;
 

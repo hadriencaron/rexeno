@@ -1,5 +1,13 @@
 #include "view.hh"
 #include <QFileDialog>
+#include <wordexp.h>
+#include "popup.hh"
+
+#include <boost/filesystem.hpp>
+
+void 
+WriteToFile(const string&,
+            const string&);
 
 void
 View::SetModel(Model* m)
@@ -10,6 +18,9 @@ View::SetModel(Model* m)
 View::View()
 {
   _m = NULL;
+  p = new PopupView;
+  p->setupUi(p);
+  p->Init();
 }
 
 /** 
@@ -64,6 +75,7 @@ View::Init()
   connect(BottomButton, SIGNAL(clicked()), (View*) this, SLOT(Down()));
   connect(EditShapeButton, SIGNAL(clicked()), (View*) this, SLOT(Edit()));
   connect(SaveButton, SIGNAL(clicked()), (View*) this, SLOT(Save()));
+  connect(TrialNameComboBox, SIGNAL(currentIndexChanged(QString)), (View*) this, SLOT(LoadTrial(QString)));
 
   //this->TrialNameComboBox->setText(_m->trialName().c_str());
   vector<string>::const_iterator it;
@@ -71,6 +83,7 @@ View::Init()
   for (it = shapes.begin(); it != shapes.end(); ++it)
     this->ShapesComboBox->addItem(it->c_str());
   const vector<string>& trials = _m->availableTrials();
+  this->TrialNameComboBox->addItem("<new trial>");
   for (it = trials.begin(); it != trials.end(); ++it)
     this->TrialNameComboBox->addItem(it->c_str());
 }
@@ -212,6 +225,10 @@ View::Edit()
   }
 }
 
+/** 
+ * Saves a trial to file by constructiong a string and then by calling a popup for confirmation
+ * the popup will then call the write to file for effective IO operation
+ */
 void
 View::Save()
 {
@@ -237,11 +254,119 @@ View::Save()
       res += (*it2 + " ").c_str();
     res += "\n";
   }
-
-
-  ofstream out(filename.c_str());
-  cout << filename << endl;
-  out << res << endl;
-  out.close();
+  p->Check(filename, res);
 }
 
+
+void
+PopupView::Check(const string& filename,
+                 const string& output)
+{
+  if (filename == "<new trial>")
+  {
+    this->_content = output;
+    this->show();
+  }
+}
+
+
+void
+View::LoadTrial(const QString& s)
+{
+  cout << "loading trial" << endl;
+
+  wordexp_t exp_result;
+  wordexp("~", &exp_result, 0);
+  string rexenoDir = exp_result.we_wordv[0];
+  rexenoDir += "/.rexeno/trial_types/";
+  string filename(rexenoDir + this->TrialNameComboBox->currentText().toStdString());
+  ifstream infile((filename).c_str());
+
+  string sLine;
+  if (!infile.good())
+    return;
+  int lineNumber = 0;
+  while (!infile.eof())
+  {
+    getline(infile, sLine);
+    QString newLine = QString::fromStdString(sLine);
+    if (sLine != "")
+    {
+      cout << "my line is : " << newLine.toStdString() << endl;
+      ShapesListWidget->insertItem(lineNumber++, newLine);
+
+      vector<string> newShape;
+      QString shapeName = ShapesComboBox->currentText();
+      QString newLine = shapeName;
+      map<string, vector<string> > prototype = _m->shapePrototypes;
+      int size = prototype[shapeName.toStdString()].size() - 1;
+      AttributesTableWidget->setRowCount(size);
+      newShape.push_back(shapeName.toStdString());
+      for (int i = 0; i < size; ++i)
+      {
+        QTableWidgetItem *item = AttributesTableWidget->item(i, 1);
+        QString curArg = item->text();
+        newShape.push_back(curArg.toStdString());
+      }
+      _m->protocole.push_back(newShape);
+      DrawProtocole();
+
+    }
+  }
+
+
+
+}
+
+// Popup Code
+
+
+PopupView::PopupView()
+{
+
+}
+
+
+// PopupView::~PopupView()
+// {
+
+// }
+
+void
+PopupView::SetModel()
+{
+  //this->hide();
+}
+
+void
+PopupView::Save()
+{
+  wordexp_t exp_result;
+  wordexp("~", &exp_result, 0);
+  string rexenoDir = exp_result.we_wordv[0];
+  rexenoDir += "/.rexeno/trial_types/";
+  cout << lineEdit->displayText().toStdString() << endl;
+  string filename = lineEdit->displayText().toStdString();
+  if (boost::filesystem::exists(rexenoDir + filename)) 
+  {
+    if (askConfirmation())
+      WriteToFile(rexenoDir + filename, _content);
+  }
+  else
+  {
+    WriteToFile(rexenoDir + filename, _content);
+  }
+  this->hide();
+}
+
+void
+PopupView::Cancel()
+{
+  this->hide();
+}
+
+void
+PopupView::Init()
+{
+  connect(SaveButton, SIGNAL(clicked()), (PopupView*) this, SLOT(Save()));
+}

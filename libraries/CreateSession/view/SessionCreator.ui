@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QListWidget" name="availableTrialsList">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -37,7 +37,7 @@
      <string>Available Trials</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidget_2">
+   <widget class="QListWidget" name="trialsInSession">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -110,6 +110,19 @@
     </property>
     <property name="text">
      <string>Session</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reloadButton">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>260</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reload</string>
     </property>
    </widget>
   </widget>

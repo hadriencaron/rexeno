@@ -1286,35 +1286,6 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="ShapeNameLabel_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>150</y>
-      <width>191</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>Trial Max Length (Frame) :</string>
-    </property>
-    <property name="buddy">
-     <cstring>ShapesComboBox</cstring>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>140</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QComboBox" name="TrialNameComboBox">
     <property name="geometry">
      <rect>

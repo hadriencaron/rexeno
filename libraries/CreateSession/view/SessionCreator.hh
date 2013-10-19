@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'SessionCreator.ui'
 **
-** Created: Wed Aug 21 01:30:46 2013
+** Created: Wed Aug 28 00:45:35 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -29,14 +29,15 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QListWidget *listWidget;
+    QListWidget *availableTrialsList;
     QLabel *label;
-    QListWidget *listWidget_2;
+    QListWidget *trialsInSession;
     QPushButton *addButton;
     QPushButton *removeButton;
     QPushButton *cancelButton;
     QPushButton *createButton;
     QLabel *label_2;
+    QPushButton *reloadButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -47,15 +48,15 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        listWidget = new QListWidget(centralwidget);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setGeometry(QRect(40, 50, 251, 471));
+        availableTrialsList = new QListWidget(centralwidget);
+        availableTrialsList->setObjectName(QString::fromUtf8("availableTrialsList"));
+        availableTrialsList->setGeometry(QRect(40, 50, 251, 471));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(100, 20, 141, 16));
-        listWidget_2 = new QListWidget(centralwidget);
-        listWidget_2->setObjectName(QString::fromUtf8("listWidget_2"));
-        listWidget_2->setGeometry(QRect(460, 50, 251, 341));
+        trialsInSession = new QListWidget(centralwidget);
+        trialsInSession->setObjectName(QString::fromUtf8("trialsInSession"));
+        trialsInSession->setGeometry(QRect(460, 50, 251, 341));
         addButton = new QPushButton(centralwidget);
         addButton->setObjectName(QString::fromUtf8("addButton"));
         addButton->setGeometry(QRect(310, 100, 141, 51));
@@ -71,6 +72,9 @@ public:
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(530, 20, 141, 16));
+        reloadButton = new QPushButton(centralwidget);
+        reloadButton->setObjectName(QString::fromUtf8("reloadButton"));
+        reloadButton->setGeometry(QRect(310, 260, 141, 51));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -94,6 +98,7 @@ public:
         cancelButton->setText(QApplication::translate("MainWindow", "Cancel", 0, QApplication::UnicodeUTF8));
         createButton->setText(QApplication::translate("MainWindow", "Create", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "Session", 0, QApplication::UnicodeUTF8));
+        reloadButton->setText(QApplication::translate("MainWindow", "Reload", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
