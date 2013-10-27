@@ -4,6 +4,10 @@ This is the new version of rexeno.
 It is designed to become the 1.0 version.
 Enjoy !
 
+== Configuration ==
+sudo apt-get install qt-sdk
+
+
 == Installation Rexeno Libraries ==
 
 Use lower level command line (recommanded to understand what is going on) :
