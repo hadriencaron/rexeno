@@ -1,2 +1,6 @@
-add_library(configuration parser.cc)
+if (STATIC)
+  add_library(configuration parser.cc)
+else()
+  add_library(configuration SHARED parser.cc)
+endif()
 install_targets(/lib configuration)
