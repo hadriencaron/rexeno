@@ -15,6 +15,8 @@ if(NOT DIR3PARTY)
   set(DIR3PARTY "${PROJECT_SOURCE_DIR}/../../3rdParty")
 endif()
 
+
+
 #include_directories ("${PROJECT_SOURCE_DIR}/nidaq")
 include_directories ("${PROJECT_SOURCE_DIR}/session")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")

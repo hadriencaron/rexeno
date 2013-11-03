@@ -12,8 +12,14 @@ if(XENO)
   link_libraries ("xenomai")
 endif()
 set(CMAKE_CXX_FLAGS_INIT "-Wall --warn-uninitialized --warn-unused-vars '-std=c++0x'")
+
+message(${DIR3PARTY})
+
+link_directories(${DIR3PARTY})
+link_libraries (GL)
 link_libraries (glut)
 link_libraries (boost_program_options)
+
 if (STATIC)
   add_library (session session.cc trial.cc shape.cc square.cc rectangle.cc variable.cc setup.cc cross.cc setup.cc window.cc)
 else()
