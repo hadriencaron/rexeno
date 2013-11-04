@@ -15,7 +15,7 @@ set(CMAKE_CXX_FLAGS_INIT "-Wall --warn-uninitialized --warn-unused-vars '-std=c+
 
 message(${DIR3PARTY})
 
-link_directories(${DIR3PARTY})
+link_directories(${DIR3PARTY}/lib)
 link_libraries (GL)
 link_libraries (glut)
 link_libraries (boost_program_options)
