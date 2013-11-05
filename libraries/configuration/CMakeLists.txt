@@ -1,3 +1,5 @@
+link_directories(${DIR3PARTY}/lib)
+include_directories(${DIR3PARTY}/include)
 if (STATIC)
   add_library(configuration parser.cc)
 else()

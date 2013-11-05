@@ -1,9 +1,14 @@
 cmake_minimum_required (VERSION 2.6)
+
+link_directories(${DIR3PARTY}/lib)
+include_directories(${DIR3PARTY}/include/xenomai)
+include_directories(${DIR3PARTY}/include)
+
 if(XENO)
   add_definitions(-DXENO)
-  include_directories ("/usr/xenomai/include")
+  #include_directories ("/usr/xenomai/include")
   #link_directories ("/usr/xenomai/lib")
-  link_directories ("/usr/xenomai/lib")
+  #link_directories ("/usr/xenomai/lib")
   link_libraries ("pthread")
   link_libraries ("native")
   link_libraries ("rt")
