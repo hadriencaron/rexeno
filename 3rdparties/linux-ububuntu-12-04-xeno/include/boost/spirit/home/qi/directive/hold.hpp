@@ -33,15 +33,17 @@ namespace boost { namespace spirit
 
 namespace boost { namespace spirit { namespace qi
 {
+#ifndef BOOST_SPIRIT_NO_PREDEFINED_TERMINALS
     using spirit::hold;
+#endif
     using spirit::hold_type;
 
     template <typename Subject>
     struct hold_directive : unary_parser<hold_directive<Subject> >
     {
         typedef Subject subject_type;
-        hold_directive(Subject const& subject)
-          : subject(subject) {}
+        hold_directive(Subject const& subject_)
+          : subject(subject_) {}
 
         template <typename Context, typename Iterator>
         struct attribute
@@ -54,12 +56,12 @@ namespace boost { namespace spirit { namespace qi
         template <typename Iterator, typename Context
           , typename Skipper, typename Attribute>
         bool parse(Iterator& first, Iterator const& last
-          , Context& context, Skipper const& skipper, Attribute& attr) const
+          , Context& context, Skipper const& skipper, Attribute& attr_) const
         {
-            Attribute copy(attr);
+            Attribute copy(attr_);
             if (subject.parse(first, last, context, skipper, copy))
             {
-                traits::swap_impl(copy, attr);
+                traits::swap_impl(copy, attr_);
                 return true;
             }
             return false;

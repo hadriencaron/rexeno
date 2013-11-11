@@ -33,15 +33,17 @@ namespace boost { namespace spirit
 
 namespace boost { namespace spirit { namespace qi
 {
+#ifndef BOOST_SPIRIT_NO_PREDEFINED_TERMINALS
     using spirit::lexeme;
+#endif
     using spirit::lexeme_type;
 
     template <typename Subject>
     struct lexeme_directive : unary_parser<lexeme_directive<Subject> >
     {
         typedef Subject subject_type;
-        lexeme_directive(Subject const& subject)
-          : subject(subject) {}
+        lexeme_directive(Subject const& subject_)
+          : subject(subject_) {}
 
         template <typename Context, typename Iterator>
         struct attribute
@@ -55,11 +57,11 @@ namespace boost { namespace spirit { namespace qi
           , typename Skipper, typename Attribute>
         bool parse(Iterator& first, Iterator const& last
           , Context& context, Skipper const& skipper
-          , Attribute& attr) const
+          , Attribute& attr_) const
         {
             qi::skip_over(first, last, skipper);
             return subject.parse(first, last, context
-              , detail::unused_skipper<Skipper>(skipper), attr);
+              , detail::unused_skipper<Skipper>(skipper), attr_);
         }
 
         template <typename Context>

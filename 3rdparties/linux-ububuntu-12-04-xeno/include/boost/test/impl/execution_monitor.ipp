@@ -301,37 +301,22 @@ class system_signal_exception {
 public:
     // Constructor
     system_signal_exception()
-#ifdef SA_SIGINFO
     : m_sig_info( 0 )
     , m_context( 0 )
-#else
-    : m_sig( 0 )
-#endif
     {}
 
     // Access methods
-#ifdef SA_SIGINFO
     void        operator()( siginfo_t* i, void* c )
     {
         m_sig_info  = i;
         m_context   = c;
     }
-#else
-    void        operator()( int s )
-    {
-        m_sig       = s;
-    }
-#endif
     void        report() const;
 
 private:
     // Data members
-#ifdef SA_SIGINFO
     siginfo_t*  m_sig_info; // system signal detailed info
     void*       m_context;  // signal context
-#else
-    int         m_sig;      // sistem signal
-#endif
 };
 
 //____________________________________________________________________________//
@@ -339,7 +324,6 @@ private:
 void
 system_signal_exception::report() const
 {
-#ifdef SA_SIGINFO
     if( !m_sig_info )
         return; // no error actually occur?
 
@@ -624,59 +608,6 @@ system_signal_exception::report() const
     default:
         report_error( execution_exception::system_error, "unrecognized signal" );
     }
-#else
-    if( !m_sig )
-        return; // no error actually occur?
-
-    switch( m_sig ) {
-    case SIGILL:
-        report_error( execution_exception::system_fatal_error, 
-                      "signal: SIGILL (illegal instruction)" ); 
-        break;
-
-    case SIGFPE:
-        report_error( execution_exception::system_error,
-                      "signal: SIGFPE (errnoneous arithmetic operations)" );
-        break;
-
-    case SIGSEGV:
-        report_error( execution_exception::system_fatal_error,
-                      "signal: SIGSEGV (memory access violation)" );
-        break;
-
-    case SIGBUS:
-        report_error( execution_exception::system_fatal_error,
-                      "signal: SIGSEGV (memory access violation)" );
-        break;
-
-    case SIGCHLD:
-        report_error( execution_exception::system_fatal_error,
-                      "signal: SIGCHLD (child process has terminated)" );
-        break;
-
-#if defined(BOOST_TEST_CATCH_SIGPOLL)
-
-    case SIGPOLL:
-        report_error( execution_exception::system_error, 
-                      "signal: SIGPOLL (asynchronous I/O event occured)" ); 
-        break;
-
-#endif
-
-    case SIGABRT:
-        report_error( execution_exception::system_error,
-                      "signal: SIGABRT (application abort requested)" );
-        break;
-
-    case SIGALRM:
-        report_error( execution_exception::timeout_error,
-                      "signal: SIGALRM (timeout while executing function)" );
-        break;
-
-    default:
-        report_error( execution_exception::system_error, "unrecognized signal" );
-    }
-#endif
 }
 
 //____________________________________________________________________________//
@@ -687,13 +618,8 @@ system_signal_exception::report() const
 
 // Forward declaration
 extern "C" {
-#ifdef SA_SIGINFO
 static void execution_monitor_jumping_signal_handler( int sig, siginfo_t* info, void* context );
 static void execution_monitor_attaching_signal_handler( int sig, siginfo_t* info, void* context );
-#else
-static void execution_monitor_jumping_signal_handler( int sig );
-static void execution_monitor_attaching_signal_handler( int sig );
-#endif
 }
 
 class signal_action {
@@ -736,14 +662,9 @@ signal_action::signal_action( int sig, bool install, bool attach_dbg, char* alt_
         return;
     }
 
-#ifdef SA_SIGINFO
     m_new_action.sa_flags     |= SA_SIGINFO;
     m_new_action.sa_sigaction  = attach_dbg ? &execution_monitor_attaching_signal_handler
                                             : &execution_monitor_jumping_signal_handler;
-#else
-    m_new_action.sa_handler = attach_dbg ? &execution_monitor_attaching_signal_handler
-                                         : &execution_monitor_jumping_signal_handler;
-#endif
     BOOST_TEST_SYS_ASSERT( sigemptyset( &m_new_action.sa_mask ) != -1 );
 
 #ifdef BOOST_TEST_USE_ALT_STACK
@@ -892,7 +813,6 @@ signal_handler::~signal_handler()
 
 extern "C" {
 
-#ifdef SA_SIGINFO
 static bool ignore_sigchild( siginfo_t* info )
 {
     return info->si_signo == SIGCHLD
@@ -905,16 +825,9 @@ static bool ignore_sigchild( siginfo_t* info )
             && (int)info->si_status == 0;
 #endif
 }
-#else
-static bool ignore_sigchild( int sig )
-{
-    return sig == SIGCHLD;
-}
-#endif
 
 //____________________________________________________________________________//
 
-#ifdef SA_SIGINFO
 static void execution_monitor_jumping_signal_handler( int sig, siginfo_t* info, void* context )
 {
     if( ignore_sigchild( info ) )
@@ -938,34 +851,6 @@ static void execution_monitor_attaching_signal_handler( int sig, siginfo_t* info
     // debugger attached; it will handle the signal
     BOOST_TEST_SYS_ASSERT( ::signal( sig, SIG_DFL ) != SIG_ERR );
 }
-
-//____________________________________________________________________________//
-
-#else
-static void execution_monitor_jumping_signal_handler( int sig )
-{
-    if( ignore_sigchild( sig ) )
-        return;
-
-    signal_handler::sys_sig()( sig );
-
-    siglongjmp( signal_handler::jump_buffer(), sig );
-}
-
-//____________________________________________________________________________//
-
-static void execution_monitor_attaching_signal_handler( int sig )
-{
-    if( ignore_sigchild( sig ) )
-        return;
-
-    if( !debug::attach_debugger( false ) )
-        execution_monitor_jumping_signal_handler( sig );
-
-    // debugger attached; it will handle the signal
-    BOOST_TEST_SYS_ASSERT( ::signal( sig, SIG_DFL ) != SIG_ERR );
-}
-#endif
 
 //____________________________________________________________________________//
 

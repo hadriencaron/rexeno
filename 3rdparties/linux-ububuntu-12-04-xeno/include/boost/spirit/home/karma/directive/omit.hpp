@@ -36,9 +36,11 @@ namespace boost { namespace spirit
 
 namespace boost { namespace spirit { namespace karma
 {
+#ifndef BOOST_SPIRIT_NO_PREDEFINED_TERMINALS
     using spirit::omit;
-    using spirit::omit_type;
     using spirit::skip;
+#endif
+    using spirit::omit_type;
     using spirit::skip_type;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -75,7 +77,7 @@ namespace boost { namespace spirit { namespace karma
             if (Execute) {
                 // wrap the given output iterator to avoid output
                 detail::disable_output<OutputIterator> disable(sink);
-                subject.generate(sink, ctx, d, attr);
+                return subject.generate(sink, ctx, d, attr);
             }
             return true;
         }

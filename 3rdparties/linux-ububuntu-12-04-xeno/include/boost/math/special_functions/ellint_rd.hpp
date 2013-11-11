@@ -29,7 +29,7 @@ template <typename T, typename Policy>
 T ellint_rd_imp(T x, T y, T z, const Policy& pol)
 {
     T value, u, lambda, sigma, factor, tolerance;
-    T X, Y, Z, EA, EB, EC, ED_, EE, S1, S2;
+    T X, Y, Z, EA, EB, EC, ED, EE, S1, S2;
     unsigned long k;
 
     BOOST_MATH_STD_USING
@@ -87,15 +87,15 @@ T ellint_rd_imp(T x, T y, T z, const Policy& pol)
     while(k < policies::get_max_series_iterations<Policy>());
 
     // Check to see if we gave up too soon:
-    policies::check_series_iterations(function, k, pol);
+    policies::check_series_iterations<T>(function, k, pol);
 
     // Taylor series expansion to the 5th order
     EA = X * Y;
     EB = Z * Z;
     EC = EA - EB;
-    ED_ = EA - 6 * EB;
-    EE = ED_ + EC + EC;
-    S1 = ED_ * (ED_ * T(9) / 88 - Z * EE * T(9) / 52 - T(3) / 14);
+    ED = EA - 6 * EB;
+    EE = ED + EC + EC;
+    S1 = ED * (ED * T(9) / 88 - Z * EE * T(9) / 52 - T(3) / 14);
     S2 = Z * (EE / 6 + Z * (-EC * T(9) / 22 + Z * EA * T(3) / 26));
     value = 3 * sigma + factor * (1 + S1 + S2) / (u * sqrt(u));
 

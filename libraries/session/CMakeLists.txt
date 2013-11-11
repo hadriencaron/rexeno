@@ -1,8 +1,10 @@
 cmake_minimum_required (VERSION 2.6)
 
+include_directories(${DIR3PARTY}/include/X11)
 link_directories(${DIR3PARTY}/lib)
 include_directories(${DIR3PARTY}/include/xenomai)
 include_directories(${DIR3PARTY}/include)
+include_directories(${DIR3PARTY}/include/boost)
 
 if(XENO)
   add_definitions(-DXENO)
@@ -34,6 +36,7 @@ target_link_libraries (configuration)
 link_libraries(configuration)
 link_libraries(driver)
 link_libraries(recorder)
+include_directories(${DIR3PARTY}/include)
 add_executable (sessionBin session.cc trial.cc  shape.cc cross.cc square.cc  rectangle.cc variable.cc setup.cc window.cc mainSession.cc)
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")

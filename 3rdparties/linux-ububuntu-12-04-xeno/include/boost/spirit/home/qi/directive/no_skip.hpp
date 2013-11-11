@@ -35,7 +35,9 @@ namespace boost { namespace spirit
 
 namespace boost { namespace spirit { namespace qi
 {
+#ifndef BOOST_SPIRIT_NO_PREDEFINED_TERMINALS
     using spirit::no_skip;
+#endif
     using spirit::no_skip_type;
 
     // same as lexeme[], but does not pre-skip
@@ -43,8 +45,8 @@ namespace boost { namespace spirit { namespace qi
     struct no_skip_directive : unary_parser<no_skip_directive<Subject> >
     {
         typedef Subject subject_type;
-        no_skip_directive(Subject const& subject)
-          : subject(subject) {}
+        no_skip_directive(Subject const& subject_)
+          : subject(subject_) {}
 
         template <typename Context, typename Iterator>
         struct attribute
@@ -58,10 +60,10 @@ namespace boost { namespace spirit { namespace qi
           , typename Skipper, typename Attribute>
         bool parse(Iterator& first, Iterator const& last
           , Context& context, Skipper const& skipper
-          , Attribute& attr) const
+          , Attribute& attr_) const
         {
             return subject.parse(first, last, context
-              , detail::unused_skipper<Skipper>(skipper), attr);
+              , detail::unused_skipper<Skipper>(skipper), attr_);
         }
 
         template <typename Context>

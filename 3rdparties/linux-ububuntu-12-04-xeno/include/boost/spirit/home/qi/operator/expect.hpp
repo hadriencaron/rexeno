@@ -1,5 +1,6 @@
 /*=============================================================================
     Copyright (c) 2001-2011 Joel de Guzman
+    Copyright (c) 2001-2011 Hartmut Kaiser
 
     Distributed under the Boost Software License, Version 1.0. (See accompanying
     file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -38,9 +39,9 @@ namespace boost { namespace spirit { namespace qi
     template <typename Iterator>
     struct expectation_failure : std::runtime_error
     {
-        expectation_failure(Iterator first, Iterator last, info const& what)
+        expectation_failure(Iterator first_, Iterator last_, info const& what)
           : std::runtime_error("boost::spirit::qi::expectation_failure")
-          , first(first), last(last), what_(what)
+          , first(first_), last(last_), what_(what)
         {}
         ~expectation_failure() throw() {}
 
@@ -95,8 +96,8 @@ namespace boost { namespace spirit { namespace traits
     template <typename Elements, typename Attribute, typename Context
       , typename Iterator>
     struct handles_container<qi::expect<Elements>, Attribute, Context
-      , Iterator>
-      : nary_handles_container<Elements, Attribute, Context, Iterator> {};
+          , Iterator>
+      : mpl::true_ {};
 }}}
 
 #endif
