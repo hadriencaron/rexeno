@@ -17,7 +17,6 @@ endif()
 
 
 
-#include_directories ("${PROJECT_SOURCE_DIR}/nidaq")
 include_directories ("${PROJECT_SOURCE_DIR}/session")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/recorder")
@@ -35,13 +34,12 @@ target_link_libraries (Rexeno driver)
 target_link_libraries (Rexeno recorder)
 
 link_directories(${DIR3PARTY}/lib)
-include_directories(${DIR3PARTY}/include/xenomai)
+# include_directories(${DIR3PARTY}/include/xenomai)
 include_directories(${DIR3PARTY}/include)
 if(XENO)
   add_definitions(-DXENO)
-  # include_directories ("/usr/xenomai/include")
-  # #link_directories ("/usr/xenomai/lib")
-  # link_directories ("/usr/xenomai/lib")
+  include_directories ("/usr/xenomai/include")
+  link_directories ("/usr/xenomai/lib")
   link_libraries ("pthread")
   link_libraries ("native")
   link_libraries ("rt")
@@ -49,7 +47,6 @@ if(XENO)
   link_libraries ("rtdm")
   link_libraries ("xenomai")
 endif()
-#add_subdirectory (nidaq)
 
 # here we add configuration files
 add_custom_command(TARGET Rexeno POST_BUILD
