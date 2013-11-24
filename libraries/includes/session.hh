@@ -17,10 +17,14 @@
 # include <list>
 
 # include "parser.hh"
-# include "trial.hh"
+// # include "trial.hh"
 # include "setup.hh"
 # include "recorder.hh"
 # include "driver.hh"
+
+class VariableManager;
+class Variable;
+class Trial;
 
 using namespace std;
 using namespace configuration;

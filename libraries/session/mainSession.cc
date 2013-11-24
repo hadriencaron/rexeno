@@ -1,6 +1,8 @@
 #include <iostream>
 #include <GL/glut.h>
 
+#include "trial.hh"
+
 #include "session.hh"
 #include "dummyDriver.hh"
 

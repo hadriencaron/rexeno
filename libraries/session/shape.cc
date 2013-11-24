@@ -3,6 +3,8 @@
 #include <boost/lexical_cast.hpp>
 #include "session.hh"
 
+# include "trial.hh"
+
 using boost::lexical_cast;
 
 /** 
