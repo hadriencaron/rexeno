@@ -16,7 +16,6 @@
 # include <iostream>
 # include <list>
 
-// # include "recorder.hh"
 # include "driver.hh"
 
 class VariableManager;
