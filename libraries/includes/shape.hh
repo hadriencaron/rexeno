@@ -15,6 +15,8 @@
 #ifndef SHAPE_HH_
 # define SHAPE_HH_
 
+# include <GL/glut.h>
+
 # include <string>
 # include <iostream>
 # include <string>

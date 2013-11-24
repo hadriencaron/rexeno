@@ -15,7 +15,6 @@
 
 # include <iostream>
 # include <list>
-# include <GL/glut.h>
 
 # include "parser.hh"
 # include "trial.hh"

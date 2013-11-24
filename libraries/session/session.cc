@@ -2,6 +2,9 @@
 #include "trial.hh"
 #include "setup.hh"
 
+# include <GL/glut.h>
+
+
 Session* Session::_instance = NULL;
 
 /** 
