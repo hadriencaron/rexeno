@@ -16,13 +16,14 @@
 # include <iostream>
 # include <list>
 
-# include "recorder.hh"
+// # include "recorder.hh"
 # include "driver.hh"
 
 class VariableManager;
 class Variable;
 class Trial;
 class Setup;
+class Recorder;
 
 namespace configuration
 {
