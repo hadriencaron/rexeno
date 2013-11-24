@@ -1,6 +1,10 @@
 include_directories("/usr/include/qt4")
 include_directories(view)
 include_directories(includes)
+
+MESSAGE(${DIR3PARTY}/qt)
+SET(QT_ROOT_DIR ${DIR3PARTY}/qt)
+
 find_package(Qt4 REQUIRED)
 link_libraries(QtCore)
 link_libraries(QtGui)

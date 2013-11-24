@@ -1,5 +1,8 @@
-link_directories(${DIR3PARTY}/lib)
-include_directories(${DIR3PARTY}/include)
+# boost
+include_directories(${DIR3PARTY}/boost/include)
+link_directories(${DIR3PARTY}/boost/lib)
+
+
 if (STATIC)
   add_library(configuration parser.cc)
 else()

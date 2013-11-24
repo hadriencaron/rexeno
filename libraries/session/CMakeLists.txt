@@ -4,8 +4,14 @@ cmake_minimum_required (VERSION 2.6)
 include_directories(${DIR3PARTY}/x11/include)
 link_directories(${DIR3PARTY}/x11/lib)
 # boost
-include_directories(${DIR3PARTY}/boost/include/boost)
+include_directories(${DIR3PARTY}/boost/include)
 link_directories(${DIR3PARTY}/boost/lib)
+# GL
+include_directories(${DIR3PARTY}/opengl/include)
+link_directories(${DIR3PARTY}/opengl/lib)
+# gl-mesa
+include_directories(${DIR3PARTY}/gl-mesa/include)
+link_directories(${DIR3PARTY}/gl-mesa/lib)
 
 
 if(XENO)

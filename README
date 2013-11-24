@@ -22,7 +22,7 @@ sudo make install
 On a regular linux box :
 cd /to/the/rexeno/source/folder
 mkdir build
-cmake .. -DXENO=OFF
+cmake .. -DXENO=OFF -DDIR3PARTY=/path/to/rexeno/3rdparties/linux-ububuntu-12-04-[no]xeno/target
 make
 sudo make install
 

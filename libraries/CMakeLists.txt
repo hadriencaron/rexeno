@@ -12,10 +12,19 @@ include_directories ("${PROJECT_SOURCE_DIR}/configuration")
 
 ## Set 3rdParty root
 if(NOT DIR3PARTY)
-  set(DIR3PARTY "${PROJECT_SOURCE_DIR}/../../3rdParty/linux-ububuntu-12-04-noxeno/target")
+  set(DIR3PARTY "${PROJECT_SOURCE_DIR}/../3rdParty/linux-ububuntu-12-04-noxeno/target")
 endif()
 
+# boost
+include_directories(${DIR3PARTY}/boost/include)
+link_directories(${DIR3PARTY}/boost/lib)
 
+# GL
+include_directories(${DIR3PARTY}/opengl/include)
+link_directories(${DIR3PARTY}/opengl/lib)
+# gl-mesa
+include_directories(${DIR3PARTY}/gl-mesa/include)
+link_directories(${DIR3PARTY}/gl-mesa/lib)
 
 include_directories ("${PROJECT_SOURCE_DIR}/session")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
@@ -25,8 +34,12 @@ add_subdirectory (session)
 add_subdirectory (driver)
 add_subdirectory (recorder)
 add_subdirectory (unitTest)
-add_subdirectory (interface)
-add_subdirectory (CreateSession)
+
+if (GUI)
+  # the GUIS
+  add_subdirectory (interface)
+  add_subdirectory (CreateSession)
+endif()
 add_executable(Rexeno main.cc)
 target_link_libraries (Rexeno configuration)
 target_link_libraries (Rexeno session)

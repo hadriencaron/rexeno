@@ -1,7 +1,13 @@
 cmake_minimum_required (VERSION 2.6)
-link_directories(${DIR3PARTY}/lib)
-include_directories(${DIR3PARTY}/include/xenomai)
-include_directories(${DIR3PARTY}/include)
+
+# boost
+include_directories(${DIR3PARTY}/boost/include)
+link_directories(${DIR3PARTY}/boost/lib)
+
+# link_directories(${DIR3PARTY}/lib)
+# include_directories(${DIR3PARTY}/include/xenomai)
+# include_directories(${DIR3PARTY}/include)
+
 if(XENO)
   add_definitions(-DXENO)
   #include_directories ("/usr/xenomai/include")
