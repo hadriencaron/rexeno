@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
-include_directories(${DIR3PARTY}/include)
-link_directories(${DIR3PARTY}/lib/boost)
+include_directories(${DIR3PARTY}/boost/include/boost)
+link_directories(${DIR3PARTY}/boost/lib)
 set(CMAKE_CXX_FLAGS_INIT "-Wall --warn-uninitialized --warn-unused-vars")
 link_libraries (boost_unit_test_framework)
 link_libraries (boost_test_exec_monitor)

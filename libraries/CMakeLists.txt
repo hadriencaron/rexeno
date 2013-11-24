@@ -12,7 +12,7 @@ include_directories ("${PROJECT_SOURCE_DIR}/configuration")
 
 ## Set 3rdParty root
 if(NOT DIR3PARTY)
-  set(DIR3PARTY "${PROJECT_SOURCE_DIR}/../../3rdParty")
+  set(DIR3PARTY "${PROJECT_SOURCE_DIR}/../../3rdParty/linux-ububuntu-12-04-noxeno/target")
 endif()
 
 
@@ -46,6 +46,9 @@ if(XENO)
   link_libraries ("analogy")
   link_libraries ("rtdm")
   link_libraries ("xenomai")
+  if(NOT DIR3PARTY)
+    set(DIR3PARTY "${PROJECT_SOURCE_DIR}/../../3rdParty/linux-ububuntu-12-04-xeno/target")
+  endif()
 endif()
 
 # here we add configuration files
