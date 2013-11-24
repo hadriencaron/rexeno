@@ -1,9 +1,11 @@
 #include "session.hh"
+#include "parser.hh"
 #include "trial.hh"
 #include "setup.hh"
 
 # include <GL/glut.h>
 
+using namespace configuration;
 
 Session* Session::_instance = NULL;
 
@@ -15,7 +17,7 @@ Session* Session::_instance = NULL;
  * 
  * @param s 
  */
-Session::Session(SessionInfo &s)
+Session::Session(configuration::SessionInfo &s)
   : _R(0),
     _G(0),
     _B(0)
@@ -225,7 +227,7 @@ Session::getInstance()
  * @return 
  */
 Session*
-Session::getInstance(SessionInfo& s)
+Session::getInstance(configuration::SessionInfo& s)
 {
   _instance = new Session(s);
 

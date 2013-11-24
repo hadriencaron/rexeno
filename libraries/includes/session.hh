@@ -16,8 +16,6 @@
 # include <iostream>
 # include <list>
 
-# include "parser.hh"
-// # include "setup.hh"
 # include "recorder.hh"
 # include "driver.hh"
 
@@ -26,8 +24,13 @@ class Variable;
 class Trial;
 class Setup;
 
+namespace configuration
+{
+  class SessionInfo;
+};
+
 using namespace std;
-using namespace configuration;
+//using namespace configuration;
 
 // Singleton class
 class Session
@@ -35,7 +38,7 @@ class Session
 public:
   ~Session();
   static Session* getInstance();
-  static Session* getInstance(SessionInfo& s);
+  static Session* getInstance(configuration::SessionInfo& s);
   void run(int argc,
            char** argv);
   void displayFrame();
@@ -54,7 +57,7 @@ public:
   ms getTime();
   bool initialized();
 private:
-  Session(SessionInfo& s);
+  Session(configuration::SessionInfo& s);
   void _fillData();
 
   Driver* _driver;
