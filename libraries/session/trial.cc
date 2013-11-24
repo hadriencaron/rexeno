@@ -1,5 +1,7 @@
 #include "trial.hh"
 #include "driver.hh"
+#include "setup.hh"
+
 #include <boost/foreach.hpp>
 
 Trial::Trial(TrialInfo& ti)

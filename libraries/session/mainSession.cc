@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 
 #include "trial.hh"
+#include "setup.hh"
 
 #include "session.hh"
 #include "dummyDriver.hh"

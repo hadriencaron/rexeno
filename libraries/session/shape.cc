@@ -4,6 +4,7 @@
 #include "session.hh"
 
 # include "trial.hh"
+# include "setup.hh"
 
 using boost::lexical_cast;
 
