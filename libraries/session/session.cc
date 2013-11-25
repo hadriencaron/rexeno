@@ -3,7 +3,9 @@
 #include "trial.hh"
 #include "setup.hh"
 
-# include <GL/glut.h>
+#include "driver.hh"
+
+#include <GL/glut.h>
 
 using namespace configuration;
 

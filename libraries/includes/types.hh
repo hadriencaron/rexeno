@@ -1,7 +1,7 @@
 #ifndef TYPES_HH_
 # define TYPES_HH_
 
-
+# include <vector>
 typedef unsigned long long ms;
 
 struct pos
@@ -22,6 +22,6 @@ struct Element
   ms timing;
 };
 
-typedef vector<Element> datas;
+typedef std::vector<Element> datas;
 
 #endif

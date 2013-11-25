@@ -14,10 +14,11 @@
 # define SESSION_HH_
 
 # include <iostream>
+# include <vector>
 # include <list>
+# include "types.hh"
 
-# include "driver.hh"
-
+class Driver;
 class VariableManager;
 class Variable;
 class Trial;

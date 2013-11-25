@@ -3,8 +3,9 @@
 #include <boost/lexical_cast.hpp>
 #include "session.hh"
 
-# include "trial.hh"
-# include "setup.hh"
+#include "recorder.hh"
+#include "trial.hh"
+#include "setup.hh"
 
 using boost::lexical_cast;
 
