@@ -4,6 +4,8 @@
 #include <sys/types.h>
 #include <signal.h>
 
+#include <assert.h>
+
 int launch();
 
 using namespace std;

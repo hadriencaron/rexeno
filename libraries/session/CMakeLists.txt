@@ -14,7 +14,7 @@ include_directories(${DIR3PARTY}/gl-mesa/include)
 link_directories(${DIR3PARTY}/gl-mesa/lib)
 
 
-if(XENO)
+if(XENO STREQUAL "ON")
   add_definitions(-DXENO)
   include_directories ("/usr/xenomai/include")
   link_directories ("/usr/xenomai/lib")
@@ -34,7 +34,7 @@ link_libraries (GL)
 link_libraries (glut)
 link_libraries (boost_program_options)
 
-if (STATIC)
+if (STATIC STREQUAL "ON")
   add_library (session session.cc trial.cc shape.cc square.cc rectangle.cc variable.cc setup.cc cross.cc setup.cc window.cc)
 else()
   add_library (session SHARED session.cc trial.cc shape.cc square.cc rectangle.cc variable.cc setup.cc cross.cc setup.cc window.cc)
@@ -50,3 +50,5 @@ include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/configuration")
 
 install_targets(/lib session)
+install(FILES ../includes/session.hh
+        DESTINATION /usr/include)

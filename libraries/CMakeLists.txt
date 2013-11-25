@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 project (Rexeno)
 
 OPTION(XENO "Build Library with super cool option" ON)
-OPTION(STATIC "Build Library with super cool option" ON)
+OPTION(STATIC "Build Library with super cool option" OFF)
 
 set(CMAKE_DEBUG_TYPE=DEBUG)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
@@ -49,7 +49,7 @@ target_link_libraries (Rexeno recorder)
 link_directories(${DIR3PARTY}/lib)
 # include_directories(${DIR3PARTY}/include/xenomai)
 include_directories(${DIR3PARTY}/include)
-if(XENO)
+if(XENO STREQUAL "ON")
   add_definitions(-DXENO)
   include_directories ("/usr/xenomai/include")
   link_directories ("/usr/xenomai/lib")
@@ -75,3 +75,5 @@ add_custom_command(TARGET Rexeno POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${PROJECT_SOURCE_DIR}/configFiles/"
         "~/.rexeno")
+install(FILES includes/rexeno.hh
+        DESTINATION /usr/include)

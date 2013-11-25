@@ -9,3 +9,5 @@ else()
   add_library(configuration SHARED parser.cc)
 endif()
 install_targets(/lib configuration)
+install(FILES parser.hh
+        DESTINATION /usr/include)

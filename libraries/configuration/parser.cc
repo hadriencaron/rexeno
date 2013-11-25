@@ -14,6 +14,10 @@
 #include <boost/fusion/include/adapt_struct.hpp>
 #include <boost/fusion/include/io.hpp>
 
+namespace qi = boost::spirit::qi;
+//namespace ascii = boost::spirit::ascii;
+namespace standard = boost::spirit::standard;
+
 
 // We need to tell fusion about our struct
 // to make it a first-class fusion citizen. This has to

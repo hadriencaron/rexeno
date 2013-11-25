@@ -4,6 +4,7 @@
 #include "popup.hh"
 
 #include <boost/filesystem.hpp>
+#include <math.h>       /* pow */
 
 void 
 WriteToFile(const string&,
