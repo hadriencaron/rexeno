@@ -30,6 +30,4 @@ $(TARGET) : $(OBJS)
 	g++ $(SRCS) -o $(TARGET) /usr/lib/libsession.a /usr/lib/librecorder.a /usr/lib/libdriver.a /usr/lib/libconfiguration.a -lGL -lboost_program_options -lglut $(CFLAGS) $(LDFLAGS)
 
 noxeno:
-	#g++ $(SRCS) -o $(TARGET) ${REXENO_PATH}/libsession.a ${REXENO_PATH}/librecorder.a ${REXENO_PATH}/libdriver.a ${REXENO_PATH}/libconfiguration.a -lGL -lboost_program_options -lglut
-	g++ $(SRCS) -o $(TARGET) -lsession -lrecorder -ldriver -lconfiguration
-	#g++ $(SRCS) -o $(TARGET) libsession.a librecorder.a ${REXENO_PATH}/libdriver.a ${REXENO_PATH}/libconfiguration.a -lGL -lboost_program_options -lglut
+	g++ $(SRCS) -o $(TARGET) -Wl,-rpath /usr/local/lib -Wl,-rpath /usr/local/lib/libsession.so -lsession -lrecorder -ldriver -lconfiguration

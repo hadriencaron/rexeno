@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 
+
 # x11
 include_directories(${DIR3PARTY}/x11/include)
 link_directories(${DIR3PARTY}/x11/lib)
@@ -52,3 +53,5 @@ include_directories ("${PROJECT_SOURCE_DIR}/configuration")
 install_targets(/lib session)
 install(FILES ../includes/session.hh
         DESTINATION /usr/include)
+
+set_property(TARGET session PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
