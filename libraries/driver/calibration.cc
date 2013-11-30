@@ -15,7 +15,7 @@ KeyboardCalibration::adjustPoint(datas& in)
 }
 
 void
-KeyboardCalibration::react2input()
+KeyboardCalibration::React2input()
 {
   if (Setup::keys['q'])
     (*_m)(0) -= 0.025;

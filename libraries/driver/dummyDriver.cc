@@ -52,7 +52,7 @@ void
 DummyDriver::React2input()
 {
   if (_calibration)
-    _calibration->react2input();
+    _calibration->React2input();
 }
 
 /** 

@@ -26,7 +26,7 @@ public:
 
   void Display();
   void DisplayMonitor();
-  void react2input(Status&,
+  void React2input(Status&,
                    datas&,
                    int frameId,
                    ms);

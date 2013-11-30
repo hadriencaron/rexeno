@@ -144,8 +144,8 @@ Shape::_yGL()
  * @param displayTime : what date (in milliseconds) was the frame presented
  */
 void
-Shape::react2input(Status& s,
-                   datas& ds,
+Shape::React2input(Status& s,
+                   const datas& ds,
                    int frameId,
                    ms displayTime)
 {

@@ -62,7 +62,7 @@ Trial::~Trial()
 }
 
 int
-Trial::displayFrame(Driver* d)
+Trial::displayFrame(Driver* driver)
 {
   Session* s = Session::getInstance();
 
@@ -89,11 +89,11 @@ Trial::displayFrame(Driver* d)
   glutPostRedisplay();
   glClear(GL_COLOR_BUFFER_BIT);
 
-  _sendTtls(d);
+  _sendTtls(driver);
   _status[RUNNING] = false;
-  d->React2input();
-  d->AnalogIn(_data);
-  ms displayTime = d->GetTime();
+  driver->React2input();
+  driver->AnalogIn(_data);
+  ms displayTime = driver->GetTime();
 
   if ((_curFrameId == 0) && (!_logged))
   {
@@ -106,7 +106,7 @@ Trial::displayFrame(Driver* d)
     Shape *curShape = *it;
 
     if (curShape->Displayable(_curFrameId))
-      curShape->react2input(_status, _data, _curFrameId, d->GetTime());
+      curShape->React2input(_status, _data, _curFrameId, driver->GetTime());
   }
   Setup::reset();
   return (_react2status());

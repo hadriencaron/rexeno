@@ -93,7 +93,7 @@ Cross::DisplayMonitor()
  * @param ms 
  */
 void
-Cross::react2input(Status& s,
+Cross::React2input(Status& s,
                    datas& ds,
                    int frameId,
                    ms)

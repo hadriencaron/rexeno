@@ -12,7 +12,7 @@ public:
   Rectangle() {}
   virtual ~Rectangle();
 
-  void react2input(Status&,
+  void React2input(Status&,
                    datas&,
                    int,
                    ms);

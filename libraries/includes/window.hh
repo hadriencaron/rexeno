@@ -16,8 +16,8 @@ public:
   void DisplayMonitor();
   bool isIn(double x,
             double y);
-  void react2input(Status&,
-                   datas&,
+  void React2input(Status&,
+                   const datas&,
                    int,
                    ms);
 protected:

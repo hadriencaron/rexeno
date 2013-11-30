@@ -50,8 +50,8 @@ public:
   virtual ~Shape() {}
   virtual void Display();
   virtual void DisplayMonitor();
-  virtual void react2input(Status&,
-                           datas&,
+  virtual void React2input(Status&,
+                           const datas&,
                            int,
                            ms);
   double x() {return _x->value;}

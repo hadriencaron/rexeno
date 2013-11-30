@@ -62,6 +62,18 @@ private:
   ms _start;
 };
 
+class FileDriver : public Driver
+{
+public:
+  FileDriver(std::string filename);
+  ~FileDriver();
+
+  ms GetTime();
+  void React2input();
+  void AnalogIn(datas&);
+private:
+  
+};
 
 #ifdef XENO
 
