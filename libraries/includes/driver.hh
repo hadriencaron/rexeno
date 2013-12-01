@@ -11,6 +11,10 @@
  * - getting and setting analog channels (in Volts)
  * - getting and setting digital channels (up/down on each bit)
  *
+ * Currently available implementations :
+ * - XenoDriver : with a nidaq card (todo? : remove keyboard)
+ * - DummyDriver : just the keyboard (todo : )
+ * - FileDriver
  */
 #ifndef DRIVER_HH_
 # define DRIVER_HH_
@@ -72,7 +76,7 @@ public:
   void React2input();
   void AnalogIn(datas&);
 private:
-  
+  ifstream _infile;
 };
 
 #ifdef XENO
