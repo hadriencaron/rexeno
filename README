@@ -7,6 +7,14 @@ Enjoy !
 == Configuration ==
 sudo apt-get install qt-sdk
 
+== TODO ==
+3rdparties : add libxcb.so
+sudo apt-get install libxcb-glx0-dev
+sudo apt-get install libnvidia-current-dev
+sudo apt-get install libgl1-mesa-dev
+sudo apt-get install xcb-proto
+sudo apt-get install python-xcb-gen
+=> j'ai installé des sources libxcb-glx/
 
 == Installation Rexeno Libraries ==
 
