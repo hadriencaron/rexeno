@@ -101,7 +101,8 @@ private:
   double* _analogData;
 
   RT_MUTEX* _mutex;
-  RT_BUFFER* _buffer;
+  RT_BUFFER* _recorderBuffer;
+  RT_BUFFER* _displayBuffer;
 };
 
 #endif /* XENO */

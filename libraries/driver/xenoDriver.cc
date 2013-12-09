@@ -52,7 +52,7 @@ RT_TASK	analogy_task;
 RT_ALARM alarm_acquire;
 RT_TASK recorder_task;
 RT_PIPE pipe_desc;
-double recorderBuffer[NB_CHANNELS*NB_DATA * 2 *2];
+double recorderArray[NB_CHANNELS*NB_DATA * 2 *2];
 
 a4l_desc_t	*descriptor = 0;
 
@@ -114,9 +114,11 @@ void input(void* p)
 {
   RT_MUTEX* mutex = (RT_MUTEX*) p;
   int i;
-  RT_BUFFER bf;
+  RT_BUFFER bufferRecorder;
+  RT_BUFFER bufferDisplay;
 
-  rt_buffer_bind(&bf, "analogy_acquisition_buffer", TM_INFINITE);
+  rt_buffer_bind(&bufferRecorder, "recorder_buffer", TM_INFINITE);
+  rt_buffer_bind(&bufferDisplay, "display_buffer", TM_INFINITE);
 
   while (1)
   {
@@ -134,7 +136,8 @@ void input(void* p)
     }
     rt_mutex_release(mutex);
     //rt_pipe_write(&pipe_desc, finalBuffer, NB_CHANNELS*NB_DATA*2 * sizeof(double), P_NORMAL);
-    rt_buffer_write(&bf, finalBuffer, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
+    rt_buffer_write(&bufferRecorder, finalBuffer, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
+    rt_buffer_write(&bufferDisplay, finalBuffer, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
   }
 }
 
@@ -142,18 +145,18 @@ void recorder(void* p)
 {
   ofstream ofs ("/tmp/Eye", std::ofstream::out);
 
-  RT_BUFFER bf;
+  RT_BUFFER bufferRecorder;
   Recorder* rec = (Recorder*) p;
 
-  rt_buffer_bind(&bf, "analogy_acquisition_buffer", TM_INFINITE);
+  rt_buffer_bind(&bufferRecorder, "recorder_buffer", TM_INFINITE);
   while (1)
   {
-    rt_buffer_read(&bf, recorderBuffer, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
+    rt_buffer_read(&bufferRecorder, recorderArray, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
     if (rec)
       {
 	for (int i = 0; i < NB_CHANNELS*NB_DATA*2; ++i)
 	  {
-	    ofs << recorderBuffer[i] << " " << recorderBuffer[i + 1] << "\n";
+	    ofs << recorderArray[i] << " " << recorderArray[i + 1] << "\n";
 	  }
       }
   }
@@ -166,7 +169,8 @@ XenoDriver::_launch()
   mlockall(MCL_CURRENT|MCL_FUTURE);
 
   _mutex = new RT_MUTEX;
-  _buffer = new RT_BUFFER;
+  _recorderBuffer = new RT_BUFFER;
+  _displayBuffer = new RT_BUFFER;
   rt_mutex_create(_mutex, "driver_mutex");
 
   // rt_alarm_t  	handler_acquire;
@@ -177,7 +181,8 @@ XenoDriver::_launch()
     
 
   //rt_pipe_create(&pipe_desc, NULL, 0, 12000);
-  rt_buffer_create(_buffer, "analogy_acquisition_buffer", 12000, 0);
+  rt_buffer_create(_recorderBuffer, "recorder_buffer", 12000, 0);
+  rt_buffer_create(_displayBuffer, "display_buffer", 12000, 0);
 
   if (_initNidaqCard())
     printf("nidaq initialization : OK\n");
@@ -222,10 +227,14 @@ XenoDriver::React2input()
 void
 XenoDriver::AnalogIn(datas& data)
 {
+  RT_BUFFER bufferRecorder;
+  rt_buffer_bind(&bufferRecorder, "recorder_buffer", TM_INFINITE);
   unsigned int i;
+  size_t size;
 
   rt_mutex_acquire(_mutex, TM_INFINITE);
-  for (i = 0; i < data.size(); ++i)
+  size = rt_buffer_read(&bufferRecorder, recorderArray, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
+  for (i = 0; size && (i < data.size()); ++i)
   {
     data[i].volt = _analogData[2 * i];
     data[i].timing = _analogData[2 * i + 1];

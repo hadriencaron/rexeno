@@ -10,7 +10,7 @@ Trial::Trial(TrialInfo& ti)
     _name(ti.name)
 {
   _logged = false;
-  _data.resize(8);
+  _data.resize(8 * 20); // 8 channels x 20 samples (20 > 16.666)
   vector<ShapeInfo>::iterator it;
   for (it = ti.shapes.begin(); it != ti.shapes.end(); ++it)
   {
