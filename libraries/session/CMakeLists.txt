@@ -13,6 +13,9 @@ link_directories(${DIR3PARTY}/opengl/lib)
 # gl-mesa
 include_directories(${DIR3PARTY}/gl-mesa/include)
 link_directories(${DIR3PARTY}/gl-mesa/lib)
+# xcb-glx0
+include_directories(${DIR3PARTY}/xcb-glx0/include)
+link_directories(${DIR3PARTY}/xcb-glx0/lib)
 
 
 if(XENO STREQUAL "ON")

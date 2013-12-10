@@ -15,6 +15,10 @@ if(NOT DIR3PARTY)
   set(DIR3PARTY "${PROJECT_SOURCE_DIR}/../3rdParty/linux-ububuntu-12-04-noxeno/target")
 endif()
 
+# xcb-glx0
+include_directories(${DIR3PARTY}/xcb-glx0/include)
+link_directories(${DIR3PARTY}/xcb-glx0/lib)
+
 # boost
 include_directories(${DIR3PARTY}/boost/include)
 link_directories(${DIR3PARTY}/boost/lib)
