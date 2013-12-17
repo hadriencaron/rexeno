@@ -253,26 +253,31 @@ Window::React2input(Status& s,
                     int n,
                     ms displayTime)
 {
-  datas::const_iterator it;
-  double x = ds[0].volt;
-  double y = ds[1].volt;
+  datas::const_iterator datasIt;
+  channel::const_iterator channelIt;
 
-  for (it = ds.begin(); it != ds.end(); ++it)
+  for (datasIt = ds.begin(); datasIt != ds.end(); ++datasIt)
   {
-    if (isIn(x, y))
+    for (channelIt = datasIt->begin(); channelIt != datasIt->end(); ++channelIt)
     {
-      if (_startValidationFrame == -1)
+      double x = channelIt->volt;
+      double y = channelIt->volt;
+
+      if (isIn(x, y))
       {
-        if (n - _startValidationFrame > _validationNbFrame->value)
-          // s[_type] is set by constructor and depends of the
-          // window type
-          s[_type] = true;
+        if (_startValidationFrame == -1)
+        {
+          if (n - _startValidationFrame > _validationNbFrame->value)
+            // s[_type] is set by constructor and depends of the
+            // window type
+            s[_type] = true;
+        }
+        else
+          _startValidationFrame = n;
       }
       else
-        _startValidationFrame = n;
+        _startValidationFrame = -1;
     }
-    else
-      _startValidationFrame = -1;
   }
 
   Shape::React2input(s, ds, n, displayTime);

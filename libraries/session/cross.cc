@@ -98,8 +98,13 @@ Cross::React2input(Status& s,
                    int frameId,
                    ms)
 {
-  _x->value = ds[0].volt;
-  _y->value = - ds[1].volt;
+  datas::iterator it;
+
+  for (it = ds.begin(); it != ds.end(); ++it)
+  {
+    _x->value = (*it)[0].volt;
+    _y->value = - (*it)[1].volt;
+  }
 }
 
 

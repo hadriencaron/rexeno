@@ -232,14 +232,14 @@ XenoDriver::AnalogIn(datas& data)
   unsigned int i;
   size_t size;
 
-  rt_mutex_acquire(_mutex, TM_INFINITE);
+  // rt_mutex_acquire(_mutex, TM_INFINITE);
   size = rt_buffer_read(&bufferRecorder, recorderArray, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
   for (i = 0; size && (i < data.size()); ++i)
   {
     data[i].volt = _analogData[2 * i];
     data[i].timing = _analogData[2 * i + 1];
   }
-  rt_mutex_release(_mutex);
+  // rt_mutex_release(_mutex);
   _calibration->adjustPoint(data);
 }
 

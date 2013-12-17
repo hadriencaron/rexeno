@@ -10,8 +10,13 @@ KeyboardCalibration::KeyboardCalibration()
 void
 KeyboardCalibration::adjustPoint(datas& in)
 {
-  in[0].volt = (*_m)(0);
-  in[1].volt = (*_m)(1);
+  datas::iterator it;
+
+  for (it = in.begin(); it != in.end(); ++it)
+  {
+    (*it)[0].volt = (*_m)(0);
+    (*it)[1].volt = (*_m)(1);
+  }
 }
 
 void

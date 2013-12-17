@@ -44,16 +44,9 @@ Once the rexeno project installed, you can have access to several tools to creat
 Inside the conf trial you can adjust how verbose the logging
 file will be by attributing an integer value to the traceLevel variable.
 
-10 - Debug mode : log is also sent to cout
-9 - Everything : 
-  * Each and every displaying is saved (if a square is displayed on 3 consecutive frames,
-                                       then it is recorded 3 times)
-  * Every shape constructor is logged
-8 - Each and every displaying is saved (if a square is displayed on 3 consecutive frames,
-                                       then it is recorded 3 times)
-7 - Only subject-visible shapes are recorder.
-0 - Empty Log
-
+0 : log nothing
+1 : log important information, errors, etc
+2 : log EVERYTHING and every input/output, shapes size, etc
 == Code ==
 
 = Conventions =

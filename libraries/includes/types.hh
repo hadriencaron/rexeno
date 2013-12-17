@@ -17,11 +17,14 @@ struct Element
     volt = 0;
     timing = 0;
   }
+  ~Element() {}
 
   double volt;
   ms timing;
 };
 
-typedef std::vector<Element> datas;
+typedef std::vector<Element> channel;
+typedef std::vector<channel> datas;
 
-#endif
+
+#endif /* TYPES_HH_ */
