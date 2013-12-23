@@ -30,6 +30,10 @@ link_directories(${DIR3PARTY}/opengl/lib)
 include_directories(${DIR3PARTY}/gl-mesa/include)
 link_directories(${DIR3PARTY}/gl-mesa/lib)
 
+# gl-mesa
+include_directories(${DIR3PARTY}/x11/include)
+link_directories(${DIR3PARTY}/x11/lib)
+
 include_directories ("${PROJECT_SOURCE_DIR}/session")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/recorder")
