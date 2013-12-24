@@ -36,7 +36,7 @@ message(${DIR3PARTY})
 link_directories(${DIR3PARTY}/lib)
 link_libraries (GL)
 
-link_libraries (libglut.a libX11.a dl xcb)
+link_libraries (${DIR3PARTY}/target/opengl/lib/libglut.a libX11.a dl xcb)
 link_libraries (boost_program_options)
 
 if (STATIC STREQUAL "ON")

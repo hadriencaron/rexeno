@@ -1,5 +1,6 @@
 link_directories(${DIR3PARTY})
-link_libraries (glut)
+#link_libraries (glut)
+link_libraries (libglut.a libX11.a dl xcb)
 link_libraries (boost_program_options)
 
 #include_directories("/usr/include/qt4")
