@@ -26,6 +26,7 @@ link_directories(${DIR3PARTY}/boost/lib)
 # GL
 include_directories(${DIR3PARTY}/opengl/include)
 link_directories(${DIR3PARTY}/opengl/lib)
+
 # gl-mesa
 include_directories(${DIR3PARTY}/gl-mesa/include)
 link_directories(${DIR3PARTY}/gl-mesa/lib)

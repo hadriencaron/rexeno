@@ -5,6 +5,10 @@
  * 
  * @brief  Implementation of the driver for a project
  * where the input comes from a datafile
+ * This uses non-real time functions so it works on a
+ * regular non-xenomai computer. But we should not expect
+ * exact replication of the results of a xenomai system.
+ * Exact behaviour replication will be done later by another driver.
  * 
  */
 
@@ -21,9 +25,19 @@ FileDriver::FileDriver(std::string filename)
 }
 
 void
-FileDriver::AnalogIn(datas& ds)
+FileDriver::AnalogIn(datas& data)
 {
+  unsigned int i;
+  while (!infile.eof())
+  {
+    getline(infile, sLine);
+    cout << sLine << endl;
+  }
 
-
+  for (i = 0; size && (i < data.size()); ++i)
+  {
+    data[i].volt = _analogData[2 * i];
+    data[i].timing = _analogData[2 * i + 1];
+  }
 
 }
