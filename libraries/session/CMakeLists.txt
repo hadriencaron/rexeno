@@ -35,10 +35,10 @@ set(CMAKE_CXX_FLAGS_INIT "-Wall --warn-uninitialized --warn-unused-vars '-std=c+
 
 message(${DIR3PARTY})
 
-link_directories(${DIR3PARTY}/lib)
+# link_directories(${DIR3PARTY}/lib)
+link_libraries (${DIR3PARTY}/opengl/lib/libglut.a libX11.a dl xcb ${DIR3PARTY}/xcb-glx0/lib/libxcb-glx.a)
 link_libraries (GL)
 
-link_libraries (${DIR3PARTY}/target/opengl/lib/libglut.a libX11.a dl xcb)
 link_libraries (boost_program_options)
 
 if (STATIC STREQUAL "ON")
