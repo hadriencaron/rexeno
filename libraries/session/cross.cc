@@ -94,17 +94,20 @@ Cross::DisplayMonitor()
  */
 void
 Cross::React2input(Status& s,
-                   datas& ds,
+                   const datas& ds,
                    int frameId,
                    ms)
 {
   datas::iterator it;
 
-  for (it = ds.begin(); it != ds.end(); ++it)
-  {
-    _x->value = (*it)[0].volt;
-    _y->value = - (*it)[1].volt;
-  }
+  _x->value = ds[0][0].volt;
+  _y->value = -ds[1][0].volt;
+  PDEBUG("Cross::React2input", " x " << _x->value << " y " << _y->value);
+  // for (it = ds.begin(); it != ds.end(); ++it)
+  // {
+  //   _x->value = (*ds.begin())[0].volt;
+  //   _y->value = - (*ds.begin())[1].volt;
+  // }
 }
 
 

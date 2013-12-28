@@ -17,6 +17,8 @@ link_directories(${DIR3PARTY}/gl-mesa/lib)
 include_directories(${DIR3PARTY}/xcb-glx0/include)
 link_directories(${DIR3PARTY}/xcb-glx0/lib)
 
+add_definitions(-DDEBUG)
+
 
 if(XENO STREQUAL "ON")
   add_definitions(-DXENO)

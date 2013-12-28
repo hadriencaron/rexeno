@@ -256,29 +256,26 @@ Window::React2input(Status& s,
   datas::const_iterator datasIt;
   channel::const_iterator channelIt;
 
-  for (datasIt = ds.begin(); datasIt != ds.end(); ++datasIt)
-  {
-    for (channelIt = datasIt->begin(); channelIt != datasIt->end(); ++channelIt)
-    {
-      double x = channelIt->volt;
-      double y = channelIt->volt;
+  double x = ds[0][0].volt;
+  double y = ds[1][0].volt;
 
-      if (isIn(x, y))
+  if (isIn(x, y))
+  {
+    if (_startValidationFrame == -1)
+    {
+      if (n - _startValidationFrame > _validationNbFrame->value)
+        // s[_type] is set by constructor and depends of the
+        // window type
       {
-        if (_startValidationFrame == -1)
-        {
-          if (n - _startValidationFrame > _validationNbFrame->value)
-            // s[_type] is set by constructor and depends of the
-            // window type
-            s[_type] = true;
-        }
-        else
-          _startValidationFrame = n;
+        s[_type] = true;
+        PDEBUG("Window::React2input", " " << name() << " activated");
       }
-      else
-        _startValidationFrame = -1;
     }
+    else
+      _startValidationFrame = n;
   }
+  else
+    _startValidationFrame = -1;
 
   Shape::React2input(s, ds, n, displayTime);
 }

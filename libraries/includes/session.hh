@@ -76,6 +76,12 @@ private:
   double _offsetVsync; // offset between 0 and 16.666 (if 60Hz)
 };
 
+#ifdef DEBUG
+# define PDEBUG(fmt, args) cerr << fmt << args << "\n";
+#else
+# define PDEBUG(fmt, args) /* not debugging: nothing */
+#endif
+
 
 #endif
 
