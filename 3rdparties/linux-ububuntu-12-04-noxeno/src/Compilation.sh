@@ -29,9 +29,24 @@
 # ./b2 install --prefix=
 
 # xcb:
+# apt-get install libxcb-composite0
+# apt-get install xtrans-dev
+# apt-get install libxext-dev
 # first install xcb-proto
+# apt-get source x11proto-code-dev
+# apt-get install libpthread-stubs0-dev
+# apt-get install python-xcbgen
+# apt-get install libglu1-mesa-dev
+# apt-get install libx11-dev
+# apt-get install x11proto-gl-dev
 # then export PKG_CONFIG_PATH=../../../target/xcb-proto/lib/pkgconfig
-
+# apt-get source libxcb-glx0
+# sudo apt-get install x11proto-dri2-dev
+# sudo apt-get install libxxf86vm-dev
+# sudo apt-get install libxdamage-dev
+# sudo apt-get install xutils-dev
+# libxt-dev: /usr/include/X11/IntrinsicP.h
+# tendra: /usr/lib/TenDRA/lib/include/x5/t.api/X11/IntrinsicP.h
 ## properly installed
 # libffi
 # xau
