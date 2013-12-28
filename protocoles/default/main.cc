@@ -1,5 +1,5 @@
 #include <iostream>
-#include <GL/glut.h>
+// #include <GL/glut.h>
 
 #include <rexeno.hh>
 //#include <rexeno/dummyDriver.hh>
