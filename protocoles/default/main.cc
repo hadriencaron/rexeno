@@ -1,7 +1,7 @@
 #include <iostream>
 #include <GL/glut.h>
 
-#include <rexeno/session.hh>
+#include <rexeno.hh>
 //#include <rexeno/dummyDriver.hh>
 
 using namespace std;
@@ -61,7 +61,7 @@ int	main(int argc,
   configuration::SessionInfo conf;
   //bool r = configuration::CreateConfiguration("../../protocoles/DevTests/conf", conf);
   bool r = configuration::CreateConfiguration("definition", conf);
-  assert(r);
+  //assert(r);
   Setup* setup = new Setup("~/.rexeno");
   Session* session = Session::getInstance(conf);
   // Driver* d = new DummyDriver();

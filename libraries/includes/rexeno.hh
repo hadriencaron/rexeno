@@ -3,6 +3,7 @@
 
 # include "session.hh"
 # include "parser.hh"
-
+# include "variable.hh"
+# include "setup.hh"
 
 #endif
