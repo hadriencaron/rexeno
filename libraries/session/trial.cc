@@ -10,7 +10,15 @@ Trial::Trial(TrialInfo& ti)
     _name(ti.name)
 {
   _logged = false;
-  _data.resize(8 * 20); // 8 channels x 20 samples (20 > 16.666)
+  // _data.resize(8 * 20); // 8 channels x 20 samples (20 > 16.666)
+
+  _data.resize(8); // 8 channels
+  vector<channel>::iterator dataIt;
+  for (dataIt = _data.begin(); dataIt != _data.end(); ++dataIt)
+  {
+    (*dataIt) = vector<Element>(20); // 20 samples per channel
+  }
+
   vector<ShapeInfo>::iterator it;
   for (it = ti.shapes.begin(); it != ti.shapes.end(); ++it)
   {
@@ -88,6 +96,7 @@ Trial::displayFrame(Driver* driver)
   glutSwapBuffers();
   glutPostRedisplay();
   glClear(GL_COLOR_BUFFER_BIT);
+  PDEBUG("Trial::displayFrame", " displayed frame " << _curFrameId);
 
   _sendTtls(driver);
   _status[RUNNING] = false;
@@ -105,6 +114,7 @@ Trial::displayFrame(Driver* driver)
   {
     Shape *curShape = *it;
 
+    PDEBUG("Trial::displayFrame ", curShape->name() << " f " << curShape->frameStart() << " t " << curShape->frameEnd() << " d " << curShape->Displayable(_curFrameId));
     if (curShape->Displayable(_curFrameId))
       curShape->React2input(_status, _data, _curFrameId, driver->GetTime());
   }

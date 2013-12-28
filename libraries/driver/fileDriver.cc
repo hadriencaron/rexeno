@@ -27,17 +27,20 @@ FileDriver::FileDriver(std::string filename)
 void
 FileDriver::AnalogIn(datas& data)
 {
-  unsigned int i;
+  unsigned int i = 0;
   while (!infile.eof())
   {
-    getline(infile, sLine);
-    cout << sLine << endl;
+    infile >> data[i].timing;
+    infile >> data[i].volt;
+    ++i;
+    // getline(infile, sLine);
+    // cout << sLine << endl;
   }
 
-  for (i = 0; size && (i < data.size()); ++i)
-  {
-    data[i].volt = _analogData[2 * i];
-    data[i].timing = _analogData[2 * i + 1];
-  }
+  // for (i = 0; size && (i < data.size()); ++i)
+  // {
+  //   data[i].volt = _analogData[2 * i];
+  //   data[i].timing = _analogData[2 * i + 1];
+  // }
 
 }
