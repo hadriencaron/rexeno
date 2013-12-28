@@ -247,6 +247,7 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
   _type = NEUTRAL;
 }
 
+// TODO x and y should iterate over their 20 channel values !
 void
 Window::React2input(Status& s,
                     const datas& ds,
