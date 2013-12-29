@@ -4,10 +4,17 @@ project (Rexeno)
 OPTION(XENO "Build Library with super cool option" ON)
 OPTION(STATIC "Build Library with super cool option" OFF)
 
-set(CMAKE_DEBUG_TYPE=DEBUG)
+set(CMAKE_DEBUG_TYPE="DEBUG")
+# set(DEBUG "1")
+
+if (DEBUG STREQUAL "1")
+  message("DEBUG MODE")
+  add_definitions(-DDEBUG)
+  set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -g")
+endif()
+
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -g")
 include_directories ("${PROJECT_SOURCE_DIR}/configuration")
 
 ## Set 3rdParty root
@@ -39,7 +46,7 @@ include_directories ("${PROJECT_SOURCE_DIR}/session")
 include_directories ("${PROJECT_SOURCE_DIR}/includes")
 include_directories ("${PROJECT_SOURCE_DIR}/recorder")
 
-link_libraries (${DIR3PARTY}/opengl/lib/libglut.a libX11.a libX11-xcb.a dl xcb ${DIR3PARTY}/xcb-glx0/lib/libxcb-glx.a )
+link_libraries (glut libX11.a libX11-xcb.a dl xcb xcb-glx )
 
 add_subdirectory (configuration)
 add_subdirectory (session)
@@ -52,7 +59,7 @@ if (GUI)
   add_subdirectory (interface)
   add_subdirectory (CreateSession)
 endif()
-add_executable(Rexeno main.cc ${DIR3PARTY}/xcb-glx0/lib/libxcb-glx.a ${DIR3PARTY}/xcb-glx0/lib/libxcb.a ${DIR3PARTY}/x11/lib/libX11.a ${DIR3PARTY}/opengl/lib/libglut.a ${DIR3PARTY}/xcb-glx0/lib/libxcb-glx.a ${DIR3PARTY}/x11/lib/libX11-xcb.a )
+add_executable(Rexeno main.cc )
 target_link_libraries (Rexeno configuration)
 target_link_libraries (Rexeno session)
 target_link_libraries (Rexeno driver)
