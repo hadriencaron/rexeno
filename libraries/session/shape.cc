@@ -55,6 +55,7 @@ Shape::Displayable(int frameId)
 
   res &= (frameId >= frameStart()) || (frameStart() == -1);
   res &= (frameId <= frameEnd()) || (frameEnd() == -1);
+  PDEBUG("Shape::Displayable ", "shape " << name() << " is displayable: " << res << " start " << frameStart() << " end " << frameEnd());
   return res;
 }
 

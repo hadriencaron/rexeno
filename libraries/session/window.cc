@@ -281,6 +281,7 @@ Window::React2input(Status& s,
   }
   else
   {
+    PDEBUG("Window::React2input", " outside " << name());
     if (_outsideValue)
       s[_outsideValue] = true;
     _startValidationFrame = -1;

@@ -16,7 +16,8 @@ void		GO_Target1(VariableManager& TM)
 
   
   fixation_duration->value = rand() % 30 + 30; // Un nombre random entre 30 et 60
-  end_fixation->value = fixation_duration->value;
+  //end_fixation->value = fixation_duration->value;
+  end_fixation->value = 1000;
   end_target->value = end_fixation->value + 60;
 }
 
@@ -29,7 +30,8 @@ void		GO_Target2(VariableManager& TM)
 
   
   fixation_duration->value = rand() % 30 + 30; // Un nombre random entre 30 et 60
-  end_fixation->value =  fixation_duration->value;
+  //end_fixation->value = fixation_duration->value;
+  end_fixation->value = 1000;
   end_target->value = end_fixation->value + 60;
 }
 
@@ -44,8 +46,8 @@ void		InterTrial_CTM(std::string &name,
   //     std::cout << "Send Pulse" << std::endl;
   //   }
 
- // GO_Target1(TM);
- // GO_Target2(TM);
+ GO_Target1(TM);
+ GO_Target2(TM);
   //Variable* start = TM.getVariable("Start_Correct");
   Variable* end = TM.getVariable("End_Target");
   //start->value = 1160;

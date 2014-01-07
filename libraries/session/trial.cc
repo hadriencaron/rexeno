@@ -99,7 +99,7 @@ Trial::displayFrame(Driver* driver)
   PDEBUG("Trial::displayFrame", " displayed frame " << _curFrameId);
 
   _sendTtls(driver);
-  // _status[RUNNING] = false;
+  //_status[RUNNING] = false;
   driver->React2input();
   driver->AnalogIn(_data);
   ms displayTime = driver->GetTime();
