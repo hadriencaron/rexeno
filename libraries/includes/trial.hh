@@ -18,6 +18,8 @@ class Shape;
 class Square;
 class Driver;
 
+typedef vector<Shape*> Shapes;
+
 # define RUNNING 0
 # define PAUSE 1
 # define WRONG_REDO 2
@@ -55,7 +57,7 @@ private:
   int _curFrameId;
   int _nbFrames;
   Status _status;
-  vector<Shape*> _shapes;
+  Shapes _shapes;
   string& _name;
   int _argc;
   char **_argv;

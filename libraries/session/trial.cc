@@ -99,7 +99,7 @@ Trial::displayFrame(Driver* driver)
   PDEBUG("Trial::displayFrame", " displayed frame " << _curFrameId);
 
   _sendTtls(driver);
-  _status[RUNNING] = false;
+  // _status[RUNNING] = false;
   driver->React2input();
   driver->AnalogIn(_data);
   ms displayTime = driver->GetTime();
@@ -136,7 +136,6 @@ Trial::_sendTtls(Driver* d)
 int
 Trial::_react2status()
 {
-  PDEBUG("Trial::_react2status ", "start")
   if (_status[CORRECT] == true)
   {
     PDEBUG("Trial::_react2status ", "CORRECT");
@@ -216,6 +215,11 @@ Trial::Reset()
   {
     it->second = false;
   }
+  // Shapes::iterator shapesIterator;
+  // for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
+  // {
+  //   (*shapesIterator)->Reset();
+  // }
 }
 
 bool

@@ -63,6 +63,7 @@ public:
   uint ttl() {return _ttl;}
   bool Displayable(int frameId);
   bool SubjectVisible(){return _subjectVisible;}
+  virtual void Reset() {}
 
 protected:
   // Use these functions for opengl's drawing scale. 

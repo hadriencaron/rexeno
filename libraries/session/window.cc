@@ -167,6 +167,7 @@ CorrectWindow::CorrectWindow(const ShapeInfo& si,
   _father = father;
   _startValidationFrame = -1;
   _type = CORRECT;
+  _outsideValue = 0;
 }
 
 WrongWindow::WrongWindow(const ShapeInfo& si,
@@ -192,6 +193,7 @@ WrongWindow::WrongWindow(const ShapeInfo& si,
   _father = father;
   _startValidationFrame = -1;
   _type = WRONG_NEXT;
+  _outsideValue = 0;
 }
 
 FixationWindow::FixationWindow(const ShapeInfo& si,
@@ -217,6 +219,7 @@ FixationWindow::FixationWindow(const ShapeInfo& si,
   _father = father;
   _startValidationFrame = -1;
   _type = WAITING_FIXATION;
+  _outsideValue = PAUSE;
 }
 
 // Small design flaw here : neutral window
@@ -245,6 +248,7 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
   _father = father;
   _startValidationFrame = -1;
   _type = NEUTRAL;
+  _outsideValue = 0;
 }
 
 // TODO x and y should iterate over their 20 channel values !
@@ -276,7 +280,17 @@ Window::React2input(Status& s,
       _startValidationFrame = n;
   }
   else
+  {
+    if (_outsideValue)
+      s[_outsideValue] = true;
     _startValidationFrame = -1;
+  }
 
   Shape::React2input(s, ds, n, displayTime);
 }
+
+// void
+// Window::Reset()
+// {
+//   _status[_type] = false;
+// }

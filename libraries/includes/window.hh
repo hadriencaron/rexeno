@@ -20,11 +20,13 @@ public:
                    const datas&,
                    int,
                    ms);
+  // void Reset();
 protected:
   double _thickness;
   Variable* _validationNbFrame;
   int _startValidationFrame;
   int _type;
+  int _outsideValue;
 };
 
 class CorrectWindow : public Window
