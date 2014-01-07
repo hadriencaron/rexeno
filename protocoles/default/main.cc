@@ -1,6 +1,6 @@
 #include <iostream>
 // #include <GL/glut.h>
-
+#include <stdlib.h>     /* srand, rand */
 #include <rexeno.hh>
 //#include <rexeno/dummyDriver.hh>
 
@@ -9,8 +9,8 @@ using namespace std;
 
 void		GO_Target1(VariableManager& TM)
 {
-  // Variable	*fixation_duration = TM->GetVariable("GO_TARGET1", "Fixation_Duration");
-  Variable	*fixation_duration = new Variable(0);
+  Variable	*fixation_duration = TM.getVariable("Fixation_Duration");
+  // Variable	*fixation_duration = new Variable(0);
   Variable	*end_fixation = TM.getVariable("End_Fixation");
   Variable	*end_target = TM.getVariable("End_Target");
 
@@ -22,8 +22,8 @@ void		GO_Target1(VariableManager& TM)
 
 void		GO_Target2(VariableManager& TM)
 {
-  // Variable	*fixation_duration = TM->GetVariable("GO_TARGET2", "Fixation_Duration");
-  Variable	*fixation_duration = new Variable(0);
+  Variable	*fixation_duration = TM.getVariable("Fixation_Duration");
+  // Variable	*fixation_duration = new Variable(0);
   Variable	*end_fixation = TM.getVariable("End_Fixation");
   Variable	*end_target = TM.getVariable("End_Target");
 
@@ -61,9 +61,10 @@ int	main(int argc,
   configuration::SessionInfo conf;
   //bool r = configuration::CreateConfiguration("../../protocoles/DevTests/conf", conf);
   bool r = configuration::CreateConfiguration("definition", conf);
+  Order o("order");
   //assert(r);
   Setup* setup = new Setup("~/.rexeno");
-  Session* session = Session::getInstance(conf);
+  Session* session = Session::getInstance(conf, o);
   // Driver* d = new DummyDriver();
 
   session->setup = setup;

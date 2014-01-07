@@ -5,5 +5,6 @@
 # include "parser.hh"
 # include "variable.hh"
 # include "setup.hh"
+# include "order_parser.hh"
 
 #endif

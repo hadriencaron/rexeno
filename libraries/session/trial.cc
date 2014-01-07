@@ -136,9 +136,10 @@ Trial::_sendTtls(Driver* d)
 int
 Trial::_react2status()
 {
-
+  PDEBUG("Trial::_react2status ", "start")
   if (_status[CORRECT] == true)
   {
+    PDEBUG("Trial::_react2status ", "CORRECT");
     return (CORRECT);
   }
 
@@ -146,29 +147,36 @@ Trial::_react2status()
   {
     if (_status[WRONG_NEXT] == true)
     {
+      PDEBUG("Trial::_react2status ", "WRONG_NEXT");
       return (WRONG_NEXT);
     }
 
     if (_status[WRONG_REDO] == true)
     {
+      PDEBUG("Trial::_react2status ", "WRONG_REDO");
       return (WRONG_REDO);
     }
   }
   if (_status[PAUSE] == true)
   {
+    PDEBUG("Trial::_react2status ", "PAUSE");
     return (PAUSE);
   }
 
   if (_status[WAITING_FIXATION] == true)
   {
+    _curFrameId++;
+    PDEBUG("Trial::_react2status ", "WAITING_FIXATION");
     return (RUNNING);
   }
 
   if (_status[RUNNING] == true)
   {
     _curFrameId++;
+    PDEBUG("Trial::_react2status ", "RUNNING");
     return (RUNNING);
   }
+  PDEBUG("Trial::_react2status ", "bug here");
   return (WRONG_NEXT); // should not get here (this line is to avoid a compiler warning)
 }
 
@@ -199,9 +207,15 @@ Trial::atStart()
 }
 
 void
-Trial::reset()
+Trial::Reset()
 {
+  PDEBUG("Trial::Reset ", "start")
   _curFrameId = 0;
+  Status::iterator it;
+  for (it = _status.begin(); it != _status.end(); ++it)
+  {
+    it->second = false;
+  }
 }
 
 bool

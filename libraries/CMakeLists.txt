@@ -94,5 +94,5 @@ add_custom_command(TARGET Rexeno POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${PROJECT_SOURCE_DIR}/configFiles/"
         "~/.rexeno")
-install(FILES includes/rexeno.hh includes/types.hh includes/variable.hh includes/setup.hh
+install(FILES includes/rexeno.hh includes/types.hh includes/variable.hh includes/setup.hh includes/order_parser.hh
         DESTINATION /usr/include)

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <GL/glut.h>
 
+#include "order_parser.hh"
 #include "trial.hh"
 #include "setup.hh"
 
@@ -63,9 +64,11 @@ int	main(int argc,
 {
   configuration::SessionInfo conf;
   bool r = configuration::CreateConfiguration("../testFiles/session/definition", conf);
+  string t(string("../testFiles/session/order"));
+  Order o = Order(t);
   assert(r);
   Setup* setup = new Setup("~/.rexeno");
-  Session* session = Session::getInstance(conf);
+  Session* session = Session::getInstance(conf, o);
   // Driver* d = new DummyDriver();
 
   session->setup = setup;

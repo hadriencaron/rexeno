@@ -4,7 +4,7 @@
 #include "setup.hh"
 
 #include "driver.hh"
-
+#include "order_parser.hh"
 #include <GL/glut.h>
 
 using namespace configuration;
@@ -19,8 +19,10 @@ Session* Session::_instance = NULL;
  * 
  * @param s 
  */
-Session::Session(configuration::SessionInfo &s)
-  : _R(0),
+Session::Session(configuration::SessionInfo& s,
+                 Order& o)
+  : _trialsOrder(o.getOrder()),
+    _R(0),
     _G(0),
     _B(0)
 {
@@ -28,12 +30,11 @@ Session::Session(configuration::SessionInfo &s)
   vector<TrialInfo>::iterator it;
 
   for (it = s.trials.begin(); it != s.trials.end(); ++it)
-    {
-      t = new Trial(*it);
-      _trials.push_back(t);
-    }
-  _currentTrial = _trials.begin();
-
+  {
+    t = new Trial(*it);
+    _trialsDefinitions.push_back(t);
+  }
+  _currentTrial = _trialsOrder.begin();
   beforeTrial = NULL;
   afterTrial = NULL;
   _inputData.resize(8);
@@ -50,6 +51,9 @@ Session::Session(configuration::SessionInfo &s)
   _initialized = false;
   _nbFrame4init = 120;
   _nbInitFrames = 0;
+#ifdef DEBUG
+  __debug_FrameNumber = 0;
+#endif
 
   recorder->Save(s.name, "general.txt");
   recorder->Save(s.traceLevel, "general.txt");
@@ -69,7 +73,7 @@ Session::Session(configuration::SessionInfo &s)
 Session::~Session()
 {
   vector<Trial*>::iterator it;
-  for (it = _trials.begin(); it != _trials.end(); ++it)
+  for (it = _trialsDefinitions.begin(); it != _trialsDefinitions.end(); ++it)
   {
     delete (*it);
   }
@@ -182,9 +186,15 @@ Session::run(int argc,
 void
 Session::displayFrame()
 {
-  if (_currentTrial != _trials.end())
+#ifdef DEBUG
+  PDEBUG("Session::displayFrame ", __debug_FrameNumber << "/" << _trialsOrder.size() << " trials in this session");
+#endif
+
+
+  if (_currentTrial != _trialsOrder.end())
   {
-    Trial* t = *_currentTrial;
+    PDEBUG("Session::displayFrame", " trial frame ");
+    Trial* t = _trialsDefinitions[*_currentTrial];
 
     if (t->atStart() && beforeTrial)
     {
@@ -192,20 +202,28 @@ Session::displayFrame()
       t->adjustNbFrames();
     }
 
-    int b = (*_currentTrial)->displayFrame(_driver);
+    int b = t->displayFrame(_driver);
 
     if (b != RUNNING)
     {
+      PDEBUG("Session::displayFrame", " end of trial : " << t->name() << " (trial number " << *_currentTrial << " )");
       ms displayTime = _driver->GetTime();
       recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);
 
       _currentTrial++;
+      t->Reset();
+#ifdef DEBUG
+      ++__debug_FrameNumber;
+#endif
     }
   }
   else
+  {
+    PDEBUG("Session::displayTime", " regular exit")
     exit (0);
+  }
 
 }
 
@@ -229,9 +247,10 @@ Session::getInstance()
  * @return 
  */
 Session*
-Session::getInstance(configuration::SessionInfo& s)
+Session::getInstance(configuration::SessionInfo& s,
+                     Order& o)
 {
-  _instance = new Session(s);
+  _instance = new Session(s, o);
 
   return (_instance);
 }

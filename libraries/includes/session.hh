@@ -24,6 +24,7 @@ class Variable;
 class Trial;
 class Setup;
 class Recorder;
+class Order;
 
 namespace configuration
 {
@@ -39,7 +40,8 @@ class Session
 public:
   ~Session();
   static Session* getInstance();
-  static Session* getInstance(configuration::SessionInfo& s);
+  static Session* getInstance(configuration::SessionInfo& s,
+                              Order& o);
   void run(int argc,
            char** argv);
   void displayFrame();
@@ -58,14 +60,16 @@ public:
   ms getTime();
   bool initialized();
 private:
-  Session(configuration::SessionInfo& s);
+  Session(configuration::SessionInfo& s,
+          Order& o);
   void _fillData();
 
   Driver* _driver;
-  vector<Trial*> _trials;
+  vector<Trial*> _trialsDefinitions;
+  vector<int>& _trialsOrder;
   static Session* _instance;
   vector<pair<double, ms> > _inputData;
-  vector<Trial*>::iterator _currentTrial;
+  vector<int>::iterator _currentTrial;
   // Background Color :
   int _R, _G, _B;
   // Guardian Trial : in charge of
@@ -74,6 +78,10 @@ private:
   int _nbFrame4init;
   int _nbInitFrames;
   double _offsetVsync; // offset between 0 and 16.666 (if 60Hz)
+
+#ifdef DEBUG
+  int __debug_FrameNumber;
+#endif
 };
 
 #ifdef DEBUG
