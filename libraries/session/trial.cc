@@ -3,6 +3,9 @@
 #include "setup.hh"
 
 #include <boost/foreach.hpp>
+#include <iostream>
+#include <fstream>
+
 
 Trial::Trial(TrialInfo& ti)
   : _curFrameId(0),
@@ -56,10 +59,13 @@ Trial::Trial(TrialInfo& ti)
   _ttl->push_back( new TtlEvent() );
   _ttl->push_back( new TtlEvent() );
   _ttl->push_back( new TtlEvent() );
+
+  replayerLogs.open("replayerLogs");
 }
 
 Trial::~Trial()
 {
+  replayerLogs.close();
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
@@ -104,6 +110,7 @@ Trial::displayFrame(Driver* driver)
   driver->AnalogIn(_data);
   ms displayTime = driver->GetTime();
 
+  _log(_data);
   if ((_curFrameId == 0) && (!_logged))
   {
     s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");
@@ -228,3 +235,20 @@ Trial::status(int key)
   return _status[key];
 }
 
+void
+Trial::_log(datas& d)
+{
+  channel& Xs = d[0];
+  channel& Ys = d[1];
+  channel::iterator it;
+
+  for (it = Xs.begin(); it != Xs.end(); ++it)
+  {
+    replayerLogs << it->volt << " ";
+  }
+  for (it = Ys.begin(); it != Ys.end(); ++it)
+  {
+    replayerLogs << it->volt << " ";
+  }
+  replayerLogs << "\n";
+}

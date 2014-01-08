@@ -53,6 +53,7 @@ public:
 private:
   int _react2status();
   void _sendTtls(Driver* d);
+  void _log(datas&);
 
   int _curFrameId;
   int _nbFrames;
@@ -64,6 +65,7 @@ private:
   vector<TtlEvent*>* _ttl;
   datas _data;
   bool _logged;
+  ofstream replayerLogs;
 };
 
 
