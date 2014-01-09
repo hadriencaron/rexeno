@@ -39,10 +39,10 @@ BOOST_FUSION_ADAPT_STRUCT(
 BOOST_FUSION_ADAPT_STRUCT(
 			  configuration::SessionInfo,
 			  (std::string, name)
-                          (std::string, frequency)
                           (std::string, x_channel)
                           (std::string, y_channel)
                           (int, traceLevel)
+                          (std::string, coordinates)
 			  (std::vector<configuration::TrialInfo>, trials)
 			  )
 
@@ -79,13 +79,11 @@ namespace configuration
 	;
 
       session %=
-	"name="
-	>> word
-        >> -("frequency="
-             >> word)
-        >> -("x_channel=" >> word)
-        >> -("y_channel=" >> word)
-        >> -("logLevel=" >> int_)
+	"name="	>> word
+        >> "x_channel=" >> word
+        >> "y_channel=" >> word
+        >> "logLevel=" >> int_
+        >> "coodinates=" >> word
 	>> +trial
 	;
 
@@ -105,11 +103,11 @@ namespace configuration
   {
     std::ifstream in(filename, std::ios_base::in);
     if (!in)
-      {
-        std::cerr << "Error: Could not open input file: "
-		  << filename << std::endl;
-        return false;
-      }
+    {
+      std::cerr << "Error: Could not open input file: "
+                << filename << std::endl;
+      return false;
+    }
     in.unsetf(std::ios::skipws); // No white space skipping!
     std::string storage; // We will read the contents here.
     std::copy(

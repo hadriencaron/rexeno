@@ -266,6 +266,7 @@ Window::React2input(Status& s,
 
   if (isIn(x, y))
   {
+    PDEBUG("Window::React2input", " " << name() << " is in");
     if (_startValidationFrame == -1)
     {
       if (n - _startValidationFrame > _validationNbFrame->value)

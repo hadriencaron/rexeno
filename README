@@ -47,6 +47,35 @@ file will be by attributing an integer value to the traceLevel variable.
 0 : log nothing
 1 : log important information, errors, etc
 2 : log EVERYTHING and every input/output, shapes size, etc
+
+== Options ==
+
+= in ~/.rexeno configuration file =
+
+height : height of the subject's screen (cm)
+width : width of the subject's screen (cm)
+refresh : refresh rate of screens (Hz)
+distance : how far is the subject from the screen (cm)
+
+= in the definition file =
+
+name (mandatory ) : name of the protocole for this session (string)
+
+logLevel : deprecated ? (integer)
+
+x_channel : driver channel used for X (not yet functional, right now is 0) (integer)
+
+y_channel : driver channel used for X (not yet functional, right now is 1) (integer)
+
+coordonates : right now only pcent is functional
+- pcent (ie percentage of the screen)
+- cm (ie real centimenters, be careful to have set correctly height and witdth in the configuration file)
+- degrees (be careful to have set correctly height, witdth AND distance in the configuration file)
+
+= in the command line =
+
+None : we keep the command line available for use defined options
+
 == Code ==
 
 = Conventions =

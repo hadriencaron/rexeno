@@ -204,19 +204,22 @@ Session::displayFrame()
 
     int b = t->displayFrame(_driver);
 
-    if (b != RUNNING)
+    if ((b != RUNNING) && (b != PAUSE))
     {
-      PDEBUG("Session::displayFrame", " end of trial : " << t->name() << " (trial number " << *_currentTrial << " )");
+      PDEBUG("Session::displayFrame", " end of trial is : " << t->name() << " (trial number " << *_currentTrial << " )");
       ms displayTime = _driver->GetTime();
       recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);
 
-      _currentTrial++;
-      t->Reset();
+      if (b != WRONG_REDO)
+      {
+        _currentTrial++;
 #ifdef DEBUG
-      ++__debug_FrameNumber;
+        ++__debug_FrameNumber;
 #endif
+      }
+      t->Reset();
     }
   }
   else
