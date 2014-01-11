@@ -35,6 +35,11 @@ Trial::Trial(TrialInfo& ti)
       newShape = new NeutralWindow(*it, variables, this);
     if (it->name == "FixationWindow")
       newShape = new FixationWindow(*it, variables, this);
+	if (it->name == "Sphere")
+		newShape = new Sphere(*it, variables, this);
+	if (it->name == "Plan")
+		newShape = new Plan(*it, variables, this);
+
     if (newShape)
     {
       _shapes.push_back(newShape);
