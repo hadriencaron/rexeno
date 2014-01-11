@@ -41,7 +41,6 @@ BOOST_FUSION_ADAPT_STRUCT(
 			  (std::string, name)
                           (std::string, x_channel)
                           (std::string, y_channel)
-                          (int, traceLevel)
                           (std::string, coordinates)
 			  (std::vector<configuration::TrialInfo>, trials)
 			  )
@@ -82,7 +81,6 @@ namespace configuration
 	"name="	>> word
         >> "x_channel=" >> word
         >> "y_channel=" >> word
-        >> "logLevel=" >> int_
         >> "coodinates=" >> word
 	>> +trial
 	;

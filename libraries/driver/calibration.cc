@@ -10,15 +10,15 @@ KeyboardCalibration::KeyboardCalibration()
 void
 KeyboardCalibration::adjustPoint(datas& in)
 {
-  datas::iterator it;
+  channel::iterator Xs;
+  channel::iterator Ys;
 
-  in[0][0].volt = (*_m)(0);
-  in[1][0].volt = (*_m)(1);
-  // for (it = in.begin(); it != in.end(); ++it)
-  // {
-  //   (*it)[0].volt = (*_m)(0);
-  //   (*it)[1].volt = (*_m)(1);
-  // }
+  // in[0][0].volt = (*_m)(0);
+  // in[1][0].volt = (*_m)(1);
+  for (Xs = in[0].begin(); Xs != in[0].end(); ++Xs)
+    Xs->volt = (*_m)(0);
+  for (Ys = in[1].begin(); Ys != in[1].end(); ++Ys)
+    Ys->volt = (*_m)(1);
 }
 
 void

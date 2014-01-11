@@ -66,7 +66,7 @@ private:
 
   Driver* _driver;
   vector<Trial*> _trialsDefinitions;
-  vector<int>& _trialsOrder;
+  vector<int> _trialsOrder;
   static Session* _instance;
   vector<pair<double, ms> > _inputData;
   vector<int>::iterator _currentTrial;
@@ -82,6 +82,10 @@ private:
 #ifdef DEBUG
   int __debug_FrameNumber;
 #endif
+  std::string _name;
+  std::string _x_channel;
+  std::string _y_channel;
+  std::string _coordinates;
 };
 
 #ifdef DEBUG

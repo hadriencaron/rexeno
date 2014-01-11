@@ -21,11 +21,16 @@ Session* Session::_instance = NULL;
  */
 Session::Session(configuration::SessionInfo& s,
                  Order& o)
-  : _trialsOrder(o.getOrder()),
+  : 
     _R(0),
     _G(0),
-    _B(0)
+    _B(0),
+    _name(s.name),
+    _x_channel(s.x_channel),
+    _y_channel(s.y_channel),
+    _coordinates(s.coordinates)
 {
+  _trialsOrder = o.getOrder();
   Trial* t = NULL;
   vector<TrialInfo>::iterator it;
 
@@ -38,7 +43,7 @@ Session::Session(configuration::SessionInfo& s,
   beforeTrial = NULL;
   afterTrial = NULL;
   _inputData.resize(8);
-  recorder = new Recorder("/tmp/", s.traceLevel);
+  recorder = new Recorder("/tmp/", 10);
   recorder->AddFile("results.txt");
   recorder->AddFile("events.txt");
   recorder->AddFile("X.txt");
@@ -56,7 +61,6 @@ Session::Session(configuration::SessionInfo& s,
 #endif
 
   recorder->Save(s.name, "general.txt");
-  recorder->Save(s.traceLevel, "general.txt");
 
 #ifdef XENO
   _driver = new XenoDriver();

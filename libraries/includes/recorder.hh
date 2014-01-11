@@ -40,7 +40,6 @@ public:
   bool in_trial;
 private:
   std::string _folder;
-  int _traceLevel;
 };
 
 

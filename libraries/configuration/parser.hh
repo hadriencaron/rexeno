@@ -41,7 +41,6 @@ namespace configuration
     std::string x_channel;
     std::string y_channel;
     std::string coordinates;
-    int traceLevel;
     std::vector<TrialInfo> trials;
   };
 
