@@ -23,14 +23,14 @@ Use lower level command line (recommanded to understand what is going on) :
 On a Xenomai Box :
 cd /to/the/rexeno/source/folder
 mkdir build
-cmake ..
+cmake .. -DXENO=ON  -DDIR3PARTY=/path/to/rexeno/3rdparties/linux-ububuntu-12-04-[no]xeno/target
 make
 sudo make install
 
 On a regular linux box :
 cd /to/the/rexeno/source/folder
 mkdir build
-cmake .. -DXENO=OFF -DDIR3PARTY=/path/to/rexeno/3rdparties/linux-ububuntu-12-04-[no]xeno/target
+cmake .. -DXENO=OFF -DDIR3PARTY=/path/to/rexeno/3rdparties/linux-ububuntu-12-04-[no]xeno/target -DDEBUG=1
 make
 sudo make install
 
@@ -84,5 +84,13 @@ Class and Methods begin with uppercase
 Fields begin with minuscule
 
 privates : start with underscore
+
+
+* git checkout
+git clone https://github.com/hadriencaron/rexeno.git
+* git pull from github
+git pull https://hadriencaron@github.com/hadriencaron/rexeno master
+* git push
+git push https://hadriencaron@github.com/hadriencaron/rexeno master
 
 Author : Hadrien CARON

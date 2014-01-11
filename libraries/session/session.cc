@@ -28,7 +28,8 @@ Session::Session(configuration::SessionInfo& s,
     _name(s.name),
     _x_channel(s.x_channel),
     _y_channel(s.y_channel),
-    _coordinates(s.coordinates)
+    _coordinates(s.coordinates),
+    _inputMethod(s.inputMethod)
 {
   _trialsOrder = o.getOrder();
   Trial* t = NULL;

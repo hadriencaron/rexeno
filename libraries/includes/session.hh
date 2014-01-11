@@ -86,6 +86,7 @@ private:
   std::string _x_channel;
   std::string _y_channel;
   std::string _coordinates;
+  std::string _inputMethod;
 };
 
 #ifdef DEBUG

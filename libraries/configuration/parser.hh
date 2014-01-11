@@ -41,6 +41,7 @@ namespace configuration
     std::string x_channel;
     std::string y_channel;
     std::string coordinates;
+    std::string inputMethod;
     std::vector<TrialInfo> trials;
   };
 

@@ -42,6 +42,7 @@ BOOST_FUSION_ADAPT_STRUCT(
                           (std::string, x_channel)
                           (std::string, y_channel)
                           (std::string, coordinates)
+                          (std::string, inputMethod)
 			  (std::vector<configuration::TrialInfo>, trials)
 			  )
 
@@ -82,6 +83,7 @@ namespace configuration
         >> "x_channel=" >> word
         >> "y_channel=" >> word
         >> "coodinates=" >> word
+        >> "inputMethod=" >> word
 	>> +trial
 	;
 
