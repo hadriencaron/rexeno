@@ -63,6 +63,7 @@ int	main(int argc,
 	     char **argv)
 {
   configuration::SessionInfo conf;
+
   bool r = configuration::CreateConfiguration("../testFiles/session/definition", conf);
   string t(string("../testFiles/session/order"));
   Order o = Order(t);

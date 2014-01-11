@@ -16,18 +16,20 @@ using boost::lexical_cast;
 void
 Shape::Display()
 {
-  double xGL = _xGL();
-  double yGL = _yGL();
-  double demi_horizontal = _demiHorizontal();
-  double demi_vertical = _demiVertical();
 
-  glBegin(GL_QUADS);
-  glColor3ub(*_R,*_G,*_B);    
-  glVertex2d(xGL-demi_horizontal, yGL-demi_vertical);
-  glVertex2d(xGL+demi_horizontal, yGL-demi_vertical);
-  glVertex2d(xGL+demi_horizontal, yGL+demi_vertical);
-  glVertex2d(xGL-demi_horizontal, yGL+demi_vertical);
-  glEnd();
+	double xGL = _xGL();
+	double yGL = _yGL();
+	double demi_horizontal = _demiHorizontal();
+	double demi_vertical = _demiVertical();
+
+	glBegin(GL_QUADS);
+	glColor3ub(*_R,*_G,*_B);
+	glVertex3d(xGL-demi_horizontal,0.f, yGL-demi_vertical);
+	glVertex3d(xGL+demi_horizontal,0.f, yGL-demi_vertical);
+	glVertex3d(xGL+demi_horizontal,0.f, yGL+demi_vertical);
+	glVertex3d(xGL-demi_horizontal,0.f, yGL+demi_vertical);
+	glEnd();
+
 }
 
 /** 
@@ -151,7 +153,8 @@ Shape::React2input(Status& s,
                    ms displayTime)
 {
   Session* session = Session::getInstance();
-  // cout << frameId << " " << frameStart() << " " << frameEnd() << endl;
+  //cout << frameId << " " << frameStart() << " " << frameEnd() << endl;
+  //cout << "Display Time => "<< displayTime << endl;
   // Saving of shape apparition
   if ((frameId == frameStart()) && (!_logged))
   {
@@ -172,9 +175,40 @@ Shape::React2input(Status& s,
   else
     s[RUNNING] = true;
 
-  
-
   session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " display", "logger.txt");
+}
+
+void
+Shape::initTexture(int sizeX, int sizeY, char * data){
+
+	glGenTextures(1, &this->_texture[0]);// Donne numero de texture
+	glBindTexture(GL_TEXTURE_2D, this->_texture[0]); //Selectionne la texture
+
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glTexImage2D(
+		GL_TEXTURE_2D,		//Type de texture
+		0,					//Mipmap : aucun
+		3,					//Couleurs: 4
+		sizeY,					//Largeur: 2
+		sizeX,					//Hauteur: 2
+		0,					//Largeur des bords: 0
+		GL_RGB,			//RGBA format
+		GL_UNSIGNED_BYTE,	//Type des couleurs
+		data			//Adresse de l'image
+	);
+
+	if (_texture[0] != 0){
+		_istexured = true;
+	}
+	else{
+		printf("ERROR ! Impossible d'appliquer la texture!");
+		exit(0);
+	}
 }
 
 /** 
@@ -183,8 +217,12 @@ Shape::React2input(Status& s,
  */
 Shape::Shape()
 {
+  _id = 0;
+  _texture[1] = 0; // not initialized
+  _istexured = false;
   _logged = false;
   _loggedEnd = false;
   _subjectVisible = true;
 }
+
 

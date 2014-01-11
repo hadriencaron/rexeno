@@ -26,6 +26,7 @@ Cross::Cross(const ShapeInfo& si,
 {
   assert(si.attributes.size() == 9);
   _name = si.attributes[0];
+  _id = 2;
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
@@ -46,7 +47,6 @@ Cross::Cross(const ShapeInfo& si,
 void
 Cross::Display()
 {
-
 
 }
 
@@ -82,6 +82,7 @@ Cross::DisplayMonitor()
   glVertex2d(xGL+(bar_width_horizontal),yGL+demi_vertical);
   glVertex2d(xGL-(bar_width_horizontal),yGL+demi_vertical);
   glEnd();
+
 }
 
 /** 

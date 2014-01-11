@@ -54,6 +54,7 @@ public:
                            const datas&,
                            int,
                            ms);
+  virtual void initTexture(int sizeX, int sizeY, char * data);
   double x() {return _x->value;}
   double y() {return _y->value;}
   const string& name() {return _name;}
@@ -64,6 +65,8 @@ public:
   bool Displayable(int frameId);
   bool SubjectVisible(){return _subjectVisible;}
   virtual void Reset() {}
+  bool IsTextured(){ return _istexured;}
+  int id() {return _id;}
 
 protected:
   // Use these functions for opengl's drawing scale. 
@@ -71,6 +74,11 @@ protected:
   double _demiHorizontal(); // inside sub square-screen
   double _xGL(); // inside sub square-screen
   double _yGL(); // inside sub square-screen
+
+  int _id;
+
+  GLuint _texture[1];
+  GLUquadric* _params;
 
   string _name;
   Variable* _frameStart;
@@ -84,9 +92,11 @@ protected:
   Variable* _B;
   uint _ttl;
   Trial* _father;
+
   bool _logged;
   bool _loggedEnd;
   bool _subjectVisible;
+  bool _istexured;
 };
 
 #endif

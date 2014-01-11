@@ -72,6 +72,7 @@ Session::Session(configuration::SessionInfo& s,
  */
 Session::~Session()
 {
+  printf("Delete session!");
   vector<Trial*>::iterator it;
   for (it = _trialsDefinitions.begin(); it != _trialsDefinitions.end(); ++it)
   {
@@ -130,6 +131,7 @@ Session::displayHeader()
   }
   else
   {
+
     displayFrame();
   }
 }
@@ -150,6 +152,56 @@ void processNormalKeys(unsigned char key, int x, int y)
     }
 }
 
+/**
+ * Reshape the window's size
+ */
+void
+reshape(int width, int height){
+	if (height==0){
+		height=1;
+	}
+
+	glViewport(0,0,width, height); //Taille de la zone de sortie
+	glMatrixMode(GL_PROJECTION); // Charge la matrice de données GL_PROJECTION = Forme
+	glLoadIdentity(); // Reset la matrice
+	gluPerspective(90, float(width/height), 0.1f, 150.0f); // Angle de la perspective, largeur de celle-ci et zone de clipping
+	glMatrixMode(GL_MODELVIEW); // GL_MODELVIEW = Camera
+
+}
+
+GLvoid
+InitGL(int width, int height){
+	float Sun =  0.5f;
+	float rgb[3] = {0.0f, 0.51f, 0.73f};
+
+	GLfloat lightPosition[4] = {0.0f,0.0f,1.0f,0.0f};
+	GLfloat lightAmbient[4] = {Sun,Sun,Sun,2.0f};
+	GLfloat lightDiffuse[4] = {1.0f,1.0f,1.0f,1.0f};
+
+	glEnable(GL_TEXTURE_2D);
+ 	glClearColor(rgb[0],rgb[1],rgb[2],1.0f);
+	glClearDepth(1.0);
+	glDepthFunc(GL_LESS);
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_DEPTH_TEST); // est de profondeur
+	glEnable(GL_LIGHTING); // Active l'éclairage
+	glEnable(GL_LIGHT0); // Allume la lumière numero 1;
+
+	glShadeModel(GL_SMOOTH);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	glEnable(GLUT_DEPTH || GLUT_DOUBLE);
+    glEnable(GL_BLEND);
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+
+}
+
 /** 
  * Inits and launch the GLUT loop
  * 
@@ -160,21 +212,29 @@ void
 Session::run(int argc,
              char** argv)
 {
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-  glutInitWindowPosition(0, 0);
-  glutInitWindowSize(2048, 768);
-  glutCreateWindow ((char*)"rexeno");
-  glutGameModeString("2048x768:32@60");
-  //glutEnterGameMode();
-  glutKeyboardFunc(processNormalKeys);
-  glutFullScreen();
-  glutSetCursor(GLUT_CURSOR_NONE);
-  glutDisplayFunc (displayRexeno);
-  glEnable(GLUT_DEPTH || GLUT_DOUBLE);
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glClearColor(_R, _G, _B, 1.0f);
+  /*  glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+    glutInitWindowPosition(0, 0);
+  	glutInitWindowSize(2048, 768);*/
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);
+	glutInitWindowSize(640,480);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-640)/2,
+			               (glutGet(GLUT_SCREEN_HEIGHT)-480)/2);
+
+	glutCreateWindow ((char*)"rexeno");
+  //  glutGameModeString("2048x768:32@60");
+  //  glutEnterGameMode();
+	glutKeyboardFunc(processNormalKeys);
+  //  glutFullScreen();
+  //  glutSetCursor(GLUT_CURSOR_NONE);
+	glutReshapeFunc(&reshape);
+	glutDisplayFunc (displayRexeno);
+
+  //  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  //  glClearColor(_R, _G, _B, 1.0f);
+  InitGL(640,640);
+
   glutMainLoop();
 }
 

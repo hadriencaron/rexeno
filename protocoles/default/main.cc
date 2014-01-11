@@ -2,6 +2,7 @@
 // #include <GL/glut.h>
 #include <stdlib.h>     /* srand, rand */
 #include <rexeno.hh>
+#include <cstdlib>
 //#include <rexeno/dummyDriver.hh>
 
 using namespace std;

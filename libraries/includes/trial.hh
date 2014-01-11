@@ -8,14 +8,19 @@
 # include "shape.hh"
 # include "square.hh"
 # include "cross.hh"
+# include "sphere.hh"
+# include "plan.hh"
 # include "session.hh"
 # include "window.hh"
 # include <GL/glut.h>
 
 using namespace std;
 using namespace configuration;
+
 class Shape;
 class Square;
+class Sphere;
+class Plan;
 class Driver;
 
 typedef vector<Shape*> Shapes;

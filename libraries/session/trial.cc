@@ -74,6 +74,22 @@ Trial::displayFrame(Driver* driver)
 {
   Session* s = Session::getInstance();
 
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  float Sun =  0.5f;
+
+  GLfloat lightPosition[4] = {0.0f,0.0f,1.0f,0.0f};
+  GLfloat lightAmbient[4] = {Sun,Sun,Sun,2.0f};
+  GLfloat lightDiffuse[4] = {1.0f,1.0f,1.0f,1.0f};
+
+  glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
+  glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+
+
+  gluLookAt(2,1,1,-1,1,0,0,0,1);
+
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
@@ -218,7 +234,7 @@ Trial::Reset()
   // Shapes::iterator shapesIterator;
   // for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
   // {
-  //   (*shapesIterator)->Reset();
+  // (*shapesIterator)->Reset();
   // }
 }
 
@@ -227,4 +243,3 @@ Trial::status(int key)
 {
   return _status[key];
 }
-

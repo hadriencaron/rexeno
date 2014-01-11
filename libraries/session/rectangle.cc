@@ -10,6 +10,8 @@ Rectangle::Rectangle(const ShapeInfo& si,
   assert(si.attributes.size() == 11);
   assert(!father);
   _name = si.attributes[0];
+  //vm.addVariable(_id = new Variable(2));
+  //std::cout << id() << endl;
   vm.addVariable(_x = new Variable(si.attributes[1]));
   vm.addVariable(_y = new Variable(si.attributes[2]));
   vm.addVariable(_frameStart = new Variable(si.attributes[3]));
