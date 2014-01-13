@@ -25,6 +25,7 @@ class Trial;
 class Setup;
 class Recorder;
 class Order;
+class Calibration;
 
 namespace configuration
 {
@@ -59,12 +60,15 @@ public:
   int nbInitFrames() {return _nbInitFrames;}
   ms getTime();
   bool initialized();
+  Calibration* CalibrationCreator(std::string);
+  Driver* DriverCreator(std::string,
+                        Calibration*);
+
 private:
   Session(configuration::SessionInfo& s,
           Order& o);
   void _fillData();
 
-  Driver* _driver;
   vector<Trial*> _trialsDefinitions;
   vector<int> _trialsOrder;
   static Session* _instance;
@@ -83,16 +87,19 @@ private:
   int __debug_FrameNumber;
 #endif
   std::string _name;
-  std::string _x_channel;
-  std::string _y_channel;
-  std::string _coordinates;
-  std::string _inputMethod;
+  int _x_channel;
+  int _y_channel;
+  std::string _driverType;
+  std::string _coordinates_type;
+  Driver* _driver;
 };
 
 #ifdef DEBUG
 # define PDEBUG(fmt, args) cerr << fmt << args << "\n";
+# define PASSERT(cond) assert(cond);
 #else
 # define PDEBUG(fmt, args) /* not debugging: nothing */
+# define PASSERT(cond)
 #endif
 
 

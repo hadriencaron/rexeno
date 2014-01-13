@@ -9,7 +9,6 @@ public:
   Window(const ShapeInfo&,
          VariableManager&,
          Trial* father);
-  Window();
   virtual ~Window() {}
 
   void Display();
@@ -20,7 +19,7 @@ public:
                    const datas&,
                    int,
                    ms);
-  // void Reset();
+  void Reset();
 protected:
   double _thickness;
   Variable* _validationNbFrame;
@@ -35,7 +34,6 @@ public:
   CorrectWindow(const ShapeInfo&,
                 VariableManager&,
                 Trial* father);
-  CorrectWindow() {}
   ~CorrectWindow() {}
 };
 
@@ -45,7 +43,6 @@ public:
   WrongWindow(const ShapeInfo&,
                 VariableManager&,
                 Trial* father);
-  WrongWindow() {}
   ~WrongWindow() {}
 };
 
@@ -55,7 +52,6 @@ public:
   FixationWindow(const ShapeInfo&,
                 VariableManager&,
                 Trial* father);
-  FixationWindow() {}
   ~FixationWindow() {}
 };
 
@@ -65,7 +61,6 @@ public:
   NeutralWindow(const ShapeInfo&,
                 VariableManager&,
                 Trial* father);
-  NeutralWindow() {}
   ~NeutralWindow() {}
 };
 

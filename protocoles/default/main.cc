@@ -63,9 +63,13 @@ int	main(int argc,
   configuration::SessionInfo conf;
   //bool r = configuration::CreateConfiguration("../../protocoles/DevTests/conf", conf);
   bool r = configuration::CreateConfiguration("definition", conf);
+  if (!r)
+    cout << "failed parsing" << endl;
+
   Order o("order");
   //assert(r);
   Setup* setup = new Setup("~/.rexeno");
+  cout << "test " << conf.x_channel << endl;
   Session* session = Session::getInstance(conf, o);
   // Driver* d = new DummyDriver();
 

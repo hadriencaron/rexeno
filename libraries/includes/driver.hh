@@ -24,11 +24,13 @@
 # include "types.hh"
 # include "recorder.hh"
 
+class Session;
+
 /// Abstract Driver
 class Driver
 {
 public:
-  Driver() {}
+  Driver(Session*, Calibration*);
   virtual ~Driver() {}
 
   virtual ms GetTime() = 0;
@@ -46,6 +48,7 @@ protected:
   string _name;
   Calibration* _calibration;
   Recorder* _recorder;
+  Session* _father;
 };
 
 #include <iostream>
@@ -56,7 +59,8 @@ using namespace std;
 class DummyDriver : public Driver
 {
 public:
-  DummyDriver();
+  DummyDriver(Session*,
+              Calibration*);
   ~DummyDriver() {}
 
   ms GetTime();
@@ -64,18 +68,23 @@ public:
   void AnalogIn(datas&);
 private:
   ms _start;
+  ofstream _ofs;
 };
 
 class FileDriver : public Driver
 {
 public:
-  FileDriver(std::string filename);
-  ~FileDriver();
+  FileDriver(Session* f, Calibration* c) : Driver::Driver(f, c) {}
+  FileDriver(Session*,
+             Calibration*,
+             std::string);
+  ~FileDriver() {}
 
   ms GetTime();
-  void React2input();
+  void React2input() {}
   void AnalogIn(datas&);
 private:
+  ms _start;
   ifstream _infile;
 };
 

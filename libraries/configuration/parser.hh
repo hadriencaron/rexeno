@@ -38,10 +38,11 @@ namespace configuration
     ~SessionInfo() {}
 
     std::string name;
-    std::string x_channel;
-    std::string y_channel;
-    std::string coordinates;
-    std::string inputMethod;
+    int x_channel;
+    int y_channel;
+    std::string coordinates_type;
+    std::string driver;
+    std::string calibration_type;
     std::vector<TrialInfo> trials;
   };
 

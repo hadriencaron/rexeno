@@ -200,9 +200,10 @@ XenoDriver::_launch()
   return(0);
 }
 
-XenoDriver::XenoDriver()
+XenoDriver::XenoDriver(Session* father,
+                       Calibration* cal)
+  : Driver::Driver(father, cal)
 {
-  _calibration = new KeyboardCalibration();
   _name = "xenomai";
   _launch();
   _analogData = finalBuffer;

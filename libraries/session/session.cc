@@ -6,6 +6,8 @@
 #include "driver.hh"
 #include "order_parser.hh"
 #include <GL/glut.h>
+#include <boost/lexical_cast.hpp>
+#include <sys/mman.h>
 
 using namespace configuration;
 
@@ -25,12 +27,15 @@ Session::Session(configuration::SessionInfo& s,
     _R(0),
     _G(0),
     _B(0),
-    _name(s.name),
-    _x_channel(s.x_channel),
-    _y_channel(s.y_channel),
-    _coordinates(s.coordinates),
-    _inputMethod(s.inputMethod)
+    _name(s.name)
 {
+  mlockall(MCL_CURRENT | MCL_FUTURE); // No page faults, memory is immediately allocated by the kernel.
+  // Set channels corresponding to x and y coordinates
+  _x_channel = boost::lexical_cast<int>(s.x_channel);
+  _y_channel = boost::lexical_cast<int>(s.y_channel);
+  // Set corrdinates type (pcents, cm or degrees)
+  _coordinates_type = s.coordinates_type;
+  // Copy the vector containing the trial orders. TODO : isn't a reference copy possible ?
   _trialsOrder = o.getOrder();
   Trial* t = NULL;
   vector<TrialInfo>::iterator it;
@@ -63,12 +68,57 @@ Session::Session(configuration::SessionInfo& s,
 
   recorder->Save(s.name, "general.txt");
 
-#ifdef XENO
-  _driver = new XenoDriver();
-#else
-  _driver = new DummyDriver();
-#endif
+  _driverType = s.driver;
+  Calibration* cal = CalibrationCreator(s.calibration_type);
+  _driver = DriverCreator(s.driver, cal);
+  
 }
+
+Calibration*
+Session::CalibrationCreator(std::string calibrationName)
+{
+  if (calibrationName == "keyboard")
+  {
+    return (new KeyboardCalibration());
+  }
+  else
+  {
+    cout << "Wrong calibration type, should be one of 'keyboard', 'no', or 'matrix:<filename>'" << endl;
+    cout << "current value is " << calibrationName << endl;
+    throw ;
+  }
+  return NULL;
+}
+
+Driver*
+Session::DriverCreator(std::string driverName,
+                       Calibration* cal)
+{
+  if (driverName == "xeno")
+  {
+#ifdef XENO
+    return(new XenoDriver(this, cal));
+#else
+    //return(new DummyDriver(this, cal));
+    cout << "xeno driver requested but installed with -DNOXENO=YES" << endl;
+    throw ;
+#endif
+  }
+  else if (driverName == "dummy")
+    return(new DummyDriver(this, cal));
+  else if ((driverName.find("file:")) == 0)
+  {
+    std::string filename = driverName.substr(5); // from end of "file:" till the end
+    return(new FileDriver(this, cal, filename));
+  }
+  else
+  {
+    cout << "Wrong driver type, should be one of 'dummy', 'xeno', or 'file:<filename>'" << endl;
+    throw ;
+  }
+  return NULL;
+}
+
 
 /** 
  * Destructor : cleans everything up

@@ -21,11 +21,16 @@
  * can control the input through the keyboard keys zqsd
  * 
  */
-DummyDriver::DummyDriver()
+DummyDriver::DummyDriver(Session* father,
+                         Calibration* cal)
+  :  Driver::Driver(father, cal),
+     _ofs("/tmp/Eye", std::ofstream::out)
 {
   _calibration = new KeyboardCalibration();
   _name = "dummy";
+  _father = father;
 
+  // Set initial time
   timeb tb;
   ftime(&tb);
   _start = tb.millitm + (tb.time & 0xfffff) * 1000;
@@ -37,6 +42,7 @@ DummyDriver::DummyDriver()
 ms
 DummyDriver::GetTime()
 {
+  // Get time by differenciating with Initial value
   timeb tb;
   ftime(&tb);
   ms current = tb.millitm + (tb.time & 0xfffff) * 1000;

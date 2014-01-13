@@ -39,10 +39,11 @@ BOOST_FUSION_ADAPT_STRUCT(
 BOOST_FUSION_ADAPT_STRUCT(
 			  configuration::SessionInfo,
 			  (std::string, name)
-                          (std::string, x_channel)
-                          (std::string, y_channel)
-                          (std::string, coordinates)
-                          (std::string, inputMethod)
+                          (int, x_channel)
+                          (int, y_channel)
+                          (std::string, coordinates_type)
+                          (std::string, driver)
+                          (std::string, calibration_type)
 			  (std::vector<configuration::TrialInfo>, trials)
 			  )
 
@@ -80,10 +81,11 @@ namespace configuration
 
       session %=
 	"name="	>> word
-        >> "x_channel=" >> word
-        >> "y_channel=" >> word
-        >> "coodinates=" >> word
-        >> "inputMethod=" >> word
+        >> "x_channel=" >> int_
+        >> "y_channel=" >> int_
+        >> "coordinates_type=" >> word
+        >> "driver=" >> word
+        >> "calibration_type=" >> word
 	>> +trial
 	;
 
@@ -127,6 +129,11 @@ namespace configuration
     std::string::const_iterator end = storage.end();
     bool r = boost::spirit::qi::phrase_parse(iter, end, g, space, res);
 
+    if (!r)
+    {
+      std::cout << "parsing failed, your definition file is not valid" << std::endl;
+      throw ;
+    }
     return (r);
   }
 

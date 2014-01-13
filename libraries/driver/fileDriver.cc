@@ -15,27 +15,67 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "driver.hh"
 
-
-FileDriver::FileDriver(std::string filename)
-   : _infile.open("infile.txt");
+FileDriver::FileDriver(Session* father,
+                       Calibration* cal,
+                       std::string filename)
+  : Driver::Driver(father, cal)
 {
-  _calibration = new KeyboardCalibration();
-  
+  // Set Inital time
+  timeb tb;
+  ftime(&tb);
+  _start = tb.millitm + (tb.time & 0xfffff) * 1000;
+  // Init File
+  _infile.open("infile.txt");
+}
+
+/** 
+ * @return time since initialization
+ */
+ms
+FileDriver::GetTime()
+{
+  // Get time by differenciating with Initial value
+  timeb tb;
+  ftime(&tb);
+  ms current = tb.millitm + (tb.time & 0xfffff) * 1000;
+
+  return (current - _start);
 }
 
 void
 FileDriver::AnalogIn(datas& data)
 {
-  unsigned int i = 0;
-  while (!infile.eof())
+  channel Xs = data[0];
+  channel Ys = data[1];
+  channel::iterator it;
+
+  // Get time by differenciating with Initial value
+  timeb tb;
+  ftime(&tb);
+  ms current = tb.millitm + (tb.time & 0xfffff) * 1000;
+
+  for (it = Xs.begin(); it != Xs.end(); ++it)
   {
-    infile >> data[i].timing;
-    infile >> data[i].volt;
-    ++i;
-    // getline(infile, sLine);
-    // cout << sLine << endl;
+    _infile >> it->volt;
+    it->timing = current;
   }
+  for (it = Ys.begin(); it != Ys.end(); ++it)
+  {
+    _infile >> it->volt;
+    it->timing = current;
+  }
+
+  // unsigned int i = 0;
+  // while (!_infile.eof())
+  // {
+  //   _infile >> data[i].timing;
+  //   _infile >> data[i].volt;
+  //   ++i;
+  //   // getline(infile, sLine);
+  //   // cout << sLine << endl;
+  // }
 
   // for (i = 0; size && (i < data.size()); ++i)
   // {

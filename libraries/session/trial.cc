@@ -46,14 +46,6 @@ Trial::Trial(TrialInfo& ti)
     }
   }
 
-  _status[RUNNING] = true;
-  _status[PAUSE] = false;
-  _status[WRONG_REDO] = false;
-  _status[WRONG_NEXT] = false;
-  _status[CORRECT] = false;
-  _status[WAITING_FIXATION] = false;
-  _status[NEUTRAL] = false;
-
   _ttl = new vector<TtlEvent*>;
   _ttl->push_back( new TtlEvent() );
   _ttl->push_back( new TtlEvent() );
@@ -78,6 +70,13 @@ Trial::~Trial()
 int
 Trial::displayFrame(Driver* driver)
 {
+  _status[RUNNING] = true;
+  _status[PAUSE] = false;
+  _status[WRONG_REDO] = false;
+  _status[WRONG_NEXT] = false;
+  _status[CORRECT] = false;
+  _status[WAITING_FIXATION] = false;
+  _status[NEUTRAL] = false;
   Session* s = Session::getInstance();
 
   vector<Shape*>::iterator it;
@@ -102,7 +101,7 @@ Trial::displayFrame(Driver* driver)
   glutSwapBuffers();
   glutPostRedisplay();
   glClear(GL_COLOR_BUFFER_BIT);
-  PDEBUG("Trial::displayFrame", " displayed frame " << _curFrameId);
+  PDEBUG("Trial::displayFrame", " displayed frame number : " << _curFrameId);
 
   _sendTtls(driver);
   //_status[RUNNING] = false;

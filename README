@@ -5,16 +5,9 @@ It is designed to become the 1.0 version.
 Enjoy !
 
 == Configuration ==
-sudo apt-get install qt-sdk
-
-== TODO ==
-3rdparties : add libxcb.so
-sudo apt-get install libxcb-glx0-dev
-sudo apt-get install libnvidia-current-dev
-sudo apt-get install libgl1-mesa-dev
-sudo apt-get install xcb-proto
-sudo apt-get install python-xcb-gen
-=> j'ai installé des sources libxcb-glx/
+sudo apt-get install make
+sudo apt-get install cmake
+sudo apt-get install nvidia-current
 
 == Installation Rexeno Libraries ==
 
@@ -41,12 +34,8 @@ Once the rexeno project installed, you can have access to several tools to creat
 
 == Trace Information == 
 
-Inside the conf trial you can adjust how verbose the logging
-file will be by attributing an integer value to the traceLevel variable.
-
-0 : log nothing
-1 : log important information, errors, etc
-2 : log EVERYTHING and every input/output, shapes size, etc
+In XENO=OFF, the program tries to crash as soon as possible and give you information about what his problem was.
+In XENO=ON, many trace information will be missing for optimisation purpose. Don't expect them all.
 
 == Options ==
 
@@ -59,18 +48,23 @@ distance : how far is the subject from the screen (cm)
 
 = in the definition file =
 
-name (mandatory ) : name of the protocole for this session (string)
-
-logLevel : deprecated ? (integer)
+name : name of the protocole for this session (string)
 
 x_channel : driver channel used for X (not yet functional, right now is 0) (integer)
 
 y_channel : driver channel used for X (not yet functional, right now is 1) (integer)
 
-coordonates : right now only pcent is functional
+coordonate : right now only pcent is functional
 - pcent (ie percentage of the screen)
 - cm (ie real centimenters, be careful to have set correctly height and witdth in the configuration file)
 - degrees (be careful to have set correctly height, witdth AND distance in the configuration file)
+
+driver : xeno | dummy | file:<filename>
+
+calibration:
+- keyboard
+- matrix:<filename>
+- no
 
 = in the command line =
 
@@ -92,5 +86,16 @@ git clone https://github.com/hadriencaron/rexeno.git
 git pull https://hadriencaron@github.com/hadriencaron/rexeno master
 * git push
 git push https://hadriencaron@github.com/hadriencaron/rexeno master
+
+== Colors ==
+
+Green : correct window
+Red : wrong window
+Dark Blue : fixation window
+Light Blue : neutral window
+
+== Internal working details ==
+
+= Drivers =
 
 Author : Hadrien CARON
