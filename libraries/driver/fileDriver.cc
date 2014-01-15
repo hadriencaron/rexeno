@@ -16,6 +16,7 @@
 #include <fstream>
 #include <string>
 #include "driver.hh"
+#include "session.hh"
 
 FileDriver::FileDriver(Session* father,
                        Calibration* cal,
@@ -47,6 +48,7 @@ FileDriver::GetTime()
 void
 FileDriver::AnalogIn(datas& data)
 {
+  PDEBUG("FileDriver::AnalogIn ", "start");
   channel Xs = data[0];
   channel Ys = data[1];
   channel::iterator it;

@@ -38,8 +38,10 @@ struct TtlEvent
 class Trial
 {
 public:
-  Trial(TrialInfo& ti);
+  Trial(TrialInfo& ti,
+        Session* father);
   ~Trial();
+
   int displayFrame(Driver* d);
   bool finished();
   bool atStart();
@@ -66,6 +68,7 @@ private:
   datas _data;
   bool _logged;
   ofstream replayerLogs;
+  Session* _father;
 };
 
 

@@ -1,9 +1,10 @@
-name= TEST
-x_channel= 0
-y_channel= 1
-coordinates_type= percent
-driver= dummy
-calibration_type= keyboard
+name=TEST
+x_channel=0
+y_channel=1
+coordinates_type=percent
+driver=dummy
+calibration_type=keyboard
+enable_replay=false
 
 | 300 STOP_TARGET1
 > Square Target -0.5 0 Start_Stop End_Target 0 255 0 0.1 0

@@ -42,7 +42,7 @@ Session::Session(configuration::SessionInfo& s,
 
   for (it = s.trials.begin(); it != s.trials.end(); ++it)
   {
-    t = new Trial(*it);
+    t = new Trial(*it, this);
     _trialsDefinitions.push_back(t);
   }
   _currentTrial = _trialsOrder.begin();
@@ -83,8 +83,8 @@ Session::CalibrationCreator(std::string calibrationName)
   }
   else
   {
-    cout << "Wrong calibration type, should be one of 'keyboard', 'no', or 'matrix:<filename>'" << endl;
-    cout << "current value is " << calibrationName << endl;
+    cerr << "Wrong calibration type, should be one of 'keyboard', 'no', or 'matrix:<filename>'" << endl;
+    cerr << "current value is " << calibrationName << endl;
     throw ;
   }
   return NULL;
@@ -97,23 +97,28 @@ Session::DriverCreator(std::string driverName,
   if (driverName == "xeno")
   {
 #ifdef XENO
+    PDEBUG("Session::DriverCreator ", "XenoDriver requested")
     return(new XenoDriver(this, cal));
 #else
     //return(new DummyDriver(this, cal));
-    cout << "xeno driver requested but installed with -DNOXENO=YES" << endl;
+    cerr << "XenoDriver requested but installed with -DNOXENO=YES" << endl;
     throw ;
 #endif
   }
   else if (driverName == "dummy")
+  {
+    PDEBUG("Session::DriverCreator ", "DummyDriver requested")
     return(new DummyDriver(this, cal));
+  }
   else if ((driverName.find("file:")) == 0)
   {
+    PDEBUG("Session::DriverCreator ", "FileDriver requested")
     std::string filename = driverName.substr(5); // from end of "file:" till the end
     return(new FileDriver(this, cal, filename));
   }
   else
   {
-    cout << "Wrong driver type, should be one of 'dummy', 'xeno', or 'file:<filename>'" << endl;
+    cerr << "Wrong driver type, should be one of 'dummy', 'xeno', or 'file:<filename>'" << endl;
     throw ;
   }
   return NULL;

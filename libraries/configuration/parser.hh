@@ -43,6 +43,7 @@ namespace configuration
     std::string coordinates_type;
     std::string driver;
     std::string calibration_type;
+    bool enable_replay;
     std::vector<TrialInfo> trials;
   };
 

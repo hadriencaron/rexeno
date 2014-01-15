@@ -33,12 +33,12 @@ namespace configuration
 };
 
 using namespace std;
-//using namespace configuration;
 
 // Singleton class
 class Session
 {
 public:
+  friend class Trial;
   ~Session();
   static Session* getInstance();
   static Session* getInstance(configuration::SessionInfo& s,
@@ -48,8 +48,8 @@ public:
   void displayFrame();
   void displayHeader();
 
-  void (*afterTrial)(string&, VariableManager&, int);
-  void (*beforeTrial)(string&, VariableManager&);
+  void (*afterTrial)(std::string&, VariableManager&, int);
+  void (*beforeTrial)(std::string&, VariableManager&);
   void setDriver(Driver* d) {_driver = d;}
 
   Setup* setup;
@@ -69,11 +69,11 @@ private:
           Order& o);
   void _fillData();
 
-  vector<Trial*> _trialsDefinitions;
-  vector<int> _trialsOrder;
+  std::vector<Trial*> _trialsDefinitions;
+  std::vector<int> _trialsOrder;
   static Session* _instance;
-  vector<pair<double, ms> > _inputData;
-  vector<int>::iterator _currentTrial;
+  std::vector<pair<double, ms> > _inputData;
+  std::vector<int>::iterator _currentTrial;
   // Background Color :
   int _R, _G, _B;
   // Guardian Trial : in charge of
@@ -91,6 +91,7 @@ private:
   int _y_channel;
   std::string _driverType;
   std::string _coordinates_type;
+  bool _enableReplay;
   Driver* _driver;
 };
 

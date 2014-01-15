@@ -7,10 +7,12 @@
 #include <fstream>
 
 
-Trial::Trial(TrialInfo& ti)
+Trial::Trial(TrialInfo& ti,
+             Session* father)
   : _curFrameId(0),
     _nbFrames(1),
-    _name(ti.name)
+    _name(ti.name),
+    _father(father)
 {
   _logged = false;
   // _data.resize(8 * 20); // 8 channels x 20 samples (20 > 16.666)
@@ -109,7 +111,8 @@ Trial::displayFrame(Driver* driver)
   driver->AnalogIn(_data);
   ms displayTime = driver->GetTime();
 
-  _log(_data);
+  if (_father->_enableReplay)
+    _log(_data);
   if ((_curFrameId == 0) && (!_logged))
   {
     s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");

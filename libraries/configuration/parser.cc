@@ -44,6 +44,7 @@ BOOST_FUSION_ADAPT_STRUCT(
                           (std::string, coordinates_type)
                           (std::string, driver)
                           (std::string, calibration_type)
+                          (bool, enable_replay)
 			  (std::vector<configuration::TrialInfo>, trials)
 			  )
 
@@ -58,6 +59,7 @@ namespace configuration
     moses_parser() : moses_parser::base_type(session)
     {
       using qi::int_;
+      using qi::bool_;
       using qi::lit;
       using qi::double_;
       using qi::lexeme;
@@ -86,6 +88,7 @@ namespace configuration
         >> "coordinates_type=" >> word
         >> "driver=" >> word
         >> "calibration_type=" >> word
+        >> "enable_replay=" >> bool_
 	>> +trial
 	;
 
