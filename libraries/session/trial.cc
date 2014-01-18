@@ -10,10 +10,11 @@
 Trial::Trial(TrialInfo& ti,
              Session* father)
   : _curFrameId(0),
-    _nbFrames(1),
+    _nbFrames(ti.max_duration),
     _name(ti.name),
     _father(father)
 {
+  PDEBUG("Trial::Trial ", "trial " << _name << " length set to " << _nbFrames);
   _logged = false;
   // _data.resize(8 * 20); // 8 channels x 20 samples (20 > 16.666)
 
@@ -43,8 +44,8 @@ Trial::Trial(TrialInfo& ti,
     if (newShape)
     {
       _shapes.push_back(newShape);
-      if (newShape->frameEnd() > _nbFrames)
-        _nbFrames = newShape->frameEnd();
+      // if (newShape->frameEnd() > _nbFrames)
+      //   _nbFrames = newShape->frameEnd();
     }
   }
 
@@ -54,12 +55,14 @@ Trial::Trial(TrialInfo& ti,
   _ttl->push_back( new TtlEvent() );
   _ttl->push_back( new TtlEvent() );
 
-  replayerLogs.open("replayerLogs");
+  if (father->_enableReplay)
+    replayerLogs.open("replayerLogs");
 }
 
 Trial::~Trial()
 {
-  replayerLogs.close();
+  if (_father->_enableReplay)
+    replayerLogs.close();
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
@@ -72,6 +75,18 @@ Trial::~Trial()
 int
 Trial::displayFrame(Driver* driver)
 {
+  if (_nbFrames <= _curFrameId)
+  {
+    PDEBUG("Trial::displayFrame", "Time up, resquest reset");
+    Setup::reset();
+    _status[WRONG_NEXT] = true;
+    glutSwapBuffers();
+    glutPostRedisplay();
+    glClear(GL_COLOR_BUFFER_BIT);
+    PDEBUG("Trial::displayFrame", " displayed frame number : " << _curFrameId << " / " << _nbFrames);
+    return WRONG_NEXT;
+  }
+
   _status[RUNNING] = true;
   _status[PAUSE] = false;
   _status[WRONG_REDO] = false;
@@ -103,7 +118,7 @@ Trial::displayFrame(Driver* driver)
   glutSwapBuffers();
   glutPostRedisplay();
   glClear(GL_COLOR_BUFFER_BIT);
-  PDEBUG("Trial::displayFrame", " displayed frame number : " << _curFrameId);
+  PDEBUG("Trial::displayFrame", " displayed frame number : " << _curFrameId << " / " << _nbFrames);
 
   _sendTtls(driver);
   //_status[RUNNING] = false;
@@ -188,20 +203,6 @@ Trial::_react2status()
   return (WRONG_NEXT); // should not get here (this line is to avoid a compiler warning)
 }
 
-void
-Trial::adjustNbFrames()
-{
-  vector<Shape*>::iterator it;
-
-  for (it = _shapes.begin(); it != _shapes.end(); ++it)
-  {
-    double curEndFrame = (*it)->frameEnd();
-
-    if (curEndFrame > _nbFrames)
-      _nbFrames = curEndFrame;
-  }
-}
-
 bool
 Trial::finished()
 {
@@ -217,13 +218,14 @@ Trial::atStart()
 void
 Trial::Reset()
 {
-  PDEBUG("Trial::Reset ", "start")
+  PDEBUG("Trial::Reset ", "start");
   _curFrameId = 0;
   Status::iterator it;
   for (it = _status.begin(); it != _status.end(); ++it)
   {
     it->second = false;
   }
+  PDEBUG("Trial::Reset ", "end");
   // Shapes::iterator shapesIterator;
   // for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
   // {

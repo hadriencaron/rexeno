@@ -31,7 +31,7 @@ BOOST_FUSION_ADAPT_STRUCT(
 
 BOOST_FUSION_ADAPT_STRUCT(
 			  configuration::TrialInfo,
-			  (int, time)
+			  (int, max_duration)
 			  (std::string, name)
 			  (std::vector<configuration::ShapeInfo>, shapes)
 			  )
@@ -50,6 +50,11 @@ BOOST_FUSION_ADAPT_STRUCT(
 
 namespace configuration
 {
+  TrialInfo::TrialInfo()
+  {
+    max_duration = -1;
+  }
+  
   ///////////////////////////////////////////////////////////////////////////////
   //  Our moses parser
   ///////////////////////////////////////////////////////////////////////////////
@@ -75,7 +80,7 @@ namespace configuration
 	;
 
       trial %= "|"
-	>> -int_
+	>> int_
 	>> word
 	>> +shape
 	>> ";"

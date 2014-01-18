@@ -26,7 +26,9 @@ namespace configuration
 
   struct TrialInfo
   {
-    int time;
+    TrialInfo();
+
+    int max_duration; // Number of frames
     std::string name;
     std::vector<ShapeInfo> shapes;
   };

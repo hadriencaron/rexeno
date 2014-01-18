@@ -27,7 +27,8 @@ Session::Session(configuration::SessionInfo& s,
     _R(0),
     _G(0),
     _B(0),
-    _name(s.name)
+    _name(s.name),
+    _enableReplay(s.enable_replay)
 {
   mlockall(MCL_CURRENT | MCL_FUTURE); // No page faults, memory is immediately allocated by the kernel.
   // Set channels corresponding to x and y coordinates
@@ -112,8 +113,8 @@ Session::DriverCreator(std::string driverName,
   }
   else if ((driverName.find("file:")) == 0)
   {
-    PDEBUG("Session::DriverCreator ", "FileDriver requested")
     std::string filename = driverName.substr(5); // from end of "file:" till the end
+    PDEBUG("Session::DriverCreator ", "FileDriver requested : " << filename);
     return(new FileDriver(this, cal, filename));
   }
   else
@@ -132,6 +133,7 @@ Session::DriverCreator(std::string driverName,
  */
 Session::~Session()
 {
+  PDEBUG("Session::~Session ", "start");
   vector<Trial*>::iterator it;
   for (it = _trialsDefinitions.begin(); it != _trialsDefinitions.end(); ++it)
   {
@@ -152,6 +154,7 @@ Session::~Session()
 void
 displayRexeno()
 {
+  PDEBUG("displayRexeno", "start");
   Session* s = Session::getInstance();
   s->displayHeader();
 }
@@ -164,6 +167,7 @@ displayRexeno()
 void
 Session::displayHeader()
 {
+  PDEBUG("Session::displayHeader", "start");
   if (!initialized())
   {
     glBegin(GL_QUADS);
@@ -190,6 +194,7 @@ Session::displayHeader()
   }
   else
   {
+    PDEBUG("Session::displayHeader ", "request a session:displayFrame");
     displayFrame();
   }
 }
@@ -205,9 +210,10 @@ void processNormalKeys(unsigned char key, int x, int y)
 {
   Setup::keys[key] = true;
   if (key == 27) 
-    {
-      exit(0);
-    }
+  {
+    PDEBUG("processNormalKeys ", "escape pressed");
+    exit(0);
+  }
 }
 
 /** 
@@ -259,12 +265,11 @@ Session::displayFrame()
     if (t->atStart() && beforeTrial)
     {
       beforeTrial(t->name(), t->variables);
-      t->adjustNbFrames();
     }
 
     int b = t->displayFrame(_driver);
 
-    if ((b != RUNNING) && (b != PAUSE))
+    if (t->status(CORRECT) || (t->status(WRONG_NEXT)) || (t->status(WRONG_REDO)))
     {
       PDEBUG("Session::displayFrame", " end of trial is : " << t->name() << " (trial number " << *_currentTrial << " )");
       ms displayTime = _driver->GetTime();
@@ -274,12 +279,14 @@ Session::displayFrame()
 
       if (b != WRONG_REDO)
       {
+        PDEBUG("Session::displayFrame ", "request next trial");
         _currentTrial++;
 #ifdef DEBUG
         ++__debug_FrameNumber;
 #endif
       }
       t->Reset();
+      PDEBUG("Session::displayFrame ", "Reset finished");
     }
   }
   else

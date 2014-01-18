@@ -28,7 +28,18 @@ FileDriver::FileDriver(Session* father,
   ftime(&tb);
   _start = tb.millitm + (tb.time & 0xfffff) * 1000;
   // Init File
-  _infile.open("infile.txt");
+  PDEBUG("FileDriver::FileDriver ", "open file file : " << filename);
+  _infile.open(filename.c_str(), std::ifstream::in);
+  if (!_infile.good())
+  {
+    cerr << "Error: Failed to open file ... already opened ?" << endl;
+    throw;
+  }
+  if (_infile.eof())
+  {
+    cerr << "Error: file is empty" << endl;
+    throw;
+  }
 }
 
 /** 
@@ -49,9 +60,10 @@ void
 FileDriver::AnalogIn(datas& data)
 {
   PDEBUG("FileDriver::AnalogIn ", "start");
-  channel Xs = data[0];
-  channel Ys = data[1];
+  channel& Xs = data[0];
+  channel& Ys = data[1];
   channel::iterator it;
+  PDEBUG("FileDriver::AnalogIn ", "size channel 0 : " << Xs.size());
 
   // Get time by differenciating with Initial value
   timeb tb;
@@ -62,27 +74,21 @@ FileDriver::AnalogIn(datas& data)
   {
     _infile >> it->volt;
     it->timing = current;
+    PDEBUG("FileDriver::AnalogIn ", "X : " << it->volt);
+    if (_infile.eof())
+    {
+      cout << "end of input" << endl;
+      throw;
+    }
   }
   for (it = Ys.begin(); it != Ys.end(); ++it)
   {
     _infile >> it->volt;
     it->timing = current;
+    if (_infile.eof())
+    {
+      cout << "end of input" << endl;
+      throw;
+    }
   }
-
-  // unsigned int i = 0;
-  // while (!_infile.eof())
-  // {
-  //   _infile >> data[i].timing;
-  //   _infile >> data[i].volt;
-  //   ++i;
-  //   // getline(infile, sLine);
-  //   // cout << sLine << endl;
-  // }
-
-  // for (i = 0; size && (i < data.size()); ++i)
-  // {
-  //   data[i].volt = _analogData[2 * i];
-  //   data[i].timing = _analogData[2 * i + 1];
-  // }
-
 }

@@ -46,7 +46,6 @@ public:
   bool finished();
   bool atStart();
   string& name() {return _name;}
-  void adjustNbFrames();
   void addTtl();
   bool status(int);
   int frameEnd() {return _nbFrames;}
