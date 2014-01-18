@@ -1,0 +1,367 @@
+idtrial1  300 ANTI_TARGET1
+id1 Square Target 0.97 0 End_Fixation End_Target 255 0 0 0.03 3
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Variable End_Fixation 54
+id4 Variable End_Target 114 
+id5 Time 300 
+id6 CorrectWindow Window_Correct -0.84 0 End_Fixation End_Target 0 255 0 1 0.72 0 
+id7 WrongWindow Window_Wrong 0.74 0 End_Fixation End_Target 255 0 0 2 0.72 0 
+id8 Variable Fixation_Duration 30 
+id9 Cross Eye 0 0 0 300 255 0 0 0.1 
+id10 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id11 NeutralWindow Neutral 0 0 0 End_Fixation 0 200 0 0.2 0.2 
+id12 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id13 Variable ANTI_TARGET1 1
+endtrial
+
+
+idtrial2  300 ANTI_TARGET2
+id1 Variable End_Fixation 54 
+id2 Variable End_Target 114 
+id3 Time 300 
+id4 Square Target -0.97 0 End_Fixation End_Target 255 0 0 0.03 5
+id5 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id6 WrongWindow Window_Wrong -0.74 0 End_Fixation End_Target 255 0 0 2 0.72 0 
+id7 CorrectWindow Window_Correct 0.84 0 End_Fixation End_Target 0 255 0 1 0.72 0 
+id8 Cross Eye 0 0 0 5000 255 0 0 0.1 
+id9 Variable Fixation_Duration 30 
+id10 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id11 NeutralWindow Neutral 0 0 0 End_Fixation 200 0 0 0.2 0.2 
+id12 RedoWindow Redo 0 0 6 End_Fixation 0 255 0 2 2 0 
+id13 Variable ANTI_TARGET2 1
+endtrial
+
+
+
+idtrial3  300 PRO_TARGET1
+id1 Square Target 0.97 0 End_Fixation End_Target 0 255 0 0.03 7
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Variable End_Fixation 54
+id4 Variable End_Target 114 
+id5 Time 300 
+id6 CorrectWindow Window_Correct 0.84 0 End_Fixation End_Target 0 255 0 1 0.72 0 
+id7 WrongWindow Window_Wrong -0.74 0 End_Fixation End_Target 255 0 0 2 0.72 0 
+id8 Variable Fixation_Duration 30 
+id9 Cross Eye 0 0 0 300 255 0 0 0.1 
+id10 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id11 NeutralWindow Neutral 0 0 0 End_Fixation 0 200 0 0.2 0.2 
+id12 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id13 Variable PRO_TARGET1 1
+endtrial
+
+
+idtrial4  300 PRO_TARGET2
+id1 Variable End_Fixation 54 
+id2 Variable End_Target 114 
+id3 Time 300 
+id4 Square Target -0.97 0 End_Fixation End_Target 0 255 0 0.03 9
+id5 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id6 WrongWindow Window_Wrong 0.74 0 End_Fixation End_Target 255 0 0 2 0.72 0 
+id7 CorrectWindow Window_Correct -0.84 0 End_Fixation End_Target 0 255 0 1 0.72 0 
+id8 Cross Eye 0 0 0 5000 255 0 0 0.1 
+id9 Variable Fixation_Duration 30 
+id10 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id11 NeutralWindow Neutral 0 0 0 End_Fixation 200 0 0 0.2 0.2 
+id12 RedoWindow Redo 0 0 6 End_Fixation 0 255 0 2 2 0 
+id13 Variable PRO_TARGET2 1
+endtrial
+
+
+idtrial5  300 ANTI_PRO_TARGET1_SSD1
+id1 Square Target 0.97 0 End_Fixation Start_Change 255 0 0 0.03 13
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id3 Variable End_Fixation 54
+id4 Variable End_Target 114 
+id5 Time 300 
+id6 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id7 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id8 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id9 Variable Fixation_Duration 30 
+id10 Cross Eye 0 0 0 300 255 0 0 0.1 
+id11 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id12 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id13 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id14 Variable ANTI_PRO_TARGET1_SSD1 1
+endtrial
+
+idtrial6  300 ANTI_PRO_TARGET1_SSD2
+id1 Square Target 0.97 0 End_Fixation Start_Change 255 0 0 0.03 15
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id3 Variable End_Fixation 54
+id4 Variable End_Target 114 
+id5 Time 300 
+id6 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id7 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id8 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id9 Variable Fixation_Duration 30 
+id10 Cross Eye 0 0 0 300 255 0 0 0.1 
+id11 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id12 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id13 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id14 Variable ANTI_PRO_TARGET1_SSD2 1
+endtrial
+
+idtrial7  300 ANTI_PRO_TARGET1_SSD3
+id1 Square Target 0.97 0 End_Fixation Start_Change 255 0 0 0.03 17
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id3 Variable End_Fixation 54
+id4 Variable End_Target 114 
+id5 Time 300 
+id6 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id7 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id8 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id9 Variable Fixation_Duration 30 
+id10 Cross Eye 0 0 0 300 255 0 0 0.1 
+id11 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id12 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id13 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id14 Variable ANTI_PRO_TARGET1_SSD3 1
+endtrial
+
+idtrial8 300 ANTI_PRO_TARGET1_SSD4
+id1 Square Target 0.97 0 End_Fixation Start_Change 255 0 0 0.03 19
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id3 Variable End_Fixation 54
+id4 Variable End_Target 114 
+id5 Time 300 
+id6 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id7 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id8 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id9 Variable Fixation_Duration 30 
+id10 Cross Eye 0 0 0 300 255 0 0 0.1 
+id11 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id12 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id13 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id14 Variable ANTI_PRO_TARGET1_SSD4 1
+endtrial
+
+
+
+
+idtrial9  300 ANTI_PRO_TARGET2_SSD1
+id1 Square Target -0.97 0 End_Fixation Start_Change 255 0 0 0.03 21
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable ANTI_PRO_TARGET2_SSD1 1
+endtrial
+
+
+idtrial10  300 ANTI_PRO_TARGET2_SSD2
+id1 Square Target -0.97 0 End_Fixation Start_Change 255 0 0 0.03 23
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable ANTI_PRO_TARGET2_SSD2 1
+endtrial
+
+
+idtrial11  300 ANTI_PRO_TARGET2_SSD3
+id1 Square Target -0.97 0 End_Fixation Start_Change 255 0 0 0.03 25
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable ANTI_PRO_TARGET2_SSD3 1
+endtrial
+
+idtrial12  300 ANTI_PRO_TARGET2_SSD4
+id1 Square Target -0.97 0 End_Fixation Start_Change 255 0 0 0.03 27
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target 0 255 0 0.03 11
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable ANTI_PRO_TARGET2_SSD4 1
+endtrial
+
+
+
+idtrial13  300 PRO_ANTI_TARGET1_SSD1
+id1 Square Target 0.97 0 End_Fixation Start_Change 0 255  0 0.03 31
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET1_SSD1 1
+endtrial
+
+idtrial14  300 PRO_ANTI_TARGET1_SSD2
+id1 Square Target 0.97 0 End_Fixation Start_Change 0 255  0 0.03 33
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET1_SSD2 1
+endtrial
+
+idtrial15  300 PRO_ANTI_TARGET1_SSD3
+id1 Square Target 0.97 0 End_Fixation Start_Change 0 255  0 0.03 35
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET1_SSD3 1
+endtrial
+
+idtrial16  300 PRO_ANTI_TARGET1_SSD4
+id1 Square Target 0.97 0 End_Fixation Start_Change 0 255  0 0.03 37
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct -0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong 0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET1_SSD4 1
+endtrial
+
+
+idtrial17  300 PRO_ANTI_TARGET2_SSD1
+id1 Square Target -0.97 0 End_Fixation Start_Change 0 255  0 0.03 39
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET2_SSD1 1
+endtrial
+
+idtrial18  300 PRO_ANTI_TARGET2_SSD2
+id1 Square Target -0.97 0 End_Fixation Start_Change 0 255  0 0.03 41
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET2_SSD2 1
+endtrial
+
+idtrial19  300 PRO_ANTI_TARGET2_SSD3
+id1 Square Target -0.97 0 End_Fixation Start_Change 0 255  0 0.03 43
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET2_SSD3 1
+endtrial
+
+idtrial20  300 PRO_ANTI_TARGET2_SSD4
+id1 Square Target -0.97 0 End_Fixation Start_Change 0 255  0 0.03 45
+id2 Square Fixation 0 0 0 End_Fixation 139 69 19 0.03 1
+id3 Square Target2 -0.97 0  Start_Change End_Target  255 0 0 0.03 29
+id4 Variable End_Fixation 54
+id5 Variable End_Target 114 
+id6 Time 300 
+id7 WrongWindow Window_Wrong 0 0 End_Fixation Start_Change 255 0 0 200 200 0 
+id8 CorrectWindow Window_Correct 0.84 0 Start_Change End_Target 0 255 0 1 0.72 0 
+id9 WrongWindow Window_Wrong -0.74 0 Start_Change End_Target 255 0 0 2 0.72 0 
+id10 Variable Fixation_Duration 30 
+id11 Cross Eye 0 0 0 300 255 0 0 0.1 
+id12 FixationWindow Fixation 0 0 0 End_Fixation 0 255 0 0.2 0.2 Fixation_Duration 
+id13 NeutralWindow Neutral 0 0 0 Start_Change 0 200 0 0.2 0.2 
+id14 RedoWindow Redo 0 0 6 End_Fixation 200 0 0 2 2 0 
+id15 Variable PRO_ANTI_TARGET2_SSD4 1
+endtrial
+
+
+end
