@@ -95,6 +95,7 @@ Cross::DisplayMonitor()
 void
 Cross::React2input(Status& s,
                    const datas& ds,
+                   int nbInput,
                    int frameId,
                    ms)
 {

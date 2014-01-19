@@ -34,7 +34,8 @@ public:
   virtual ~Driver() {}
 
   virtual ms GetTime() = 0;
-  virtual void AnalogIn(datas& data) = 0;
+  // Driver fills data with n values. Returns n
+  virtual int AnalogIn(datas& data) = 0;
   virtual void TtlPulse(uint value,
                         ms delay = 0,
                         ms duration = 5) {}
@@ -65,7 +66,7 @@ public:
 
   ms GetTime();
   void React2input();
-  void AnalogIn(datas&);
+  int AnalogIn(datas&);
 private:
   ms _start;
   ofstream _ofs;
@@ -81,7 +82,7 @@ public:
 
   ms GetTime();
   void React2input() {}
-  void AnalogIn(datas&);
+  int AnalogIn(datas&);
 private:
   ms _start;
   ifstream _infile;
@@ -101,7 +102,7 @@ public:
 
   ms GetTime();
   void React2input();
-  void AnalogIn(datas&);
+  int AnalogIn(datas&);
 private:
   int _initNidaqCard();
   int _launch();

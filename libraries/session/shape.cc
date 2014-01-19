@@ -147,6 +147,7 @@ Shape::_yGL()
 void
 Shape::React2input(Status& s,
                    const datas& ds,
+                   int nbInput,
                    int frameId,
                    ms displayTime)
 {

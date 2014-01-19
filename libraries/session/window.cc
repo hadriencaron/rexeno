@@ -199,6 +199,7 @@ NeutralWindow::NeutralWindow(const ShapeInfo& si,
 void
 Window::React2input(Status& s,
                     const datas& ds,
+                    int nbInput,
                     int n,
                     ms displayTime)
 {
@@ -232,7 +233,7 @@ Window::React2input(Status& s,
     _startValidationFrame = -1;
   }
 
-  Shape::React2input(s, ds, n, displayTime);
+  Shape::React2input(s, ds, nbInput, n, displayTime);
 }
 
 // void

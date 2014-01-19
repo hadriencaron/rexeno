@@ -153,12 +153,12 @@ void recorder(void* p)
   {
     rt_buffer_read(&bufferRecorder, recorderArray, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
     if (rec)
+    {
+      for (int i = 0; i < NB_CHANNELS*NB_DATA*2; ++i)
       {
-	for (int i = 0; i < NB_CHANNELS*NB_DATA*2; ++i)
-	  {
-	    ofs << recorderArray[i] << " " << recorderArray[i + 1] << "\n";
-	  }
+        ofs << recorderArray[i] << " " << recorderArray[i + 1] << "\n";
       }
+    }
   }
 }
 
@@ -225,20 +225,25 @@ XenoDriver::React2input()
     _calibration->react2input();
 }
 
-void
+int
 XenoDriver::AnalogIn(datas& data)
 {
-  RT_BUFFER bufferRecorder;
-  rt_buffer_bind(&bufferRecorder, "recorder_buffer", TM_INFINITE);
+  RT_BUFFER bufferDisplay;
+  rt_buffer_bind(&bufferDisplay, "display_buffer", TM_INFINITE);
   unsigned int i;
   size_t size;
 
   // rt_mutex_acquire(_mutex, TM_INFINITE);
-  size = rt_buffer_read(&bufferRecorder, recorderArray, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
-  for (i = 0; size && (i < data.size()); ++i)
+  size = rt_buffer_read(&bufferDisplay, recorderArray, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
+  for (i = 0; i < size; ++i)
   {
     data[i].volt = _analogData[2 * i];
     data[i].timing = _analogData[2 * i + 1];
+  }
+  if (i < data.size())
+  {
+    data[i].volt = 0;
+    data[i].timing = 0;
   }
   // rt_mutex_release(_mutex);
   _calibration->adjustPoint(data);

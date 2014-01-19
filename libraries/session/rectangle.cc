@@ -28,10 +28,11 @@ Rectangle::Rectangle(const ShapeInfo& si,
 void
 Rectangle::React2input(Status& s,
                        datas& ds,
+                       int nbInput,
                        int frameId,
                        ms displayTime)
 {
-  Shape::React2input(s, ds, frameId, displayTime);
+  Shape::React2input(s, ds, nbInput, frameId, displayTime);
 }
 
 Rectangle::~Rectangle()

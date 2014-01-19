@@ -53,6 +53,7 @@ public:
   virtual void React2input(Status&,
                            const datas&,
                            int,
+                           int,
                            ms);
   double x() {return _x->value;}
   double y() {return _y->value;}

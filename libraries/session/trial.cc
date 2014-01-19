@@ -75,6 +75,8 @@ Trial::~Trial()
 int
 Trial::displayFrame(Driver* driver)
 {
+  int nbInput;
+
   if (_nbFrames <= _curFrameId)
   {
     PDEBUG("Trial::displayFrame", "Time up, resquest reset");
@@ -123,11 +125,11 @@ Trial::displayFrame(Driver* driver)
   _sendTtls(driver);
   //_status[RUNNING] = false;
   driver->React2input();
-  driver->AnalogIn(_data);
+  nbInput = driver->AnalogIn(_data);
   ms displayTime = driver->GetTime();
 
   if (_father->_enableReplay)
-    _log(_data);
+    _log(_data, nbInput);
   if ((_curFrameId == 0) && (!_logged))
   {
     s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");
@@ -140,7 +142,7 @@ Trial::displayFrame(Driver* driver)
 
     PDEBUG("Trial::displayFrame ", curShape->name() << " f " << curShape->frameStart() << " t " << curShape->frameEnd() << " d " << curShape->Displayable(_curFrameId));
     if (curShape->Displayable(_curFrameId))
-      curShape->React2input(_status, _data, _curFrameId, driver->GetTime());
+      curShape->React2input(_status, _data, nbInput, _curFrameId, driver->GetTime());
   }
   Setup::reset();
   return (_react2status());
@@ -240,19 +242,16 @@ Trial::status(int key)
 }
 
 void
-Trial::_log(datas& d)
+Trial::_log(datas& d,
+            int nbInput)
 {
   channel& Xs = d[0];
   channel& Ys = d[1];
-  channel::iterator it;
+  int i;
 
-  for (it = Xs.begin(); it != Xs.end(); ++it)
+  for (i = 0; i < nbInput; ++i)
   {
-    replayerLogs << it->volt << " ";
+    replayerLogs << Xs[i].volt << " " << Ys[i].volt << " ";
   }
-  for (it = Ys.begin(); it != Ys.end(); ++it)
-  {
-    replayerLogs << it->volt << " ";
-  }
-  replayerLogs << "\n";
+  replayerLogs << std::endl;
 }

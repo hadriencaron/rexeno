@@ -18,6 +18,7 @@ public:
   void React2input(Status&,
                    const datas&,
                    int,
+                   int,
                    ms);
   void Reset();
 protected:

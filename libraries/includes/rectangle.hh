@@ -15,6 +15,7 @@ public:
   void React2input(Status&,
                    datas&,
                    int,
+                   int,
                    ms);
 private:
 };

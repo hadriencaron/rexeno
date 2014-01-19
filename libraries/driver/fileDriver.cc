@@ -17,6 +17,8 @@
 #include <string>
 #include "driver.hh"
 #include "session.hh"
+#include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
 
 FileDriver::FileDriver(Session* father,
                        Calibration* cal,
@@ -57,42 +59,40 @@ FileDriver::GetTime()
   return (current - _start);
 }
 
-void
+int
 FileDriver::AnalogIn(datas& data)
 {
   PDEBUG("FileDriver::AnalogIn ", "start");
   channel& Xs = data[0];
   channel& Ys = data[1];
-  channel::iterator it;
   PDEBUG("FileDriver::AnalogIn ", "size channel 0 : " << Xs.size());
 
   // Get time by differenciating with Initial value
   timeb tb;
   ftime(&tb);
   ms current = tb.millitm + (tb.time & 0xfffff) * 1000;
-
-  for (it = Xs.begin(); it != Xs.end(); ++it)
+  std::string sLine;
+  if (getline(_infile, sLine))
   {
-    _infile >> it->volt;
-    it->timing = current;
-    PDEBUG("FileDriver::AnalogIn ", "X : " << it->volt);
-    if (_infile.eof())
+    vector<string> strs;
+    vector<string>::iterator it;
+    boost::split(strs,sLine,boost::is_any_of("\t "), boost::token_compress_on);
+    for (it = strs.begin(); it != strs.end(); ++it)
     {
-      cout << "end of input" << endl;
-      throw;
+      if (*it != "")
+      {
+        Xs[0].volt = boost::lexical_cast<double>(*it);
+        Xs[0].timing = current;
+        ++it;
+        Ys[0].volt = boost::lexical_cast<double>(*it);
+        Ys[0].timing = current;
+      }
     }
+    return (strs.size());
   }
-  for (it = Ys.begin(); it != Ys.end(); ++it)
+  else
   {
-    _infile >> it->volt;
-    it->timing = current;
-    if (_infile.eof())
-    {
-      cout << "end of input" << endl;
-      throw;
-    }
+    cout << "end of input" << endl;
+    throw;
   }
-
-
-
 }

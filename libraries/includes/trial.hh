@@ -54,7 +54,7 @@ public:
 private:
   int _react2status();
   void _sendTtls(Driver* d);
-  void _log(datas&);
+  void _log(datas&, int);
 
   int _curFrameId;
   int _nbFrames;

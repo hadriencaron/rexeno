@@ -28,6 +28,7 @@ public:
   void DisplayMonitor();
   void React2input(Status&,
                    const datas&,
+                   int nbInput,
                    int frameId,
                    ms);
 private:

@@ -66,9 +66,10 @@ DummyDriver::React2input()
  * 
  * @param data 
  */
-void
+int
 DummyDriver::AnalogIn(datas& data)
 {
   _calibration->adjustPoint(data);
+  return (1);
 }
 
