@@ -2,7 +2,7 @@ name=TEST
 x_channel=0
 y_channel=1
 coordinates_type=percent
-driver=file:replayerLogs
+driver=dummy
 calibration_type=keyboard
 enable_replay=false
 
