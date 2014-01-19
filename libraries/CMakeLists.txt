@@ -94,5 +94,10 @@ add_custom_command(TARGET Rexeno POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${PROJECT_SOURCE_DIR}/configFiles/"
         "~/.rexeno")
+set_property(TARGET Rexeno PROPERTY INSTALL_RPATH_USE_LINK_PATH TRUE)
+
 install(FILES includes/rexeno.hh includes/types.hh includes/variable.hh includes/setup.hh includes/order_parser.hh
         DESTINATION /usr/include)
+install(FILES ../scripts/rexeno-saver
+	DESTINATION /bin
+	PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)

@@ -23,6 +23,7 @@ FileDriver::FileDriver(Session* father,
                        std::string filename)
   : Driver::Driver(father, cal)
 {
+  _ofs = new ofstream("/tmp/Eye", std::ofstream::out);
   // Set Inital time
   timeb tb;
   ftime(&tb);
@@ -91,4 +92,7 @@ FileDriver::AnalogIn(datas& data)
       throw;
     }
   }
+
+
+
 }

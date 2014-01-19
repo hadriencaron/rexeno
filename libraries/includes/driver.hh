@@ -74,7 +74,6 @@ private:
 class FileDriver : public Driver
 {
 public:
-  FileDriver(Session* f, Calibration* c) : Driver::Driver(f, c) {}
   FileDriver(Session*,
              Calibration*,
              std::string);
@@ -86,6 +85,7 @@ public:
 private:
   ms _start;
   ifstream _infile;
+  ofstream* _ofs;
 };
 
 #ifdef XENO
