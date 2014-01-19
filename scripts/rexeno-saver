@@ -1,0 +1,13 @@
+#! /bin/sh
+
+dirname=`date +%F-%kh%Mmn | tr -d \\  | tr - _ | tr -d '\n'`
+
+echo "Saving last section with current date: " $cur_date
+
+mkdir $dirname
+cp /tmp/*.txt $dirname/.
+cp order $dirname/.
+cp definition $dirname/.
+cp main.cc $dirname/.
+cp *calib*.txt $dirname/calib.txt
+zip -r $dirname.zip $dirname
