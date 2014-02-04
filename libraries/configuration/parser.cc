@@ -67,8 +67,8 @@ namespace configuration
       word %= lexeme[ +(char_ - ' ' - "|" - ">" - ";" - "\n")];
 
       shape %= ">"
-	>> word
-	>> +word
+	>> word // Shape name
+	>> +word // Shape attributes
 	;
 
       trial %= "|"

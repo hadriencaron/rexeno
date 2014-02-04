@@ -1,0 +1,6 @@
+/home/xeno1/Desktop/rexeno/libraries/CMakeFiles/Rexeno.dir
+/home/xeno1/Desktop/rexeno/libraries/configuration/CMakeFiles/configuration.dir
+/home/xeno1/Desktop/rexeno/libraries/driver/CMakeFiles/driver.dir
+/home/xeno1/Desktop/rexeno/libraries/recorder/CMakeFiles/recorder.dir
+/home/xeno1/Desktop/rexeno/libraries/session/CMakeFiles/session.dir
+/home/xeno1/Desktop/rexeno/libraries/session/CMakeFiles/sessionBin.dir

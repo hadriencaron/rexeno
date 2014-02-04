@@ -1,0 +1,10 @@
+/usr/include/rexeno.hh
+/usr/include/types.hh
+/usr/include/variable.hh
+/usr/include/setup.hh
+/usr/include/parser.hh
+/usr/local/lib/libconfiguration.so
+/usr/include/session.hh
+/usr/local/lib/libsession.so
+/usr/local/lib/libdriver.so
+/usr/local/lib/librecorder.so

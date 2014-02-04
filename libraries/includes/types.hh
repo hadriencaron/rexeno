@@ -16,11 +16,14 @@ struct Element
   {
     volt = 0;
     timing = 0;
+    rep = 0;
   }
   ~Element() {}
 
+  int rep;
   double volt;
   ms timing;
+
 };
 
 typedef std::vector<Element> channel;

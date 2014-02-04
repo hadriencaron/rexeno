@@ -16,20 +16,19 @@ using boost::lexical_cast;
 void
 Shape::Display()
 {
-
 	double xGL = _xGL();
 	double yGL = _yGL();
 	double demi_horizontal = _demiHorizontal();
 	double demi_vertical = _demiVertical();
-
+	glDisable(GL_LIGHTING);
 	glBegin(GL_QUADS);
-	glColor3ub(*_R,*_G,*_B);
-	glVertex3d(xGL-demi_horizontal,0.f, yGL-demi_vertical);
-	glVertex3d(xGL+demi_horizontal,0.f, yGL-demi_vertical);
-	glVertex3d(xGL+demi_horizontal,0.f, yGL+demi_vertical);
-	glVertex3d(xGL-demi_horizontal,0.f, yGL+demi_vertical);
+		glColor3ub(*_R,*_G,*_B);
+		glVertex3d(xGL-demi_horizontal, yGL-demi_vertical,0.f);
+		glVertex3d(xGL+demi_horizontal, yGL-demi_vertical,0.f);
+		glVertex3d(xGL+demi_horizontal, yGL+demi_vertical,0.f);
+		glVertex3d(xGL-demi_horizontal, yGL+demi_vertical,0.f);
 	glEnd();
-
+	glEnable(GL_LIGHTING);
 }
 
 /** 
@@ -57,7 +56,7 @@ Shape::Displayable(int frameId)
 
   res &= (frameId >= frameStart()) || (frameStart() == -1);
   res &= (frameId <= frameEnd()) || (frameEnd() == -1);
-  PDEBUG("Shape::Displayable ", "shape " << name() << " is displayable: " << res << " start " << frameStart() << " end " << frameEnd());
+ // PDEBUG("Shape::Displayable ", "shape " << name() << " is displayable: " << res << " start " << frameStart() << " end " << frameEnd());
   return res;
 }
 
@@ -152,19 +151,26 @@ Shape::React2input(Status& s,
                    int frameId,
                    ms displayTime)
 {
+
   Session* session = Session::getInstance();
-  //cout << frameId << " " << frameStart() << " " << frameEnd() << endl;
-  //cout << "Display Time => "<< displayTime << endl;
   // Saving of shape apparition
   if ((frameId == frameStart()) && (!_logged))
   {
     _logged = true;
-    session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " start", "events.txt");
+	string s;
+	ostringstream ostr;
+	ostr << _name << " start " << lexical_cast<string>(displayTime) << " Pos [" << *_x << ", " << *_y <<"]";
+	s = ostr.str();
+	session->recorder->Save(s, "events.txt");
   }
   // Saving of shape disparation
   if ((frameId == frameEnd()) && (!_loggedEnd))
   {
-    session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " end", "events.txt");
+	string s;
+	ostringstream ostr;
+	ostr << _name << " end " << lexical_cast<string>(displayTime) << " Pos [" << *_x << ", " << *_y <<"]";
+	s = ostr.str();
+	session->recorder->Save(s, "events.txt");
     _loggedEnd = true;
   }
 
@@ -211,10 +217,27 @@ Shape::initTexture(int sizeX, int sizeY, char * data){
 	}
 }
 
-/** 
+void
+Shape::Reset(){
+	printf("ok\n");
+//	_logged = false;
+//	_loggedEnd = false;
+}
+
+/**
  * Abstract Constructor : inits some bool values
- * 
+ *
  */
+
+string
+Shape::getAttrsToString(){
+	string s;
+	ostringstream ostr;
+	ostr << _name << ": Width "<< *_width <<" Height "<<*_height << " Pos ["<< *_x <<", "<< *_y <<"] RGB ["<<*_R<<", "<<*_G<<", "<<*_B<<"]";
+	s = ostr.str();
+	return s;
+}
+
 Shape::Shape()
 {
   _id = 0;

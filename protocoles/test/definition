@@ -1,0 +1,13 @@
+name= TEST
+logLevel= 9
+
+| 300 STOP_TARGET1
+> Square Target -0.5 0 Start_Stop End_Target 0 255 0 0.1 0
+
+
+
+> Plan Plan 0 0 0 -1 255 255 0 15 25 40
+> Sphere Sphere2 0.8 0 0 0 -1 255 255 0 20 60 0.1 0.6 0 0 0
+> Sphere Sphere1 0.8 0 0 0 -1 255 255 0 20 60 0.1 0.4 0 0 1
+;
+

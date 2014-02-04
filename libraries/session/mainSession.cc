@@ -14,16 +14,16 @@ using namespace std;
 void		GO_Target1(VariableManager& TM)
 {
   // Variable	*fixation_duration = TM->GetVariable("GO_TARGET1", "Fixation_Duration");
-  Variable	*fixation_duration = new Variable(0);
-  Variable	*end_fixation = TM.getVariable("End_Fixation");
-  Variable	*end_target = TM.getVariable("End_Target");
+ // Variable	*fixation_duration = new Variable(0);
+  //Variable	*end_fixation = TM.getVariable("End_Fixation");
+  //Variable	*end_target = TM.getVariable("End_Target");
 
-  
-  fixation_duration->value = rand() % 30 + 30; // Un nombre random entre 30 et 60
-  end_fixation->value = fixation_duration->value;
-  end_target->value = end_fixation->value + 60;
+
+ // fixation_duration->value = rand() % 30 + 30; // Un nombre random entre 30 et 60
+ // end_fixation->value = fixation_duration->value;
+//  end_target->value = end_fixation->value + 60;
 }
-
+/*
 void		GO_Target2(VariableManager& TM)
 {
   // Variable	*fixation_duration = TM->GetVariable("GO_TARGET2", "Fixation_Duration");
@@ -36,7 +36,7 @@ void		GO_Target2(VariableManager& TM)
   end_fixation->value =  fixation_duration->value;
   end_target->value = end_fixation->value + 60;
 }
-
+*/
 
 void		InterTrial_CTM(std::string &name,
                                VariableManager& TM)
@@ -51,9 +51,9 @@ void		InterTrial_CTM(std::string &name,
  // GO_Target1(TM);
  // GO_Target2(TM);
   //Variable* start = TM.getVariable("Start_Correct");
-  Variable* end = TM.getVariable("End_Target");
+ /* Variable* end = TM.getVariable("End_Target");
   //start->value = 1160;
-  end->value = 1160;
+  end->value = 1160;*/
 }
 
 

@@ -7,7 +7,8 @@
 Trial::Trial(TrialInfo& ti)
   : _curFrameId(0),
     _nbFrames(1),
-    _name(ti.name)
+    _name(ti.name),
+    _displayTime(0)
 {
   _logged = false;
   // _data.resize(8 * 20); // 8 channels x 20 samples (20 > 16.666)
@@ -20,6 +21,10 @@ Trial::Trial(TrialInfo& ti)
   }
 
   vector<ShapeInfo>::iterator it;
+
+//  Sphere* sphere1 = NULL;
+ // Sphere* sphere2 = NULL;
+
   for (it = ti.shapes.begin(); it != ti.shapes.end(); ++it)
   {
     Shape *newShape = NULL;
@@ -35,8 +40,16 @@ Trial::Trial(TrialInfo& ti)
       newShape = new NeutralWindow(*it, variables, this);
     if (it->name == "FixationWindow")
       newShape = new FixationWindow(*it, variables, this);
-	if (it->name == "Sphere")
+	if (it->name == "Sphere"){
 		newShape = new Sphere(*it, variables, this);
+/*
+		if (sphere1==NULL){
+			sphere1 = (Sphere*) newShape;
+		}
+		else if (sphere2 == NULL){
+			sphere2 = (Sphere*) newShape;
+		}*/
+	}
 	if (it->name == "Plan")
 		newShape = new Plan(*it, variables, this);
 
@@ -47,6 +60,16 @@ Trial::Trial(TrialInfo& ti)
         _nbFrames = newShape->frameEnd();
     }
   }
+/*	if (sphere1->getLead()==1){
+		sphere2->setIsWorking(true);
+	}
+	else{
+		sphere2->setIsWorking(true);
+	}*/
+/*	if ((sphere1->getLead()==1 && sphere2->getLead()==1) || (sphere1->getLead()==0 && sphere2->getLead()==0)){
+		printf("!!! Les spheres ont le même rang!\n");
+		exit(0);
+	}*/
 
   _status[RUNNING] = true;
   _status[PAUSE] = false;
@@ -61,6 +84,7 @@ Trial::Trial(TrialInfo& ti)
   _ttl->push_back( new TtlEvent() );
   _ttl->push_back( new TtlEvent() );
   _ttl->push_back( new TtlEvent() );
+
 }
 
 Trial::~Trial()
@@ -77,14 +101,18 @@ Trial::~Trial()
 int
 Trial::displayFrame(Driver* driver)
 {
+  if (_displayTime==0){
+	  _displayTime = driver->GetTime();
+  }
   Session* s = Session::getInstance();
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
   float Sun =  0.5f;
 
-  GLfloat lightPosition[4] = {0.0f,0.0f,1.0f,0.0f};
+  GLfloat lightPosition[4] = {0.0f,0.0f,0.0f,1.0f};
   GLfloat lightAmbient[4] = {Sun,Sun,Sun,2.0f};
   GLfloat lightDiffuse[4] = {1.0f,1.0f,1.0f,1.0f};
 
@@ -92,53 +120,82 @@ Trial::displayFrame(Driver* driver)
   glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
   glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
-
-  gluLookAt(2,1,1,-1,1,0,0,0,1);
+  gluLookAt(0,1,1.8, 0,0,0, 0,1,0);
 
   vector<Shape*>::iterator it;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
     glPushMatrix();
-    glTranslatef(0.5, 0, 0);
-    if (curShape->Displayable(_curFrameId))
-      curShape->Display();
+    //glTranslatef(0.5, 0, 0);
+    if (curShape->Displayable(_curFrameId)){
+    	if (curShape->name()=="Sphere"){
+        	curShape->Display();
+        	if (curShape->getIsWorking()==false){
+        		 // std::cout << "Time > "<< (driver->GetTime()-_displayTime) << endl;
+        	}
+    	}
+    	else{
+    		curShape->Display();
+    	}
+    }
+  //  std::cout << "Time > "<< (driver->GetTime()-_displayTime) << endl;
     glPopMatrix();
 
-    if (curShape->MonitorDisplayable())
-    {
-      glPushMatrix();
-      glTranslatef(-0.5, 0, 0);
-      if (curShape->Displayable(_curFrameId))
-        curShape->DisplayMonitor();
-      glPopMatrix();
+    if (curShape->getId() != 7){
+		if (curShape->MonitorDisplayable())
+		{
+			glPushMatrix();
+			//glTranslatef(-0.5, 0, 0);
+			if (curShape->Displayable(_curFrameId))
+				curShape->DisplayMonitor();
+			glPopMatrix();
+		}
     }
+
   }
+
   glutSwapBuffers();
   glutPostRedisplay();
   glClear(GL_COLOR_BUFFER_BIT);
-  PDEBUG("Trial::displayFrame", " displayed frame " << _curFrameId);
+ // PDEBUG("Trial::displayFrame", " displayed frame " << _curFrameId);
 
   _sendTtls(driver);
-  //_status[RUNNING] = false;
+
   driver->React2input();
   driver->AnalogIn(_data);
   ms displayTime = driver->GetTime();
-
   if ((_curFrameId == 0) && (!_logged))
   {
     s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");
-    s->recorder->Save(_name + lexical_cast<string>(displayTime), "events.txt");
+    s->recorder->Save(_name + ' ' + lexical_cast<string>(displayTime) + "\n", "events.txt");
+		for (it = _shapes.begin(); it != _shapes.end(); ++it)
+		{
+		  Shape *curShape = *it;
+
+		  if ((_curFrameId == 0) && (!_logged))
+		  {
+			s->recorder->Save(curShape->getAttrsToString() ,"events.txt");
+		  }
+	    }
+	s->recorder->Save("\n" ,"events.txt");
     _logged = true;
   }
+ // std::cout << "Frame Id => " << _logged << endl;
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
 
-    PDEBUG("Trial::displayFrame ", curShape->name() << " f " << curShape->frameStart() << " t " << curShape->frameEnd() << " d " << curShape->Displayable(_curFrameId));
+    if ((_curFrameId == 0) && (!_logged))
+    {
+    	s->recorder->Save(curShape->getAttrsToString() ,"events.txt");
+    }
+   //PDEBUG("Trial::displayFrame ", curShape->name() << " f " << curShape->frameStart() << " t " << curShape->frameEnd() << " d " << curShape->Displayable(_curFrameId));
     if (curShape->Displayable(_curFrameId))
-      curShape->React2input(_status, _data, _curFrameId, driver->GetTime());
-  }
+    		curShape->React2input(_status, _data, _curFrameId, driver->GetTime());
+
+    }
+
   Setup::reset();
   return (_react2status());
 }
@@ -157,8 +214,10 @@ Trial::_sendTtls(Driver* d)
 int
 Trial::_react2status()
 {
+
   if (_status[CORRECT] == true)
   {
+
     PDEBUG("Trial::_react2status ", "CORRECT");
     return (CORRECT);
   }
@@ -167,7 +226,7 @@ Trial::_react2status()
   {
     if (_status[WRONG_NEXT] == true)
     {
-      PDEBUG("Trial::_react2status ", "WRONG_NEXT");
+     PDEBUG("Trial::_react2status ", "WRONG_NEXT");
       return (WRONG_NEXT);
     }
 
@@ -193,7 +252,7 @@ Trial::_react2status()
   if (_status[RUNNING] == true)
   {
     _curFrameId++;
-    PDEBUG("Trial::_react2status ", "RUNNING");
+    //PDEBUG("Trial::_react2status ", "RUNNING");
     return (RUNNING);
   }
   PDEBUG("Trial::_react2status ", "bug here");
@@ -227,20 +286,25 @@ Trial::atStart()
 }
 
 void
-Trial::Reset()
+Trial::Reset(Driver *d)
 {
-  PDEBUG("Trial::Reset ", "start")
+//  PDEBUG("Trial::Reset ", "start")
   _curFrameId = 0;
+  _logged = false; 											// !!
   Status::iterator it;
   for (it = _status.begin(); it != _status.end(); ++it)
   {
     it->second = false;
   }
-  // Shapes::iterator shapesIterator;
-  // for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
-  // {
+  d->Reset();
+  Shapes::iterator shapesIterator;
+  for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
+   {
   // (*shapesIterator)->Reset();
-  // }
+	  (*shapesIterator)->Reset();
+	  _displayTime = d->GetTime();
+   }
+
 }
 
 bool

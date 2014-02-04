@@ -12,6 +12,7 @@ public:
 
   virtual void adjustPoint(datas&) = 0;
   virtual void React2input() = 0;
+  virtual void Reset(){};
 };
 
 class KeyboardCalibration : public Calibration
@@ -22,8 +23,10 @@ public:
 
   void adjustPoint(datas&);
   void React2input();
+  void Reset();
 private:
   Matrix<double>* _m;
+  int _rep;
 };
 
 #endif

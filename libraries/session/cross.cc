@@ -65,7 +65,7 @@ Cross::DisplayMonitor()
 
   double bar_width_horizontal = demi_horizontal / 20;
   double bar_width_vertical = demi_vertical / 20;
-
+  glDisable(GL_LIGHTING);
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);    
   glVertex2d(xGL-demi_horizontal, yGL-bar_width_vertical);
@@ -82,7 +82,7 @@ Cross::DisplayMonitor()
   glVertex2d(xGL+(bar_width_horizontal),yGL+demi_vertical);
   glVertex2d(xGL-(bar_width_horizontal),yGL+demi_vertical);
   glEnd();
-
+  glEnable(GL_LIGHTING);
 }
 
 /** 
@@ -103,7 +103,7 @@ Cross::React2input(Status& s,
 
   _x->value = ds[0][0].volt;
   _y->value = -ds[1][0].volt;
-  PDEBUG("Cross::React2input", " x " << _x->value << " y " << _y->value);
+  //PDEBUG("Cross::React2input", " x " << _x->value << " y " << _y->value);
   // for (it = ds.begin(); it != ds.end(); ++it)
   // {
   //   _x->value = (*ds.begin())[0].volt;

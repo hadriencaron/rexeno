@@ -84,7 +84,7 @@ Window::DisplayMonitor()
   double rightX = _xGL() + _demiHorizontal();
   double topY = _yGL() + _demiVertical();
   double bottomY = _yGL() - _demiVertical();
-
+  glDisable(GL_LIGHTING);
   glBegin(GL_QUADS);
   glColor3ub(*_R,*_G,*_B);
   glVertex2d(leftX, topY);
@@ -116,7 +116,7 @@ Window::DisplayMonitor()
   glVertex2d(rightX, _thickness + bottomY);
   glVertex2d(rightX, bottomY);
   glEnd();
-
+  glEnable(GL_LIGHTING);
 }
 
 /**
@@ -264,11 +264,18 @@ Window::React2input(Status& s,
 {
   datas::const_iterator datasIt;
   channel::const_iterator channelIt;
-
+/*
   double x = ds[0][0].volt;
-  double y = ds[1][0].volt;
+  double y = ds[1][0].volt;*/
+// int *rep = &ds[0][0].rep;
 
-  if (isIn(x, y))
+/*  if (ds[0][0].rep != (-1)){
+	  printf("J'ai une réponse! => %d \n", ds[0][0].rep);
+	  s[CORRECT] = true;
+//	  ds[0][0].rep = false;
+	//  *rep = false;
+  }*/
+/*  if (isIn(x, y))
   {
     if (_startValidationFrame == -1)
     {
@@ -277,7 +284,8 @@ Window::React2input(Status& s,
         // window type
       {
         s[_type] = true;
-        PDEBUG("Window::React2input", " " << name() << " activated");
+
+    	  //   PDEBUG("Window::React2input", " " << name() << " activated");
       }
     }
     else
@@ -285,12 +293,12 @@ Window::React2input(Status& s,
   }
   else
   {
-    PDEBUG("Window::React2input", " outside " << name());
+ //   PDEBUG("Window::React2input", " outside " << name());
     if (_outsideValue)
       s[_outsideValue] = true;
     _startValidationFrame = -1;
   }
-
+*/
   Shape::React2input(s, ds, n, displayTime);
 }
 

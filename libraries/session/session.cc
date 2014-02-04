@@ -72,7 +72,6 @@ Session::Session(configuration::SessionInfo& s,
  */
 Session::~Session()
 {
-  printf("Delete session!");
   vector<Trial*>::iterator it;
   for (it = _trialsDefinitions.begin(); it != _trialsDefinitions.end(); ++it)
   {
@@ -119,6 +118,7 @@ Session::displayHeader()
     glutSwapBuffers();
     glutPostRedisplay();
     glClear(GL_COLOR_BUFFER_BIT);
+
     if (nbInitFrames() < nbFrame4init())
     {
       //getTime() % (int) setup->refreshRate();
@@ -131,8 +131,7 @@ Session::displayHeader()
   }
   else
   {
-
-    displayFrame();
+	  displayFrame();
   }
 }
 
@@ -160,7 +159,12 @@ reshape(int width, int height){
 	if (height==0){
 		height=1;
 	}
-
+	if (width <= height){
+		glOrtho (-50, 50, -50*height/width, 50*height/width, -1, 1);
+	}
+	else{
+		glOrtho (-50*width/height, 50*width/height, -50, 50, -1, 1);
+	}
 	glViewport(0,0,width, height); //Taille de la zone de sortie
 	glMatrixMode(GL_PROJECTION); // Charge la matrice de données GL_PROJECTION = Forme
 	glLoadIdentity(); // Reset la matrice
@@ -171,10 +175,11 @@ reshape(int width, int height){
 
 GLvoid
 InitGL(int width, int height){
+
 	float Sun =  0.5f;
 	float rgb[3] = {0.0f, 0.51f, 0.73f};
 
-	GLfloat lightPosition[4] = {0.0f,0.0f,1.0f,0.0f};
+	GLfloat lightPosition[4] = {0.0f,1.0f,0.0f,0.0f};
 	GLfloat lightAmbient[4] = {Sun,Sun,Sun,2.0f};
 	GLfloat lightDiffuse[4] = {1.0f,1.0f,1.0f,1.0f};
 
@@ -184,6 +189,7 @@ InitGL(int width, int height){
 	glDepthFunc(GL_LESS);
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable( GL_BLEND );
 
 	glEnable(GL_DEPTH_TEST); // est de profondeur
 	glEnable(GL_LIGHTING); // Active l'éclairage
@@ -193,20 +199,20 @@ InitGL(int width, int height){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	glEnable(GLUT_DEPTH || GLUT_DOUBLE);
-    glEnable(GL_BLEND);
+	//glEnable(GLUT_DEPTH || GLUT_DOUBLE);
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
+
 }
 
-/** 
+/**
  * Inits and launch the GLUT loop
- * 
- * @param argc 
- * @param argv 
+ *
+ * @param argc
+ * @param argv
  */
 void
 Session::run(int argc,
@@ -218,24 +224,25 @@ Session::run(int argc,
   	glutInitWindowSize(2048, 768);*/
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);
-	glutInitWindowSize(640,480);
+	glutInitWindowSize(3840,1080);
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-640)/2,
 			               (glutGet(GLUT_SCREEN_HEIGHT)-480)/2);
+	//glutInitWindowPosition(0, 0);
+	glutCreateWindow ((char*)"Time in Dynamic Perspective");;
 
-	glutCreateWindow ((char*)"rexeno");
-  //  glutGameModeString("2048x768:32@60");
-  //  glutEnterGameMode();
+	//glutGameModeString("1920x1080:32@60");
+	//glutEnterGameMode();
 	glutKeyboardFunc(processNormalKeys);
-  //  glutFullScreen();
-  //  glutSetCursor(GLUT_CURSOR_NONE);
+	 // glutFullScreen();
+	 // glutSetCursor(GLUT_CURSOR_NONE);
 	glutReshapeFunc(&reshape);
 	glutDisplayFunc (displayRexeno);
 
-  //  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  //  glClearColor(_R, _G, _B, 1.0f);
-  InitGL(640,640);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  glutMainLoop();
+	InitGL(3840,1080);
+
+	glutMainLoop();
 }
 
 /** 
@@ -247,37 +254,39 @@ void
 Session::displayFrame()
 {
 #ifdef DEBUG
-  PDEBUG("Session::displayFrame ", __debug_FrameNumber << "/" << _trialsOrder.size() << " trials in this session");
+ // PDEBUG("Session::displayFrame ", __debug_FrameNumber << "/" << _trialsOrder.size() << " trials in this session");
 #endif
 
 
   if (_currentTrial != _trialsOrder.end())
   {
-    PDEBUG("Session::displayFrame", " trial frame ");
+  //  PDEBUG("Session::displayFrame", " trial frame ");
     Trial* t = _trialsDefinitions[*_currentTrial];
-
     if (t->atStart() && beforeTrial)
     {
+   //   std::cout << "Name => " << t->variables << endl;
       beforeTrial(t->name(), t->variables);
-      t->adjustNbFrames();
-    }
-
+      t->adjustNbFrames();	printf("3\n");
+    };
     int b = t->displayFrame(_driver);
 
     if (b != RUNNING)
     {
-      PDEBUG("Session::displayFrame", " end of trial : " << t->name() << " (trial number " << *_currentTrial << " )");
+
+    // PDEBUG("Session::displayFrame", " end of trial : " << t->name() << " (trial number " << *_currentTrial << " )");
       ms displayTime = _driver->GetTime();
       recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
+
         afterTrial(t->name(), t->variables, b);
 
       _currentTrial++;
-      t->Reset();
+      t->Reset(_driver);
 #ifdef DEBUG
       ++__debug_FrameNumber;
 #endif
     }
+
   }
   else
   {

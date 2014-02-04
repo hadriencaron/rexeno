@@ -64,7 +64,11 @@ public:
   uint ttl() {return _ttl;}
   bool Displayable(int frameId);
   bool SubjectVisible(){return _subjectVisible;}
-  virtual void Reset() {}
+  virtual void Reset();
+  virtual bool getIsWorking(){ return false;}
+  virtual string getAttrsToString();
+  int getId(){ return _id;}
+
   bool IsTextured(){ return _istexured;}
   int id() {return _id;}
 

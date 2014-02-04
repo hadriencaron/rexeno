@@ -55,6 +55,11 @@ DummyDriver::React2input()
     _calibration->React2input();
 }
 
+void
+DummyDriver::Reset(){
+	if (_calibration)
+		_calibration->Reset();
+}
 /** 
  * Gets the keyboard input through calibration
  * 
