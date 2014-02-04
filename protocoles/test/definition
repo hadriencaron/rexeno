@@ -3,6 +3,7 @@ logLevel= 9
 
 | 300 STOP_TARGET1
 > Square Target -0.5 0 Start_Stop End_Target 0 255 0 0.1 0
+> FixationWindow Fixation 0 0 0 End_Fixation 0.48 0.32 Fixation_Duration 0
 
 
 
