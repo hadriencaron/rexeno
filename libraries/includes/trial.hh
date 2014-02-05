@@ -55,6 +55,7 @@ public:
   int frameEnd() {return _nbFrames;}
   VariableManager variables;
   void Reset(Driver * d);
+
 private:
   int _react2status();
   void _sendTtls(Driver* d);
@@ -70,6 +71,9 @@ private:
   datas _data;
   bool _logged;
   ms _displayTime;
+  bool _start;
+
+
 
 };
 

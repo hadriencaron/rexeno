@@ -50,11 +50,8 @@ void Plan::Display(){
 	glTexCoord2i(0.0f,*_repeat);glVertex3f(-*_height,0.0f, *_width);
 	glEnd();
 
-
-
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable( GL_TEXTURE_2D );
-
 
 }
 string
@@ -65,3 +62,4 @@ Plan::getAttrsToString(){
 	s = ostr.str();
 	return s;
 }
+

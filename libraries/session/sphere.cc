@@ -61,13 +61,10 @@ Sphere::React2input(Status& s,
 		int frameId,
 		ms displayTime)
 {
-	  if (ds[0][0].rep != (-1)){
-		  printf("J'ai une réponse! => %d \n", ds[0][0].rep);
-		  s[CORRECT] = true;
-	  }
+
 	  Session* session = Session::getInstance();
 	  // Saving of shape apparition
-
+	//  std::cout << "FrameId => " << frameId << "frameStart => " << frameStart() << "Logged (false?) => " << _logged << endl;
 	  if ((frameId == frameStart()) && (!_logged))
 	  {
 	    _logged = true;
@@ -75,9 +72,11 @@ Sphere::React2input(Status& s,
 		ostringstream ostr;
 		ostr << _name << " start " << lexical_cast<string>(displayTime) << " Pos [" << *_x << ", " << *_y << ", " << *_z <<"]";
 		s = ostr.str();
+	//	printf("Logged passe a vrai\n");
 	    session->recorder->Save(s, "events.txt");
 	  }
 	  // Saving of shape disparation
+//	  std::cout << "FrameId => " << frameId << "frameEnd => " << frameEnd() << "LoggedEnd (false?) => " << _loggedEnd << endl;
 	  if ((frameId == frameEnd()) && (!_loggedEnd))
 	  {
 		string s;
@@ -85,9 +84,10 @@ Sphere::React2input(Status& s,
 		ostr << _name << " end " << lexical_cast<string>(displayTime) << " Pos [" << *_x << ", " << *_y << ", " << *_z <<"]";
 		s = ostr.str();
 		session->recorder->Save(s, "events.txt");
+	//	printf("LoggedEnd passe a vrai\n");
 	    _loggedEnd = true;
 	  }
-
+	  std::cout << "Frame Id => " << frameId << " FrameEnd => " << frameEnd() << displayTime <<endl;
 	  session->recorder->Save(_name + "\n" + lexical_cast<string>(this->_x->value) + "\n" + lexical_cast<string>(this->_y->value) + "\n" + lexical_cast<string>(displayTime), "square_targets.txt");
 
 	  if (frameId > frameEnd())
@@ -102,16 +102,15 @@ Sphere::React2input(Status& s,
 void
 Sphere::Display()
 {
-		if (_lastime == 0){
+	/*	if (_lastime == 0){
 			_lastime = glutGet(GLUT_ELAPSED_TIME);
 		}
 
 		time_t now = glutGet(GLUT_ELAPSED_TIME);
 		const double FrameTime = difftime(now, _lastime);
-
+*/
 		if (this->IsTextured() == false){
 			ImageLoad iload;
-			std::cout << "Texture => " << this->IsTextured() << endl;
 			iload.setFilename("/home/xeno1/workspace/TinDPe/src/textures/test.bmp");
 			if(!(iload.load())){
 				exit(1);
@@ -121,8 +120,8 @@ Sphere::Display()
 		}
 
 		if (*_x>(-0.8)){
-			float move = *_veloX*FrameTime/1000.0;
-			float angleX = move / *_radius*180.0/M_PI;
+			float move = *_veloX/60;
+			float angleX = move / *_radius*180.0 / M_PI;
 			_isWorking = true;
 
 			glPushMatrix();
@@ -146,7 +145,7 @@ Sphere::Display()
 
 			///  if (_x==0){
 			_angleX = _angleX+angleX;
-			//printf("Angle => %f\n ", angleX);
+			std::cout << "X => " << *_x << endl;
 
 			if (_angleX>360){
 				double nb = 360.0- _angleX;
@@ -188,12 +187,15 @@ Sphere::Display()
 			_isWorking = false;
 		}
 
-		_lastime = now;
+//		_lastime = now;
 }
 
 void
 Sphere::Reset(){
 	*_x = 0.8;
+	_logged = false;
+	_loggedEnd = false;
+	_lastime = 0;
 }
 
 void

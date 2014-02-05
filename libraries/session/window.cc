@@ -264,6 +264,7 @@ Window::React2input(Status& s,
 {
   datas::const_iterator datasIt;
   channel::const_iterator channelIt;
+
 /*
   double x = ds[0][0].volt;
   double y = ds[1][0].volt;*/

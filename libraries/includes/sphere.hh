@@ -26,7 +26,7 @@ public:
 
   bool getLead() { return *_lead;}
   bool getIsWorking() { return _isWorking; }
-  float getX() { return *_x;}
+  double z() { return _z->value; }
 
   string getAttrsToString();
 

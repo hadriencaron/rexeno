@@ -114,7 +114,6 @@ Session::displayHeader()
     glVertex2d(0.1, 0.1);
     glEnd();
 
-
     glutSwapBuffers();
     glutPostRedisplay();
     glClear(GL_COLOR_BUFFER_BIT);
@@ -233,14 +232,12 @@ Session::run(int argc,
 	//glutGameModeString("1920x1080:32@60");
 	//glutEnterGameMode();
 	glutKeyboardFunc(processNormalKeys);
-	 // glutFullScreen();
-	 // glutSetCursor(GLUT_CURSOR_NONE);
+	glutFullScreen();
+	//glutSetCursor(GLUT_CURSOR_NONE);
 	glutReshapeFunc(&reshape);
 	glutDisplayFunc (displayRexeno);
 
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	InitGL(3840,1080);
+	InitGL(600,500);
 
 	glutMainLoop();
 }
@@ -257,7 +254,6 @@ Session::displayFrame()
  // PDEBUG("Session::displayFrame ", __debug_FrameNumber << "/" << _trialsOrder.size() << " trials in this session");
 #endif
 
-
   if (_currentTrial != _trialsOrder.end())
   {
   //  PDEBUG("Session::displayFrame", " trial frame ");
@@ -266,7 +262,6 @@ Session::displayFrame()
     {
    //   std::cout << "Name => " << t->variables << endl;
       beforeTrial(t->name(), t->variables);
-      t->adjustNbFrames();	printf("3\n");
     };
     int b = t->displayFrame(_driver);
 
@@ -275,7 +270,7 @@ Session::displayFrame()
 
     // PDEBUG("Session::displayFrame", " end of trial : " << t->name() << " (trial number " << *_currentTrial << " )");
       ms displayTime = _driver->GetTime();
-      recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
+      recorder->Save("\nEndTrial " + lexical_cast<string>(displayTime) + "\n", "events.txt");
       if (afterTrial)
 
         afterTrial(t->name(), t->variables, b);
@@ -286,7 +281,6 @@ Session::displayFrame()
       ++__debug_FrameNumber;
 #endif
     }
-
   }
   else
   {
@@ -295,6 +289,8 @@ Session::displayFrame()
   }
 
 }
+
+
 
 /** 
  * Standard SINGLETON member

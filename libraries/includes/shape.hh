@@ -57,6 +57,8 @@ public:
   virtual void initTexture(int sizeX, int sizeY, char * data);
   double x() {return _x->value;}
   double y() {return _y->value;}
+  virtual double z() { return 0.0; }
+  int id() {return _id;}
   const string& name() {return _name;}
   double frameStart() {return _frameStart->value;}
   double frameEnd() {return _frameEnd->value;}
@@ -67,10 +69,9 @@ public:
   virtual void Reset();
   virtual bool getIsWorking(){ return false;}
   virtual string getAttrsToString();
-  int getId(){ return _id;}
+
 
   bool IsTextured(){ return _istexured;}
-  int id() {return _id;}
 
 protected:
   // Use these functions for opengl's drawing scale. 

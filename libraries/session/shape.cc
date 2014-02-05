@@ -153,6 +153,9 @@ Shape::React2input(Status& s,
 {
 
   Session* session = Session::getInstance();
+
+
+
   // Saving of shape apparition
   if ((frameId == frameStart()) && (!_logged))
   {
@@ -219,7 +222,7 @@ Shape::initTexture(int sizeX, int sizeY, char * data){
 
 void
 Shape::Reset(){
-	printf("ok\n");
+
 //	_logged = false;
 //	_loggedEnd = false;
 }

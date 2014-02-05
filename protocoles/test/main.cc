@@ -2,11 +2,12 @@
 #include <GL/glut.h>
 
 #include "order_parser.hh"
-#include "trial.hh"
-#include "setup.hh"
 
+//  #include "trial.hh"
+#include "setup.hh"
+#include <rexeno.hh>
 #include "session.hh"
-#include "dummyDriver.hh"
+// #include "dummyDriver.hh"
 
 using namespace std;
 
@@ -37,20 +38,17 @@ void		InterTrial_CTM(std::string &name,
   //   }
 
  GO_Target1(TM);
- GO_Target2(TM);
-  //Variable* start = TM.getVariable("Start_Correct");
+  /*//Variable* start = TM.getVariable("Start_Correct");
   Variable* end = TM.getVariable("End_Target");
   //start->value = 1160;
-  end->value = 1160;
+  end->value = 1160;*/
 }
-
-
 
 
 int	main(int argc,
 	     char **argv)
 {
-	printf("ok\n");
+
   configuration::SessionInfo conf;
   //bool r = configuration::CreateConfiguration("../../protocoles/DevTests/conf", conf);
   bool r = configuration::CreateConfiguration("definition", conf);
