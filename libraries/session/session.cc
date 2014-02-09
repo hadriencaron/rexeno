@@ -8,6 +8,7 @@
 #include <GL/glut.h>
 #include <boost/lexical_cast.hpp>
 #include <sys/mman.h>
+#include "fileCalibration.hh"
 
 using namespace configuration;
 
@@ -81,6 +82,12 @@ Session::CalibrationCreator(std::string calibrationName)
   if (calibrationName == "keyboard")
   {
     return (new KeyboardCalibration());
+  }
+  else if (calibrationName.find("matrix:") == 0)
+  {
+    std::string filename = calibrationName.substr(7); // from end of "file:" till the end
+    PDEBUG("Session::DriverCreator ", "FileDriver requested : " << filename);
+    return (new FileCalibration(filename));
   }
   else
   {
@@ -190,6 +197,7 @@ Session::displayHeader()
     else
     {
       _initialized = true;
+      _driver->InitTime();
     }
   }
   else
@@ -273,13 +281,17 @@ Session::displayFrame()
     {
       PDEBUG("Session::displayFrame", " end of trial is : " << t->name() << " (trial number " << *_currentTrial << " )");
       ms displayTime = _driver->GetTime();
-      recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
+      recorder->Save(lexical_cast<string>(displayTime) + " EndTrial", "events.txt");
       if (afterTrial)
         afterTrial(t->name(), t->variables, b);
 
       if (b != WRONG_REDO)
       {
         PDEBUG("Session::displayFrame ", "request next trial");
+        if (t->status(CORRECT))
+          recorder->Save("1", "results.txt");
+        if (t->status(WRONG_NEXT))
+          recorder->Save("0", "results.txt");
         _currentTrial++;
 #ifdef DEBUG
         ++__debug_FrameNumber;

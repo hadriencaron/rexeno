@@ -52,7 +52,9 @@ add_subdirectory (configuration)
 add_subdirectory (session)
 add_subdirectory (driver)
 add_subdirectory (recorder)
-# add_subdirectory (unitTest)
+if (TEST)
+  add_subdirectory (unitTest)
+endif()
 
 if (GUI)
   # the GUIS
@@ -101,3 +103,8 @@ install(FILES includes/rexeno.hh includes/types.hh includes/variable.hh includes
 install(FILES ../scripts/rexeno-saver
 	DESTINATION /bin
 	PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+
+enable_testing()
+
+add_test(test_grammar unitTest/session/sessionUnitTest)

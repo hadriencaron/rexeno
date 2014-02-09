@@ -24,9 +24,9 @@ public:
 
   ~Matrix();
 
-  T&		operator()(int	i,
-			   int	j);
-  T&		operator()(int	i);
+  T&		operator()(unsigned int	i,
+			   unsigned int	j);
+  T&		operator()(unsigned int	i);
   Matrix*	operator+(Matrix&	m);
   Matrix*	operator*(T		x);
   Matrix*	operator+=(T		x);
@@ -38,8 +38,8 @@ public:
 		    Matrix&	b);
   void		Mult(Matrix&	a,
 		     Matrix&	b);
-  int		NbLines() {return _nlines;}
-  int		NbCols() {return _ncols;}
+  unsigned int	NbLines() {return _nlines;}
+  unsigned int	NbCols() {return _ncols;}
   int		NbElem() {return _ncols * _nlines;}
   void		Disp();
   Matrix*	Trans();

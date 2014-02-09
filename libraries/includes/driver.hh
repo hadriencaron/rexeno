@@ -43,6 +43,7 @@ public:
                          ms delay = 0,
                          ms duration = 5) {}
   virtual void React2input() = 0 ;
+  virtual void InitTime() = 0;
   void SetRecorder(Recorder* r) {_recorder = r;}
   
 protected:
@@ -64,6 +65,7 @@ public:
               Calibration*);
   ~DummyDriver() {}
 
+  void InitTime();
   ms GetTime();
   void React2input();
   int AnalogIn(datas&);
@@ -80,6 +82,7 @@ public:
              std::string);
   ~FileDriver() {}
 
+  void InitTime();
   ms GetTime();
   void React2input() {}
   int AnalogIn(datas&);
@@ -103,6 +106,7 @@ public:
   ms GetTime();
   void React2input();
   int AnalogIn(datas&);
+  void InitTime();
 private:
   int _initNidaqCard();
   int _launch();

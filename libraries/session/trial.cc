@@ -132,8 +132,8 @@ Trial::displayFrame(Driver* driver)
     _log(_data, nbInput);
   if ((_curFrameId == 0) && (!_logged))
   {
-    s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");
-    s->recorder->Save(_name + lexical_cast<string>(displayTime), "events.txt");
+    s->recorder->Save(lexical_cast<string>(displayTime) + " TrialStart_" , "events.txt");
+    s->recorder->Save(lexical_cast<string>(displayTime) + " " + _name, "events.txt");
     _logged = true;
   }
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
@@ -220,6 +220,7 @@ Trial::atStart()
 void
 Trial::Reset()
 {
+  _logged = false;
   PDEBUG("Trial::Reset ", "start");
   _curFrameId = 0;
   Status::iterator it;

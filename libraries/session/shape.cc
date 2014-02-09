@@ -157,12 +157,13 @@ Shape::React2input(Status& s,
   if ((frameId == frameStart()) && (!_logged))
   {
     _logged = true;
-    session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " start", "events.txt");
+    //session->recorder->Save(lexical_cast<string>(displayTime) + " " + _name + " start", "events.txt");
+    session->recorder->Save(lexical_cast<string>(displayTime) + " " + _name, "events.txt");
   }
   // Saving of shape disparation
   if ((frameId == frameEnd()) && (!_loggedEnd))
   {
-    session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " end", "events.txt");
+    session->recorder->Save(lexical_cast<string>(displayTime) + " " + _name, "events.txt");
     _loggedEnd = true;
   }
 

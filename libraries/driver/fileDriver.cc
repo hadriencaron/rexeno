@@ -45,6 +45,15 @@ FileDriver::FileDriver(Session* father,
   }
 }
 
+void
+FileDriver::InitTime()
+{
+  // Set Inital time
+  timeb tb;
+  ftime(&tb);
+  _start = tb.millitm + (tb.time & 0xfffff) * 1000;
+}
+
 /** 
  * @return time since initialization
  */
@@ -70,7 +79,7 @@ FileDriver::AnalogIn(datas& data)
   // Get time by differenciating with Initial value
   timeb tb;
   ftime(&tb);
-  ms current = tb.millitm + (tb.time & 0xfffff) * 1000;
+  ms current = tb.millitm + (tb.time & 0xfffff) * 1000 - _start;
   std::string sLine;
   if (getline(_infile, sLine))
   {

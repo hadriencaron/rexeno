@@ -141,6 +141,11 @@ void input(void* p)
   }
 }
 
+void XenoDriver::InitTime()
+{
+
+}
+
 void recorder(void* p)
 {
   ofstream ofs ("/tmp/Eye", std::ofstream::out);

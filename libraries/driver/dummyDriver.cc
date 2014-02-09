@@ -11,7 +11,7 @@
 
 
 #include "driver.hh"
-
+#include "session.hh"
 
 
 /** 
@@ -30,6 +30,15 @@ DummyDriver::DummyDriver(Session* father,
   _name = "dummy";
   _father = father;
 
+  // Set initial time
+  timeb tb;
+  ftime(&tb);
+  _start = tb.millitm + (tb.time & 0xfffff) * 1000;
+}
+
+void
+DummyDriver::InitTime()
+{
   // Set initial time
   timeb tb;
   ftime(&tb);
@@ -69,7 +78,21 @@ DummyDriver::React2input()
 int
 DummyDriver::AnalogIn(datas& data)
 {
+  // Get time by differenciating with Initial value
+  timeb tb;
+  ftime(&tb);
+  ms current = tb.millitm + (tb.time & 0xfffff) * 1000 - _start;
+  PDEBUG("DummyDriver::AnalogIn ", "current time is " << current);
+
   _calibration->adjustPoint(data);
+  _ofs << data[0][0].volt << " " << current << "\n";
+  _ofs << data[1][0].volt << " " << current << "\n";
+  _ofs << 0 << " " << current << "\n";
+  _ofs << 0 << " " << current << "\n";
+  _ofs << 0 << " " << current << "\n";
+  _ofs << 0 << " " << current << "\n";
+  _ofs << 0 << " " << current << "\n";
+  _ofs << 0 << " " << current << std::endl;
   return (1);
 }
 

@@ -10,5 +10,6 @@ cp order $dirname/.
 cp definition $dirname/.
 cp /tmp/Eye $dirname/.
 cp main.cc $dirname/.
+cp replayerLogs $dirname/.
 cp *calib*.txt $dirname/calib.txt
 zip -r $dirname.zip $dirname

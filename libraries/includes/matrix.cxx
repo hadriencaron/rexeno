@@ -134,8 +134,8 @@ Matrix<T>::Matrix(Matrix<T>&	m)
 // Access the jth column of the ith line
 template<class T>
 T&
-Matrix<T>::operator()(int	i,
-		      int	j)
+Matrix<T>::operator()(unsigned int	i,
+		      unsigned int	j)
 {
   assert(i >= 0);
   assert(j >= 0);
@@ -148,7 +148,7 @@ Matrix<T>::operator()(int	i,
 // for vectors only !
 template<class T>
 T&
-Matrix<T>::operator()(int	i)
+Matrix<T>::operator()(unsigned int	i)
 {
   assert(i >= 0);
   assert((NbLines() == 1) || (NbCols() == 1));
