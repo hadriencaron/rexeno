@@ -22,11 +22,13 @@ public:
   void DisplayMonitor();
 
   void Reset();
+  void RandomDir();
 
-  bool getLead() { return *_lead;}
+  bool lead() { return *_lead;}
   double z() { return _z->value; }
 
   string getAttrsToString();
+
 
 
 protected:
@@ -38,6 +40,7 @@ protected:
   float _initY;
   float _initZ;
 
+  bool _randomDir;
   Variable* _lead;
   Variable* _slices;
   Variable* _stacks;

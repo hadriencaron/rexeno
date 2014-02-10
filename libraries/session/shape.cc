@@ -241,6 +241,16 @@ Shape::getAttrsToString(){
 	return s;
 }
 
+double
+Shape::RoundNdecimal(int n, float nb){
+	int i, res = 1;
+
+	for (i=0;i<n;i++){
+		res *= 10;
+	}
+
+	return floor((nb*res+0.5)/res*100)/100;
+}
 Shape::Shape()
 {
   _id = 0;

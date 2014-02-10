@@ -49,9 +49,17 @@ Sphere::Sphere(const ShapeInfo& si,
 	_father = father;
 	_lastime = 0;
 
-	SphereShadow* s;
-	s = new SphereShadow(*_radius, *_z, *_stacks, true);
+	SphereShadow* s = new SphereShadow(*_radius, *_z, *_stacks, true);
 	_shadow = s;
+
+	if (*_dir == false){
+		_randomDir = true;
+		RandomDir();
+	}
+	else{
+		_randomDir = false;
+	}
+
 
 }
 
@@ -75,7 +83,7 @@ Sphere::React2input(Status& s,
 	    _logged = true;
 		string s;
 		ostringstream ostr;
-		ostr << _name << " start " << lexical_cast<string>(displayTime) << " Pos [" << *_x << ", " << *_y << ", " << *_z <<"]";
+		ostr << _name << " start " << lexical_cast<string>(displayTime) << " Pos [" << RoundNdecimal(2,_x->value) << ", " << RoundNdecimal(2,_y->value) << ", " << RoundNdecimal(2,_z->value) <<"]";
 		s = ostr.str();
 	//	printf("Logged passe a vrai\n");
 	    session->recorder->Save(s, "events.txt");
@@ -86,14 +94,14 @@ Sphere::React2input(Status& s,
 	  {
 		string s;
 		ostringstream ostr;
-		ostr << _name << " end " << lexical_cast<string>(displayTime) << " Pos [" << *_x << ", " << *_y << ", " << *_z <<"]";
+		ostr << _name << " end " << lexical_cast<string>(displayTime) << " Pos [" << RoundNdecimal(2,_x->value) << ", " << RoundNdecimal(2,_y->value) << ", " << RoundNdecimal(2,_z->value) <<"]";
 		s = ostr.str();
 		session->recorder->Save(s, "events.txt");
 	//	printf("LoggedEnd passe a vrai\n");
 	    _loggedEnd = true;
 	  }
 	  std::cout << "Frame Id => " << frameId << " FrameEnd => " << frameEnd() << displayTime <<endl;
-	  session->recorder->Save(_name + "\n" + lexical_cast<string>(this->_x->value) + "\n" + lexical_cast<string>(this->_y->value) + "\n" + lexical_cast<string>(displayTime), "square_targets.txt");
+	  session->recorder->Save(_name + "\n" + lexical_cast<string>(_x->value) + "\n" + lexical_cast<string>(_y->value) + "\n" + lexical_cast<string>(displayTime), "square_targets.txt");
 
 	  if (frameId > frameEnd())
 	    s[RUNNING] |= false;
@@ -215,8 +223,16 @@ Sphere::Reset(){
 	_logged = false;
 	_loggedEnd = false;
 	//_lastime = 0;
+	if (_randomDir == true){
+		RandomDir();
+	}
 }
 
+void
+Sphere::RandomDir(){
+	int dir = rand()%(3-1)+1;
+	*_dir = dir;
+}
 void
 Sphere::DisplayMonitor()
 {
@@ -226,8 +242,21 @@ Sphere::DisplayMonitor()
 string
 Sphere::getAttrsToString(){
 	string s;
+	float move = *_veloX/60;
+	float angleX = (move / *_radius*180.0 / M_PI)*60;
+	//angleX = floor(RoundNdecimal(2,angleX)*100.0)/100.0;
+	move = *_veloY/60;
+	float angleY = (move / *_radius*180.0 / M_PI)*60;
+	move = *_veloZ/60;
+	float angleZ = (move / *_radius*180.0 / M_PI)*60;
 	ostringstream ostr;
-	ostr <<  _name << ": Radius ["<<*_radius <<"] Velocity ["<<*_veloX <<", "<<*_veloY <<", "<<*_veloZ <<"] Angle ["<<_angleX <<", "<<_angleY <<", "<<_angleZ <<"]";
+	ostr <<  _name << ": Radius ["
+			<< *_radius << "] Velocity [" << *_veloX << ", " << *_veloY <<", " << *_veloZ <<"] Angle ["
+			<<RoundNdecimal(2,angleX)
+			<<", "
+			<<RoundNdecimal(2,angleY)
+			<<", "
+			<<RoundNdecimal(2,angleZ) <<"]";
 	s = ostr.str();
 	return s;
 }

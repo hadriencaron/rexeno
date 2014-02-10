@@ -67,9 +67,8 @@ public:
   bool Displayable(int frameId);
   bool SubjectVisible(){return _subjectVisible;}
   virtual void Reset();
-  virtual bool getIsWorking(){ return false;}
   virtual string getAttrsToString();
-
+  double RoundNdecimal(int n, float nb);
 
   bool IsTextured(){ return _istexured;}
 

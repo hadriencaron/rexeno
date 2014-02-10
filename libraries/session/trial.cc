@@ -112,9 +112,6 @@ Trial::displayFrame(Driver* driver)
     if (curShape->Displayable(_curFrameId)){
     	if (curShape->name()=="Sphere"){
         	curShape->Display();
-        	if (curShape->getIsWorking()==false){
-        		 // std::cout << "Time > "<< (driver->GetTime()-_displayTime) << endl;
-        	}
     	}
     	else{
     		curShape->Display();
@@ -166,7 +163,7 @@ Trial::displayFrame(Driver* driver)
   if ((_curFrameId == 0) && (!_logged))
   {
 	    s->recorder->Save("TrialStart_ " + lexical_cast<string>(displayTime), "events.txt");
-	    s->recorder->Save(_name + ' ' + lexical_cast<string>(displayTime) + "\n", "events.txt");
+	    s->recorder->Save(_name + ' ' + lexical_cast<string>(displayTime), "events.txt");
 
     _logged = true;
   }
@@ -176,7 +173,7 @@ Trial::displayFrame(Driver* driver)
 	  	printf("J'ai une réponse! => %d \n", _data[0][0].rep);
 		string str;
 		ostringstream ostr;
-		ostr << "Subject says : " << _data[0][0].rep;
+		ostr << "Response "<< lexical_cast<string>(displayTime) << " : " << _data[0][0].rep;
 		str = ostr.str();
 		s->recorder->Save(str, "events.txt");
 	  _status[CORRECT] = true;
@@ -196,7 +193,6 @@ Trial::displayFrame(Driver* driver)
 				curShape->React2input(_status, _data, _curFrameId, driver->GetTime());
 
 		}
-//	std::cout << "String => " << curShape->getAttrsToString() << " X  => " << curShape->x() << endl ;
    }
 
   Setup::reset();
@@ -301,10 +297,11 @@ Trial::Reset(Driver *d)
   d->Reset();
   Shapes::iterator shapesIterator;
   for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
-   {
+	{
 	  (*shapesIterator)->Reset();
 	  _displayTime = d->GetTime();
-   }
+	}
+
 
 }
 

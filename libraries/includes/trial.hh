@@ -73,8 +73,6 @@ private:
   ms _displayTime;
   bool _start;
 
-
-
 };
 
 

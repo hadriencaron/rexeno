@@ -229,8 +229,8 @@ Session::run(int argc,
 	//glutInitWindowPosition(0, 0);
 	glutCreateWindow ((char*)"Time in Dynamic Perspective");;
 
-	//glutGameModeString("1920x1080:32@60");
-	//glutEnterGameMode();
+	glutGameModeString("1920x1080:32@60");
+	glutEnterGameMode();
 	glutKeyboardFunc(processNormalKeys);
 	glutFullScreen();
 	//glutSetCursor(GLUT_CURSOR_NONE);
@@ -270,7 +270,7 @@ Session::displayFrame()
 
     // PDEBUG("Session::displayFrame", " end of trial : " << t->name() << " (trial number " << *_currentTrial << " )");
       ms displayTime = _driver->GetTime();
-      recorder->Save("\nEndTrial " + lexical_cast<string>(displayTime) + "\n", "events.txt");
+      recorder->Save("EndTrial " + lexical_cast<string>(displayTime), "events.txt");
       if (afterTrial)
 
         afterTrial(t->name(), t->variables, b);
