@@ -16,7 +16,7 @@ Sphere::Sphere(const ShapeInfo& si,
 		VariableManager& vm,
 		Trial* father)
 {
-	assert(si.attributes.size() == 16);
+	assert(si.attributes.size() == 17);
 
 	_name = si.attributes[0];
 	_id = 7;
@@ -36,13 +36,18 @@ Sphere::Sphere(const ShapeInfo& si,
 	vm.addVariable(_veloY = new Variable(si.attributes[13]));
 	vm.addVariable(_veloZ = new Variable(si.attributes[14]));
 	vm.addVariable(_lead = new Variable(si.attributes[15]));
+	vm.addVariable(_dir = new Variable(si.attributes[16]));
 
 	_angleX = 0.0f;
 	_angleY = 0.0f;
 	_angleZ = 0.0f;
+
+	_initX = *_x;
+	_initY = *_y;
+	_initZ = *_z;
+
 	_father = father;
 	_lastime = 0;
-	_isWorking = false;
 
 	SphereShadow* s;
 	s = new SphereShadow(*_radius, *_z, *_stacks, true);
@@ -119,83 +124,97 @@ Sphere::Display()
 			this->initTexture(iload.getSizeY(), iload.getSizeX(), iload.getData());
 		}
 
-		if (*_x>(-0.8)){
-			float move = *_veloX/60;
-			float angleX = move / *_radius*180.0 / M_PI;
-			_isWorking = true;
+		if (*_dir==1){
+		//	if (*_x>(-0.8)){
+				float move = *_veloX/60;
+				float angleX = move / *_radius*180.0 / M_PI;
 
-			glPushMatrix();
-			glColor3f(1.0, 1.0, 1.0);
+				_angleX = _angleX+angleX;
+				std::cout << "X => " << *_x << endl;
 
-			int spec[4] = {1,1,0,1};
-			int light[4] = {0,0,4,0};
-
-			//if (shadow.getActive()==1){
-			glMaterialiv(GL_FRONT_AND_BACK, GL_SPECULAR, spec);
-			glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, 2);
-			glLightiv(GL_LIGHT0, GL_POSITION, light);
-			//}
-
-			_params = gluNewQuadric();
-
-			glEnable( GL_TEXTURE_2D );
-			glBindTexture(GL_TEXTURE_2D, _texture[0]);
-
-			gluQuadricDrawStyle(_params,GLU_FILL);
-
-			///  if (_x==0){
-			_angleX = _angleX+angleX;
-			std::cout << "X => " << *_x << endl;
-
-			if (_angleX>360){
-				double nb = 360.0- _angleX;
-				_angleX=nb;
-			}
-
-			*_x = *_x-move;
-
-			/*    }
-			else if (this->dir==1){
-				this->angle = this->angle-angle;
-				if (this->angle<1){
-				this->angle=360;
-
+				if (_angleX>360){
+					double nb = 360.0- _angleX;
+					_angleX=nb;
 				}
-				this->move = this->move+move;
-				if (this->move>(2)){
-					this->move = 0.0f;
-				}
+
+				*_x = *_x-move;
+		/*	}
+			else{
+				// *_x = -0.8f;
+				*_x = _initX;
+				*_y = _initY;
+				*_z = _initZ;
 			}*/
-
-			glTranslated(*_x,*_radius+*_y,*_z);
-			glRotated(_angleX,0,0,1);
-			glRotated(90.0f,1,0,0);
-
-			gluQuadricTexture(_params ,GL_TRUE);
-			gluSphere(_params, *_radius, *_stacks, *_slices);
-			gluDeleteQuadric(_params);
-
-			glPopMatrix();
-
-			glBindTexture(GL_TEXTURE_2D, 0);
-			glDisable( GL_TEXTURE_2D );
-			_shadow->setPos(*_x, *_y, *_z);
-			_shadow->Display();
 		}
-		else{
-			*_x = -0.8f;
-			_isWorking = false;
+		else if (*_dir==2){
+		//	if (*_x<(0.8)){
+				float move = *_veloX/60;
+				float angleX = move / *_radius*180.0 / M_PI;
+
+				_angleX = _angleX-angleX;
+				std::cout << "X => " << *_x << endl;
+
+				if (_angleX>360){
+					double nb = 360.0- _angleX;
+					std::cout << "NB => " << nb;
+					_angleX=nb;
+				}
+				*_x = *_x+move;
+		/*	}
+			else{
+				*_x = _initX;
+				*_y = _initY;
+				*_z = _initZ;
+			}*/
 		}
+
+		glPushMatrix();
+		glColor3f(1.0, 1.0, 1.0);
+
+		int spec[4] = {1,1,0,1};
+		int light[4] = {0,0,4,0};
+
+		//if (shadow.getActive()==1){
+		glMaterialiv(GL_FRONT_AND_BACK, GL_SPECULAR, spec);
+		glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, 2);
+		glLightiv(GL_LIGHT0, GL_POSITION, light);
+		//}
+
+		_params = gluNewQuadric();
+
+		glEnable( GL_TEXTURE_2D );
+		glBindTexture(GL_TEXTURE_2D, _texture[0]);
+
+		gluQuadricDrawStyle(_params,GLU_FILL);
+
+		glTranslated(*_x,*_radius+*_y,*_z);
+		glRotated(_angleX,0,0,1);
+		glRotated(90.0f,1,0,0);
+
+		gluQuadricTexture(_params ,GL_TRUE);
+		gluSphere(_params, *_radius, *_stacks, *_slices);
+		gluDeleteQuadric(_params);
+
+		glPopMatrix();
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glDisable( GL_TEXTURE_2D );
+		_shadow->setPos(*_x, *_y, *_z);
+		_shadow->Display();
 
 //		_lastime = now;
 }
 
 void
 Sphere::Reset(){
-	*_x = 0.8;
+
+	*_x = _initX;
+	*_y = _initY;
+	*_z = _initZ;
+
 	_logged = false;
 	_loggedEnd = false;
-	_lastime = 0;
+	//_lastime = 0;
 }
 
 void

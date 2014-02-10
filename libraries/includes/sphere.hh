@@ -21,11 +21,9 @@ public:
   void Display();
   void DisplayMonitor();
 
-  void setIsWorking(bool b) { _isWorking = b; }
   void Reset();
 
   bool getLead() { return *_lead;}
-  bool getIsWorking() { return _isWorking; }
   double z() { return _z->value; }
 
   string getAttrsToString();
@@ -35,7 +33,10 @@ protected:
   float _angleX;
   float _angleY;
   float _angleZ;
-  bool _isWorking;
+
+  float _initX;
+  float _initY;
+  float _initZ;
 
   Variable* _lead;
   Variable* _slices;
@@ -47,6 +48,7 @@ protected:
   Variable* _veloZ;
 
   Variable* _z;
+  Variable* _dir;
   SphereShadow* _shadow;
 
   /****/

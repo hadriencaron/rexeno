@@ -3,7 +3,7 @@ logLevel= 9
 
 | 300 STOP_TARGET1
 > Plan Plan 0 0 0 -1 255 255 0 15 25 40
-> Sphere Sphere1 0.8 0 -2 0 60 255 255 0 20 60 0.2 0.8 0 0 0
-> Sphere Sphere2 0.8 0 0 0 60 255 255 0 20 60 0.1 0.8 0 0 0
+> Sphere Sphere1 0.8 0 -2 0 60 255 255 0 20 60 0.2 0.8 0 0 0 1
+> Sphere Sphere2 0 0 0 0 60 255 255 0 20 60 0.1 0.8 0 0 0 2
 ;
 
