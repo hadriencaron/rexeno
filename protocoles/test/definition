@@ -1,9 +1,28 @@
 name= TEST
 logLevel= 9
 
-| 300 STOP_TARGET1
+| 300 LEFTO_RIGHT
 > Plan Plan 0 0 0 -1 255 255 0 15 25 40
 > Sphere Sphere1 -0.8 0 -2 0 45 255 255 0 20 60 0.2 1.6 0 0 0 2
 > Sphere Sphere2 -0.8 0  0 0 45 255 255 0 20 60 0.1 1.6 0 0 0 2
+> Sphere Sphere3 -0.8 0 -4 0 45 255 255 0 20 60 0.1 1.6 0 0 0 2
+;
+
+| 300 RIGHTO_LEFT
+> Plan Plan 0 0 0 -1 255 255 0 15 25 40
+> Sphere Sphere1 0.8 0 -2 0 45 255 255 0 20 60 0.2 1.6 0 0 0 1
+> Sphere Sphere2 0.8 0  0 0 45 255 255 0 20 60 0.1 1.6 0 0 0 1
+;
+
+| 300 RANDO_M
+> Plan Plan 0 0 0 -1 255 255 0 15 25 40
+> Sphere Sphere1 0   0 -2 0 45 255 255 0 20 60 0.2 1.6 0 0 0 0
+> Sphere Sphere2 0   0  0 0 45 255 255 0 20 60 0.1 1.6 0 0 0 0
+;
+
+| 300 INVERSE
+> Plan Plan 0 0 0 -1 255 255 0 15 25 40
+> Sphere Sphere1 0   0 -2 0 45 255 255 0 20 60 0.2 1.6 0 0 0 2
+> Sphere Sphere2 0   0  0 0 45 255 255 0 20 60 0.1 1.6 0 0 0 1
 ;
 

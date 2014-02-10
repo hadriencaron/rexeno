@@ -40,6 +40,7 @@ Session::Session(configuration::SessionInfo& s,
   _inputData.resize(8);
   recorder = new Recorder("/tmp/", s.traceLevel);
   recorder->AddFile("results.txt");
+  recorder->AddFile("trials.txt");
   recorder->AddFile("events.txt");
   recorder->AddFile("X.txt");
   recorder->AddFile("id_trials.txt");

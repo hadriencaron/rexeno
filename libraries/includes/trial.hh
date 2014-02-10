@@ -70,8 +70,8 @@ private:
   vector<TtlEvent*>* _ttl;
   datas _data;
   bool _logged;
-  ms _displayTime;
   bool _start;
+  bool _subjectResponse;
 
 };
 

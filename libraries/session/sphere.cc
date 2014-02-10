@@ -100,7 +100,7 @@ Sphere::React2input(Status& s,
 	//	printf("LoggedEnd passe a vrai\n");
 	    _loggedEnd = true;
 	  }
-	  std::cout << "Frame Id => " << frameId << " FrameEnd => " << frameEnd() << displayTime <<endl;
+	// std::cout << "Frame Id => " << frameId << " FrameEnd => " << frameEnd() << "time => " << displayTime <<endl;
 	  session->recorder->Save(_name + "\n" + lexical_cast<string>(_x->value) + "\n" + lexical_cast<string>(_y->value) + "\n" + lexical_cast<string>(displayTime), "square_targets.txt");
 
 	  if (frameId > frameEnd())
@@ -133,47 +133,30 @@ Sphere::Display()
 		}
 
 		if (*_dir==1){
-		//	if (*_x>(-0.8)){
-				float move = *_veloX/60;
-				float angleX = move / *_radius*180.0 / M_PI;
+			float move = *_veloX/60;
+			float angleX = move / *_radius*180.0 / M_PI;
 
-				_angleX = _angleX+angleX;
-				std::cout << "X => " << *_x << endl;
+			_angleX = _angleX+angleX;
 
-				if (_angleX>360){
-					double nb = 360.0- _angleX;
-					_angleX=nb;
-				}
+			if (_angleX>360){
+				double nb = 360.0- _angleX;
+				_angleX=nb;
+			}
 
-				*_x = *_x-move;
-		/*	}
-			else{
-				// *_x = -0.8f;
-				*_x = _initX;
-				*_y = _initY;
-				*_z = _initZ;
-			}*/
+			*_x = *_x-move;
 		}
 		else if (*_dir==2){
-		//	if (*_x<(0.8)){
-				float move = *_veloX/60;
-				float angleX = move / *_radius*180.0 / M_PI;
+			float move = *_veloX/60;
+			float angleX = move / *_radius*180.0 / M_PI;
 
-				_angleX = _angleX-angleX;
-				std::cout << "X => " << *_x << endl;
+			_angleX = _angleX-angleX;
 
-				if (_angleX>360){
-					double nb = 360.0- _angleX;
-					std::cout << "NB => " << nb;
-					_angleX=nb;
-				}
-				*_x = *_x+move;
-		/*	}
-			else{
-				*_x = _initX;
-				*_y = _initY;
-				*_z = _initZ;
-			}*/
+			if (_angleX>360){
+				double nb = 360.0- _angleX;
+				std::cout << "NB => " << nb;
+				_angleX=nb;
+			}
+			*_x = *_x+move;
 		}
 
 		glPushMatrix();
@@ -244,7 +227,6 @@ Sphere::getAttrsToString(){
 	string s;
 	float move = *_veloX/60;
 	float angleX = (move / *_radius*180.0 / M_PI)*60;
-	//angleX = floor(RoundNdecimal(2,angleX)*100.0)/100.0;
 	move = *_veloY/60;
 	float angleY = (move / *_radius*180.0 / M_PI)*60;
 	move = *_veloZ/60;

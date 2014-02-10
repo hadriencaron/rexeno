@@ -8,10 +8,11 @@ Trial::Trial(TrialInfo& ti)
   : _curFrameId(0),
     _nbFrames(1),
     _name(ti.name),
-    _displayTime(0),
-    _start(true)
+    _logged(false),
+    _start(true),
+    _subjectResponse(false)
 {
-  _logged = false;
+
   // _data.resize(8 * 20); // 8 channels x 20 samples (20 > 16.666)
 
   _data.resize(8); // 8 channels
@@ -82,9 +83,6 @@ Trial::~Trial()
 int
 Trial::displayFrame(Driver* driver)
 {
-  if (_displayTime==0){
-	  _displayTime = driver->GetTime();
-  }
   Session* s = Session::getInstance();
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -104,18 +102,18 @@ Trial::displayFrame(Driver* driver)
   gluLookAt(0,1,1.8, 0,0,0, 0,1,0);
 
   vector<Shape*>::iterator it;
+  vector<Shape*> spheres;
+
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
     glPushMatrix();
     //glTranslatef(0.5, 0, 0);
+	if (curShape->id()==7){
+    	spheres.push_back(curShape);
+	}
     if (curShape->Displayable(_curFrameId)){
-    	if (curShape->name()=="Sphere"){
-        	curShape->Display();
-    	}
-    	else{
-    		curShape->Display();
-    	}
+    	curShape->Display();
     }
   //  std::cout << "Time > "<< (driver->GetTime()-_displayTime) << endl;
     glPopMatrix();
@@ -133,6 +131,19 @@ Trial::displayFrame(Driver* driver)
 
   }
 
+  bool spheresEnd = false;
+  int nbSphere = spheres.size();
+  int nbSphereNotDisplayable = 0;
+
+  for (it = spheres.begin(); it != spheres.end(); ++it){
+  	Shape *curSphere = *it;
+  	if (!curSphere->Displayable(_curFrameId)){
+  		nbSphereNotDisplayable++;
+  	}
+  }
+  if (nbSphereNotDisplayable==nbSphere){
+  	spheresEnd = true;
+  }
   glutSwapBuffers();
   glutPostRedisplay();
   glClear(GL_COLOR_BUFFER_BIT);
@@ -146,18 +157,19 @@ Trial::displayFrame(Driver* driver)
   ms displayTime = driver->GetTime();
 
   if((_curFrameId == 0) && (_start)){
+	  s->recorder->Save(_name ,"trials.txt");
 		for (it = _shapes.begin(); it != _shapes.end(); ++it)
 		{
 		  Shape *curShape = *it;
 
 		  if ((_curFrameId == 0) && (!_logged))
 		  {
-			s->recorder->Save(curShape->getAttrsToString() ,"events.txt");
+			s->recorder->Save(curShape->getAttrsToString() ,"trials.txt");
 		  }
 
 	    }
 	    _start = false;
-		s->recorder->Save("" ,"events.txt");
+		s->recorder->Save("" ,"trials.txt");
   }
 
   if ((_curFrameId == 0) && (!_logged))
@@ -170,15 +182,22 @@ Trial::displayFrame(Driver* driver)
 
 
   if (_data[0][0].rep != (-1)){
-	  	printf("J'ai une réponse! => %d \n", _data[0][0].rep);
+	if (_subjectResponse == false){
+		printf("J'ai une réponse! => %d \n", _data[0][0].rep);
 		string str;
 		ostringstream ostr;
 		ostr << "Response "<< lexical_cast<string>(displayTime) << " : " << _data[0][0].rep;
 		str = ostr.str();
 		s->recorder->Save(str, "events.txt");
-	  _status[CORRECT] = true;
+		_subjectResponse = true;
+	}
   }
-
+/*  else{
+	  driver->Reset();
+  }*/
+  if ((_data[0][0].rep != (-1)) && (spheresEnd)){
+	_status[CORRECT] = true;
+  }
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
   {
     Shape *curShape = *it;
@@ -288,7 +307,8 @@ Trial::Reset(Driver *d)
 {
 //  PDEBUG("Trial::Reset ", "start")
   _curFrameId = 0;
-  _logged = false; 											// !!
+  _logged = false;
+  _subjectResponse = false;
   Status::iterator it;
   for (it = _status.begin(); it != _status.end(); ++it)
   {
@@ -299,7 +319,6 @@ Trial::Reset(Driver *d)
   for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
 	{
 	  (*shapesIterator)->Reset();
-	  _displayTime = d->GetTime();
 	}
 
 
