@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/xeno1/Desktop/rexeno/libraries/includes/recorder.hh
+fstream
+-
+iostream
+-
+vector
+-
+utility
+-
+
+/home/xeno1/Desktop/rexeno/libraries/recorder/recorder.cc
+recorder.hh
+/home/xeno1/Desktop/rexeno/libraries/recorder/recorder.hh
+

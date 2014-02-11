@@ -63,7 +63,6 @@ public:
   ms GetTime();
   void React2input();
   void AnalogIn(datas&);
-  void Reset();
 
 private:
   ms _start;

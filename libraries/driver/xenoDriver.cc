@@ -221,7 +221,7 @@ void
 XenoDriver::React2input()
 {
   if (_calibration)
-    _calibration->react2input();
+    _calibration->React2input();
 }
 
 void
@@ -236,8 +236,8 @@ XenoDriver::AnalogIn(datas& data)
   size = rt_buffer_read(&bufferRecorder, recorderArray, NB_CHANNELS*NB_DATA*2 * sizeof(double), TM_INFINITE);
   for (i = 0; size && (i < data.size()); ++i)
   {
-    data[i].volt = _analogData[2 * i];
-    data[i].timing = _analogData[2 * i + 1];
+    data[0][i].volt = _analogData[2 * i];
+    data[0][i].timing = _analogData[2 * i + 1];
   }
   // rt_mutex_release(_mutex);
   _calibration->adjustPoint(data);

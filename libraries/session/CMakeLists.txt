@@ -21,6 +21,9 @@ link_directories(${DIR3PARTY}/xcb-glx0/lib)
 
 if(XENO STREQUAL "ON")
   add_definitions(-DXENO)
+  include_directories ("/usr/include/xenomai")
+  link_directories ("/usr/lib/xenomai")
+  
   include_directories ("/usr/xenomai/include")
   link_directories ("/usr/xenomai/lib")
   link_libraries ("pthread")

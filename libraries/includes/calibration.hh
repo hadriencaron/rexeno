@@ -23,10 +23,9 @@ public:
 
   void adjustPoint(datas&);
   void React2input();
-  void Reset();
+
 private:
   Matrix<double>* _m;
-  int _rep;
 };
 
 #endif

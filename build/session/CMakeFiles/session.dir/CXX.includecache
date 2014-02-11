@@ -5398,6 +5398,12 @@ native/mutex.h
 native/buffer.h
 -
 
+/home/xeno1/Desktop/rexeno/libraries/includes/imageload.hh
+stdio.h
+-
+stdlib.h
+-
+
 /home/xeno1/Desktop/rexeno/libraries/includes/matrix.cxx
 matrix.hh
 /home/xeno1/Desktop/rexeno/libraries/includes/matrix.hh
@@ -5539,6 +5545,20 @@ string
 /home/xeno1/Desktop/rexeno/libraries/includes/window.hh
 shape.hh
 /home/xeno1/Desktop/rexeno/libraries/includes/shape.hh
+
+/home/xeno1/Desktop/rexeno/libraries/session/sphere.cc
+sphere.hh
+/home/xeno1/Desktop/rexeno/libraries/session/sphere.hh
+imageload.hh
+/home/xeno1/Desktop/rexeno/libraries/session/imageload.hh
+GL/glut.h
+-
+trial.hh
+-
+recorder.hh
+/home/xeno1/Desktop/rexeno/libraries/session/recorder.hh
+setup.hh
+/home/xeno1/Desktop/rexeno/libraries/session/setup.hh
 
 /home/xeno1/Desktop/rexeno/libraries/session/trial.cc
 trial.hh

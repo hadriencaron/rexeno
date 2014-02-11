@@ -145,6 +145,7 @@ Session::displayHeader()
 void processNormalKeys(unsigned char key, int x, int y) 
 {
   Setup::keys[key] = true;
+  Setup::keysName = key;
   if (key == 27) 
     {
       exit(0);
@@ -224,16 +225,16 @@ Session::run(int argc,
   	glutInitWindowSize(2048, 768);*/
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);
-	glutInitWindowSize(3840,1080);
+	glutInitWindowSize(640,480);
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-640)/2,
 			               (glutGet(GLUT_SCREEN_HEIGHT)-480)/2);
 	//glutInitWindowPosition(0, 0);
 	glutCreateWindow ((char*)"Time in Dynamic Perspective");;
 
 	glutGameModeString("1920x1080:32@60");
-	glutEnterGameMode();
+	//glutEnterGameMode();
 	glutKeyboardFunc(processNormalKeys);
-	glutFullScreen();
+	//glutFullScreen();
 	//glutSetCursor(GLUT_CURSOR_NONE);
 	glutReshapeFunc(&reshape);
 	glutDisplayFunc (displayRexeno);

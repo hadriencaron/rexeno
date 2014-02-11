@@ -181,21 +181,19 @@ Trial::displayFrame(Driver* driver)
   }
 
 
-  if (_data[0][0].rep != (-1)){
+  if (Setup::keysName != ""){
 	if (_subjectResponse == false){
-		printf("J'ai une réponse! => %d \n", _data[0][0].rep);
+		std::cout << "J'ai une réponse! => " << Setup::keysName << endl;
 		string str;
 		ostringstream ostr;
-		ostr << "Response "<< lexical_cast<string>(displayTime) << " : " << _data[0][0].rep;
+		ostr << "Response "<< lexical_cast<string>(displayTime) << " : " << Setup::keysName;
 		str = ostr.str();
 		s->recorder->Save(str, "events.txt");
 		_subjectResponse = true;
 	}
   }
-/*  else{
-	  driver->Reset();
-  }*/
-  if ((_data[0][0].rep != (-1)) && (spheresEnd)){
+
+  if ((Setup::keysName != "") && (spheresEnd)){
 	_status[CORRECT] = true;
   }
   for (it = _shapes.begin(); it != _shapes.end(); ++it)
@@ -314,14 +312,14 @@ Trial::Reset(Driver *d)
   {
     it->second = false;
   }
-  d->Reset();
+
   Shapes::iterator shapesIterator;
   for (shapesIterator = _shapes.begin(); shapesIterator != _shapes.end(); ++shapesIterator)
 	{
 	  (*shapesIterator)->Reset();
 	}
 
-
+  Setup::keysName = "";
 }
 
 bool

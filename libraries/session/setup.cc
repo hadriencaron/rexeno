@@ -7,6 +7,7 @@ namespace po = boost::program_options;
 using namespace std;
 
 bool* Setup::keys = new bool[256];
+string Setup::keysName = "";
 
 Setup::Setup(string confFile)
 {
@@ -45,4 +46,6 @@ Setup::reset()
   int i = 0;
   for (; i < 256; ++i)
     Setup::keys[i] = false;
+
+  Setup::keysName = "";
 }

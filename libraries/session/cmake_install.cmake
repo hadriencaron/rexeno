@@ -40,14 +40,14 @@ IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   IF(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsession.so")
     FILE(RPATH_CHECK
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsession.so"
-         RPATH "/usr/xenomai/lib")
+         RPATH "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/xcb-glx0/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/boost/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/opengl/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/gl-mesa/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/x11/lib:/usr/xenomai/lib")
   ENDIF(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsession.so")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/xeno1/Desktop/rexeno/libraries/session/libsession.so")
   IF(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsession.so")
     FILE(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsession.so"
-         OLD_RPATH "/home/xeno1/Desktop/rexeno/libraries/../3rdParty/linux-ububuntu-12-04-noxeno/target/xcb-glx0/lib:/home/xeno1/Desktop/rexeno/libraries/../3rdParty/linux-ububuntu-12-04-noxeno/target/boost/lib:/home/xeno1/Desktop/rexeno/libraries/../3rdParty/linux-ububuntu-12-04-noxeno/target/opengl/lib:/home/xeno1/Desktop/rexeno/libraries/../3rdParty/linux-ububuntu-12-04-noxeno/target/gl-mesa/lib:/home/xeno1/Desktop/rexeno/libraries/../3rdParty/linux-ububuntu-12-04-noxeno/target/x11/lib:/usr/xenomai/lib:"
-         NEW_RPATH "/usr/xenomai/lib")
+         OLD_RPATH "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/xcb-glx0/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/boost/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/opengl/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/gl-mesa/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/x11/lib:/usr/xenomai/lib:"
+         NEW_RPATH "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/xcb-glx0/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/boost/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/opengl/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/gl-mesa/lib:/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/x11/lib:/usr/xenomai/lib")
     IF(CMAKE_INSTALL_DO_STRIP)
       EXECUTE_PROCESS(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libsession.so")
     ENDIF(CMAKE_INSTALL_DO_STRIP)

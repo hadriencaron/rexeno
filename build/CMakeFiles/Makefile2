@@ -55,8 +55,8 @@ CMAKE_BINARY_DIR = /home/xeno1/Desktop/rexeno/build
 # All Build rule for target.
 CMakeFiles/Rexeno.dir/all: configuration/CMakeFiles/configuration.dir/all
 CMakeFiles/Rexeno.dir/all: session/CMakeFiles/session.dir/all
-CMakeFiles/Rexeno.dir/all: recorder/CMakeFiles/recorder.dir/all
 CMakeFiles/Rexeno.dir/all: driver/CMakeFiles/driver.dir/all
+CMakeFiles/Rexeno.dir/all: recorder/CMakeFiles/recorder.dir/all
 	$(MAKE) -f CMakeFiles/Rexeno.dir/build.make CMakeFiles/Rexeno.dir/depend
 	$(MAKE) -f CMakeFiles/Rexeno.dir/build.make CMakeFiles/Rexeno.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/xeno1/Desktop/rexeno/build/CMakeFiles  1
@@ -194,8 +194,8 @@ clean: session/CMakeFiles/session.dir/clean
 
 # All Build rule for target.
 session/CMakeFiles/sessionBin.dir/all: configuration/CMakeFiles/configuration.dir/all
-session/CMakeFiles/sessionBin.dir/all: recorder/CMakeFiles/recorder.dir/all
 session/CMakeFiles/sessionBin.dir/all: driver/CMakeFiles/driver.dir/all
+session/CMakeFiles/sessionBin.dir/all: recorder/CMakeFiles/recorder.dir/all
 	$(MAKE) -f session/CMakeFiles/sessionBin.dir/build.make session/CMakeFiles/sessionBin.dir/depend
 	$(MAKE) -f session/CMakeFiles/sessionBin.dir/build.make session/CMakeFiles/sessionBin.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/xeno1/Desktop/rexeno/build/CMakeFiles  21 22 23 24 25 26 27 28 29 30 31 32 33 34

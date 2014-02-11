@@ -11,11 +11,11 @@ SET(CMAKE_FORCE_UNIX_PATHS 1)
 # The C and CXX include file search paths:
 SET(CMAKE_C_INCLUDE_PATH
   "configuration"
-  "../3rdParty/linux-ububuntu-12-04-noxeno/target/xcb-glx0/include"
-  "../3rdParty/linux-ububuntu-12-04-noxeno/target/boost/include"
-  "../3rdParty/linux-ububuntu-12-04-noxeno/target/opengl/include"
-  "../3rdParty/linux-ububuntu-12-04-noxeno/target/gl-mesa/include"
-  "../3rdParty/linux-ububuntu-12-04-noxeno/target/x11/include"
+  "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/xcb-glx0/include"
+  "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/boost/include"
+  "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/opengl/include"
+  "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/gl-mesa/include"
+  "/home/xeno1/Desktop/rexeno/3rdparties/linux-ububuntu-10-04-noxeno/target/x11/include"
   "session"
   "includes"
   "recorder"

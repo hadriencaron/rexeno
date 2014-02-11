@@ -1,5 +1,4 @@
 
-#include <math.h>
 #include "sphere.hh"
 #include "imageload.hh"
 #include <GL/glut.h>
@@ -65,6 +64,7 @@ Sphere::Sphere(const ShapeInfo& si,
 
 Sphere::~Sphere()
 {
+	gluDeleteQuadric(_params);
 	delete _shadow;
 }
 
@@ -109,28 +109,6 @@ Sphere::React2input(Status& s,
 	    s[RUNNING] = true;
 
 	  session->recorder->Save(_name + " " + lexical_cast<string>(displayTime) + " display", "logger.txt");
-//	Shape::React2input(s, ds, frameId, displayTime);
-}
-
-void
-Sphere::Display()
-{
-	/*	if (_lastime == 0){
-			_lastime = glutGet(GLUT_ELAPSED_TIME);
-		}
-
-		time_t now = glutGet(GLUT_ELAPSED_TIME);
-		const double FrameTime = difftime(now, _lastime);
-*/
-		if (this->IsTextured() == false){
-			ImageLoad iload;
-			iload.setFilename("/home/xeno1/workspace/TinDPe/src/textures/test.bmp");
-			if(!(iload.load())){
-				exit(1);
-			}
-
-			this->initTexture(iload.getSizeY(), iload.getSizeX(), iload.getData());
-		}
 
 		if (*_dir==1){
 			float move = *_veloX/60;
@@ -159,37 +137,56 @@ Sphere::Display()
 			*_x = *_x+move;
 		}
 
+}
+
+void
+Sphere::Display()
+{
+	/*	if (_lastime == 0){
+			_lastime = glutGet(GLUT_ELAPSED_TIME);
+		}
+
+		time_t now = glutGet(GLUT_ELAPSED_TIME);
+		const double FrameTime = difftime(now, _lastime);
+*/
+		if (this->IsTextured() == false){
+			ImageLoad iload;
+			iload.setFilename("/home/xeno1/workspace/TinDPe/src/textures/Sphere.bmp");
+			if(!(iload.load())){
+				exit(1);
+			}
+
+			this->initTexture(iload.getSizeY(), iload.getSizeX(), iload.getData());
+
+			int spec[4] = {1,1,0,1};
+			int light[4] = {0,0,4,0};
+
+			glMaterialiv(GL_FRONT_AND_BACK, GL_SPECULAR, spec);
+			glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, 2);
+			glLightiv(GL_LIGHT0, GL_POSITION, light);
+
+			_params = gluNewQuadric();
+			gluQuadricDrawStyle(_params,GLU_FILL);
+			gluQuadricTexture(_params ,GL_TRUE);
+		}
+
 		glPushMatrix();
 		glColor3f(1.0, 1.0, 1.0);
 
-		int spec[4] = {1,1,0,1};
-		int light[4] = {0,0,4,0};
-
-		//if (shadow.getActive()==1){
-		glMaterialiv(GL_FRONT_AND_BACK, GL_SPECULAR, spec);
-		glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, 2);
-		glLightiv(GL_LIGHT0, GL_POSITION, light);
-		//}
-
-		_params = gluNewQuadric();
-
 		glEnable( GL_TEXTURE_2D );
 		glBindTexture(GL_TEXTURE_2D, _texture[0]);
-
-		gluQuadricDrawStyle(_params,GLU_FILL);
 
 		glTranslated(*_x,*_radius+*_y,*_z);
 		glRotated(_angleX,0,0,1);
 		glRotated(90.0f,1,0,0);
 
-		gluQuadricTexture(_params ,GL_TRUE);
 		gluSphere(_params, *_radius, *_stacks, *_slices);
-		gluDeleteQuadric(_params);
 
 		glPopMatrix();
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glDisable( GL_TEXTURE_2D );
+
 		_shadow->setPos(*_x, *_y, *_z);
 		_shadow->Display();
 
