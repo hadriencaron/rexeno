@@ -240,7 +240,7 @@ Session::run(int argc,
   glutInitWindowSize(2048, 768);
   glutCreateWindow ((char*)"rexeno");
   glutGameModeString("2048x768:32@60");
-  //glutEnterGameMode();
+  glutEnterGameMode();
   glutKeyboardFunc(processNormalKeys);
   glutFullScreen();
   glutSetCursor(GLUT_CURSOR_NONE);
